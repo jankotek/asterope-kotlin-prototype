@@ -1,0 +1,348 @@
+I/280B   All-sky Compiled Catalogue of 2.5 million stars  (Kharchenko+ 2009)
+================================================================================
+All-sky Compiled Catalogue of 2.5 million stars (ASCC-2.5, 3rd version)
+    Kharchenko N.V., Roeser S.
+   <Kinematics and Physics of Celestial Bodies. 17, 409 (2001)>
+   =2001KFNT...17e.409K
+================================================================================
+ADC_Keywords: Combined data; Positional data; Proper motions;
+    Parallaxes, trigonometric; Photometry; Spectral types;
+    Stars, variable; Stars, double and multiple; Cross identifications
+
+Description:
+    The All-Sky Compiled Catalogue of 2501313 stars (ASCC-2.5) with the
+    limiting magnitude V=12-14 is a result of a merging of star lists from
+    present day large high-precision catalogues from space (Hipparcos-
+    Tycho family catalogues: Hipparcos main catalogue including Multiple
+    System Annex [I/239], Tycho-1 [I/239], Tycho-2 [I/259], ACT-RC [I/246],
+    TRC [I/250]) and ground-based (PPM-N [I/146], PPM-S [I/193], PPM-add
+    [I/208], CMC11 [I/256]) observations and reduction to standard systems
+    of corresponding stellar data. The data from the Tycho-2 Spectral Type
+    Catalog [III/231], and the 2MASS All-Sky Catalog of Point Sources
+    [II/246] are added.
+
+    The basic stellar data presented in the ASCC-2.5 are the equatorial
+    coordinates (J2000, epoch 1991.25), proper motions in the Hipparcos
+    system, B and/or V stellar magnitudes in the Johnson system.
+    Additionally, for some stars we give trigonometric parallaxes,
+    spectral classes in the MK or HD system, multiplicity and variability
+    flags, Hipparcos, Tycho-2, HD, DM designations.
+
+    Equatorial coordinates and their standard errors were taken from
+    the source catalogues in accordance with the priority: Hipparcos
+    [I/239/hip_main], Tycho-2 [I/259], Tycho-1 [I/239/tyc_main], CMC11
+    [I/256], PPM [I/146,I/193,I/208].
+
+    Proper motions from the source catalogues were compared with Hipparcos
+    data.The compiled proper motions in the Hipparcos system and their
+    standard errors were computed as the weighted means. The weights were
+    set in accordance with the proper motion errors listed for individual
+    stars in the source catalogues.
+
+    Trigonometric parallaxes are taken from the Hipparcos and Tycho-1
+    catalogues.
+
+    Stellar B, V magnitudes were determined on the basis of the ground-
+    based photometric data taken from CMC11, Hipparcos, as well as space
+    BT, VT from Tycho-1, Tycho-2. Magnitudes from the PPM catalogue were
+    used if no other photometric data were available. Tycho data were
+    transformed to the Johnson system via:
+
+               V = VT - 0.09 (B-V)T + dV,
+           (B-V) = 0.850 (B-V)T + d(B-V),
+
+    i.e. using the recommendations from the Introduction to the Tycho
+    catalogue and including additional corrections dV and d(B-V). These
+    additional corrections were determined by comparison with ground-based
+    data in the Johnson system. These corrections depend non-linearly on
+    colour and reach 0.02 and 0.04 mag, respectively.
+
+    Infrared stellar magnitudes J, H, K_s_ and their errors were copied
+    from the 2MASS catalogue.
+
+    Spectral classes in the MK or HD systems were taken from Hipparcos,
+    CMC11, PPM, and Tycho-2 Spectral Type catalogues.
+
+    Multiplicity and variability flags were taken from Tycho-1, Tycho-2,
+    Hipparcos, CMC11, and PPM catalogues.
+
+    The 1st version of the ASCC-2.5 contained some errors in the zones
+    -1 to +1 degree which have been corrected (see details in the
+    "History" section below). The 2nd version included a new file
+    (ccadd.dat) containing the previously missing stars (including
+    components of multiple systems). Note that the ASCC numbers did not
+    change between the two versions, but additional numbers (2600001 to
+    2603318) were assigned. In the present 3rd version of the ASCC-2.5
+    the stars from file ccadd.dat are inserted in the basic files in
+    accordance with their coordinates.
+
+    Stars in the ASCC-2.5 are divided into 30 files ordered by declination
+    (North and South polar caps and 28 bands of 5 degrees width), then
+    sorted in order of right ascension within each file.
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe        80        .   This file
+ccp70.dat    210    66455   Declination from +70.0 to +90.0
+ccp65.dat    210    34036   Declination from +65.0 to +69.99999999
+ccp60.dat    210    53853   Declination from +60.0 to +64.99999999
+ccp55.dat    210    71473   Declination from +55.0 to +59.99999999
+ccp50.dat    210    71054   Declination from +50.0 to +54.99999999
+ccp45.dat    210    75896   Declination from +45.0 to +49.99999999
+ccp40.dat    210    80855   Declination from +40.0 to +44.99999999
+ccp35.dat    210    95204   Declination from +35.0 to +39.99999999
+ccp30.dat    210    99125   Declination from +30.0 to +34.99999999
+ccp25.dat    210    92233   Declination from +25.0 to +29.99999999
+ccp20.dat    210    89927   Declination from +20.0 to +24.99999999
+ccp15.dat    210    83973   Declination from +15.0 to +19.99999999
+ccp10.dat    210    87285   Declination from +10.0 to +14.99999999
+ccp05.dat    210    92968   Declination from +05.0 to +09.99999999
+ccp00.dat    210    88324   Declination from +00.0 to +04.99999999
+ccm00.dat    210    79059   Declination from -00.0 to -04.99999999
+ccm05.dat    210    80228   Declination from -05.0 to -09.99999999
+ccm10.dat    210    84242   Declination from -10.0 to -14.99999999
+ccm15.dat    210    92146   Declination from -15.0 to -19.99999999
+ccm20.dat    210    96530   Declination from -20.0 to -24.99999999
+ccm25.dat    210    97266   Declination from -25.0 to -29.99999999
+ccm30.dat    210    97367   Declination from -30.0 to -34.99999999
+ccm35.dat    210    94279   Declination from -35.0 to -39.99999999
+ccm40.dat    210    97934   Declination from -40.0 to -44.99999999
+ccm45.dat    210    98339   Declination from -45.0 to -49.99999999
+ccm50.dat    210    95810   Declination from -50.0 to -54.99999999
+ccm55.dat    210    94963   Declination from -55.0 to -59.99999999
+ccm60.dat    210    80770   Declination from -60.0 to -64.99999999
+ccm65.dat    210    57389   Declination from -65.0 to -69.99999999
+ccm70.dat    210    72330   Declination from -70.0 to -90.0
+--------------------------------------------------------------------------------
+
+See also:
+    I/239 : The Hipparcos and Tycho Catalogues (ESA 1997)
+    I/259 : The Tycho-2 Catalogue (Hog+ 2000)
+    I/246 : The ACT Reference Catalog (Urban+ 1997)
+    I/250 : The Tycho Reference Catalogue (Hog+ 1998)
+    I/146 : Positions and Proper Motions - North (Roeser+, 1988)
+    I/193 : Positions and Proper Motions - South (Bastian+ 1993)
+    I/208 : The 90000 stars Supplement to the PPM Catalogue (Roeser+, 1994)
+    I/256 : Carlsberg Meridian Catalogs (CMC, 1999)
+  III/231 : The Tycho-2 Spectral Type Catalog (Wright+, 2003)
+   II/246 : 2MASS All-Sky Catalog of Point Sources (Cutri+ 2003)
+
+
+Byte-by-byte Description of file:  cc*.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units     Label    Explanations
+--------------------------------------------------------------------------------
+   1- 12  F12.9 h         RAhour   Right Ascension J2000.0, epoch 1991.25
+  14- 25  F12.8 deg       DEdeg    Declination J2000.0, epoch 1991.25
+  27- 30  I4   0.1mas   e_RAhour   Standard error in RA*cos(DEdeg)
+  32- 35  I4   0.1mas   e_DEdeg    Standard error in DEdeg
+  37- 42  I6  0.01mas     Plx     *?=999999 Trigonometric parallax
+  44- 48  I5  0.01mas   e_Plx     *?=99999 Standard error in Plx
+  50- 56  I7  0.01mas/yr  pmRA     Proper Motion in RA*cos(DE)
+  58- 64  I7  0.01mas/yr  pmDE     Proper Motion in Declination
+  66- 70  I5  0.01mas/yr e_pmRA    Standard error in pmRA
+  72- 76  I5  0.01mas/yr e_pmDE    Standard error in pmDE
+  78- 82  I5    mmag      Bmag    *?=99999 B magnitude in Johnson system
+  84- 88  I5    mmag      Vmag    *?=99999 V magnitude in Johnson system
+  90- 93  I4    mmag    e_Bmag    *?=9999 Standard error on Bmag
+  95- 98  I4    mmag    e_Vmag    *?=9999 Standard error on Vmag
+ 100-103  I4    mmag      Scat    *?=9999 Scatter on V_T_ or Hp mag
+     105  A1    ---       v1      *[GN ] Known variability from GCVS/NSV
+     106  A1    ---       v2      *[UVW ] Variability from Tycho-1
+     107  A1    ---       v3      *[CDMPRU ] Variability type
+     108  A1    ---       v4      *[VYIXR ] Variability from CMC11
+ 109-110  A2    ---       d12     *[A-S ] CCDM component identifier
+     111  A1    ---       d3      *[A-S ] Component identifier
+     112  A1    ---       d4      *[DRSYZ ] Duplicity from Tycho-1
+     113  A1    ---       d5      *[CGOVX ] Double/Multiple Systems flag
+     114  A1    ---       d6      *[D ] Duplicity flag from PPM
+ 116-135  A20   ---       SpType  *Spectral type in MK or HD system
+ 137-140  I4    ---       TYC1    *?=0 TYC1 number from Tycho-2
+ 141-145  I5    ---       TYC2    *?=0 TYC2 number from Tycho-2
+     146  I1    ---       TYC3    *?=0 TYC3 number from Tycho-2
+ 148-153  I6    ---       HIP     *?=0 Hipparcos number
+ 155-160  I6    ---       HD      *?=0 HD number
+ 162-169  I8    ---       DM      *?=0 DM number
+ 171-177  I7    ---       ASCC    *[1,2603318] ASCC-2.5 number
+ 179-183  I5    mmag      Jmag    *?=99999 J magnitude from 2MASS
+ 185-188  I4    mmag    e_Jmag    *?=9999 Standard error on J magnitude
+ 190-194  I5    mmag      Hmag    *?=99999 H magnitude from 2MASS
+ 196-199  I4    mmag    e_Hmag    *?=9999 Standard error on H magnitude
+ 201-205  I5    mmag      Kmag    *?=99999 K_s magnitude from 2MASS
+ 207-210  I4    mmag    e_Kmag    *?=9999 Standard error on K_s magnitude
+--------------------------------------------------------------------------------
+Note on Plx:
+    Substituted with 999999 if no data
+Note on e_Plx:
+    Substituted with 99999 if no data
+Note on Bmag, Vmag, Jmag, Hmag, Kmag:
+    Substituted with 99999 if no data
+Note on e_Bmag, e_Vmag, Scat, e_Jmag, e_Hmag, e_Kmag:
+    Substituted with 9999 if no data
+Note on v1:
+    Byte 292 from Tycho-1 file tyc_main.dat
+    This flag is set when the variability is known:
+    G = variable known in General Catalog of Variable Stars
+    N = variable known in New Suspected Variables catalog
+    Substituted with blank if no data
+Note on v2:
+    Byte 294 from Tycho-1 file tyc_main.dat
+    This flag has the following meaning:
+    U = apparent variability in the Tycho data; may be due to duplicity
+    V = strong evidence of intrinsic variability
+    W = suspected intrinsic variability
+    Substituted with blank if no data
+Note on v3:
+    Byte 322 from Hipparcos file hip_main.dat
+    Hipparcos-defined type of variability (a blank entry signifies
+    that the entry could not be classified as variable or constant):
+    C = no variability detected ("constant")
+    D = duplicity-induced variability
+    M = possibly micro-variable (amplitude < 0.03mag)
+    P = periodic variable
+    R = V-I colour index was revised due to variability analysis
+    U = unsolved variable which does not fall in the other categories
+    Substituted with blank if no data
+Note on v4:
+    Flag from CMC11 catalogue
+    V      = variable star
+    Y or I = if the CAMC did not measure the mag, an approximate value
+             from other sources is given to a precision of 0.1 mag
+    X or R = star fainter than 12 with unknown mag is given as 12.
+    Substituted with blank if no data
+Note on d12:
+    Bytes 149, 150 from Tycho-2 file catalog.dat.
+    The CCDM component identifiers for double or multiple Hipparcos stars
+    contributing to this Tycho-2 entry.
+    Substituted with blank if no data
+    Tycho-2 byte 151 with the third component is not included. This byte
+    contains data (equal to "C") for two stars of the ASCC-2.5 No 244181
+    (ccp50.dat) and No 339869 (ccp45.dat) only.
+Note on d3:
+    Byte 41 from Hipparcos file hipdmcom.dat
+    Substituted with blank if no data
+Note on d4:
+    Byte 296 from Tycho-1 file tyc_main.dat
+    Unresolved duplicity status from Tycho data analysis:
+    D     = duplicity clearly indicated (B_Tmag and V_Tmag refer to
+            combined light)
+    R     = duplicity weakly indicated, combined with indication of
+            variability
+    S     = duplicity suspected
+    Y     = investigation for duplicity carried out on Tycho data,
+            no indication of duplicity was found
+    Z     = investigation for duplicity not carried out
+    blank = Hipparcos star not observed by Tycho
+    Substituted with blank if no data
+Note on d5:
+    Byte 347 from Hipparcos file hip_main.dat
+    Indicates that further details are given in the Hipparcos Double
+    and Multiple Systems Annex:
+    C = solutions for the components
+    G = acceleration or higher order terms
+    O = orbital solutions
+    V = variability-induced movers (apparent motion arises from
+        variability)
+    X = stochastic solution (probably astrometric binaries with short
+        period)
+    Substituted with blank if no data
+Note on d6:
+    Some multiple stars are not resolved in the PPM and/or CMC11
+    catalogues into separate components and are given in these catalogues
+    as single stars with a flag "D". Sometimes (especially at large PM)
+    such stars were not identified with resolved components from other
+    catalogues, and are present in the ASCC as additional (false)
+    component. Substituted with blank if no data
+Note on SpType:
+    Substituted with blank if no data
+Note on TYC1, TYC2, TYC3, HIP, HD:
+    Substituted with 0 if no data
+Note on DM:
+    DM = Zone sign and abs(Zone)*100000 + running number within this Zone
+    Substituted with 0 if no data
+Note on ASCC:
+    Stars are numbered from 1 to 2501977 (as in the first version,
+    in agreement with the file order indicated in the File Summary)
+    and from 2600001 to 2603318 (new stars in the 2nd version).
+--------------------------------------------------------------------------------
+
+History:
+  * 21-Aug-2002 (date of the first release)
+
+  * 18-Jun-2003: Version 'A'
+    The 1st version of the ASCC-2.5 (21-Aug-2002) contains some errors:
+
+    -  3982 false stars were detected at Dec = 0 ... +1 degrees. In
+       the 2nd version of the ASCC-2.5 these stars were excluded from
+       the file ccp00.dat. The corrected file ccp00.dat supersedes
+       the previous file ccp00.dat and contains 88230 stars.
+
+    -  for 3948 stars at Dec = 0 ... -1 degrees the PPM data were
+       missed during the catalogue compilation. In the 2nd version
+       the missed data were added and corresponding stellar data were
+       recompiled. The corrected file ccm00.dat supersedes the previous
+       file ccm00.dat and contains the same number of stars.
+
+    -  34 stars with PPM-only data were missed in zone Dec = 0 ... -1.
+       They were included in a new file of additional catalogue
+       objects ccadd.dat.
+
+    Besides, 3284 components of multiple systems from all over the sky
+    were included in the catalogue. These stars and their compiled
+    stellar data are placed in the file ccadd.dat of version 'A'.
+
+  * 12-Aug-2009: Version 'B'
+    Stars from file ccadd.dat are placed into the basic files in
+    accordance of their declinations.
+
+    The spectral types from The Tycho-2 Spectral Type Catalog were added.
+
+    The cross-correlation with the 2MASS catalogue was carried out and
+    stellar magnitudes J, H, K_s_ were added.
+
+
+References:
+  Bastian U., Roeser S., 1993, "PPM Star Catalogue, 3, 4", Spectrum
+    Akademischer Verlag, Heidelberg (PPM-S) (Cat. I/193)
+  Carlsberg Meridian Catalogue La Palma Numbers 1 to 11,
+    "Observations of positions of stars and planets: May 1984 to May 1998",
+    1999, Copenhagen University Observatory, Royal Greenwich
+    Observatory and Real Instituto y Observatorio de la Armada en
+    San Fernando, CD-ROM distribution (CMC11) (Cat. I/256)
+  ESA, 1997, "The Hipparcos and Tycho Catalogues", ESA SP-1200, 17
+    (Hipparcos: files I/239/hip_main.dat and I/239/hipdmcom.dat),
+    (Tycho-1: file I/239/tyc_main.dat)
+  Hog E., Kuzmin A., Bastian U., et al., 1998, "The Tycho Reference
+    Catalogue", AA, 335, N 3, L65-L68 (TRC) (Cat. I/250)
+  Hog E., Fabricius C., Makarov V.V., Urban S.E., Corbin T.E., Wycoff G.L.,
+    Bastian U., Schwekendiek P., Wicenec A, 2000, "The Tycho-2 Catalogue:
+    Positions, proper motions and two-color photometry of the 2.5 million
+    brightest stars", Copenhagen, CD-ROM distribution (Tycho-2) (Cat. I/259)
+  Kharchenko N.V., 2001, "All-sky Compiled Catalogue of 2.5 million stars",
+    Kinematics and Physics of Celestial Bodies, 17, N 5, 409-423
+    (ASCC-2.5) (Cat.I/280)
+  Roeser S., Bastian U., 1991, "PPM Star Catalogue, 1, 2", Spectrum
+    Akademischer Verlag, Heidelberg, Berlin, New York (PPM-N) (Cat. I/146)
+  Roeser S., Bastian U., Kuzmin A., 1994, "The 90000 stars supplement to
+    PPM", AApSS, 105, N 2, 301-303 (PPM-add) (Cat. I/208)
+  Skrutskie M.F., Cutri R.M., Stiening M.D. et al., 2006, "The Two Micron
+    All-Sky Survey (2MASS)", AJ, 131, 1163 (Cat. II/246)
+  Urban S.E., Corbin T.E., Wycoff G.L., 1998, "The ACT Reference Catalog",
+    (ACT RC) (1998AJ....115.2161U, Cat. I/246)
+  Wright C.O., Egan M.P., Kraemer K.E., Price S.D., 2003, "The Tycho-2
+    Spectral Type Catalog" (2003AJ....125..359W, Cat.III/231 )
+
+Author's Address:
+    Nina V. Kharchenko                 Siegfried Roeser
+    Main Astronomical Observatory      ZAH
+    NAS of Ukraine                     Astronomisches Rechen-Institut
+    27 Academica Zabolotnogo Str.      12-14 Moenchhofstrasse
+    03680 Kiev                         D-69120 Heidelberg
+    Ukraine                            Germany
+       Voice: +(380)44-266-4768          Voice: (+49)6221 54-1858
+       Fax:   +(380)44-266-2147          Fax:   (+49)6221 54-1888
+       e-mail:  nkhar(at)mao.kiev.ua     e-mail: roeser@ari.uni-heidelberg.de
+================================================================================
+(End)      Nina V. Kharchenko [Kiev], Francois Ochsenbein [CDS]      25-Sep-2009
