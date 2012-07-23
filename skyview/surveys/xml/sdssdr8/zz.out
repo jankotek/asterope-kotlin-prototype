@@ -1,0 +1,18 @@
+39c39
+<     <Coverage>    <![CDATA[12,000 square degrees. The SDDS site provides <a href="http://www.sdss3.org/dr8/scope.php">coverage maps</a>]]></Coverage>
+---
+>     <Coverage>    <![CDATA[9,583 square degrees. The SDDS site provides <a href="http://www.sdss.org/dr7/coverage/">coverage maps</a>]]></Coverage>
+47c47
+< <![CDATA[<a href="http://www.sdss3.org"> Sloan Digital Sky Survey web site </a>
+---
+> <![CDATA[<a href="http://www.sdss.org"> Sloan Digital Sky Survey web site </a>
+69d68
+< COMMENT  From release DR8
+71c70
+< COMMENT  available at www.sdss3.org.
+---
+> COMMENT  available at www.sdss.org.
+84c83
+< http://skyserver.sdss3.org/vo/DR8SIAP/SIAP.asmx/getSiapInfo?FORMAT=image/fits&BANDPASS=g&
+---
+> http://casjobs.sdss.org/vo/DR7SIAP/SIAP.asmx/getSiapInfo?FORMAT=image/fits&BANDPASS=g&

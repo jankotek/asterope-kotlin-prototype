@@ -1,0 +1,620 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName>SHASSA-SM,SHASSA Smoothed,SHASSA_Sm,SHASSA Sm</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>The Southern H-Alpha Sky Survey Atlas: Smoothed  </Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+The Southern H-Alpha Sky Survey Atlas is the product of a wide-angle 
+digital imaging survey of the H-alpha emission from the warm ionized 
+interstellar gas of our Galaxy. This atlas covers the southern hemisphere 
+sky (declinations less than +15 degrees). The observations were taken with 
+a robotic camera  operating at Cerro Tololo Inter-American Observatory (CTIO) 
+in Chile.  The atlas consists of 2168 images covering 542 fields. There are four 
+images available for each field: <b>H-alpha</b>, <b>Continuum</b>, <b>Continuum-Corrected</b> 
+(the difference of the H-alpha and Continuum images), and <b>Smoothed</b> (median filtered to 5 pixel, or 4.0 arcminute, resolution to remove star residuals better).  The  <a href="http://amundsen.swarthmore.edu/SHASSA">SHASSA web site</a> has more details of the data and the status of this and related projects.  Images can also be
+obtained from the <a href="http://amundsen.astro.swarthmore.edu/SHASSA/#Images">Download Images</a> section at the SHASSA site.
+
+]]>
+  </Description>
+
+  <Settings>
+    <Scale>0.0131666 </Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance> John E. Gaustad (Swarthmore College), Peter R. McCullough (University of Illinois), Wayne Rosing (Las Cumbres Observatory), and Dave Van Buren (Extrasolar Research Corporation)
+    </Provenance>
+    <Copyright>  <![CDATA[
+Las Cumbres Observatory, Inc. See the <a href="http://amundsen.swarthmore.edu/SHASSA/ack.html">Acknowledgement/Guidelines for Use of Images</a>
+    ]]> </Copyright>
+    <Regime>  Optical</Regime>
+    <Frequency> 457 THz </Frequency>
+    <Bandpass> 456-458 THz </Bandpass>
+    <Coverage>  All-sky south of 15</Coverage>
+    <PixelScale>  0.79'/pixel</PixelScale>
+    <PixelUnits><![CDATA[decirayleighs (dR) or  10<sup>5</sup>/4pi photons/cm<sup>2</sup>/s/sr]]></PixelUnits>
+    <CoordinateSystem>  Equatorial</CoordinateSystem>
+    <Projection>  Gnomonic </Projection>
+    <Equinox>  2000</Equinox>
+    <Epoch> 1997-2000</Epoch>
+    <Reference> <![CDATA[ "A Robotic Wide-Angle H-alpha Survey of the Southern Sky" by J.E. Gaustad, P.R. McCullough, W. Rosing, and D. Van Buren 2001, PASP, 113, 1326.  This paper may be downloaded in <a
+href="ftp://amundsen.swarthmore.edu/SHASSA/SurveyPaper.pdf"> PDF </a> (2.5 Mb) or <a href="ftp://amundsen.swarthmore.edu/SHASSA/SurveyPaper.ps"> Postscript</a> (12.7 Mb) format.
+    or
+    <a href="http://adsabs.harvard.edu/abs/2001PASP..113.1326G">ADS</a>
+    ]]>
+    </Reference>
+  </MetaTable>
+  <FITS>
+<![CDATA[
+SURVEY  = 'SHASSA SM '
+BUNIT   = 'dR      '                 /Image intensity units are decirayleighs
+BLANK   =           -2147483648       / 
+FILTER  = 'Dual Continuum'
+ORIGIN  = 'SWARTHMORE COLLEGE PHYSICS AND ASTRONOMY DEPT'               
+TELESCOP= '0.033M  '                  /Nikon 52 MM f/1.6 lens                   
+INSTRUME= 'SpectraSource Instruments HPC-TI CCD Camera'
+OBSERVAT= 'CERRO TOLOLO INTERAMERICAN OBSERVATORY' 
+]]>
+  </FITS>
+  
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    12 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/halpha/smoothed/ </SpellPrefix>
+        <SpellSuffix> ,Tan,J2000,1014,998,0.0132344,0.0132344 </SpellSuffix>
+<Image> 002.sm.fits.gz,002.sm.fits.gz,0.261221,-79.7615 0.261221 -79.7615 1998.8140 </Image>
+<Image> 003.sm.fits.gz,003.sm.fits.gz,44.2129,-79.7851 44.2129 -79.7851 1998.9530 </Image>
+<Image> 004.sm.fits.gz,004.sm.fits.gz,88.8233,-80.2215 88.8233 -80.2215 1998.0010 </Image>
+<Image> 005.sm.fits.gz,005.sm.fits.gz,134.319,-80.5469 134.319 -80.5469 1998.1680 </Image>
+<Image> 006.sm.fits.gz,006.sm.fits.gz,180.430,-80.6121 180.430 -80.6121 1998.2610 </Image>
+<Image> 007.sm.fits.gz,007.sm.fits.gz,226.491,-80.4700 226.491 -80.4700 1998.3900 </Image>
+<Image> 008.sm.fits.gz,008.sm.fits.gz,271.930,-80.3058 271.930 -80.3058 1998.4880 </Image>
+<Image> 009.sm.fits.gz,009.sm.fits.gz,316.503,-80.2820 316.503 -80.2820 1998.7070 </Image>
+<Image> 010.sm.fits.gz,010.sm.fits.gz,0.322155,-69.7738 0.322155 -69.7738 1998.8060 </Image>
+<Image> 011.sm.fits.gz,011.sm.fits.gz,25.9771,-69.7990 25.9771 -69.7990 1998.8900 </Image>
+<Image> 012.sm.fits.gz,012.sm.fits.gz,51.7567,-69.8432 51.7567 -69.8432 1998.9590 </Image>
+<Image> 013.sm.fits.gz,013.sm.fits.gz,77.7012,-70.1711 77.7012 -70.1711 1997.9920 </Image>
+<Image> 014.sm.fits.gz,014.sm.fits.gz,104.138,-69.9646 104.138 -69.9646 1997.9780 </Image>
+<Image> 015.sm.fits.gz,015.sm.fits.gz,129.885,-70.5551 129.885 -70.5551 1998.1620 </Image>
+<Image> 016.sm.fits.gz,016.sm.fits.gz,156.184,-70.6680 156.184 -70.6680 1998.2360 </Image>
+<Image> 017.sm.fits.gz,017.sm.fits.gz,182.512,-70.6568 182.512 -70.6568 1998.3130 </Image>
+<Image> 018.sm.fits.gz,018.sm.fits.gz,208.827,-70.6054 208.827 -70.6054 1998.3350 </Image>
+<Image> 019.sm.fits.gz,019.sm.fits.gz,235.049,-70.5000 235.049 -70.5000 1998.4200 </Image>
+<Image> 020.sm.fits.gz,020.sm.fits.gz,261.177,-70.3483 261.177 -70.3483 1998.4850 </Image>
+<Image> 021.sm.fits.gz,021.sm.fits.gz,287.189,-70.2843 287.189 -70.2843 1998.5650 </Image>
+<Image> 022.sm.fits.gz,022.sm.fits.gz,312.839,-69.8523 312.839 -69.8523 1998.8540 </Image>
+<Image> 023.sm.fits.gz,023.sm.fits.gz,338.771,-70.2041 338.771 -70.2041 1998.7260 </Image>
+<Image> 024.sm.fits.gz,024.sm.fits.gz,0.249208,-59.7116 0.249208 -59.7116 1998.8820 </Image>
+<Image> 025.sm.fits.gz,025.sm.fits.gz,19.1609,-59.7402 19.1609 -59.7402 1998.8770 </Image>
+<Image> 026.sm.fits.gz,026.sm.fits.gz,38.0313,-59.7206 38.0313 -59.7206 1998.9530 </Image>
+<Image> 027.sm.fits.gz,027.sm.fits.gz,57.0313,-60.0847 57.0313 -60.0847 1997.9050 </Image>
+<Image> 028.sm.fits.gz,028.sm.fits.gz,76.0341,-60.1711 76.0341 -60.1711 1997.9900 </Image>
+<Image> 029.sm.fits.gz,029.sm.fits.gz,94.9446,-60.2544 94.9446 -60.2544 1998.0060 </Image>
+<Image> 030.sm.fits.gz,030.sm.fits.gz,114.338,-59.9343 114.338 -59.9343 1997.9890 </Image>
+<Image> 031.sm.fits.gz,031.sm.fits.gz,133.150,-60.5415 133.150 -60.5415 1998.1650 </Image>
+<Image> 032.sm.fits.gz,032.sm.fits.gz,152.579,-59.9992 152.579 -59.9992 1998.0120 </Image>
+<Image> 033.sm.fits.gz,033.sm.fits.gz,171.391,-60.6128 171.391 -60.6128 1998.2420 </Image>
+<Image> 034.sm.fits.gz,034.sm.fits.gz,190.581,-60.6137 190.581 -60.6137 1998.3260 </Image>
+<Image> 035.sm.fits.gz,035.sm.fits.gz,209.700,-60.5237 209.700 -60.5237 1998.4770 </Image>
+<Image> 036.sm.fits.gz,036.sm.fits.gz,228.836,-60.4771 228.836 -60.4771 1998.4850 </Image>
+<Image> 037.sm.fits.gz,037.sm.fits.gz,248.195,-60.1070 248.195 -60.1070 1999.2110 </Image>
+<Image> 038.sm.fits.gz,038.sm.fits.gz,266.957,-60.3346 266.957 -60.3346 1998.5670 </Image>
+<Image> 039.sm.fits.gz,039.sm.fits.gz,285.895,-60.2879 285.895 -60.2879 1998.7720 </Image>
+<Image> 040.sm.fits.gz,040.sm.fits.gz,304.795,-60.2924 304.795 -60.2924 1998.7180 </Image>
+<Image> 041.sm.fits.gz,041.sm.fits.gz,323.530,-59.7504 323.530 -59.7504 1998.8020 </Image>
+<Image> 042.sm.fits.gz,042.sm.fits.gz,342.443,-59.7289 342.443 -59.7289 1998.7920 </Image>
+<Image> 043.sm.fits.gz,043.sm.fits.gz,0.294316,-49.7109 0.294316 -49.7109 1998.8790 </Image>
+<Image> 044.sm.fits.gz,044.sm.fits.gz,15.2823,-49.7489 15.2823 -49.7489 1998.8740 </Image>
+<Image> 045.sm.fits.gz,045.sm.fits.gz,30.2143,-49.7737 30.2143 -49.7737 1998.8990 </Image>
+<Image> 046.sm.fits.gz,046.sm.fits.gz,45.2239,-49.7715 45.2239 -49.7715 1998.9510 </Image>
+<Image> 047.sm.fits.gz,047.sm.fits.gz,59.4740,-50.0315 59.4740 -50.0315 1997.9210 </Image>
+<Image> 048.sm.fits.gz,048.sm.fits.gz,75.3943,-49.7336 75.3943 -49.7336 1997.9150 </Image>
+<Image> 049.sm.fits.gz,049.sm.fits.gz,90.2098,-50.3721 90.2098 -50.3721 1998.1590 </Image>
+<Image> 050.sm.fits.gz,050.sm.fits.gz,105.196,-50.4434 105.196 -50.4434 1998.2160 </Image>
+<Image> 051.sm.fits.gz,051.sm.fits.gz,120.408,-49.9514 120.408 -49.9514 1997.9950 </Image>
+<Image> 052.sm.fits.gz,052.sm.fits.gz,135.204,-50.5194 135.204 -50.5194 1998.2440 </Image>
+<Image> 053.sm.fits.gz,053.sm.fits.gz,150.353,-50.5820 150.353 -50.5820 1998.2360 </Image>
+<Image> 054.sm.fits.gz,054.sm.fits.gz,165.424,-50.5917 165.424 -50.5917 1998.3260 </Image>
+<Image> 055.sm.fits.gz,055.sm.fits.gz,180.490,-50.5508 180.490 -50.5508 1998.4760 </Image>
+<Image> 056.sm.fits.gz,056.sm.fits.gz,195.611,-50.5314 195.611 -50.5314 1998.5390 </Image>
+<Image> 057.sm.fits.gz,057.sm.fits.gz,210.681,-50.5295 210.681 -50.5295 1998.4880 </Image>
+<Image> 058.sm.fits.gz,058.sm.fits.gz,225.979,-50.1587 225.979 -50.1587 1999.2190 </Image>
+<Image> 059.sm.fits.gz,059.sm.fits.gz,240.819,-50.4373 240.819 -50.4373 1998.5530 </Image>
+<Image> 060.sm.fits.gz,060.sm.fits.gz,256.016,-50.0900 256.016 -50.0900 1999.2300 </Image>
+<Image> 061.sm.fits.gz,061.sm.fits.gz,270.748,-50.4056 270.748 -50.4056 1998.7200 </Image>
+<Image> 062.sm.fits.gz,062.sm.fits.gz,285.994,-49.9266 285.994 -49.9266 1999.2990 </Image>
+<Image> 063.sm.fits.gz,063.sm.fits.gz,300.624,-50.2310 300.624 -50.2310 1998.7860 </Image>
+<Image> 064.sm.fits.gz,064.sm.fits.gz,315.622,-50.2008 315.622 -50.2008 1998.7310 </Image>
+<Image> 065.sm.fits.gz,065.sm.fits.gz,330.510,-49.7699 330.510 -49.7699 1998.8630 </Image>
+<Image> 066.sm.fits.gz,066.sm.fits.gz,345.442,-49.7302 345.442 -49.7302 1998.7940 </Image>
+<Image> 067.sm.fits.gz,067.sm.fits.gz,0.413570,-39.7245 0.413570 -39.7245 1998.8160 </Image>
+<Image> 068.sm.fits.gz,068.sm.fits.gz,13.5951,-39.4391 13.5951 -39.4391 1998.5680 </Image>
+<Image> 069.sm.fits.gz,069.sm.fits.gz,26.2805,-39.7572 26.2805 -39.7572 1998.8930 </Image>
+<Image> 070.sm.fits.gz,070.sm.fits.gz,39.2929,-39.7444 39.2929 -39.7444 1998.9560 </Image>
+<Image> 071.sm.fits.gz,071.sm.fits.gz,52.4882,-39.4036 52.4882 -39.4036 1998.7210 </Image>
+<Image> 072.sm.fits.gz,072.sm.fits.gz,65.4350,-39.7759 65.4350 -39.7759 1997.8960 </Image>
+<Image> 073.sm.fits.gz,073.sm.fits.gz,78.4372,-39.6636 78.4372 -39.6636 1997.9070 </Image>
+<Image> 074.sm.fits.gz,074.sm.fits.gz,91.2831,-40.2532 91.2831 -40.2532 1998.0030 </Image>
+<Image> 075.sm.fits.gz,075.sm.fits.gz,104.445,-39.8683 104.445 -39.8683 1997.9760 </Image>
+<Image> 076.sm.fits.gz,076.sm.fits.gz,117.440,-39.9414 117.440 -39.9414 1997.9920 </Image>
+<Image> 077.sm.fits.gz,077.sm.fits.gz,130.327,-40.5187 130.327 -40.5187 1998.2300 </Image>
+<Image> 078.sm.fits.gz,078.sm.fits.gz,143.533,-39.9874 143.533 -39.9874 1998.0090 </Image>
+<Image> 079.sm.fits.gz,079.sm.fits.gz,156.449,-40.5691 156.449 -40.5691 1998.3040 </Image>
+<Image> 080.sm.fits.gz,080.sm.fits.gz,169.514,-40.6070 169.514 -40.6070 1998.3810 </Image>
+<Image> 081.sm.fits.gz,081.sm.fits.gz,182.543,-40.5572 182.543 -40.5572 1998.4790 </Image>
+<Image> 082.sm.fits.gz,082.sm.fits.gz,195.702,-40.2982 195.702 -40.2982 1999.1280 </Image>
+<Image> 083.sm.fits.gz,083.sm.fits.gz,208.821,-40.2314 208.821 -40.2314 2000.3460 </Image>
+<Image> 084.sm.fits.gz,084.sm.fits.gz,221.802,-40.2188 221.802 -40.2188 1999.2130 </Image>
+<Image> 085.sm.fits.gz,085.sm.fits.gz,234.763,-40.4715 234.763 -40.4715 1998.5640 </Image>
+<Image> 086.sm.fits.gz,086.sm.fits.gz,247.798,-40.4159 247.798 -40.4159 1998.5620 </Image>
+<Image> 087.sm.fits.gz,087.sm.fits.gz,260.719,-40.4736 260.719 -40.4736 1998.7120 </Image>
+<Image> 088.sm.fits.gz,088.sm.fits.gz,273.859,-39.9840 273.859 -39.9840 1999.2960 </Image>
+<Image> 089.sm.fits.gz,089.sm.fits.gz,286.727,-40.3181 286.727 -40.3181 1998.7780 </Image>
+<Image> 090.sm.fits.gz,090.sm.fits.gz,299.701,-40.3089 299.701 -40.3089 1998.7120 </Image>
+<Image> 091.sm.fits.gz,091.sm.fits.gz,312.801,-39.5266 312.801 -39.5266 1998.4770 </Image>
+<Image> 092.sm.fits.gz,092.sm.fits.gz,325.525,-39.7832 325.525 -39.7832 1998.8570 </Image>
+<Image> 093.sm.fits.gz,093.sm.fits.gz,338.491,-40.1162 338.491 -40.1162 1998.7830 </Image>
+<Image> 094.sm.fits.gz,094.sm.fits.gz,351.439,-39.7227 351.439 -39.7227 1998.8050 </Image>
+<Image> 095.sm.fits.gz,095.sm.fits.gz,0.634573,-29.7889 0.634573 -29.7889 2000.6670 </Image>
+<Image> 096.sm.fits.gz,096.sm.fits.gz,11.9002,-29.7480 11.9002 -29.7480 1998.8710 </Image>
+<Image> 097.sm.fits.gz,097.sm.fits.gz,23.3632,-29.7678 23.3632 -29.7678 1998.8880 </Image>
+<Image> 098.sm.fits.gz,098.sm.fits.gz,34.9259,-29.7920 34.9259 -29.7920 1998.9670 </Image>
+<Image> 099.sm.fits.gz,099.sm.fits.gz,46.4232,-29.8240 46.4232 -29.8240 1998.9560 </Image>
+<Image> 100.sm.fits.gz,100.sm.fits.gz,57.9385,-30.2195 57.9385 -30.2195 1997.9080 </Image>
+<Image> 101.sm.fits.gz,101.sm.fits.gz,69.4537,-30.2228 69.4537 -30.2228 1998.0740 </Image>
+<Image> 102.sm.fits.gz,102.sm.fits.gz,80.9212,-30.3441 80.9212 -30.3441 1998.1650 </Image>
+<Image> 103.sm.fits.gz,103.sm.fits.gz,92.4824,-30.3469 92.4824 -30.3469 1998.0720 </Image>
+<Image> 104.sm.fits.gz,104.sm.fits.gz,103.969,-30.3844 103.969 -30.3844 1998.0750 </Image>
+<Image> 105.sm.fits.gz,105.sm.fits.gz,115.388,-30.4827 115.388 -30.4827 1998.1570 </Image>
+<Image> 106.sm.fits.gz,106.sm.fits.gz,127.002,-30.5526 127.002 -30.5526 1998.1590 </Image>
+<Image> 107.sm.fits.gz,107.sm.fits.gz,138.519,-30.5870 138.519 -30.5870 1998.1730 </Image>
+<Image> 108.sm.fits.gz,108.sm.fits.gz,150.015,-30.5977 150.015 -30.5977 1998.1710 </Image>
+<Image> 109.sm.fits.gz,109.sm.fits.gz,161.557,-30.6125 161.557 -30.6125 1998.3070 </Image>
+<Image> 110.sm.fits.gz,110.sm.fits.gz,173.108,-30.3248 173.108 -30.3248 1999.0630 </Image>
+<Image> 111.sm.fits.gz,111.sm.fits.gz,184.624,-30.5758 184.624 -30.5758 1998.4600 </Image>
+<Image> 112.sm.fits.gz,112.sm.fits.gz,196.112,-30.5758 196.112 -30.5758 1998.4080 </Image>
+<Image> 113.sm.fits.gz,113.sm.fits.gz,207.692,-30.6064 207.692 -30.6064 1998.3380 </Image>
+<Image> 114.sm.fits.gz,114.sm.fits.gz,219.109,-30.2897 219.109 -30.2897 1999.3660 </Image>
+<Image> 115.sm.fits.gz,115.sm.fits.gz,230.675,-30.2121 230.675 -30.2121 1999.2900 </Image>
+<Image> 116.sm.fits.gz,116.sm.fits.gz,242.273,-30.4515 242.273 -30.4515 1998.4960 </Image>
+<Image> 117.sm.fits.gz,117.sm.fits.gz,253.782,-30.4184 253.782 -30.4184 1998.4990 </Image>
+<Image> 118.sm.fits.gz,118.sm.fits.gz,265.301,-30.3558 265.301 -30.3558 1998.5450 </Image>
+<Image> 119.sm.fits.gz,119.sm.fits.gz,276.802,-30.3104 276.802 -30.3104 1998.4960 </Image>
+<Image> 120.sm.fits.gz,120.sm.fits.gz,288.149,-30.4015 288.149 -30.4015 1998.7010 </Image>
+<Image> 121.sm.fits.gz,121.sm.fits.gz,299.669,-30.3196 299.669 -30.3196 1998.7090 </Image>
+<Image> 122.sm.fits.gz,122.sm.fits.gz,311.244,-30.3191 311.244 -30.3191 1998.7040 </Image>
+<Image> 123.sm.fits.gz,123.sm.fits.gz,322.686,-30.2720 322.686 -30.2720 1998.7290 </Image>
+<Image> 124.sm.fits.gz,124.sm.fits.gz,333.977,-29.7633 333.977 -29.7633 1998.8650 </Image>
+<Image> 125.sm.fits.gz,125.sm.fits.gz,345.590,-30.1772 345.590 -30.1772 1998.7400 </Image>
+<Image> 126.sm.fits.gz,126.sm.fits.gz,357.076,-30.1706 357.076 -30.1706 1998.7430 </Image>
+<Image> 127.sm.fits.gz,127.sm.fits.gz,0.484098,-19.7480 0.484098 -19.7480 1998.8110 </Image>
+<Image> 128.sm.fits.gz,128.sm.fits.gz,10.9318,-19.7541 10.9318 -19.7541 1998.8680 </Image>
+<Image> 129.sm.fits.gz,129.sm.fits.gz,21.3979,-19.7609 21.3979 -19.7609 1998.8850 </Image>
+<Image> 130.sm.fits.gz,130.sm.fits.gz,31.9462,-19.6561 31.9462 -19.6561 1998.9480 </Image>
+<Image> 131.sm.fits.gz,131.sm.fits.gz,42.3838,-19.8333 42.3838 -19.8333 1998.9010 </Image>
+<Image> 132.sm.fits.gz,132.sm.fits.gz,52.9065,-19.7868 52.9065 -19.7868 1999.0380 </Image>
+<Image> 133.sm.fits.gz,133.sm.fits.gz,63.4833,-20.1746 63.4833 -20.1746 1997.9240 </Image>
+<Image> 134.sm.fits.gz,134.sm.fits.gz,74.0031,-20.2131 74.0031 -20.2131 1998.0580 </Image>
+<Image> 135.sm.fits.gz,135.sm.fits.gz,84.5036,-20.2842 84.5036 -20.2842 1998.0850 </Image>
+<Image> 136.sm.fits.gz,136.sm.fits.gz,95.0464,-20.3533 95.0464 -20.3533 1998.0830 </Image>
+<Image> 137.sm.fits.gz,137.sm.fits.gz,105.543,-20.4121 105.543 -20.4121 1998.0860 </Image>
+<Image> 138.sm.fits.gz,138.sm.fits.gz,115.992,-20.1360 115.992 -20.1360 2000.2510 </Image>
+<Image> 139.sm.fits.gz,139.sm.fits.gz,126.512,-20.5282 126.512 -20.5282 1998.2960 </Image>
+<Image> 140.sm.fits.gz,140.sm.fits.gz,137.018,-20.5353 137.018 -20.5353 1998.3070 </Image>
+<Image> 141.sm.fits.gz,141.sm.fits.gz,147.548,-20.6069 147.548 -20.6069 1998.2280 </Image>
+<Image> 142.sm.fits.gz,142.sm.fits.gz,158.000,-20.6054 158.000 -20.6054 1998.2440 </Image>
+<Image> 143.sm.fits.gz,143.sm.fits.gz,168.596,-20.6134 168.596 -20.6134 1998.3130 </Image>
+<Image> 144.sm.fits.gz,144.sm.fits.gz,179.061,-19.9610 179.061 -19.9610 1998.2360 </Image>
+<Image> 145.sm.fits.gz,145.sm.fits.gz,189.610,-20.5638 189.610 -20.5638 1998.4820 </Image>
+<Image> 146.sm.fits.gz,146.sm.fits.gz,200.122,-19.9446 200.122 -19.9446 1998.3780 </Image>
+<Image> 147.sm.fits.gz,147.sm.fits.gz,210.691,-20.5709 210.691 -20.5709 1998.4820 </Image>
+<Image> 148.sm.fits.gz,148.sm.fits.gz,221.184,-20.2004 221.184 -20.2004 1999.1420 </Image>
+<Image> 149.sm.fits.gz,149.sm.fits.gz,231.725,-20.4889 231.725 -20.4889 1998.5450 </Image>
+<Image> 150.sm.fits.gz,150.sm.fits.gz,242.218,-20.4575 242.218 -20.4575 1998.4880 </Image>
+<Image> 151.sm.fits.gz,151.sm.fits.gz,252.564,-20.5387 252.564 -20.5387 1998.7010 </Image>
+<Image> 152.sm.fits.gz,152.sm.fits.gz,263.256,-20.3814 263.256 -20.3814 1998.5650 </Image>
+<Image> 153.sm.fits.gz,153.sm.fits.gz,273.669,-20.4395 273.669 -20.4395 1998.7260 </Image>
+<Image> 154.sm.fits.gz,154.sm.fits.gz,284.152,-20.3947 284.152 -20.3947 1998.7040 </Image>
+<Image> 155.sm.fits.gz,155.sm.fits.gz,294.666,-20.3848 294.666 -20.3848 1998.7070 </Image>
+<Image> 156.sm.fits.gz,156.sm.fits.gz,305.141,-20.3129 305.141 -20.3129 1998.7200 </Image>
+<Image> 157.sm.fits.gz,157.sm.fits.gz,315.637,-20.2781 315.637 -20.2781 1998.7260 </Image>
+<Image> 158.sm.fits.gz,158.sm.fits.gz,326.130,-19.4905 326.130 -19.4905 1998.4830 </Image>
+<Image> 159.sm.fits.gz,159.sm.fits.gz,336.644,-20.2254 336.644 -20.2254 1998.7320 </Image>
+<Image> 160.sm.fits.gz,160.sm.fits.gz,346.976,-19.7309 346.976 -19.7309 1998.7970 </Image>
+<Image> 161.sm.fits.gz,161.sm.fits.gz,357.405,-19.7129 357.405 -19.7129 1998.8740 </Image>
+<Image> 162.sm.fits.gz,162.sm.fits.gz,0.475836,-9.72585 0.475836 -9.72585 1998.8080 </Image>
+<Image> 163.sm.fits.gz,163.sm.fits.gz,10.4348,-9.74032 10.4348 -9.74032 1998.8660 </Image>
+<Image> 164.sm.fits.gz,164.sm.fits.gz,20.4226,-9.75575 20.4226 -9.75575 1998.8820 </Image>
+<Image> 165.sm.fits.gz,165.sm.fits.gz,30.4161,-9.77933 30.4161 -9.77933 1998.8960 </Image>
+<Image> 166.sm.fits.gz,166.sm.fits.gz,40.5069,-9.81351 40.5069 -9.81351 1999.0320 </Image>
+<Image> 167.sm.fits.gz,167.sm.fits.gz,50.5363,-9.43854 50.5363 -9.43854 1998.7180 </Image>
+<Image> 168.sm.fits.gz,168.sm.fits.gz,60.5456,-10.1515 60.5456 -10.1515 1999.9790 </Image>
+<Image> 169.sm.fits.gz,169.sm.fits.gz,70.5567,-10.1744 70.5567 -10.1744 1998.0550 </Image>
+<Image> 170.sm.fits.gz,170.sm.fits.gz,80.5579,-10.2530 80.5579 -10.2530 1998.0710 </Image>
+<Image> 171.sm.fits.gz,171.sm.fits.gz,90.5318,-10.3565 90.5318 -10.3565 1998.1510 </Image>
+<Image> 172.sm.fits.gz,172.sm.fits.gz,100.520,-10.4068 100.520 -10.4068 1998.1620 </Image>
+<Image> 173.sm.fits.gz,173.sm.fits.gz,110.545,-10.4597 110.545 -10.4597 1998.2190 </Image>
+<Image> 174.sm.fits.gz,174.sm.fits.gz,120.540,-10.4788 120.540 -10.4788 1998.1700 </Image>
+<Image> 175.sm.fits.gz,175.sm.fits.gz,130.569,-10.5518 130.569 -10.5518 1998.2220 </Image>
+<Image> 176.sm.fits.gz,176.sm.fits.gz,140.466,-10.5473 140.466 -10.5473 1998.2470 </Image>
+<Image> 177.sm.fits.gz,177.sm.fits.gz,150.650,-10.2862 150.650 -10.2862 1999.0330 </Image>
+<Image> 178.sm.fits.gz,178.sm.fits.gz,160.557,-10.3275 160.557 -10.3275 1999.0380 </Image>
+<Image> 179.sm.fits.gz,179.sm.fits.gz,170.535,-10.3433 170.535 -10.3433 1999.0490 </Image>
+<Image> 180.sm.fits.gz,180.sm.fits.gz,180.594,-10.2633 180.594 -10.2633 2000.3440 </Image>
+<Image> 181.sm.fits.gz,181.sm.fits.gz,190.629,-10.5862 190.629 -10.5862 1998.4850 </Image>
+<Image> 182.sm.fits.gz,182.sm.fits.gz,200.648,-10.2510 200.648 -10.2510 1999.1480 </Image>
+<Image> 183.sm.fits.gz,183.sm.fits.gz,210.646,-10.5526 210.646 -10.5526 1998.4790 </Image>
+<Image> 184.sm.fits.gz,184.sm.fits.gz,220.525,-10.2463 220.525 -10.2463 1999.3750 </Image>
+<Image> 185.sm.fits.gz,185.sm.fits.gz,230.691,-10.4625 230.691 -10.4625 1998.5400 </Image>
+<Image> 186.sm.fits.gz,186.sm.fits.gz,240.692,-10.4338 240.692 -10.4338 1998.5420 </Image>
+<Image> 187.sm.fits.gz,187.sm.fits.gz,250.663,-10.0894 250.663 -10.0894 1999.2250 </Image>
+<Image> 188.sm.fits.gz,188.sm.fits.gz,260.605,-10.5071 260.605 -10.5071 1998.7060 </Image>
+<Image> 189.sm.fits.gz,189.sm.fits.gz,270.586,-10.4473 270.586 -10.4473 1998.7170 </Image>
+<Image> 190.sm.fits.gz,190.sm.fits.gz,280.557,-9.99214 280.557 -9.99214 1999.3590 </Image>
+<Image> 191.sm.fits.gz,191.sm.fits.gz,290.623,-10.3598 290.623 -10.3598 1998.7290 </Image>
+<Image> 192.sm.fits.gz,192.sm.fits.gz,300.616,-10.3680 300.616 -10.3680 1998.7150 </Image>
+<Image> 193.sm.fits.gz,193.sm.fits.gz,310.685,-9.84060 310.685 -9.84060 2000.6370 </Image>
+<Image> 194.sm.fits.gz,194.sm.fits.gz,320.476,-9.76819 320.476 -9.76819 1998.8000 </Image>
+<Image> 195.sm.fits.gz,195.sm.fits.gz,330.490,-9.75900 330.490 -9.75900 1998.8110 </Image>
+<Image> 196.sm.fits.gz,196.sm.fits.gz,340.457,-10.1757 340.457 -10.1757 1998.7860 </Image>
+<Image> 197.sm.fits.gz,197.sm.fits.gz,350.567,-9.84749 350.567 -9.84749 1999.4630 </Image>
+<Image> 198.sm.fits.gz,198.sm.fits.gz,0.774423,0.178107 0.774423 0.178107 1998.7890 </Image>
+<Image> 199.sm.fits.gz,199.sm.fits.gz,10.4349,0.258340 10.4349 0.258340 1998.8630 </Image>
+<Image> 200.sm.fits.gz,200.sm.fits.gz,20.4295,0.246073 20.4295 0.246073 1998.8790 </Image>
+<Image> 201.sm.fits.gz,201.sm.fits.gz,30.3473,0.295047 30.3473 0.295047 1998.9450 </Image>
+<Image> 202.sm.fits.gz,202.sm.fits.gz,40.4670,0.174825 40.4670 0.174825 1999.0350 </Image>
+<Image> 203.sm.fits.gz,203.sm.fits.gz,50.5639,0.544130 50.5639 0.544130 1998.7150 </Image>
+<Image> 204.sm.fits.gz,204.sm.fits.gz,60.5960,-0.156731 60.5960 -0.156731 1997.9160 </Image>
+<Image> 205.sm.fits.gz,205.sm.fits.gz,70.5873,-0.161382 70.5873 -0.161382 1997.9320 </Image>
+<Image> 206.sm.fits.gz,206.sm.fits.gz,80.6030,-0.252458 80.6030 -0.252458 1998.0690 </Image>
+<Image> 207.sm.fits.gz,207.sm.fits.gz,90.7322,-0.120577 90.7322 -0.120577 1998.7950 </Image>
+<Image> 208.sm.fits.gz,208.sm.fits.gz,100.678,-0.177375 100.678 -0.177375 1998.8030 </Image>
+<Image> 209.sm.fits.gz,209.sm.fits.gz,110.694,-0.180466 110.694 -0.180466 1999.0210 </Image>
+<Image> 210.sm.fits.gz,210.sm.fits.gz,120.695,-0.220049 120.695 -0.220049 1998.9780 </Image>
+<Image> 211.sm.fits.gz,211.sm.fits.gz,130.667,-0.254080 130.667 -0.254080 1998.9730 </Image>
+<Image> 212.sm.fits.gz,212.sm.fits.gz,140.689,-0.286656 140.689 -0.286656 1998.9830 </Image>
+<Image> 213.sm.fits.gz,213.sm.fits.gz,150.692,-0.306057 150.692 -0.306057 1998.9860 </Image>
+<Image> 214.sm.fits.gz,214.sm.fits.gz,160.622,-0.339226 160.622 -0.339226 1999.0350 </Image>
+<Image> 215.sm.fits.gz,215.sm.fits.gz,170.557,-0.344313 170.557 -0.344313 1999.0520 </Image>
+<Image> 216.sm.fits.gz,216.sm.fits.gz,180.625,-0.330433 180.625 -0.330433 1999.0660 </Image>
+<Image> 217.sm.fits.gz,217.sm.fits.gz,190.611,-0.327851 190.611 -0.327851 1999.1230 </Image>
+<Image> 218.sm.fits.gz,218.sm.fits.gz,200.628,-0.551741 200.628 -0.551741 1998.5450 </Image>
+<Image> 219.sm.fits.gz,219.sm.fits.gz,210.639,-0.509784 210.639 -0.509784 1998.5370 </Image>
+<Image> 220.sm.fits.gz,220.sm.fits.gz,220.632,-0.498545 220.632 -0.498545 1998.5610 </Image>
+<Image> 221.sm.fits.gz,221.sm.fits.gz,230.636,-0.170807 230.636 -0.170807 1999.2030 </Image>
+<Image> 222.sm.fits.gz,222.sm.fits.gz,240.625,-0.152431 240.625 -0.152431 1999.2080 </Image>
+<Image> 223.sm.fits.gz,223.sm.fits.gz,250.625,-0.117465 250.625 -0.117465 1999.2220 </Image>
+<Image> 224.sm.fits.gz,224.sm.fits.gz,260.551,-0.0775973 260.551 -0.0775973 1999.2900 </Image>
+<Image> 225.sm.fits.gz,225.sm.fits.gz,270.548,-0.464239 270.548 -0.464239 1998.7150 </Image>
+<Image> 226.sm.fits.gz,226.sm.fits.gz,280.512,-0.0464210 280.512 -0.0464210 1999.3010 </Image>
+<Image> 227.sm.fits.gz,227.sm.fits.gz,290.512,0.0167413 290.512 0.0167413 1999.3610 </Image>
+<Image> 228.sm.fits.gz,228.sm.fits.gz,300.465,0.142467 300.465 0.142467 1998.7940 </Image>
+<Image> 229.sm.fits.gz,229.sm.fits.gz,310.513,0.144970 310.513 0.144970 1999.3670 </Image>
+<Image> 230.sm.fits.gz,230.sm.fits.gz,320.436,0.231370 320.436 0.231370 1998.7970 </Image>
+<Image> 231.sm.fits.gz,231.sm.fits.gz,330.420,0.232429 330.420 0.232429 1998.8600 </Image>
+<Image> 232.sm.fits.gz,232.sm.fits.gz,340.458,0.247595 340.458 0.247595 1998.7890 </Image>
+<Image> 233.sm.fits.gz,233.sm.fits.gz,350.621,0.178923 350.621 0.178923 1999.5480 </Image>
+<Image> 234.sm.fits.gz,234.sm.fits.gz,0.616608,10.5075 0.616608 10.5075 1998.5620 </Image>
+<Image> 235.sm.fits.gz,235.sm.fits.gz,10.7313,10.1503 10.7313 10.1503 1998.8050 </Image>
+<Image> 236.sm.fits.gz,236.sm.fits.gz,20.6734,10.1546 20.6734 10.1546 1999.6220 </Image>
+<Image> 237.sm.fits.gz,237.sm.fits.gz,30.7148,10.1999 30.7148 10.1999 2000.6780 </Image>
+<Image> 238.sm.fits.gz,238.sm.fits.gz,40.5292,10.2257 40.5292 10.2257 1998.9590 </Image>
+<Image> 239.sm.fits.gz,239.sm.fits.gz,50.6154,10.4952 50.6154 10.4952 1998.7120 </Image>
+<Image> 240.sm.fits.gz,240.sm.fits.gz,60.6229,9.85004 60.6229 9.85004 1997.9100 </Image>
+<Image> 241.sm.fits.gz,241.sm.fits.gz,70.6118,9.84661 70.6118 9.84661 1997.9290 </Image>
+<Image> 242.sm.fits.gz,242.sm.fits.gz,80.6388,9.75652 80.6388 9.75652 1998.0610 </Image>
+<Image> 243.sm.fits.gz,243.sm.fits.gz,90.5288,9.67965 90.5288 9.67965 1998.1560 </Image>
+<Image> 244.sm.fits.gz,244.sm.fits.gz,100.739,9.83530 100.739 9.83530 1998.9720 </Image>
+<Image> 245.sm.fits.gz,245.sm.fits.gz,110.610,9.56924 110.610 9.56924 1998.2220 </Image>
+<Image> 246.sm.fits.gz,246.sm.fits.gz,120.603,9.52515 120.603 9.52515 1998.2930 </Image>
+<Image> 247.sm.fits.gz,247.sm.fits.gz,130.600,9.49023 130.600 9.49023 1998.2270 </Image>
+<Image> 248.sm.fits.gz,248.sm.fits.gz,140.756,9.73600 140.756 9.73600 1998.9750 </Image>
+<Image> 249.sm.fits.gz,249.sm.fits.gz,150.601,9.45675 150.601 9.45675 1998.3120 </Image>
+<Image> 250.sm.fits.gz,250.sm.fits.gz,160.631,9.66979 160.631 9.66979 1999.0460 </Image>
+<Image> 251.sm.fits.gz,251.sm.fits.gz,170.677,9.68178 170.677 9.68178 1999.0550 </Image>
+<Image> 252.sm.fits.gz,252.sm.fits.gz,180.568,9.75331 180.568 9.75331 2000.4120 </Image>
+<Image> 253.sm.fits.gz,253.sm.fits.gz,190.645,9.69236 190.645 9.69236 1999.1340 </Image>
+<Image> 254.sm.fits.gz,254.sm.fits.gz,200.639,9.69728 200.639 9.69728 1999.1450 </Image>
+<Image> 255.sm.fits.gz,255.sm.fits.gz,210.640,9.74439 210.640 9.74439 1999.1260 </Image>
+<Image> 256.sm.fits.gz,256.sm.fits.gz,220.581,9.52814 220.581 9.52814 1998.5420 </Image>
+<Image> 257.sm.fits.gz,257.sm.fits.gz,230.629,9.80794 230.629 9.80794 1999.2000 </Image>
+<Image> 258.sm.fits.gz,258.sm.fits.gz,240.567,9.54871 240.567 9.54871 1998.5670 </Image>
+<Image> 259.sm.fits.gz,259.sm.fits.gz,250.615,9.89022 250.615 9.89022 1999.2160 </Image>
+<Image> 260.sm.fits.gz,260.sm.fits.gz,260.542,9.89539 260.542 9.89539 1999.2820 </Image>
+<Image> 261.sm.fits.gz,261.sm.fits.gz,270.537,9.95351 270.537 9.95351 1999.2850 </Image>
+<Image> 262.sm.fits.gz,262.sm.fits.gz,280.527,9.98068 280.527 9.98068 1999.3040 </Image>
+<Image> 263.sm.fits.gz,263.sm.fits.gz,290.496,10.0555 290.496 10.0555 1999.3750 </Image>
+<Image> 264.sm.fits.gz,264.sm.fits.gz,300.493,10.0773 300.493 10.0773 1999.3830 </Image>
+<Image> 265.sm.fits.gz,265.sm.fits.gz,310.503,10.1303 310.503 10.1303 1999.3640 </Image>
+<Image> 266.sm.fits.gz,266.sm.fits.gz,320.410,10.2389 320.410 10.2389 1998.7910 </Image>
+<Image> 267.sm.fits.gz,267.sm.fits.gz,330.419,10.2583 330.419 10.2583 1998.8080 </Image>
+<Image> 268.sm.fits.gz,268.sm.fits.gz,340.382,10.2604 340.382 10.2604 1998.8680 </Image>
+<Image> 269.sm.fits.gz,269.sm.fits.gz,350.597,10.5295 350.597 10.5295 1998.4800 </Image>
+<Image> 435.sm.fits.gz,435.sm.fits.gz,0.184624,-87.2197 0.184624 -87.2197 1998.8190 </Image>
+<Image> 436.sm.fits.gz,436.sm.fits.gz,114.876,-87.9855 114.876 -87.9855 1998.1510 </Image>
+<Image> 437.sm.fits.gz,437.sm.fits.gz,246.108,-87.9633 246.108 -87.9633 1998.4230 </Image>
+<Image> 502.sm.fits.gz,502.sm.fits.gz,22.3959,-84.7395 22.3959 -84.7395 1999.7800 </Image>
+<Image> 503.sm.fits.gz,503.sm.fits.gz,65.6957,-84.8930 65.6957 -84.8930 1999.9190 </Image>
+<Image> 504.sm.fits.gz,504.sm.fits.gz,110.582,-85.1045 110.582 -85.1045 1999.9250 </Image>
+<Image> 505.sm.fits.gz,505.sm.fits.gz,157.348,-85.2471 157.348 -85.2471 1999.1910 </Image>
+<Image> 506.sm.fits.gz,506.sm.fits.gz,204.821,-85.3051 204.821 -85.3051 1999.3440 </Image>
+<Image> 507.sm.fits.gz,507.sm.fits.gz,251.512,-85.1329 251.512 -85.1329 1999.5060 </Image>
+<Image> 508.sm.fits.gz,508.sm.fits.gz,296.357,-84.9894 296.357 -84.9894 1999.5140 </Image>
+<Image> 509.sm.fits.gz,509.sm.fits.gz,338.899,-84.6597 338.899 -84.6597 2000.8150 </Image>
+<Image> 510.sm.fits.gz,510.sm.fits.gz,13.0844,-74.7149 13.0844 -74.7149 1999.8460 </Image>
+<Image> 511.sm.fits.gz,511.sm.fits.gz,39.2806,-74.7891 39.2806 -74.7891 1999.8400 </Image>
+<Image> 512.sm.fits.gz,512.sm.fits.gz,64.9920,-74.8845 64.9920 -74.8845 1999.6900 </Image>
+<Image> 513.sm.fits.gz,513.sm.fits.gz,90.3653,-75.0374 90.3653 -75.0374 2000.0160 </Image>
+<Image> 514.sm.fits.gz,514.sm.fits.gz,116.992,-75.1326 116.992 -75.1326 1999.9330 </Image>
+<Image> 515.sm.fits.gz,515.sm.fits.gz,143.321,-75.2276 143.321 -75.2276 1999.1280 </Image>
+<Image> 516.sm.fits.gz,516.sm.fits.gz,169.770,-75.2508 169.770 -75.2508 1999.1180 </Image>
+<Image> 517.sm.fits.gz,517.sm.fits.gz,196.215,-75.2318 196.215 -75.2318 1999.2110 </Image>
+<Image> 518.sm.fits.gz,518.sm.fits.gz,222.130,-75.2469 222.130 -75.2469 1999.5260 </Image>
+<Image> 519.sm.fits.gz,519.sm.fits.gz,248.828,-75.1323 248.828 -75.1323 1999.3720 </Image>
+<Image> 520.sm.fits.gz,520.sm.fits.gz,274.921,-74.9702 274.921 -74.9702 1999.3700 </Image>
+<Image> 521.sm.fits.gz,521.sm.fits.gz,300.787,-74.8387 300.787 -74.8387 1999.4410 </Image>
+<Image> 522.sm.fits.gz,522.sm.fits.gz,325.809,-74.7922 325.809 -74.7922 1998.8760 </Image>
+<Image> 523.sm.fits.gz,523.sm.fits.gz,351.571,-74.8173 351.571 -74.8173 1999.8680 </Image>
+<Image> 524.sm.fits.gz,524.sm.fits.gz,10.2353,-64.7444 10.2353 -64.7444 1999.7500 </Image>
+<Image> 525.sm.fits.gz,525.sm.fits.gz,29.0755,-64.7536 29.0755 -64.7536 1999.7640 </Image>
+<Image> 526.sm.fits.gz,526.sm.fits.gz,47.8688,-64.8557 47.8688 -64.8557 1999.8480 </Image>
+<Image> 527.sm.fits.gz,527.sm.fits.gz,66.8238,-64.8779 66.8238 -64.8779 1999.8510 </Image>
+<Image> 528.sm.fits.gz,528.sm.fits.gz,85.7120,-65.0214 85.7120 -65.0214 1999.9280 </Image>
+<Image> 529.sm.fits.gz,529.sm.fits.gz,104.851,-65.1024 104.851 -65.1024 1999.0240 </Image>
+<Image> 530.sm.fits.gz,530.sm.fits.gz,123.855,-65.1435 123.855 -65.1435 1999.9420 </Image>
+<Image> 531.sm.fits.gz,531.sm.fits.gz,142.987,-65.2338 142.987 -65.2338 1999.1250 </Image>
+<Image> 532.sm.fits.gz,532.sm.fits.gz,162.154,-65.2615 162.154 -65.2615 1999.1970 </Image>
+<Image> 533.sm.fits.gz,533.sm.fits.gz,181.368,-65.2864 181.368 -65.2864 1999.2680 </Image>
+<Image> 534.sm.fits.gz,534.sm.fits.gz,200.563,-65.2142 200.563 -65.2142 1999.2210 </Image>
+<Image> 535.sm.fits.gz,535.sm.fits.gz,219.710,-65.1909 219.710 -65.1909 1999.4400 </Image>
+<Image> 536.sm.fits.gz,536.sm.fits.gz,238.791,-65.1620 238.791 -65.1620 1999.3610 </Image>
+<Image> 537.sm.fits.gz,537.sm.fits.gz,257.908,-65.0506 257.908 -65.0506 1999.4380 </Image>
+<Image> 538.sm.fits.gz,538.sm.fits.gz,276.853,-65.1220 276.853 -65.1220 1999.5170 </Image>
+<Image> 539.sm.fits.gz,539.sm.fits.gz,295.854,-64.9720 295.854 -64.9720 1999.5170 </Image>
+<Image> 540.sm.fits.gz,540.sm.fits.gz,314.755,-64.8772 314.755 -64.8772 1999.5340 </Image>
+<Image> 541.sm.fits.gz,541.sm.fits.gz,333.589,-64.7907 333.589 -64.7907 1999.6070 </Image>
+<Image> 542.sm.fits.gz,542.sm.fits.gz,351.994,-64.7145 351.994 -64.7145 1999.7040 </Image>
+<Image> 543.sm.fits.gz,543.sm.fits.gz,8.20978,-54.7908 8.20978 -54.7908 1999.5260 </Image>
+<Image> 544.sm.fits.gz,544.sm.fits.gz,23.1322,-54.7433 23.1322 -54.7433 1999.6900 </Image>
+<Image> 545.sm.fits.gz,545.sm.fits.gz,37.6873,-54.7512 37.6873 -54.7512 1999.7910 </Image>
+<Image> 546.sm.fits.gz,546.sm.fits.gz,52.9172,-54.8870 52.9172 -54.8870 1999.8510 </Image>
+<Image> 547.sm.fits.gz,547.sm.fits.gz,67.9273,-54.8813 67.9273 -54.8813 1999.8540 </Image>
+<Image> 548.sm.fits.gz,548.sm.fits.gz,82.9053,-54.9482 82.9053 -54.9482 1999.8600 </Image>
+<Image> 549.sm.fits.gz,549.sm.fits.gz,97.8945,-55.0166 97.8945 -55.0166 1999.9170 </Image>
+<Image> 550.sm.fits.gz,550.sm.fits.gz,112.913,-55.1111 112.913 -55.1111 1999.0520 </Image>
+<Image> 551.sm.fits.gz,551.sm.fits.gz,127.992,-55.1734 127.992 -55.1734 1999.1090 </Image>
+<Image> 552.sm.fits.gz,552.sm.fits.gz,143.049,-55.2984 143.049 -55.2984 1998.9700 </Image>
+<Image> 553.sm.fits.gz,553.sm.fits.gz,158.128,-55.2592 158.128 -55.2592 1999.1880 </Image>
+<Image> 554.sm.fits.gz,554.sm.fits.gz,173.236,-55.2663 173.236 -55.2663 1999.1200 </Image>
+<Image> 555.sm.fits.gz,555.sm.fits.gz,188.349,-55.2350 188.349 -55.2350 1999.1970 </Image>
+<Image> 556.sm.fits.gz,556.sm.fits.gz,203.376,-55.2699 203.376 -55.2699 1999.2950 </Image>
+<Image> 557.sm.fits.gz,557.sm.fits.gz,218.501,-55.2090 218.501 -55.2090 1999.4370 </Image>
+<Image> 558.sm.fits.gz,558.sm.fits.gz,233.556,-55.1542 233.556 -55.1542 1999.2950 </Image>
+<Image> 559.sm.fits.gz,559.sm.fits.gz,248.567,-55.1359 248.567 -55.1359 1999.3800 </Image>
+<Image> 560.sm.fits.gz,560.sm.fits.gz,263.590,-55.0602 263.590 -55.0602 1999.3830 </Image>
+<Image> 561.sm.fits.gz,561.sm.fits.gz,278.585,-54.9743 278.585 -54.9743 1999.3860 </Image>
+<Image> 562.sm.fits.gz,562.sm.fits.gz,293.608,-54.9258 293.608 -54.9258 1999.5120 </Image>
+<Image> 563.sm.fits.gz,563.sm.fits.gz,308.498,-54.8569 308.498 -54.8569 1999.3780 </Image>
+<Image> 564.sm.fits.gz,564.sm.fits.gz,323.132,-54.6723 323.132 -54.6723 1999.6270 </Image>
+<Image> 565.sm.fits.gz,565.sm.fits.gz,338.101,-54.6545 338.101 -54.6545 1999.6240 </Image>
+<Image> 566.sm.fits.gz,566.sm.fits.gz,352.983,-54.6977 352.983 -54.6977 1999.7090 </Image>
+<Image> 567.sm.fits.gz,567.sm.fits.gz,7.16522,-44.7531 7.16522 -44.7531 1999.7010 </Image>
+<Image> 568.sm.fits.gz,568.sm.fits.gz,19.8930,-44.7173 19.8930 -44.7173 1999.7860 </Image>
+<Image> 569.sm.fits.gz,569.sm.fits.gz,33.0373,-44.8054 33.0373 -44.8054 1999.8240 </Image>
+<Image> 570.sm.fits.gz,570.sm.fits.gz,46.0311,-44.7927 46.0311 -44.7927 1999.6950 </Image>
+<Image> 571.sm.fits.gz,571.sm.fits.gz,58.9886,-44.8460 58.9886 -44.8460 1999.9170 </Image>
+<Image> 572.sm.fits.gz,572.sm.fits.gz,71.9671,-44.8997 71.9671 -44.8997 1999.8650 </Image>
+<Image> 573.sm.fits.gz,573.sm.fits.gz,84.9114,-45.0029 84.9114 -45.0029 1999.9220 </Image>
+<Image> 574.sm.fits.gz,574.sm.fits.gz,97.9547,-45.0094 97.9547 -45.0094 1999.8620 </Image>
+<Image> 575.sm.fits.gz,575.sm.fits.gz,110.944,-45.1163 110.944 -45.1163 1999.0490 </Image>
+<Image> 576.sm.fits.gz,576.sm.fits.gz,124.013,-45.1523 124.013 -45.1523 1999.0540 </Image>
+<Image> 577.sm.fits.gz,577.sm.fits.gz,137.026,-45.2109 137.026 -45.2109 1999.1200 </Image>
+<Image> 578.sm.fits.gz,578.sm.fits.gz,150.084,-45.2392 150.084 -45.2392 1999.1830 </Image>
+<Image> 579.sm.fits.gz,579.sm.fits.gz,163.114,-45.2606 163.114 -45.2606 1999.1990 </Image>
+<Image> 580.sm.fits.gz,580.sm.fits.gz,176.150,-45.3007 176.150 -45.3007 1999.2070 </Image>
+<Image> 581.sm.fits.gz,581.sm.fits.gz,189.272,-45.2352 189.272 -45.2352 1999.2000 </Image>
+<Image> 582.sm.fits.gz,582.sm.fits.gz,202.552,-45.2804 202.552 -45.2804 1999.2840 </Image>
+<Image> 583.sm.fits.gz,583.sm.fits.gz,215.250,-45.2858 215.250 -45.2858 1999.3580 </Image>
+<Image> 584.sm.fits.gz,584.sm.fits.gz,228.192,-45.0960 228.192 -45.0960 1999.5910 </Image>
+<Image> 585.sm.fits.gz,585.sm.fits.gz,241.350,-45.1612 241.350 -45.1612 1999.3640 </Image>
+<Image> 586.sm.fits.gz,586.sm.fits.gz,254.391,-45.0815 254.391 -45.0815 1999.3750 </Image>
+<Image> 587.sm.fits.gz,587.sm.fits.gz,267.436,-45.1511 267.436 -45.1511 1999.5140 </Image>
+<Image> 588.sm.fits.gz,588.sm.fits.gz,280.405,-45.0802 280.405 -45.0802 1999.5200 </Image>
+<Image> 589.sm.fits.gz,589.sm.fits.gz,293.373,-44.9195 293.373 -44.9195 1999.3890 </Image>
+<Image> 590.sm.fits.gz,590.sm.fits.gz,306.384,-44.9236 306.384 -44.9236 1999.6070 </Image>
+<Image> 591.sm.fits.gz,591.sm.fits.gz,319.372,-44.8614 319.372 -44.8614 1999.5910 </Image>
+<Image> 592.sm.fits.gz,592.sm.fits.gz,332.327,-44.8509 332.327 -44.8509 1999.6100 </Image>
+<Image> 593.sm.fits.gz,593.sm.fits.gz,345.289,-44.7413 345.289 -44.7413 1999.7440 </Image>
+<Image> 594.sm.fits.gz,594.sm.fits.gz,358.202,-44.8036 358.202 -44.8036 1999.5970 </Image>
+<Image> 595.sm.fits.gz,595.sm.fits.gz,6.28973,-34.6392 6.28973 -34.6392 2000.6680 </Image>
+<Image> 596.sm.fits.gz,596.sm.fits.gz,17.7184,-34.7099 17.7184 -34.7099 1999.7830 </Image>
+<Image> 597.sm.fits.gz,597.sm.fits.gz,29.3416,-34.7488 29.3416 -34.7488 1999.7660 </Image>
+<Image> 598.sm.fits.gz,598.sm.fits.gz,40.7697,-34.8276 40.7697 -34.8276 1999.8430 </Image>
+<Image> 599.sm.fits.gz,599.sm.fits.gz,52.1250,-34.8168 52.1250 -34.8168 1999.8490 </Image>
+<Image> 600.sm.fits.gz,600.sm.fits.gz,63.7140,-34.9844 63.7140 -34.9844 1998.8840 </Image>
+<Image> 601.sm.fits.gz,601.sm.fits.gz,75.2361,-34.9221 75.2361 -34.9221 1999.7720 </Image>
+<Image> 602.sm.fits.gz,602.sm.fits.gz,86.5703,-34.9854 86.5703 -34.9854 2000.0240 </Image>
+<Image> 603.sm.fits.gz,603.sm.fits.gz,98.2456,-35.0089 98.2456 -35.0089 1999.9200 </Image>
+<Image> 604.sm.fits.gz,604.sm.fits.gz,109.711,-35.1171 109.711 -35.1171 1999.0410 </Image>
+<Image> 605.sm.fits.gz,605.sm.fits.gz,121.231,-35.1541 121.231 -35.1541 1999.9390 </Image>
+<Image> 606.sm.fits.gz,606.sm.fits.gz,132.803,-35.1900 132.803 -35.1900 1999.0570 </Image>
+<Image> 607.sm.fits.gz,607.sm.fits.gz,144.327,-35.2242 144.327 -35.2242 1999.0600 </Image>
+<Image> 608.sm.fits.gz,608.sm.fits.gz,155.858,-35.3206 155.858 -35.3206 1998.9670 </Image>
+<Image> 609.sm.fits.gz,609.sm.fits.gz,167.391,-35.2504 167.391 -35.2504 1999.1150 </Image>
+<Image> 610.sm.fits.gz,610.sm.fits.gz,178.908,-35.2586 178.908 -35.2586 1999.2160 </Image>
+<Image> 611.sm.fits.gz,611.sm.fits.gz,190.462,-35.2412 190.462 -35.2412 1999.2020 </Image>
+<Image> 612.sm.fits.gz,612.sm.fits.gz,201.890,-35.3156 201.890 -35.3156 1999.2920 </Image>
+<Image> 613.sm.fits.gz,613.sm.fits.gz,213.520,-35.2085 213.520 -35.2085 1999.2240 </Image>
+<Image> 614.sm.fits.gz,614.sm.fits.gz,225.007,-33.8475 225.007 -33.8475 1999.5310 </Image>
+<Image> 615.sm.fits.gz,615.sm.fits.gz,236.511,-35.1838 236.511 -35.1838 1999.3040 </Image>
+<Image> 616.sm.fits.gz,616.sm.fits.gz,247.951,-35.1888 247.951 -35.1888 1999.3770 </Image>
+<Image> 617.sm.fits.gz,617.sm.fits.gz,259.581,-35.0639 259.581 -35.0639 1999.4430 </Image>
+<Image> 618.sm.fits.gz,618.sm.fits.gz,271.011,-34.9979 271.011 -34.9979 1999.3670 </Image>
+<Image> 619.sm.fits.gz,619.sm.fits.gz,282.588,-35.0024 282.588 -35.0024 1999.4600 </Image>
+<Image> 620.sm.fits.gz,620.sm.fits.gz,294.076,-34.9607 294.076 -34.9607 1999.4570 </Image>
+<Image> 621.sm.fits.gz,621.sm.fits.gz,305.501,-34.9682 305.501 -34.9682 1999.5990 </Image>
+<Image> 622.sm.fits.gz,622.sm.fits.gz,316.940,-34.8210 316.940 -34.8210 1999.3860 </Image>
+<Image> 623.sm.fits.gz,623.sm.fits.gz,328.472,-34.8644 328.472 -34.8644 1999.5960 </Image>
+<Image> 624.sm.fits.gz,624.sm.fits.gz,339.863,-34.6860 339.863 -34.6860 1999.6270 </Image>
+<Image> 625.sm.fits.gz,625.sm.fits.gz,351.442,-34.7413 351.442 -34.7413 1999.7520 </Image>
+<Image> 626.sm.fits.gz,626.sm.fits.gz,2.91329,-34.7616 2.91329 -34.7616 1999.6080 </Image>
+<Image> 627.sm.fits.gz,627.sm.fits.gz,5.87840,-24.7993 5.87840 -24.7993 1999.6130 </Image>
+<Image> 628.sm.fits.gz,628.sm.fits.gz,16.2722,-24.7119 16.2722 -24.7119 1999.7800 </Image>
+<Image> 629.sm.fits.gz,629.sm.fits.gz,26.8384,-24.7602 26.8384 -24.7602 1999.7550 </Image>
+<Image> 630.sm.fits.gz,630.sm.fits.gz,37.3209,-24.7827 37.3209 -24.7827 1999.7750 </Image>
+<Image> 631.sm.fits.gz,631.sm.fits.gz,47.7688,-24.8678 47.7688 -24.8678 1999.8450 </Image>
+<Image> 632.sm.fits.gz,632.sm.fits.gz,58.2687,-24.8873 58.2687 -24.8873 1999.8590 </Image>
+<Image> 633.sm.fits.gz,633.sm.fits.gz,68.7805,-24.9029 68.7805 -24.9029 1999.8570 </Image>
+<Image> 634.sm.fits.gz,634.sm.fits.gz,79.1767,-24.9575 79.1767 -24.9575 2000.0150 </Image>
+<Image> 635.sm.fits.gz,635.sm.fits.gz,89.7377,-25.0451 89.7377 -25.0451 2000.0100 </Image>
+<Image> 636.sm.fits.gz,636.sm.fits.gz,100.289,-25.1659 100.289 -25.1659 1998.9690 </Image>
+<Image> 637.sm.fits.gz,637.sm.fits.gz,110.743,-25.1280 110.743 -25.1280 1999.0460 </Image>
+<Image> 638.sm.fits.gz,638.sm.fits.gz,121.256,-25.1710 121.256 -25.1710 1999.9360 </Image>
+<Image> 639.sm.fits.gz,639.sm.fits.gz,131.794,-25.1863 131.794 -25.1863 1999.1140 </Image>
+<Image> 640.sm.fits.gz,640.sm.fits.gz,142.295,-25.2320 142.295 -25.2320 1999.1230 </Image>
+<Image> 641.sm.fits.gz,641.sm.fits.gz,152.835,-25.2301 152.835 -25.2301 1999.1370 </Image>
+<Image> 642.sm.fits.gz,642.sm.fits.gz,163.336,-25.2685 163.336 -25.2685 1999.2020 </Image>
+<Image> 643.sm.fits.gz,643.sm.fits.gz,173.880,-25.2655 173.880 -25.2655 1999.1260 </Image>
+<Image> 644.sm.fits.gz,644.sm.fits.gz,184.406,-25.2476 184.406 -25.2476 1999.2190 </Image>
+<Image> 645.sm.fits.gz,645.sm.fits.gz,194.918,-25.2485 194.918 -25.2485 1999.2050 </Image>
+<Image> 646.sm.fits.gz,646.sm.fits.gz,205.375,-25.2614 205.375 -25.2614 1999.2980 </Image>
+<Image> 647.sm.fits.gz,647.sm.fits.gz,215.819,-25.2900 215.819 -25.2900 1999.3630 </Image>
+<Image> 648.sm.fits.gz,648.sm.fits.gz,226.434,-25.2183 226.434 -25.2183 1999.4460 </Image>
+<Image> 649.sm.fits.gz,649.sm.fits.gz,236.891,-25.1689 236.891 -25.1689 1999.3580 </Image>
+<Image> 650.sm.fits.gz,650.sm.fits.gz,247.376,-25.1445 247.376 -25.1445 1999.3660 </Image>
+<Image> 651.sm.fits.gz,651.sm.fits.gz,257.991,-25.0612 257.991 -25.0612 1999.4400 </Image>
+<Image> 652.sm.fits.gz,652.sm.fits.gz,268.400,-25.0437 268.400 -25.0437 1999.3780 </Image>
+<Image> 653.sm.fits.gz,653.sm.fits.gz,278.933,-24.9316 278.933 -24.9316 1999.6950 </Image>
+<Image> 654.sm.fits.gz,654.sm.fits.gz,289.484,-24.9573 289.484 -24.9573 1999.4620 </Image>
+<Image> 655.sm.fits.gz,655.sm.fits.gz,299.966,-24.8849 299.966 -24.8849 1999.4430 </Image>
+<Image> 656.sm.fits.gz,656.sm.fits.gz,310.440,-24.9619 310.440 -24.9619 1999.6100 </Image>
+<Image> 657.sm.fits.gz,657.sm.fits.gz,320.948,-24.8441 320.948 -24.8441 1999.4600 </Image>
+<Image> 658.sm.fits.gz,658.sm.fits.gz,331.400,-24.8401 331.400 -24.8401 1999.5990 </Image>
+<Image> 659.sm.fits.gz,659.sm.fits.gz,341.930,-24.7948 341.930 -24.7948 1999.6050 </Image>
+<Image> 660.sm.fits.gz,660.sm.fits.gz,352.416,-24.7311 352.416 -24.7311 1999.7660 </Image>
+<Image> 661.sm.fits.gz,661.sm.fits.gz,2.84762,-24.7916 2.84762 -24.7916 1999.6000 </Image>
+<Image> 662.sm.fits.gz,662.sm.fits.gz,5.61792,-14.8048 5.61792 -14.8048 1999.6100 </Image>
+<Image> 663.sm.fits.gz,663.sm.fits.gz,15.6082,-14.7688 15.6082 -14.7688 1999.7770 </Image>
+<Image> 664.sm.fits.gz,664.sm.fits.gz,25.6114,-14.7643 25.6114 -14.7643 1999.7060 </Image>
+<Image> 665.sm.fits.gz,665.sm.fits.gz,35.5869,-14.8198 35.5869 -14.8198 1999.6870 </Image>
+<Image> 666.sm.fits.gz,666.sm.fits.gz,45.5862,-14.8174 45.5862 -14.8174 1999.7770 </Image>
+<Image> 667.sm.fits.gz,667.sm.fits.gz,55.5748,-14.8508 55.5748 -14.8508 1999.9080 </Image>
+<Image> 668.sm.fits.gz,668.sm.fits.gz,65.5205,-15.0066 65.5205 -15.0066 1998.8870 </Image>
+<Image> 669.sm.fits.gz,669.sm.fits.gz,75.5624,-14.9377 75.5624 -14.9377 1999.7750 </Image>
+<Image> 670.sm.fits.gz,670.sm.fits.gz,85.5289,-15.0414 85.5289 -15.0414 1999.9250 </Image>
+<Image> 671.sm.fits.gz,671.sm.fits.gz,95.5036,-15.0312 95.5036 -15.0312 2000.0890 </Image>
+<Image> 672.sm.fits.gz,672.sm.fits.gz,105.615,-15.1254 105.615 -15.1254 1999.0270 </Image>
+<Image> 673.sm.fits.gz,673.sm.fits.gz,115.566,-15.1509 115.566 -15.1509 2000.0920 </Image>
+<Image> 674.sm.fits.gz,674.sm.fits.gz,125.584,-15.1877 125.584 -15.1877 1999.1060 </Image>
+<Image> 675.sm.fits.gz,675.sm.fits.gz,135.562,-15.2090 135.562 -15.2090 1999.1170 </Image>
+<Image> 676.sm.fits.gz,676.sm.fits.gz,145.573,-15.2246 145.573 -15.2246 1999.1340 </Image>
+<Image> 677.sm.fits.gz,677.sm.fits.gz,155.598,-15.2711 155.598 -15.2711 1999.1860 </Image>
+<Image> 678.sm.fits.gz,678.sm.fits.gz,165.593,-15.2817 165.593 -15.2817 1999.2050 </Image>
+<Image> 679.sm.fits.gz,679.sm.fits.gz,175.623,-15.2608 175.623 -15.2608 1999.1420 </Image>
+<Image> 680.sm.fits.gz,680.sm.fits.gz,185.604,-15.2712 185.604 -15.2712 2000.3330 </Image>
+<Image> 681.sm.fits.gz,681.sm.fits.gz,195.641,-15.2551 195.641 -15.2551 1999.2080 </Image>
+<Image> 682.sm.fits.gz,682.sm.fits.gz,205.648,-15.2830 205.648 -15.2830 2000.1660 </Image>
+<Image> 683.sm.fits.gz,683.sm.fits.gz,215.673,-15.2494 215.673 -15.2494 2000.1800 </Image>
+<Image> 684.sm.fits.gz,684.sm.fits.gz,225.607,-15.1961 225.607 -15.1961 1999.2850 </Image>
+<Image> 685.sm.fits.gz,685.sm.fits.gz,235.578,-15.1767 235.578 -15.1767 1999.3530 </Image>
+<Image> 686.sm.fits.gz,686.sm.fits.gz,245.616,-15.1294 245.616 -15.1294 1999.2980 </Image>
+<Image> 687.sm.fits.gz,687.sm.fits.gz,255.678,-15.1431 255.678 -15.1431 1999.4570 </Image>
+<Image> 688.sm.fits.gz,688.sm.fits.gz,265.666,-15.0604 265.666 -15.0604 1999.4460 </Image>
+<Image> 689.sm.fits.gz,689.sm.fits.gz,275.579,-14.9860 275.579 -14.9860 1999.3720 </Image>
+<Image> 690.sm.fits.gz,690.sm.fits.gz,285.569,-14.9648 285.569 -14.9648 1999.3810 </Image>
+<Image> 691.sm.fits.gz,691.sm.fits.gz,295.668,-14.9114 295.668 -14.9114 1999.4380 </Image>
+<Image> 692.sm.fits.gz,692.sm.fits.gz,305.663,-14.8251 305.663 -14.8251 1999.6950 </Image>
+<Image> 693.sm.fits.gz,693.sm.fits.gz,315.554,-14.8222 315.554 -14.8222 1999.3730 </Image>
+<Image> 694.sm.fits.gz,694.sm.fits.gz,325.663,-14.8448 325.663 -14.8448 1999.5170 </Image>
+<Image> 695.sm.fits.gz,695.sm.fits.gz,335.639,-14.8362 335.639 -14.8362 1999.6130 </Image>
+<Image> 696.sm.fits.gz,696.sm.fits.gz,345.619,-14.7149 345.619 -14.7149 1999.6930 </Image>
+<Image> 697.sm.fits.gz,697.sm.fits.gz,355.569,-14.7034 355.569 -14.7034 1999.8350 </Image>
+<Image> 698.sm.fits.gz,698.sm.fits.gz,5.65017,-4.76019 5.65017 -4.76019 2000.6730 </Image>
+<Image> 699.sm.fits.gz,699.sm.fits.gz,15.6522,-4.77132 15.6522 -4.77132 2000.7250 </Image>
+<Image> 700.sm.fits.gz,700.sm.fits.gz,25.6433,-4.81306 25.6433 -4.81306 2000.7270 </Image>
+<Image> 701.sm.fits.gz,701.sm.fits.gz,35.6347,-4.89216 35.6347 -4.89216 2000.7490 </Image>
+<Image> 702.sm.fits.gz,702.sm.fits.gz,45.6297,-4.83325 45.6297 -4.83325 2000.6810 </Image>
+<Image> 703.sm.fits.gz,703.sm.fits.gz,55.6344,-4.91981 55.6344 -4.91981 2000.7580 </Image>
+<Image> 704.sm.fits.gz,704.sm.fits.gz,65.5560,-4.88754 65.5560 -4.88754 2000.0040 </Image>
+<Image> 705.sm.fits.gz,705.sm.fits.gz,75.5566,-4.93500 75.5566 -4.93500 2000.0100 </Image>
+<Image> 706.sm.fits.gz,706.sm.fits.gz,85.5494,-4.98477 85.5494 -4.98477 2000.0210 </Image>
+<Image> 707.sm.fits.gz,707.sm.fits.gz,95.5660,-5.02641 95.5660 -5.02641 2000.0950 </Image>
+<Image> 708.sm.fits.gz,708.sm.fits.gz,105.616,-5.08411 105.616 -5.08411 2000.0180 </Image>
+<Image> 709.sm.fits.gz,709.sm.fits.gz,115.607,-5.13432 115.607 -5.13432 1999.9500 </Image>
+<Image> 710.sm.fits.gz,710.sm.fits.gz,125.609,-5.17310 125.609 -5.17310 1999.9530 </Image>
+<Image> 711.sm.fits.gz,711.sm.fits.gz,135.612,-5.21411 135.612 -5.21411 1999.9450 </Image>
+<Image> 712.sm.fits.gz,712.sm.fits.gz,145.605,-5.25898 145.605 -5.25898 1999.9550 </Image>
+<Image> 713.sm.fits.gz,713.sm.fits.gz,155.585,-5.23280 155.585 -5.23280 2000.1720 </Image>
+<Image> 714.sm.fits.gz,714.sm.fits.gz,165.629,-5.30809 165.629 -5.30809 2000.1110 </Image>
+<Image> 715.sm.fits.gz,715.sm.fits.gz,175.553,-5.29644 175.553 -5.29644 1999.2810 </Image>
+<Image> 716.sm.fits.gz,716.sm.fits.gz,185.549,-5.30936 185.549 -5.30936 1999.2900 </Image>
+<Image> 717.sm.fits.gz,717.sm.fits.gz,195.610,-5.24992 195.610 -5.24992 2000.2570 </Image>
+<Image> 718.sm.fits.gz,718.sm.fits.gz,205.632,-5.29804 205.632 -5.29804 2000.1200 </Image>
+<Image> 719.sm.fits.gz,719.sm.fits.gz,215.646,-5.24742 215.646 -5.24742 2000.1740 </Image>
+<Image> 720.sm.fits.gz,720.sm.fits.gz,225.672,-5.20614 225.672 -5.20614 2000.1910 </Image>
+<Image> 721.sm.fits.gz,721.sm.fits.gz,235.661,-5.16779 235.661 -5.16779 2000.2590 </Image>
+<Image> 722.sm.fits.gz,722.sm.fits.gz,245.651,-5.16389 245.651 -5.16389 2000.1960 </Image>
+<Image> 723.sm.fits.gz,723.sm.fits.gz,255.659,-5.11740 255.659 -5.11740 2000.2680 </Image>
+<Image> 724.sm.fits.gz,724.sm.fits.gz,265.664,-5.05898 265.664 -5.05898 2000.3280 </Image>
+<Image> 725.sm.fits.gz,725.sm.fits.gz,275.675,-5.00433 275.675 -5.00433 2000.3440 </Image>
+<Image> 726.sm.fits.gz,726.sm.fits.gz,285.684,-4.96686 285.684 -4.96686 2000.3500 </Image>
+<Image> 727.sm.fits.gz,727.sm.fits.gz,295.659,-4.90327 295.659 -4.90327 2000.3610 </Image>
+<Image> 728.sm.fits.gz,728.sm.fits.gz,305.669,-4.89776 305.669 -4.89776 2000.4130 </Image>
+<Image> 729.sm.fits.gz,729.sm.fits.gz,315.661,-4.83666 315.661 -4.83666 2000.6560 </Image>
+<Image> 730.sm.fits.gz,730.sm.fits.gz,325.620,-4.69335 325.620 -4.69335 2000.6510 </Image>
+<Image> 731.sm.fits.gz,731.sm.fits.gz,335.658,-4.78548 335.658 -4.78548 2000.6510 </Image>
+<Image> 732.sm.fits.gz,732.sm.fits.gz,345.586,-4.71581 345.586 -4.71581 2000.7460 </Image>
+<Image> 733.sm.fits.gz,733.sm.fits.gz,355.599,-4.72013 355.599 -4.72013 2000.7440 </Image>
+<Image> 734.sm.fits.gz,734.sm.fits.gz,5.58622,5.33473 5.58622 5.33473 2000.6700 </Image>
+<Image> 735.sm.fits.gz,735.sm.fits.gz,15.6853,5.22510 15.6853 5.22510 2000.6590 </Image>
+<Image> 736.sm.fits.gz,736.sm.fits.gz,25.6758,5.19082 25.6758 5.19082 2000.6670 </Image>
+<Image> 737.sm.fits.gz,737.sm.fits.gz,35.6850,5.14244 35.6850 5.14244 2000.7300 </Image>
+<Image> 738.sm.fits.gz,738.sm.fits.gz,45.6908,5.14639 45.6908 5.14639 2000.6730 </Image>
+<Image> 739.sm.fits.gz,739.sm.fits.gz,55.6864,5.04667 55.6864 5.04667 2000.8040 </Image>
+<Image> 740.sm.fits.gz,740.sm.fits.gz,65.7068,5.01532 65.7068 5.01532 2000.7470 </Image>
+<Image> 741.sm.fits.gz,741.sm.fits.gz,75.5948,5.05933 75.5948 5.05933 2000.0070 </Image>
+<Image> 742.sm.fits.gz,742.sm.fits.gz,85.6100,5.00536 85.6100 5.00536 2000.0180 </Image>
+<Image> 743.sm.fits.gz,743.sm.fits.gz,95.5979,4.95867 95.5979 4.95867 2000.0780 </Image>
+<Image> 744.sm.fits.gz,744.sm.fits.gz,105.686,4.88896 105.686 4.88896 2000.0130 </Image>
+<Image> 745.sm.fits.gz,745.sm.fits.gz,115.616,4.85472 115.616 4.85472 2000.0950 </Image>
+<Image> 746.sm.fits.gz,746.sm.fits.gz,125.686,4.81438 125.686 4.81438 2000.0860 </Image>
+<Image> 747.sm.fits.gz,747.sm.fits.gz,135.699,4.76557 135.699 4.76557 2000.1000 </Image>
+<Image> 748.sm.fits.gz,748.sm.fits.gz,145.670,4.75099 145.670 4.75099 2000.1770 </Image>
+<Image> 749.sm.fits.gz,749.sm.fits.gz,155.662,4.68652 155.662 4.68652 2000.1060 </Image>
+<Image> 750.sm.fits.gz,750.sm.fits.gz,165.656,4.69138 165.656 4.69138 2000.0980 </Image>
+<Image> 751.sm.fits.gz,751.sm.fits.gz,175.695,4.68976 175.695 4.68976 2000.2560 </Image>
+<Image> 752.sm.fits.gz,752.sm.fits.gz,185.654,4.68706 185.654 4.68706 2000.1060 </Image>
+<Image> 753.sm.fits.gz,753.sm.fits.gz,195.680,4.69988 195.680 4.69988 2000.2620 </Image>
+<Image> 754.sm.fits.gz,754.sm.fits.gz,205.638,4.69462 205.638 4.69462 2000.1120 </Image>
+<Image> 755.sm.fits.gz,755.sm.fits.gz,215.646,4.71079 215.646 4.71079 2000.1690 </Image>
+<Image> 756.sm.fits.gz,756.sm.fits.gz,225.623,4.78583 225.623 4.78583 2000.1770 </Image>
+<Image> 757.sm.fits.gz,757.sm.fits.gz,235.626,4.77703 235.626 4.77703 2000.1940 </Image>
+<Image> 758.sm.fits.gz,758.sm.fits.gz,245.667,4.84659 245.667 4.84659 2000.2650 </Image>
+<Image> 759.sm.fits.gz,759.sm.fits.gz,255.645,4.89822 255.645 4.89822 2000.2760 </Image>
+<Image> 760.sm.fits.gz,760.sm.fits.gz,265.641,4.94401 265.641 4.94401 2000.2790 </Image>
+<Image> 761.sm.fits.gz,761.sm.fits.gz,275.633,4.95291 275.633 4.95291 2000.3410 </Image>
+<Image> 762.sm.fits.gz,762.sm.fits.gz,285.643,5.02128 285.643 5.02128 2000.3580 </Image>
+<Image> 763.sm.fits.gz,763.sm.fits.gz,295.648,5.06180 295.648 5.06180 2000.3470 </Image>
+<Image> 764.sm.fits.gz,764.sm.fits.gz,305.655,5.07314 305.655 5.07314 2000.4100 </Image>
+<Image> 765.sm.fits.gz,765.sm.fits.gz,315.564,5.25563 315.564 5.25563 2000.6530 </Image>
+<Image> 766.sm.fits.gz,766.sm.fits.gz,325.575,5.28937 325.575 5.28937 2000.6700 </Image>
+<Image> 767.sm.fits.gz,767.sm.fits.gz,335.704,5.18849 335.704 5.18849 2000.6750 </Image>
+<Image> 768.sm.fits.gz,768.sm.fits.gz,345.595,5.32856 345.595 5.32856 2000.6020 </Image>
+<Image> 769.sm.fits.gz,769.sm.fits.gz,355.665,5.22228 355.665 5.22228 2000.6560 </Image>
+<Image> 935.sm.fits.gz,935.sm.fits.gz,55.1185,-87.3251 55.1185 -87.3251 1999.9230 </Image>
+<Image> 936.sm.fits.gz,936.sm.fits.gz,180.310,-87.8335 180.310 -87.8335 1999.5820 </Image>
+<Image> 937.sm.fits.gz,937.sm.fits.gz,305.431,-87.2219 305.431 -87.2219 1999.6240 </Image>
+    </Images>
+</Survey>

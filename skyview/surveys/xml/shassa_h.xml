@@ -1,0 +1,620 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName>SHASSA-H,SHASSA_H,SHASSA H</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>The Southern H-Alpha Sky Survey Atlas: H-alpha  </Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+The Southern H-Alpha Sky Survey Atlas is the product of a wide-angle 
+digital imaging survey of the H-alpha emission from the warm ionized 
+interstellar gas of our Galaxy. This atlas covers the southern hemisphere 
+sky (declinations less than +15 degrees). The observations were taken with 
+a robotic camera  operating at Cerro Tololo Inter-American Observatory (CTIO) 
+in Chile.  The atlas consists of 2168 images covering 542 fields. There are four 
+images available for each field: <b>H-alpha</b>, <b>Continuum</b>, <b>Continuum-Corrected</b> 
+(the difference of the H-alpha and Continuum images), and <b>Smoothed</b> (median filtered to 5 pixel, or 4.0 arcminute, resolution to remove star residuals better).  The  <a href="http://amundsen.swarthmore.edu/SHASSA">SHASSA web site</a> has more details of the data and the status of this and related projects.  Images can also be
+obtained from the <a href="http://amundsen.astro.swarthmore.edu/SHASSA/#Images">Download Images</a> section at the SHASSA site.
+
+]]>
+  </Description>
+
+  <Settings>
+    <Scale>0.0131666 </Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance> John E. Gaustad (Swarthmore College), Peter R. McCullough (University of Illinois), Wayne Rosing (Las Cumbres Observatory), and Dave Van Buren (Extrasolar Research Corporation)
+    </Provenance>
+    <Copyright>  <![CDATA[
+Las Cumbres Observatory, Inc. See the <a href="http://amundsen.swarthmore.edu/SHASSA/ack.html">Acknowledgement/Guidelines for Use of Images</a>
+    ]]> </Copyright>
+    <Regime>  Optical</Regime>
+    <Frequency> 457 THz </Frequency>
+    <Bandpass> 456-458THz </Bandpass>
+    <Coverage>  All-sky south of 15</Coverage>
+    <PixelScale>  0.79'/pixel</PixelScale>
+    <PixelUnits><![CDATA[decirayleighs (dR) or  10<sup>5</sup>/4pi photons/cm<sup>2</sup>/s/sr]]></PixelUnits>
+    <CoordinateSystem>  Equatorial</CoordinateSystem>
+    <Projection>  Gnomonic </Projection>
+    <Equinox>  2000</Equinox>
+    <Epoch> 1997-2000</Epoch>
+    <Reference> <![CDATA[ "A Robotic Wide-Angle H-alpha Survey of the Southern Sky" by J.E. Gaustad, P.R. McCullough, W. Rosing, and D. Van Buren 2001, PASP, 113, 1326.  This paper may be downloaded in <a
+href="ftp://amundsen.swarthmore.edu/SHASSA/SurveyPaper.pdf"> PDF </a> (2.5 Mb) or <a href="ftp://amundsen.swarthmore.edu/SHASSA/SurveyPaper.ps"> Postscript</a> (12.7 Mb) format.
+    or
+    <a href="http://adsabs.harvard.edu/abs/2001PASP..113.1326G">ADS</a>
+    ]]>
+    </Reference>
+  </MetaTable>
+  <FITS>
+<![CDATA[
+SURVEY  = 'SHASSA H '
+BUNIT   = 'dR      '                 /Image intensity units are decirayleighs
+BLANK   =           -2147483648       / 
+FILTER  = 'Dual Continuum'
+ORIGIN  = 'SWARTHMORE COLLEGE PHYSICS AND ASTRONOMY DEPT'               
+TELESCOP= '0.033M  '                  /Nikon 52 MM f/1.6 lens                   
+INSTRUME= 'SpectraSource Instruments HPC-TI CCD Camera'
+OBSERVAT= 'CERRO TOLOLO INTERAMERICAN OBSERVATORY' 
+]]>
+  </FITS>
+  
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    12 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/halpha/halpha/ </SpellPrefix>
+        <SpellSuffix> ,Tan,J2000,1014,998,0.0132344,0.0132344 </SpellSuffix>
+<Image> 002h3.mn.fits.gz,002h3.mn.fits.gz,0.261221,-79.7615 0.261221 -79.7615 1998.8140 </Image>
+<Image> 003h3.mn.fits.gz,003h3.mn.fits.gz,44.2129,-79.7851 44.2129 -79.7851 1998.9530 </Image>
+<Image> 004h3.mn.fits.gz,004h3.mn.fits.gz,88.8233,-80.2215 88.8233 -80.2215 1998.0010 </Image>
+<Image> 005h3.mn.fits.gz,005h3.mn.fits.gz,134.319,-80.5469 134.319 -80.5469 1998.1680 </Image>
+<Image> 006h3.mn.fits.gz,006h3.mn.fits.gz,180.430,-80.6121 180.430 -80.6121 1998.2610 </Image>
+<Image> 007h3.mn.fits.gz,007h3.mn.fits.gz,226.491,-80.4700 226.491 -80.4700 1998.3900 </Image>
+<Image> 008h3.mn.fits.gz,008h3.mn.fits.gz,271.930,-80.3058 271.930 -80.3058 1998.4880 </Image>
+<Image> 009h3.mn.fits.gz,009h3.mn.fits.gz,316.503,-80.2820 316.503 -80.2820 1998.7070 </Image>
+<Image> 010h3.mn.fits.gz,010h3.mn.fits.gz,0.322155,-69.7738 0.322155 -69.7738 1998.8060 </Image>
+<Image> 011h3.mn.fits.gz,011h3.mn.fits.gz,25.9771,-69.7990 25.9771 -69.7990 1998.8900 </Image>
+<Image> 012h3.mn.fits.gz,012h3.mn.fits.gz,51.7567,-69.8432 51.7567 -69.8432 1998.9590 </Image>
+<Image> 013h3.mn.fits.gz,013h3.mn.fits.gz,77.7012,-70.1711 77.7012 -70.1711 1997.9920 </Image>
+<Image> 014h3.mn.fits.gz,014h3.mn.fits.gz,104.138,-69.9646 104.138 -69.9646 1997.9780 </Image>
+<Image> 015h3.mn.fits.gz,015h3.mn.fits.gz,129.885,-70.5551 129.885 -70.5551 1998.1620 </Image>
+<Image> 016h3.mn.fits.gz,016h3.mn.fits.gz,156.184,-70.6680 156.184 -70.6680 1998.2360 </Image>
+<Image> 017h3.mn.fits.gz,017h3.mn.fits.gz,182.512,-70.6568 182.512 -70.6568 1998.3130 </Image>
+<Image> 018h3.mn.fits.gz,018h3.mn.fits.gz,208.827,-70.6054 208.827 -70.6054 1998.3350 </Image>
+<Image> 019h3.mn.fits.gz,019h3.mn.fits.gz,235.049,-70.5000 235.049 -70.5000 1998.4200 </Image>
+<Image> 020h3.mn.fits.gz,020h3.mn.fits.gz,261.177,-70.3483 261.177 -70.3483 1998.4850 </Image>
+<Image> 021h3.mn.fits.gz,021h3.mn.fits.gz,287.189,-70.2843 287.189 -70.2843 1998.5650 </Image>
+<Image> 022h3.mn.fits.gz,022h3.mn.fits.gz,312.839,-69.8523 312.839 -69.8523 1998.8540 </Image>
+<Image> 023h3.mn.fits.gz,023h3.mn.fits.gz,338.771,-70.2041 338.771 -70.2041 1998.7260 </Image>
+<Image> 024h3.mn.fits.gz,024h3.mn.fits.gz,0.249208,-59.7116 0.249208 -59.7116 1998.8820 </Image>
+<Image> 025h3.mn.fits.gz,025h3.mn.fits.gz,19.1609,-59.7402 19.1609 -59.7402 1998.8770 </Image>
+<Image> 026h3.mn.fits.gz,026h3.mn.fits.gz,38.0313,-59.7206 38.0313 -59.7206 1998.9530 </Image>
+<Image> 027h3.mn.fits.gz,027h3.mn.fits.gz,57.0313,-60.0847 57.0313 -60.0847 1997.9050 </Image>
+<Image> 028h3.mn.fits.gz,028h3.mn.fits.gz,76.0341,-60.1711 76.0341 -60.1711 1997.9900 </Image>
+<Image> 029h3.mn.fits.gz,029h3.mn.fits.gz,94.9446,-60.2544 94.9446 -60.2544 1998.0060 </Image>
+<Image> 030h3.mn.fits.gz,030h3.mn.fits.gz,114.338,-59.9343 114.338 -59.9343 1997.9890 </Image>
+<Image> 031h3.mn.fits.gz,031h3.mn.fits.gz,133.150,-60.5415 133.150 -60.5415 1998.1650 </Image>
+<Image> 032h3.mn.fits.gz,032h3.mn.fits.gz,152.579,-59.9992 152.579 -59.9992 1998.0120 </Image>
+<Image> 033h3.mn.fits.gz,033h3.mn.fits.gz,171.391,-60.6128 171.391 -60.6128 1998.2420 </Image>
+<Image> 034h3.mn.fits.gz,034h3.mn.fits.gz,190.581,-60.6137 190.581 -60.6137 1998.3260 </Image>
+<Image> 035h3.mn.fits.gz,035h3.mn.fits.gz,209.700,-60.5237 209.700 -60.5237 1998.4770 </Image>
+<Image> 036h3.mn.fits.gz,036h3.mn.fits.gz,228.836,-60.4771 228.836 -60.4771 1998.4850 </Image>
+<Image> 037h3.mn.fits.gz,037h3.mn.fits.gz,248.195,-60.1070 248.195 -60.1070 1999.2110 </Image>
+<Image> 038h3.mn.fits.gz,038h3.mn.fits.gz,266.957,-60.3346 266.957 -60.3346 1998.5670 </Image>
+<Image> 039h3.mn.fits.gz,039h3.mn.fits.gz,285.895,-60.2879 285.895 -60.2879 1998.7720 </Image>
+<Image> 040h3.mn.fits.gz,040h3.mn.fits.gz,304.795,-60.2924 304.795 -60.2924 1998.7180 </Image>
+<Image> 041h3.mn.fits.gz,041h3.mn.fits.gz,323.530,-59.7504 323.530 -59.7504 1998.8020 </Image>
+<Image> 042h3.mn.fits.gz,042h3.mn.fits.gz,342.443,-59.7289 342.443 -59.7289 1998.7920 </Image>
+<Image> 043h3.mn.fits.gz,043h3.mn.fits.gz,0.294316,-49.7109 0.294316 -49.7109 1998.8790 </Image>
+<Image> 044h3.mn.fits.gz,044h3.mn.fits.gz,15.2823,-49.7489 15.2823 -49.7489 1998.8740 </Image>
+<Image> 045h3.mn.fits.gz,045h3.mn.fits.gz,30.2143,-49.7737 30.2143 -49.7737 1998.8990 </Image>
+<Image> 046h3.mn.fits.gz,046h3.mn.fits.gz,45.2239,-49.7715 45.2239 -49.7715 1998.9510 </Image>
+<Image> 047h3.mn.fits.gz,047h3.mn.fits.gz,59.4740,-50.0315 59.4740 -50.0315 1997.9210 </Image>
+<Image> 048h3.mn.fits.gz,048h3.mn.fits.gz,75.3943,-49.7336 75.3943 -49.7336 1997.9150 </Image>
+<Image> 049h3.mn.fits.gz,049h3.mn.fits.gz,90.2098,-50.3721 90.2098 -50.3721 1998.1590 </Image>
+<Image> 050h3.mn.fits.gz,050h3.mn.fits.gz,105.196,-50.4434 105.196 -50.4434 1998.2160 </Image>
+<Image> 051h3.mn.fits.gz,051h3.mn.fits.gz,120.408,-49.9514 120.408 -49.9514 1997.9950 </Image>
+<Image> 052h3.mn.fits.gz,052h3.mn.fits.gz,135.204,-50.5194 135.204 -50.5194 1998.2440 </Image>
+<Image> 053du.mn.fits.gz,053du.mn.fits.gz,150.332,-50.5647 150.332 -50.5647 1998.2360 </Image>
+<Image> 054h3.mn.fits.gz,054h3.mn.fits.gz,165.424,-50.5917 165.424 -50.5917 1998.3260 </Image>
+<Image> 055h3.mn.fits.gz,055h3.mn.fits.gz,180.490,-50.5508 180.490 -50.5508 1998.4760 </Image>
+<Image> 056h3.mn.fits.gz,056h3.mn.fits.gz,195.611,-50.5314 195.611 -50.5314 1998.5390 </Image>
+<Image> 057h3.mn.fits.gz,057h3.mn.fits.gz,210.681,-50.5295 210.681 -50.5295 1998.4880 </Image>
+<Image> 058h3.mn.fits.gz,058h3.mn.fits.gz,225.979,-50.1587 225.979 -50.1587 1999.2190 </Image>
+<Image> 059h3.mn.fits.gz,059h3.mn.fits.gz,240.819,-50.4373 240.819 -50.4373 1998.5530 </Image>
+<Image> 060h3.mn.fits.gz,060h3.mn.fits.gz,256.016,-50.0900 256.016 -50.0900 1999.2300 </Image>
+<Image> 061h3.mn.fits.gz,061h3.mn.fits.gz,270.748,-50.4056 270.748 -50.4056 1998.7200 </Image>
+<Image> 062h3.mn.fits.gz,062h3.mn.fits.gz,285.994,-49.9266 285.994 -49.9266 1999.2990 </Image>
+<Image> 063h3.mn.fits.gz,063h3.mn.fits.gz,300.624,-50.2310 300.624 -50.2310 1998.7860 </Image>
+<Image> 064h3.mn.fits.gz,064h3.mn.fits.gz,315.622,-50.2008 315.622 -50.2008 1998.7310 </Image>
+<Image> 065h3.mn.fits.gz,065h3.mn.fits.gz,330.510,-49.7699 330.510 -49.7699 1998.8630 </Image>
+<Image> 066h3.mn.fits.gz,066h3.mn.fits.gz,345.442,-49.7302 345.442 -49.7302 1998.7940 </Image>
+<Image> 067h3.mn.fits.gz,067h3.mn.fits.gz,0.413570,-39.7245 0.413570 -39.7245 1998.8160 </Image>
+<Image> 068h3.mn.fits.gz,068h3.mn.fits.gz,13.5951,-39.4391 13.5951 -39.4391 1998.5680 </Image>
+<Image> 069h3.mn.fits.gz,069h3.mn.fits.gz,26.2805,-39.7572 26.2805 -39.7572 1998.8930 </Image>
+<Image> 070h3.mn.fits.gz,070h3.mn.fits.gz,39.2929,-39.7444 39.2929 -39.7444 1998.9560 </Image>
+<Image> 071h3.mn.fits.gz,071h3.mn.fits.gz,52.4882,-39.4036 52.4882 -39.4036 1998.7210 </Image>
+<Image> 072h3.mn.fits.gz,072h3.mn.fits.gz,65.4350,-39.7759 65.4350 -39.7759 1997.8960 </Image>
+<Image> 073h3.mn.fits.gz,073h3.mn.fits.gz,78.4372,-39.6636 78.4372 -39.6636 1997.9070 </Image>
+<Image> 074h3.mn.fits.gz,074h3.mn.fits.gz,91.2831,-40.2532 91.2831 -40.2532 1998.0030 </Image>
+<Image> 075h3.mn.fits.gz,075h3.mn.fits.gz,104.445,-39.8683 104.445 -39.8683 1997.9760 </Image>
+<Image> 076h3.mn.fits.gz,076h3.mn.fits.gz,117.440,-39.9414 117.440 -39.9414 1997.9920 </Image>
+<Image> 077h3.mn.fits.gz,077h3.mn.fits.gz,130.327,-40.5187 130.327 -40.5187 1998.2300 </Image>
+<Image> 078h3.mn.fits.gz,078h3.mn.fits.gz,143.533,-39.9874 143.533 -39.9874 1998.0090 </Image>
+<Image> 079h3.mn.fits.gz,079h3.mn.fits.gz,156.449,-40.5691 156.449 -40.5691 1998.3040 </Image>
+<Image> 080h3.mn.fits.gz,080h3.mn.fits.gz,169.514,-40.6070 169.514 -40.6070 1998.3810 </Image>
+<Image> 081h3.mn.fits.gz,081h3.mn.fits.gz,182.543,-40.5572 182.543 -40.5572 1998.4790 </Image>
+<Image> 082h3.mn.fits.gz,082h3.mn.fits.gz,195.702,-40.2982 195.702 -40.2982 1999.1280 </Image>
+<Image> 083h3.mn.fits.gz,083h3.mn.fits.gz,208.821,-40.2314 208.821 -40.2314 2000.3460 </Image>
+<Image> 084h3.mn.fits.gz,084h3.mn.fits.gz,221.802,-40.2188 221.802 -40.2188 1999.2130 </Image>
+<Image> 085h3.mn.fits.gz,085h3.mn.fits.gz,234.763,-40.4715 234.763 -40.4715 1998.5640 </Image>
+<Image> 086h3.mn.fits.gz,086h3.mn.fits.gz,247.798,-40.4159 247.798 -40.4159 1998.5620 </Image>
+<Image> 087h3.mn.fits.gz,087h3.mn.fits.gz,260.719,-40.4736 260.719 -40.4736 1998.7120 </Image>
+<Image> 088h3.mn.fits.gz,088h3.mn.fits.gz,273.859,-39.9840 273.859 -39.9840 1999.2960 </Image>
+<Image> 089h3.mn.fits.gz,089h3.mn.fits.gz,286.727,-40.3181 286.727 -40.3181 1998.7780 </Image>
+<Image> 090h3.mn.fits.gz,090h3.mn.fits.gz,299.701,-40.3089 299.701 -40.3089 1998.7120 </Image>
+<Image> 091h3.mn.fits.gz,091h3.mn.fits.gz,312.801,-39.5266 312.801 -39.5266 1998.4770 </Image>
+<Image> 092h3.mn.fits.gz,092h3.mn.fits.gz,325.525,-39.7832 325.525 -39.7832 1998.8570 </Image>
+<Image> 093h3.mn.fits.gz,093h3.mn.fits.gz,338.491,-40.1162 338.491 -40.1162 1998.7830 </Image>
+<Image> 094h3.mn.fits.gz,094h3.mn.fits.gz,351.439,-39.7227 351.439 -39.7227 1998.8050 </Image>
+<Image> 095h3.mn.fits.gz,095h3.mn.fits.gz,0.634573,-29.7889 0.634573 -29.7889 2000.6670 </Image>
+<Image> 096h3.mn.fits.gz,096h3.mn.fits.gz,11.9002,-29.7480 11.9002 -29.7480 1998.8710 </Image>
+<Image> 097h3.mn.fits.gz,097h3.mn.fits.gz,23.3632,-29.7678 23.3632 -29.7678 1998.8880 </Image>
+<Image> 098h3.mn.fits.gz,098h3.mn.fits.gz,34.9259,-29.7920 34.9259 -29.7920 1998.9670 </Image>
+<Image> 099h3.mn.fits.gz,099h3.mn.fits.gz,46.4232,-29.8240 46.4232 -29.8240 1998.9560 </Image>
+<Image> 100h3.mn.fits.gz,100h3.mn.fits.gz,57.9385,-30.2195 57.9385 -30.2195 1997.9080 </Image>
+<Image> 101h3.mn.fits.gz,101h3.mn.fits.gz,69.4537,-30.2228 69.4537 -30.2228 1998.0740 </Image>
+<Image> 102h3.mn.fits.gz,102h3.mn.fits.gz,80.9212,-30.3441 80.9212 -30.3441 1998.1650 </Image>
+<Image> 103h3.mn.fits.gz,103h3.mn.fits.gz,92.4824,-30.3469 92.4824 -30.3469 1998.0720 </Image>
+<Image> 104h3.mn.fits.gz,104h3.mn.fits.gz,103.969,-30.3844 103.969 -30.3844 1998.0750 </Image>
+<Image> 105h3.mn.fits.gz,105h3.mn.fits.gz,115.388,-30.4827 115.388 -30.4827 1998.1570 </Image>
+<Image> 106h3.mn.fits.gz,106h3.mn.fits.gz,127.002,-30.5526 127.002 -30.5526 1998.1590 </Image>
+<Image> 107h3.mn.fits.gz,107h3.mn.fits.gz,138.519,-30.5870 138.519 -30.5870 1998.1730 </Image>
+<Image> 108h3.mn.fits.gz,108h3.mn.fits.gz,150.015,-30.5977 150.015 -30.5977 1998.1710 </Image>
+<Image> 109h3.mn.fits.gz,109h3.mn.fits.gz,161.557,-30.6125 161.557 -30.6125 1998.3070 </Image>
+<Image> 110h3.mn.fits.gz,110h3.mn.fits.gz,173.108,-30.3248 173.108 -30.3248 1999.0630 </Image>
+<Image> 111h3.mn.fits.gz,111h3.mn.fits.gz,184.624,-30.5758 184.624 -30.5758 1998.4600 </Image>
+<Image> 112h3.mn.fits.gz,112h3.mn.fits.gz,196.112,-30.5758 196.112 -30.5758 1998.4080 </Image>
+<Image> 113h3.mn.fits.gz,113h3.mn.fits.gz,207.692,-30.6064 207.692 -30.6064 1998.3380 </Image>
+<Image> 114h3.mn.fits.gz,114h3.mn.fits.gz,219.109,-30.2897 219.109 -30.2897 1999.3660 </Image>
+<Image> 115h3.mn.fits.gz,115h3.mn.fits.gz,230.675,-30.2121 230.675 -30.2121 1999.2900 </Image>
+<Image> 116h3.mn.fits.gz,116h3.mn.fits.gz,242.273,-30.4515 242.273 -30.4515 1998.4960 </Image>
+<Image> 117h3.mn.fits.gz,117h3.mn.fits.gz,253.782,-30.4184 253.782 -30.4184 1998.4990 </Image>
+<Image> 118h3.mn.fits.gz,118h3.mn.fits.gz,265.301,-30.3558 265.301 -30.3558 1998.5450 </Image>
+<Image> 119h3.mn.fits.gz,119h3.mn.fits.gz,276.802,-30.3104 276.802 -30.3104 1998.4960 </Image>
+<Image> 120h3.mn.fits.gz,120h3.mn.fits.gz,288.149,-30.4015 288.149 -30.4015 1998.7010 </Image>
+<Image> 121h3.mn.fits.gz,121h3.mn.fits.gz,299.669,-30.3196 299.669 -30.3196 1998.7090 </Image>
+<Image> 122h3.mn.fits.gz,122h3.mn.fits.gz,311.244,-30.3191 311.244 -30.3191 1998.7040 </Image>
+<Image> 123h3.mn.fits.gz,123h3.mn.fits.gz,322.686,-30.2720 322.686 -30.2720 1998.7290 </Image>
+<Image> 124h3.mn.fits.gz,124h3.mn.fits.gz,333.977,-29.7633 333.977 -29.7633 1998.8650 </Image>
+<Image> 125h3.mn.fits.gz,125h3.mn.fits.gz,345.590,-30.1772 345.590 -30.1772 1998.7400 </Image>
+<Image> 126h3.mn.fits.gz,126h3.mn.fits.gz,357.076,-30.1706 357.076 -30.1706 1998.7430 </Image>
+<Image> 127h3.mn.fits.gz,127h3.mn.fits.gz,0.484098,-19.7480 0.484098 -19.7480 1998.8110 </Image>
+<Image> 128h3.mn.fits.gz,128h3.mn.fits.gz,10.9318,-19.7541 10.9318 -19.7541 1998.8680 </Image>
+<Image> 129h3.mn.fits.gz,129h3.mn.fits.gz,21.3979,-19.7609 21.3979 -19.7609 1998.8850 </Image>
+<Image> 130h3.mn.fits.gz,130h3.mn.fits.gz,31.9462,-19.6561 31.9462 -19.6561 1998.9480 </Image>
+<Image> 131h3.mn.fits.gz,131h3.mn.fits.gz,42.3838,-19.8333 42.3838 -19.8333 1998.9010 </Image>
+<Image> 132h3.mn.fits.gz,132h3.mn.fits.gz,52.9065,-19.7868 52.9065 -19.7868 1999.0380 </Image>
+<Image> 133h3.mn.fits.gz,133h3.mn.fits.gz,63.4833,-20.1746 63.4833 -20.1746 1997.9240 </Image>
+<Image> 134h3.mn.fits.gz,134h3.mn.fits.gz,74.0031,-20.2131 74.0031 -20.2131 1998.0580 </Image>
+<Image> 135h3.mn.fits.gz,135h3.mn.fits.gz,84.5036,-20.2842 84.5036 -20.2842 1998.0850 </Image>
+<Image> 136h3.mn.fits.gz,136h3.mn.fits.gz,95.0464,-20.3533 95.0464 -20.3533 1998.0830 </Image>
+<Image> 137h3.mn.fits.gz,137h3.mn.fits.gz,105.543,-20.4121 105.543 -20.4121 1998.0860 </Image>
+<Image> 138h3.mn.fits.gz,138h3.mn.fits.gz,115.992,-20.1360 115.992 -20.1360 2000.2510 </Image>
+<Image> 139h3.mn.fits.gz,139h3.mn.fits.gz,126.512,-20.5282 126.512 -20.5282 1998.2960 </Image>
+<Image> 140h3.mn.fits.gz,140h3.mn.fits.gz,137.018,-20.5353 137.018 -20.5353 1998.3070 </Image>
+<Image> 141h3.mn.fits.gz,141h3.mn.fits.gz,147.548,-20.6069 147.548 -20.6069 1998.2280 </Image>
+<Image> 142h3.mn.fits.gz,142h3.mn.fits.gz,158.000,-20.6054 158.000 -20.6054 1998.2440 </Image>
+<Image> 143h3.mn.fits.gz,143h3.mn.fits.gz,168.596,-20.6134 168.596 -20.6134 1998.3130 </Image>
+<Image> 144h3.mn.fits.gz,144h3.mn.fits.gz,179.061,-19.9610 179.061 -19.9610 1998.2360 </Image>
+<Image> 145h3.mn.fits.gz,145h3.mn.fits.gz,189.610,-20.5638 189.610 -20.5638 1998.4820 </Image>
+<Image> 146h3.mn.fits.gz,146h3.mn.fits.gz,200.122,-19.9446 200.122 -19.9446 1998.3780 </Image>
+<Image> 147h3.mn.fits.gz,147h3.mn.fits.gz,210.691,-20.5709 210.691 -20.5709 1998.4820 </Image>
+<Image> 148h3.mn.fits.gz,148h3.mn.fits.gz,221.184,-20.2004 221.184 -20.2004 1999.1420 </Image>
+<Image> 149h3.mn.fits.gz,149h3.mn.fits.gz,231.725,-20.4889 231.725 -20.4889 1998.5450 </Image>
+<Image> 150h3.mn.fits.gz,150h3.mn.fits.gz,242.218,-20.4575 242.218 -20.4575 1998.4880 </Image>
+<Image> 151h3.mn.fits.gz,151h3.mn.fits.gz,252.564,-20.5387 252.564 -20.5387 1998.7010 </Image>
+<Image> 152h3.mn.fits.gz,152h3.mn.fits.gz,263.256,-20.3814 263.256 -20.3814 1998.5650 </Image>
+<Image> 153h3.mn.fits.gz,153h3.mn.fits.gz,273.669,-20.4395 273.669 -20.4395 1998.7260 </Image>
+<Image> 154h3.mn.fits.gz,154h3.mn.fits.gz,284.152,-20.3947 284.152 -20.3947 1998.7040 </Image>
+<Image> 155h3.mn.fits.gz,155h3.mn.fits.gz,294.666,-20.3848 294.666 -20.3848 1998.7070 </Image>
+<Image> 156h3.mn.fits.gz,156h3.mn.fits.gz,305.141,-20.3129 305.141 -20.3129 1998.7200 </Image>
+<Image> 157h3.mn.fits.gz,157h3.mn.fits.gz,315.637,-20.2781 315.637 -20.2781 1998.7260 </Image>
+<Image> 158h3.mn.fits.gz,158h3.mn.fits.gz,326.130,-19.4905 326.130 -19.4905 1998.4830 </Image>
+<Image> 159h3.mn.fits.gz,159h3.mn.fits.gz,336.644,-20.2254 336.644 -20.2254 1998.7320 </Image>
+<Image> 160h3.mn.fits.gz,160h3.mn.fits.gz,346.976,-19.7309 346.976 -19.7309 1998.7970 </Image>
+<Image> 161h3.mn.fits.gz,161h3.mn.fits.gz,357.405,-19.7129 357.405 -19.7129 1998.8740 </Image>
+<Image> 162h3.mn.fits.gz,162h3.mn.fits.gz,0.475836,-9.72585 0.475836 -9.72585 1998.8080 </Image>
+<Image> 163h3.mn.fits.gz,163h3.mn.fits.gz,10.4348,-9.74032 10.4348 -9.74032 1998.8660 </Image>
+<Image> 164h3.mn.fits.gz,164h3.mn.fits.gz,20.4226,-9.75575 20.4226 -9.75575 1998.8820 </Image>
+<Image> 165h3.mn.fits.gz,165h3.mn.fits.gz,30.4161,-9.77933 30.4161 -9.77933 1998.8960 </Image>
+<Image> 166h3.mn.fits.gz,166h3.mn.fits.gz,40.5069,-9.81351 40.5069 -9.81351 1999.0320 </Image>
+<Image> 167h3.mn.fits.gz,167h3.mn.fits.gz,50.5363,-9.43854 50.5363 -9.43854 1998.7180 </Image>
+<Image> 168h3.mn.fits.gz,168h3.mn.fits.gz,60.5456,-10.1515 60.5456 -10.1515 1999.9790 </Image>
+<Image> 169h3.mn.fits.gz,169h3.mn.fits.gz,70.5567,-10.1744 70.5567 -10.1744 1998.0550 </Image>
+<Image> 170h3.mn.fits.gz,170h3.mn.fits.gz,80.5579,-10.2530 80.5579 -10.2530 1998.0710 </Image>
+<Image> 171h3.mn.fits.gz,171h3.mn.fits.gz,90.5318,-10.3565 90.5318 -10.3565 1998.1510 </Image>
+<Image> 172h3.mn.fits.gz,172h3.mn.fits.gz,100.520,-10.4068 100.520 -10.4068 1998.1620 </Image>
+<Image> 173h3.mn.fits.gz,173h3.mn.fits.gz,110.545,-10.4597 110.545 -10.4597 1998.2190 </Image>
+<Image> 174h3.mn.fits.gz,174h3.mn.fits.gz,120.540,-10.4788 120.540 -10.4788 1998.1700 </Image>
+<Image> 175h3.mn.fits.gz,175h3.mn.fits.gz,130.569,-10.5518 130.569 -10.5518 1998.2220 </Image>
+<Image> 176h3.mn.fits.gz,176h3.mn.fits.gz,140.466,-10.5473 140.466 -10.5473 1998.2470 </Image>
+<Image> 177h3.mn.fits.gz,177h3.mn.fits.gz,150.650,-10.2862 150.650 -10.2862 1999.0330 </Image>
+<Image> 178h3.mn.fits.gz,178h3.mn.fits.gz,160.557,-10.3275 160.557 -10.3275 1999.0380 </Image>
+<Image> 179h3.mn.fits.gz,179h3.mn.fits.gz,170.535,-10.3433 170.535 -10.3433 1999.0490 </Image>
+<Image> 180h3.mn.fits.gz,180h3.mn.fits.gz,180.594,-10.2633 180.594 -10.2633 2000.3440 </Image>
+<Image> 181h3.mn.fits.gz,181h3.mn.fits.gz,190.629,-10.5862 190.629 -10.5862 1998.4850 </Image>
+<Image> 182h3.mn.fits.gz,182h3.mn.fits.gz,200.648,-10.2510 200.648 -10.2510 1999.1480 </Image>
+<Image> 183h3.mn.fits.gz,183h3.mn.fits.gz,210.646,-10.5526 210.646 -10.5526 1998.4790 </Image>
+<Image> 184h3.mn.fits.gz,184h3.mn.fits.gz,220.525,-10.2463 220.525 -10.2463 1999.3750 </Image>
+<Image> 185h3.mn.fits.gz,185h3.mn.fits.gz,230.691,-10.4625 230.691 -10.4625 1998.5400 </Image>
+<Image> 186h3.mn.fits.gz,186h3.mn.fits.gz,240.692,-10.4338 240.692 -10.4338 1998.5420 </Image>
+<Image> 187h3.mn.fits.gz,187h3.mn.fits.gz,250.663,-10.0894 250.663 -10.0894 1999.2250 </Image>
+<Image> 188h3.mn.fits.gz,188h3.mn.fits.gz,260.605,-10.5071 260.605 -10.5071 1998.7060 </Image>
+<Image> 189h3.mn.fits.gz,189h3.mn.fits.gz,270.586,-10.4473 270.586 -10.4473 1998.7170 </Image>
+<Image> 190h3.mn.fits.gz,190h3.mn.fits.gz,280.557,-9.99214 280.557 -9.99214 1999.3590 </Image>
+<Image> 191h3.mn.fits.gz,191h3.mn.fits.gz,290.623,-10.3598 290.623 -10.3598 1998.7290 </Image>
+<Image> 192h3.mn.fits.gz,192h3.mn.fits.gz,300.616,-10.3680 300.616 -10.3680 1998.7150 </Image>
+<Image> 193h3.mn.fits.gz,193h3.mn.fits.gz,310.685,-9.84060 310.685 -9.84060 2000.6370 </Image>
+<Image> 194h3.mn.fits.gz,194h3.mn.fits.gz,320.476,-9.76819 320.476 -9.76819 1998.8000 </Image>
+<Image> 195h3.mn.fits.gz,195h3.mn.fits.gz,330.490,-9.75900 330.490 -9.75900 1998.8110 </Image>
+<Image> 196h3.mn.fits.gz,196h3.mn.fits.gz,340.457,-10.1757 340.457 -10.1757 1998.7860 </Image>
+<Image> 197h3.mn.fits.gz,197h3.mn.fits.gz,350.567,-9.84749 350.567 -9.84749 1999.4630 </Image>
+<Image> 198h3.mn.fits.gz,198h3.mn.fits.gz,0.774423,0.178107 0.774423 0.178107 1998.7890 </Image>
+<Image> 199h3.mn.fits.gz,199h3.mn.fits.gz,10.4349,0.258340 10.4349 0.258340 1998.8630 </Image>
+<Image> 200h3.mn.fits.gz,200h3.mn.fits.gz,20.4295,0.246073 20.4295 0.246073 1998.8790 </Image>
+<Image> 201h3.mn.fits.gz,201h3.mn.fits.gz,30.3473,0.295047 30.3473 0.295047 1998.9450 </Image>
+<Image> 202h3.mn.fits.gz,202h3.mn.fits.gz,40.4670,0.174825 40.4670 0.174825 1999.0350 </Image>
+<Image> 203h3.mn.fits.gz,203h3.mn.fits.gz,50.5639,0.544130 50.5639 0.544130 1998.7150 </Image>
+<Image> 204h3.mn.fits.gz,204h3.mn.fits.gz,60.5960,-0.156731 60.5960 -0.156731 1997.9160 </Image>
+<Image> 205h3.mn.fits.gz,205h3.mn.fits.gz,70.5873,-0.161382 70.5873 -0.161382 1997.9320 </Image>
+<Image> 206h3.mn.fits.gz,206h3.mn.fits.gz,80.6030,-0.252458 80.6030 -0.252458 1998.0690 </Image>
+<Image> 207h3.mn.fits.gz,207h3.mn.fits.gz,90.7322,-0.120577 90.7322 -0.120577 1998.7950 </Image>
+<Image> 208h3.mn.fits.gz,208h3.mn.fits.gz,100.678,-0.177375 100.678 -0.177375 1998.8030 </Image>
+<Image> 209h3.mn.fits.gz,209h3.mn.fits.gz,110.694,-0.180466 110.694 -0.180466 1999.0210 </Image>
+<Image> 210h3.mn.fits.gz,210h3.mn.fits.gz,120.695,-0.220049 120.695 -0.220049 1998.9780 </Image>
+<Image> 211h3.mn.fits.gz,211h3.mn.fits.gz,130.667,-0.254080 130.667 -0.254080 1998.9730 </Image>
+<Image> 212h3.mn.fits.gz,212h3.mn.fits.gz,140.689,-0.286656 140.689 -0.286656 1998.9830 </Image>
+<Image> 213h3.mn.fits.gz,213h3.mn.fits.gz,150.692,-0.306057 150.692 -0.306057 1998.9860 </Image>
+<Image> 214h3.mn.fits.gz,214h3.mn.fits.gz,160.622,-0.339226 160.622 -0.339226 1999.0350 </Image>
+<Image> 215h3.mn.fits.gz,215h3.mn.fits.gz,170.557,-0.344313 170.557 -0.344313 1999.0520 </Image>
+<Image> 216h3.mn.fits.gz,216h3.mn.fits.gz,180.625,-0.330433 180.625 -0.330433 1999.0660 </Image>
+<Image> 217h3.mn.fits.gz,217h3.mn.fits.gz,190.611,-0.327851 190.611 -0.327851 1999.1230 </Image>
+<Image> 218h3.mn.fits.gz,218h3.mn.fits.gz,200.628,-0.551741 200.628 -0.551741 1998.5450 </Image>
+<Image> 219h3.mn.fits.gz,219h3.mn.fits.gz,210.639,-0.509784 210.639 -0.509784 1998.5370 </Image>
+<Image> 220h3.mn.fits.gz,220h3.mn.fits.gz,220.632,-0.498545 220.632 -0.498545 1998.5610 </Image>
+<Image> 221h3.mn.fits.gz,221h3.mn.fits.gz,230.636,-0.170807 230.636 -0.170807 1999.2030 </Image>
+<Image> 222h3.mn.fits.gz,222h3.mn.fits.gz,240.625,-0.152431 240.625 -0.152431 1999.2080 </Image>
+<Image> 223h3.mn.fits.gz,223h3.mn.fits.gz,250.625,-0.117465 250.625 -0.117465 1999.2220 </Image>
+<Image> 224h3.mn.fits.gz,224h3.mn.fits.gz,260.551,-0.0775973 260.551 -0.0775973 1999.2900 </Image>
+<Image> 225h3.mn.fits.gz,225h3.mn.fits.gz,270.548,-0.464239 270.548 -0.464239 1998.7150 </Image>
+<Image> 226h3.mn.fits.gz,226h3.mn.fits.gz,280.512,-0.0464210 280.512 -0.0464210 1999.3010 </Image>
+<Image> 227h3.mn.fits.gz,227h3.mn.fits.gz,290.512,0.0167413 290.512 0.0167413 1999.3610 </Image>
+<Image> 228h3.mn.fits.gz,228h3.mn.fits.gz,300.465,0.142467 300.465 0.142467 1998.7940 </Image>
+<Image> 229h3.mn.fits.gz,229h3.mn.fits.gz,310.513,0.144970 310.513 0.144970 1999.3670 </Image>
+<Image> 230h3.mn.fits.gz,230h3.mn.fits.gz,320.436,0.231370 320.436 0.231370 1998.7970 </Image>
+<Image> 231h3.mn.fits.gz,231h3.mn.fits.gz,330.420,0.232429 330.420 0.232429 1998.8600 </Image>
+<Image> 232h3.mn.fits.gz,232h3.mn.fits.gz,340.458,0.247595 340.458 0.247595 1998.7890 </Image>
+<Image> 233h3.mn.fits.gz,233h3.mn.fits.gz,350.621,0.178923 350.621 0.178923 1999.5480 </Image>
+<Image> 234h3.mn.fits.gz,234h3.mn.fits.gz,0.616608,10.5075 0.616608 10.5075 1998.5620 </Image>
+<Image> 235h3.mn.fits.gz,235h3.mn.fits.gz,10.7313,10.1503 10.7313 10.1503 1998.8050 </Image>
+<Image> 236h3.mn.fits.gz,236h3.mn.fits.gz,20.6734,10.1546 20.6734 10.1546 1999.6220 </Image>
+<Image> 237h3.mn.fits.gz,237h3.mn.fits.gz,30.7148,10.1999 30.7148 10.1999 2000.6780 </Image>
+<Image> 238h3.mn.fits.gz,238h3.mn.fits.gz,40.5292,10.2257 40.5292 10.2257 1998.9590 </Image>
+<Image> 239h3.mn.fits.gz,239h3.mn.fits.gz,50.6154,10.4952 50.6154 10.4952 1998.7120 </Image>
+<Image> 240h3.mn.fits.gz,240h3.mn.fits.gz,60.6229,9.85004 60.6229 9.85004 1997.9100 </Image>
+<Image> 241h3.mn.fits.gz,241h3.mn.fits.gz,70.6118,9.84661 70.6118 9.84661 1997.9290 </Image>
+<Image> 242h3.mn.fits.gz,242h3.mn.fits.gz,80.6388,9.75652 80.6388 9.75652 1998.0610 </Image>
+<Image> 243h3.mn.fits.gz,243h3.mn.fits.gz,90.5288,9.67965 90.5288 9.67965 1998.1560 </Image>
+<Image> 244h3.mn.fits.gz,244h3.mn.fits.gz,100.739,9.83530 100.739 9.83530 1998.9720 </Image>
+<Image> 245h3.mn.fits.gz,245h3.mn.fits.gz,110.610,9.56924 110.610 9.56924 1998.2220 </Image>
+<Image> 246h3.mn.fits.gz,246h3.mn.fits.gz,120.603,9.52515 120.603 9.52515 1998.2930 </Image>
+<Image> 247h3.mn.fits.gz,247h3.mn.fits.gz,130.600,9.49023 130.600 9.49023 1998.2270 </Image>
+<Image> 248h3.mn.fits.gz,248h3.mn.fits.gz,140.756,9.73600 140.756 9.73600 1998.9750 </Image>
+<Image> 249h3.mn.fits.gz,249h3.mn.fits.gz,150.601,9.45675 150.601 9.45675 1998.3120 </Image>
+<Image> 250h3.mn.fits.gz,250h3.mn.fits.gz,160.631,9.66979 160.631 9.66979 1999.0460 </Image>
+<Image> 251h3.mn.fits.gz,251h3.mn.fits.gz,170.677,9.68178 170.677 9.68178 1999.0550 </Image>
+<Image> 252h3.mn.fits.gz,252h3.mn.fits.gz,180.568,9.75331 180.568 9.75331 2000.4120 </Image>
+<Image> 253h3.mn.fits.gz,253h3.mn.fits.gz,190.645,9.69236 190.645 9.69236 1999.1340 </Image>
+<Image> 254h3.mn.fits.gz,254h3.mn.fits.gz,200.639,9.69728 200.639 9.69728 1999.1450 </Image>
+<Image> 255h3.mn.fits.gz,255h3.mn.fits.gz,210.640,9.74439 210.640 9.74439 1999.1260 </Image>
+<Image> 256h3.mn.fits.gz,256h3.mn.fits.gz,220.581,9.52814 220.581 9.52814 1998.5420 </Image>
+<Image> 257h3.mn.fits.gz,257h3.mn.fits.gz,230.629,9.80794 230.629 9.80794 1999.2000 </Image>
+<Image> 258h3.mn.fits.gz,258h3.mn.fits.gz,240.567,9.54871 240.567 9.54871 1998.5670 </Image>
+<Image> 259h3.mn.fits.gz,259h3.mn.fits.gz,250.615,9.89022 250.615 9.89022 1999.2160 </Image>
+<Image> 260h3.mn.fits.gz,260h3.mn.fits.gz,260.542,9.89539 260.542 9.89539 1999.2820 </Image>
+<Image> 261h3.mn.fits.gz,261h3.mn.fits.gz,270.537,9.95351 270.537 9.95351 1999.2850 </Image>
+<Image> 262h3.mn.fits.gz,262h3.mn.fits.gz,280.527,9.98068 280.527 9.98068 1999.3040 </Image>
+<Image> 263h3.mn.fits.gz,263h3.mn.fits.gz,290.496,10.0555 290.496 10.0555 1999.3750 </Image>
+<Image> 264h3.mn.fits.gz,264h3.mn.fits.gz,300.493,10.0773 300.493 10.0773 1999.3830 </Image>
+<Image> 265h3.mn.fits.gz,265h3.mn.fits.gz,310.503,10.1303 310.503 10.1303 1999.3640 </Image>
+<Image> 266h3.mn.fits.gz,266h3.mn.fits.gz,320.410,10.2389 320.410 10.2389 1998.7910 </Image>
+<Image> 267h3.mn.fits.gz,267h3.mn.fits.gz,330.419,10.2583 330.419 10.2583 1998.8080 </Image>
+<Image> 268h3.mn.fits.gz,268h3.mn.fits.gz,340.382,10.2604 340.382 10.2604 1998.8680 </Image>
+<Image> 269h3.mn.fits.gz,269h3.mn.fits.gz,350.597,10.5295 350.597 10.5295 1998.4800 </Image>
+<Image> 435h3.mn.fits.gz,435h3.mn.fits.gz,0.184624,-87.2197 0.184624 -87.2197 1998.8190 </Image>
+<Image> 436h3.mn.fits.gz,436h3.mn.fits.gz,114.876,-87.9855 114.876 -87.9855 1998.1510 </Image>
+<Image> 437h3.mn.fits.gz,437h3.mn.fits.gz,246.108,-87.9633 246.108 -87.9633 1998.4230 </Image>
+<Image> 502h3.mn.fits.gz,502h3.mn.fits.gz,22.3959,-84.7395 22.3959 -84.7395 1999.7800 </Image>
+<Image> 503h3.mn.fits.gz,503h3.mn.fits.gz,65.6957,-84.8930 65.6957 -84.8930 1999.9190 </Image>
+<Image> 504h3.mn.fits.gz,504h3.mn.fits.gz,110.582,-85.1045 110.582 -85.1045 1999.9250 </Image>
+<Image> 505h3.mn.fits.gz,505h3.mn.fits.gz,157.348,-85.2471 157.348 -85.2471 1999.1910 </Image>
+<Image> 506h3.mn.fits.gz,506h3.mn.fits.gz,204.821,-85.3051 204.821 -85.3051 1999.3440 </Image>
+<Image> 507h3.mn.fits.gz,507h3.mn.fits.gz,251.512,-85.1329 251.512 -85.1329 1999.5060 </Image>
+<Image> 508h3.mn.fits.gz,508h3.mn.fits.gz,296.357,-84.9894 296.357 -84.9894 1999.5140 </Image>
+<Image> 509h3.mn.fits.gz,509h3.mn.fits.gz,338.899,-84.6597 338.899 -84.6597 2000.8150 </Image>
+<Image> 510h3.mn.fits.gz,510h3.mn.fits.gz,13.0844,-74.7149 13.0844 -74.7149 1999.8460 </Image>
+<Image> 511h3.mn.fits.gz,511h3.mn.fits.gz,39.2806,-74.7891 39.2806 -74.7891 1999.8400 </Image>
+<Image> 512h3.mn.fits.gz,512h3.mn.fits.gz,64.9920,-74.8845 64.9920 -74.8845 1999.6900 </Image>
+<Image> 513h3.mn.fits.gz,513h3.mn.fits.gz,90.3653,-75.0374 90.3653 -75.0374 2000.0160 </Image>
+<Image> 514h3.mn.fits.gz,514h3.mn.fits.gz,116.992,-75.1326 116.992 -75.1326 1999.9330 </Image>
+<Image> 515h3.mn.fits.gz,515h3.mn.fits.gz,143.321,-75.2276 143.321 -75.2276 1999.1280 </Image>
+<Image> 516h3.mn.fits.gz,516h3.mn.fits.gz,169.770,-75.2508 169.770 -75.2508 1999.1180 </Image>
+<Image> 517h3.mn.fits.gz,517h3.mn.fits.gz,196.215,-75.2318 196.215 -75.2318 1999.2110 </Image>
+<Image> 518h3.mn.fits.gz,518h3.mn.fits.gz,222.130,-75.2469 222.130 -75.2469 1999.5260 </Image>
+<Image> 519h3.mn.fits.gz,519h3.mn.fits.gz,248.828,-75.1323 248.828 -75.1323 1999.3720 </Image>
+<Image> 520h3.mn.fits.gz,520h3.mn.fits.gz,274.921,-74.9702 274.921 -74.9702 1999.3700 </Image>
+<Image> 521h3.mn.fits.gz,521h3.mn.fits.gz,300.787,-74.8387 300.787 -74.8387 1999.4410 </Image>
+<Image> 522h3.mn.fits.gz,522h3.mn.fits.gz,325.809,-74.7922 325.809 -74.7922 1998.8760 </Image>
+<Image> 523h3.mn.fits.gz,523h3.mn.fits.gz,351.571,-74.8173 351.571 -74.8173 1999.8680 </Image>
+<Image> 524h3.mn.fits.gz,524h3.mn.fits.gz,10.2353,-64.7444 10.2353 -64.7444 1999.7500 </Image>
+<Image> 525h3.mn.fits.gz,525h3.mn.fits.gz,29.0755,-64.7536 29.0755 -64.7536 1999.7640 </Image>
+<Image> 526h3.mn.fits.gz,526h3.mn.fits.gz,47.8688,-64.8557 47.8688 -64.8557 1999.8480 </Image>
+<Image> 527h3.mn.fits.gz,527h3.mn.fits.gz,66.8238,-64.8779 66.8238 -64.8779 1999.8510 </Image>
+<Image> 528h3.mn.fits.gz,528h3.mn.fits.gz,85.7120,-65.0214 85.7120 -65.0214 1999.9280 </Image>
+<Image> 529h3.mn.fits.gz,529h3.mn.fits.gz,104.851,-65.1024 104.851 -65.1024 1999.0240 </Image>
+<Image> 530h3.mn.fits.gz,530h3.mn.fits.gz,123.855,-65.1435 123.855 -65.1435 1999.9420 </Image>
+<Image> 531h3.mn.fits.gz,531h3.mn.fits.gz,142.987,-65.2338 142.987 -65.2338 1999.1250 </Image>
+<Image> 532h3.mn.fits.gz,532h3.mn.fits.gz,162.154,-65.2615 162.154 -65.2615 1999.1970 </Image>
+<Image> 533h3.mn.fits.gz,533h3.mn.fits.gz,181.368,-65.2864 181.368 -65.2864 1999.2680 </Image>
+<Image> 534h3.mn.fits.gz,534h3.mn.fits.gz,200.563,-65.2142 200.563 -65.2142 1999.2210 </Image>
+<Image> 535h3.mn.fits.gz,535h3.mn.fits.gz,219.710,-65.1909 219.710 -65.1909 1999.4400 </Image>
+<Image> 536h3.mn.fits.gz,536h3.mn.fits.gz,238.791,-65.1620 238.791 -65.1620 1999.3610 </Image>
+<Image> 537h3.mn.fits.gz,537h3.mn.fits.gz,257.908,-65.0506 257.908 -65.0506 1999.4380 </Image>
+<Image> 538h3.mn.fits.gz,538h3.mn.fits.gz,276.853,-65.1220 276.853 -65.1220 1999.5170 </Image>
+<Image> 539h3.mn.fits.gz,539h3.mn.fits.gz,295.854,-64.9720 295.854 -64.9720 1999.5170 </Image>
+<Image> 540h3.mn.fits.gz,540h3.mn.fits.gz,314.755,-64.8772 314.755 -64.8772 1999.5340 </Image>
+<Image> 541h3.mn.fits.gz,541h3.mn.fits.gz,333.589,-64.7907 333.589 -64.7907 1999.6070 </Image>
+<Image> 542h3.mn.fits.gz,542h3.mn.fits.gz,351.994,-64.7145 351.994 -64.7145 1999.7040 </Image>
+<Image> 543h3.mn.fits.gz,543h3.mn.fits.gz,8.20978,-54.7908 8.20978 -54.7908 1999.5260 </Image>
+<Image> 544h3.mn.fits.gz,544h3.mn.fits.gz,23.1322,-54.7433 23.1322 -54.7433 1999.6900 </Image>
+<Image> 545h3.mn.fits.gz,545h3.mn.fits.gz,37.6873,-54.7512 37.6873 -54.7512 1999.7910 </Image>
+<Image> 546h3.mn.fits.gz,546h3.mn.fits.gz,52.9172,-54.8870 52.9172 -54.8870 1999.8510 </Image>
+<Image> 547h3.mn.fits.gz,547h3.mn.fits.gz,67.9273,-54.8813 67.9273 -54.8813 1999.8540 </Image>
+<Image> 548h3.mn.fits.gz,548h3.mn.fits.gz,82.9053,-54.9482 82.9053 -54.9482 1999.8600 </Image>
+<Image> 549h3.mn.fits.gz,549h3.mn.fits.gz,97.8945,-55.0166 97.8945 -55.0166 1999.9170 </Image>
+<Image> 550h3.mn.fits.gz,550h3.mn.fits.gz,112.913,-55.1111 112.913 -55.1111 1999.0520 </Image>
+<Image> 551h3.mn.fits.gz,551h3.mn.fits.gz,127.992,-55.1734 127.992 -55.1734 1999.1090 </Image>
+<Image> 552h3.mn.fits.gz,552h3.mn.fits.gz,143.049,-55.2984 143.049 -55.2984 1998.9700 </Image>
+<Image> 553h3.mn.fits.gz,553h3.mn.fits.gz,158.128,-55.2592 158.128 -55.2592 1999.1880 </Image>
+<Image> 554h3.mn.fits.gz,554h3.mn.fits.gz,173.236,-55.2663 173.236 -55.2663 1999.1200 </Image>
+<Image> 555h3.mn.fits.gz,555h3.mn.fits.gz,188.349,-55.2350 188.349 -55.2350 1999.1970 </Image>
+<Image> 556h3.mn.fits.gz,556h3.mn.fits.gz,203.376,-55.2699 203.376 -55.2699 1999.2950 </Image>
+<Image> 557h3.mn.fits.gz,557h3.mn.fits.gz,218.501,-55.2090 218.501 -55.2090 1999.4370 </Image>
+<Image> 558h3.mn.fits.gz,558h3.mn.fits.gz,233.556,-55.1542 233.556 -55.1542 1999.2950 </Image>
+<Image> 559h3.mn.fits.gz,559h3.mn.fits.gz,248.567,-55.1359 248.567 -55.1359 1999.3800 </Image>
+<Image> 560h3.mn.fits.gz,560h3.mn.fits.gz,263.590,-55.0602 263.590 -55.0602 1999.3830 </Image>
+<Image> 561h3.mn.fits.gz,561h3.mn.fits.gz,278.585,-54.9743 278.585 -54.9743 1999.3860 </Image>
+<Image> 562h3.mn.fits.gz,562h3.mn.fits.gz,293.608,-54.9258 293.608 -54.9258 1999.5120 </Image>
+<Image> 563h3.mn.fits.gz,563h3.mn.fits.gz,308.498,-54.8569 308.498 -54.8569 1999.3780 </Image>
+<Image> 564h3.mn.fits.gz,564h3.mn.fits.gz,323.132,-54.6723 323.132 -54.6723 1999.6270 </Image>
+<Image> 565h3.mn.fits.gz,565h3.mn.fits.gz,338.101,-54.6545 338.101 -54.6545 1999.6240 </Image>
+<Image> 566h3.mn.fits.gz,566h3.mn.fits.gz,352.983,-54.6977 352.983 -54.6977 1999.7090 </Image>
+<Image> 567h3.mn.fits.gz,567h3.mn.fits.gz,7.16522,-44.7531 7.16522 -44.7531 1999.7010 </Image>
+<Image> 568h3.mn.fits.gz,568h3.mn.fits.gz,19.8930,-44.7173 19.8930 -44.7173 1999.7860 </Image>
+<Image> 569h3.mn.fits.gz,569h3.mn.fits.gz,33.0373,-44.8054 33.0373 -44.8054 1999.8240 </Image>
+<Image> 570h3.mn.fits.gz,570h3.mn.fits.gz,46.0311,-44.7927 46.0311 -44.7927 1999.6950 </Image>
+<Image> 571h3.mn.fits.gz,571h3.mn.fits.gz,58.9886,-44.8460 58.9886 -44.8460 1999.9170 </Image>
+<Image> 572h3.mn.fits.gz,572h3.mn.fits.gz,71.9671,-44.8997 71.9671 -44.8997 1999.8650 </Image>
+<Image> 573h3.mn.fits.gz,573h3.mn.fits.gz,84.9114,-45.0029 84.9114 -45.0029 1999.9220 </Image>
+<Image> 574h3.mn.fits.gz,574h3.mn.fits.gz,97.9547,-45.0094 97.9547 -45.0094 1999.8620 </Image>
+<Image> 575h3.mn.fits.gz,575h3.mn.fits.gz,110.944,-45.1163 110.944 -45.1163 1999.0490 </Image>
+<Image> 576h3.mn.fits.gz,576h3.mn.fits.gz,124.013,-45.1523 124.013 -45.1523 1999.0540 </Image>
+<Image> 577h3.mn.fits.gz,577h3.mn.fits.gz,137.026,-45.2109 137.026 -45.2109 1999.1200 </Image>
+<Image> 578h3.mn.fits.gz,578h3.mn.fits.gz,150.084,-45.2392 150.084 -45.2392 1999.1830 </Image>
+<Image> 579h3.mn.fits.gz,579h3.mn.fits.gz,163.114,-45.2606 163.114 -45.2606 1999.1990 </Image>
+<Image> 580h3.mn.fits.gz,580h3.mn.fits.gz,176.150,-45.3007 176.150 -45.3007 1999.2070 </Image>
+<Image> 581h3.mn.fits.gz,581h3.mn.fits.gz,189.272,-45.2352 189.272 -45.2352 1999.2000 </Image>
+<Image> 582h3.mn.fits.gz,582h3.mn.fits.gz,202.552,-45.2804 202.552 -45.2804 1999.2840 </Image>
+<Image> 583h3.mn.fits.gz,583h3.mn.fits.gz,215.250,-45.2858 215.250 -45.2858 1999.3580 </Image>
+<Image> 584h3.mn.fits.gz,584h3.mn.fits.gz,228.192,-45.0960 228.192 -45.0960 1999.5910 </Image>
+<Image> 585h3.mn.fits.gz,585h3.mn.fits.gz,241.350,-45.1612 241.350 -45.1612 1999.3640 </Image>
+<Image> 586h3.mn.fits.gz,586h3.mn.fits.gz,254.391,-45.0815 254.391 -45.0815 1999.3750 </Image>
+<Image> 587h3.mn.fits.gz,587h3.mn.fits.gz,267.436,-45.1511 267.436 -45.1511 1999.5140 </Image>
+<Image> 588h3.mn.fits.gz,588h3.mn.fits.gz,280.405,-45.0802 280.405 -45.0802 1999.5200 </Image>
+<Image> 589h3.mn.fits.gz,589h3.mn.fits.gz,293.373,-44.9195 293.373 -44.9195 1999.3890 </Image>
+<Image> 590h3.mn.fits.gz,590h3.mn.fits.gz,306.384,-44.9236 306.384 -44.9236 1999.6070 </Image>
+<Image> 591h3.mn.fits.gz,591h3.mn.fits.gz,319.372,-44.8614 319.372 -44.8614 1999.5910 </Image>
+<Image> 592h3.mn.fits.gz,592h3.mn.fits.gz,332.327,-44.8509 332.327 -44.8509 1999.6100 </Image>
+<Image> 593h3.mn.fits.gz,593h3.mn.fits.gz,345.289,-44.7413 345.289 -44.7413 1999.7440 </Image>
+<Image> 594h3.mn.fits.gz,594h3.mn.fits.gz,358.202,-44.8036 358.202 -44.8036 1999.5970 </Image>
+<Image> 595h3.mn.fits.gz,595h3.mn.fits.gz,6.28973,-34.6392 6.28973 -34.6392 2000.6680 </Image>
+<Image> 596h3.mn.fits.gz,596h3.mn.fits.gz,17.7184,-34.7099 17.7184 -34.7099 1999.7830 </Image>
+<Image> 597h3.mn.fits.gz,597h3.mn.fits.gz,29.3416,-34.7488 29.3416 -34.7488 1999.7660 </Image>
+<Image> 598h3.mn.fits.gz,598h3.mn.fits.gz,40.7697,-34.8276 40.7697 -34.8276 1999.8430 </Image>
+<Image> 599h3.mn.fits.gz,599h3.mn.fits.gz,52.1250,-34.8168 52.1250 -34.8168 1999.8490 </Image>
+<Image> 600h3.mn.fits.gz,600h3.mn.fits.gz,63.7140,-34.9844 63.7140 -34.9844 1998.8840 </Image>
+<Image> 601h3.mn.fits.gz,601h3.mn.fits.gz,75.2361,-34.9221 75.2361 -34.9221 1999.7720 </Image>
+<Image> 602h3.mn.fits.gz,602h3.mn.fits.gz,86.5703,-34.9854 86.5703 -34.9854 2000.0240 </Image>
+<Image> 603h3.mn.fits.gz,603h3.mn.fits.gz,98.2456,-35.0089 98.2456 -35.0089 1999.9200 </Image>
+<Image> 604h3.mn.fits.gz,604h3.mn.fits.gz,109.711,-35.1171 109.711 -35.1171 1999.0410 </Image>
+<Image> 605h3.mn.fits.gz,605h3.mn.fits.gz,121.231,-35.1541 121.231 -35.1541 1999.9390 </Image>
+<Image> 606h3.mn.fits.gz,606h3.mn.fits.gz,132.803,-35.1900 132.803 -35.1900 1999.0570 </Image>
+<Image> 607h3.mn.fits.gz,607h3.mn.fits.gz,144.327,-35.2242 144.327 -35.2242 1999.0600 </Image>
+<Image> 608h3.mn.fits.gz,608h3.mn.fits.gz,155.858,-35.3206 155.858 -35.3206 1998.9670 </Image>
+<Image> 609h3.mn.fits.gz,609h3.mn.fits.gz,167.391,-35.2504 167.391 -35.2504 1999.1150 </Image>
+<Image> 610h3.mn.fits.gz,610h3.mn.fits.gz,178.908,-35.2586 178.908 -35.2586 1999.2160 </Image>
+<Image> 611h3.mn.fits.gz,611h3.mn.fits.gz,190.462,-35.2412 190.462 -35.2412 1999.2020 </Image>
+<Image> 612h3.mn.fits.gz,612h3.mn.fits.gz,201.890,-35.3156 201.890 -35.3156 1999.2920 </Image>
+<Image> 613h3.mn.fits.gz,613h3.mn.fits.gz,213.520,-35.2085 213.520 -35.2085 1999.2240 </Image>
+<Image> 614h3.mn.fits.gz,614h3.mn.fits.gz,225.007,-33.8475 225.007 -33.8475 1999.5310 </Image>
+<Image> 615h3.mn.fits.gz,615h3.mn.fits.gz,236.511,-35.1838 236.511 -35.1838 1999.3040 </Image>
+<Image> 616h3.mn.fits.gz,616h3.mn.fits.gz,247.951,-35.1888 247.951 -35.1888 1999.3770 </Image>
+<Image> 617h3.mn.fits.gz,617h3.mn.fits.gz,259.581,-35.0639 259.581 -35.0639 1999.4430 </Image>
+<Image> 618h3.mn.fits.gz,618h3.mn.fits.gz,271.011,-34.9979 271.011 -34.9979 1999.3670 </Image>
+<Image> 619h3.mn.fits.gz,619h3.mn.fits.gz,282.588,-35.0024 282.588 -35.0024 1999.4600 </Image>
+<Image> 620h3.mn.fits.gz,620h3.mn.fits.gz,294.076,-34.9607 294.076 -34.9607 1999.4570 </Image>
+<Image> 621h3.mn.fits.gz,621h3.mn.fits.gz,305.501,-34.9682 305.501 -34.9682 1999.5990 </Image>
+<Image> 622h3.mn.fits.gz,622h3.mn.fits.gz,316.940,-34.8210 316.940 -34.8210 1999.3860 </Image>
+<Image> 623h3.mn.fits.gz,623h3.mn.fits.gz,328.472,-34.8644 328.472 -34.8644 1999.5960 </Image>
+<Image> 624h3.mn.fits.gz,624h3.mn.fits.gz,339.863,-34.6860 339.863 -34.6860 1999.6270 </Image>
+<Image> 625h3.mn.fits.gz,625h3.mn.fits.gz,351.442,-34.7413 351.442 -34.7413 1999.7520 </Image>
+<Image> 626h3.mn.fits.gz,626h3.mn.fits.gz,2.91329,-34.7616 2.91329 -34.7616 1999.6080 </Image>
+<Image> 627h3.mn.fits.gz,627h3.mn.fits.gz,5.87840,-24.7993 5.87840 -24.7993 1999.6130 </Image>
+<Image> 628h3.mn.fits.gz,628h3.mn.fits.gz,16.2722,-24.7119 16.2722 -24.7119 1999.7800 </Image>
+<Image> 629h3.mn.fits.gz,629h3.mn.fits.gz,26.8384,-24.7602 26.8384 -24.7602 1999.7550 </Image>
+<Image> 630h3.mn.fits.gz,630h3.mn.fits.gz,37.3209,-24.7827 37.3209 -24.7827 1999.7750 </Image>
+<Image> 631h3.mn.fits.gz,631h3.mn.fits.gz,47.7688,-24.8678 47.7688 -24.8678 1999.8450 </Image>
+<Image> 632h3.mn.fits.gz,632h3.mn.fits.gz,58.2687,-24.8873 58.2687 -24.8873 1999.8590 </Image>
+<Image> 633h3.mn.fits.gz,633h3.mn.fits.gz,68.7805,-24.9029 68.7805 -24.9029 1999.8570 </Image>
+<Image> 634h3.mn.fits.gz,634h3.mn.fits.gz,79.1767,-24.9575 79.1767 -24.9575 2000.0150 </Image>
+<Image> 635h3.mn.fits.gz,635h3.mn.fits.gz,89.7377,-25.0451 89.7377 -25.0451 2000.0100 </Image>
+<Image> 636h3.mn.fits.gz,636h3.mn.fits.gz,100.289,-25.1659 100.289 -25.1659 1998.9690 </Image>
+<Image> 637h3.mn.fits.gz,637h3.mn.fits.gz,110.743,-25.1280 110.743 -25.1280 1999.0460 </Image>
+<Image> 638h3.mn.fits.gz,638h3.mn.fits.gz,121.256,-25.1710 121.256 -25.1710 1999.9360 </Image>
+<Image> 639h3.mn.fits.gz,639h3.mn.fits.gz,131.794,-25.1863 131.794 -25.1863 1999.1140 </Image>
+<Image> 640h3.mn.fits.gz,640h3.mn.fits.gz,142.295,-25.2320 142.295 -25.2320 1999.1230 </Image>
+<Image> 641h3.mn.fits.gz,641h3.mn.fits.gz,152.835,-25.2301 152.835 -25.2301 1999.1370 </Image>
+<Image> 642h3.mn.fits.gz,642h3.mn.fits.gz,163.336,-25.2685 163.336 -25.2685 1999.2020 </Image>
+<Image> 643h3.mn.fits.gz,643h3.mn.fits.gz,173.880,-25.2655 173.880 -25.2655 1999.1260 </Image>
+<Image> 644h3.mn.fits.gz,644h3.mn.fits.gz,184.406,-25.2476 184.406 -25.2476 1999.2190 </Image>
+<Image> 645h3.mn.fits.gz,645h3.mn.fits.gz,194.918,-25.2485 194.918 -25.2485 1999.2050 </Image>
+<Image> 646h3.mn.fits.gz,646h3.mn.fits.gz,205.375,-25.2614 205.375 -25.2614 1999.2980 </Image>
+<Image> 647h3.mn.fits.gz,647h3.mn.fits.gz,215.819,-25.2900 215.819 -25.2900 1999.3630 </Image>
+<Image> 648h3.mn.fits.gz,648h3.mn.fits.gz,226.434,-25.2183 226.434 -25.2183 1999.4460 </Image>
+<Image> 649h3.mn.fits.gz,649h3.mn.fits.gz,236.891,-25.1689 236.891 -25.1689 1999.3580 </Image>
+<Image> 650h3.mn.fits.gz,650h3.mn.fits.gz,247.376,-25.1445 247.376 -25.1445 1999.3660 </Image>
+<Image> 651h3.mn.fits.gz,651h3.mn.fits.gz,257.991,-25.0612 257.991 -25.0612 1999.4400 </Image>
+<Image> 652h3.mn.fits.gz,652h3.mn.fits.gz,268.400,-25.0437 268.400 -25.0437 1999.3780 </Image>
+<Image> 653h3.mn.fits.gz,653h3.mn.fits.gz,278.933,-24.9316 278.933 -24.9316 1999.6950 </Image>
+<Image> 654h3.mn.fits.gz,654h3.mn.fits.gz,289.484,-24.9573 289.484 -24.9573 1999.4620 </Image>
+<Image> 655h3.mn.fits.gz,655h3.mn.fits.gz,299.966,-24.8849 299.966 -24.8849 1999.4430 </Image>
+<Image> 656h3.mn.fits.gz,656h3.mn.fits.gz,310.440,-24.9619 310.440 -24.9619 1999.6100 </Image>
+<Image> 657h3.mn.fits.gz,657h3.mn.fits.gz,320.948,-24.8441 320.948 -24.8441 1999.4600 </Image>
+<Image> 658h3.mn.fits.gz,658h3.mn.fits.gz,331.400,-24.8401 331.400 -24.8401 1999.5990 </Image>
+<Image> 659h3.mn.fits.gz,659h3.mn.fits.gz,341.930,-24.7948 341.930 -24.7948 1999.6050 </Image>
+<Image> 660h3.mn.fits.gz,660h3.mn.fits.gz,352.416,-24.7311 352.416 -24.7311 1999.7660 </Image>
+<Image> 661h3.mn.fits.gz,661h3.mn.fits.gz,2.84762,-24.7916 2.84762 -24.7916 1999.6000 </Image>
+<Image> 662h3.mn.fits.gz,662h3.mn.fits.gz,5.61792,-14.8048 5.61792 -14.8048 1999.6100 </Image>
+<Image> 663h3.mn.fits.gz,663h3.mn.fits.gz,15.6082,-14.7688 15.6082 -14.7688 1999.7770 </Image>
+<Image> 664h3.mn.fits.gz,664h3.mn.fits.gz,25.6114,-14.7643 25.6114 -14.7643 1999.7060 </Image>
+<Image> 665h3.mn.fits.gz,665h3.mn.fits.gz,35.5869,-14.8198 35.5869 -14.8198 1999.6870 </Image>
+<Image> 666h3.mn.fits.gz,666h3.mn.fits.gz,45.5862,-14.8174 45.5862 -14.8174 1999.7770 </Image>
+<Image> 667h3.mn.fits.gz,667h3.mn.fits.gz,55.5748,-14.8508 55.5748 -14.8508 1999.9080 </Image>
+<Image> 668h3.mn.fits.gz,668h3.mn.fits.gz,65.5205,-15.0066 65.5205 -15.0066 1998.8870 </Image>
+<Image> 669h3.mn.fits.gz,669h3.mn.fits.gz,75.5624,-14.9377 75.5624 -14.9377 1999.7750 </Image>
+<Image> 670h3.mn.fits.gz,670h3.mn.fits.gz,85.5289,-15.0414 85.5289 -15.0414 1999.9250 </Image>
+<Image> 671h3.mn.fits.gz,671h3.mn.fits.gz,95.5036,-15.0312 95.5036 -15.0312 2000.0890 </Image>
+<Image> 672h3.mn.fits.gz,672h3.mn.fits.gz,105.615,-15.1254 105.615 -15.1254 1999.0270 </Image>
+<Image> 673h3.mn.fits.gz,673h3.mn.fits.gz,115.566,-15.1509 115.566 -15.1509 2000.0920 </Image>
+<Image> 674h3.mn.fits.gz,674h3.mn.fits.gz,125.584,-15.1877 125.584 -15.1877 1999.1060 </Image>
+<Image> 675h3.mn.fits.gz,675h3.mn.fits.gz,135.562,-15.2090 135.562 -15.2090 1999.1170 </Image>
+<Image> 676h3.mn.fits.gz,676h3.mn.fits.gz,145.573,-15.2246 145.573 -15.2246 1999.1340 </Image>
+<Image> 677h3.mn.fits.gz,677h3.mn.fits.gz,155.598,-15.2711 155.598 -15.2711 1999.1860 </Image>
+<Image> 678h3.mn.fits.gz,678h3.mn.fits.gz,165.593,-15.2817 165.593 -15.2817 1999.2050 </Image>
+<Image> 679h3.mn.fits.gz,679h3.mn.fits.gz,175.623,-15.2608 175.623 -15.2608 1999.1420 </Image>
+<Image> 680h3.mn.fits.gz,680h3.mn.fits.gz,185.604,-15.2712 185.604 -15.2712 2000.3330 </Image>
+<Image> 681h3.mn.fits.gz,681h3.mn.fits.gz,195.641,-15.2551 195.641 -15.2551 1999.2080 </Image>
+<Image> 682h3.mn.fits.gz,682h3.mn.fits.gz,205.648,-15.2830 205.648 -15.2830 2000.1660 </Image>
+<Image> 683h3.mn.fits.gz,683h3.mn.fits.gz,215.673,-15.2494 215.673 -15.2494 2000.1800 </Image>
+<Image> 684h3.mn.fits.gz,684h3.mn.fits.gz,225.607,-15.1961 225.607 -15.1961 1999.2850 </Image>
+<Image> 685h3.mn.fits.gz,685h3.mn.fits.gz,235.578,-15.1767 235.578 -15.1767 1999.3530 </Image>
+<Image> 686h3.mn.fits.gz,686h3.mn.fits.gz,245.616,-15.1294 245.616 -15.1294 1999.2980 </Image>
+<Image> 687h3.mn.fits.gz,687h3.mn.fits.gz,255.678,-15.1431 255.678 -15.1431 1999.4570 </Image>
+<Image> 688h3.mn.fits.gz,688h3.mn.fits.gz,265.666,-15.0604 265.666 -15.0604 1999.4460 </Image>
+<Image> 689h3.mn.fits.gz,689h3.mn.fits.gz,275.579,-14.9860 275.579 -14.9860 1999.3720 </Image>
+<Image> 690h3.mn.fits.gz,690h3.mn.fits.gz,285.569,-14.9648 285.569 -14.9648 1999.3810 </Image>
+<Image> 691h3.mn.fits.gz,691h3.mn.fits.gz,295.668,-14.9114 295.668 -14.9114 1999.4380 </Image>
+<Image> 692h3.mn.fits.gz,692h3.mn.fits.gz,305.663,-14.8251 305.663 -14.8251 1999.6950 </Image>
+<Image> 693h3.mn.fits.gz,693h3.mn.fits.gz,315.554,-14.8222 315.554 -14.8222 1999.3730 </Image>
+<Image> 694h3.mn.fits.gz,694h3.mn.fits.gz,325.663,-14.8448 325.663 -14.8448 1999.5170 </Image>
+<Image> 695h3.mn.fits.gz,695h3.mn.fits.gz,335.639,-14.8362 335.639 -14.8362 1999.6130 </Image>
+<Image> 696h3.mn.fits.gz,696h3.mn.fits.gz,345.619,-14.7149 345.619 -14.7149 1999.6930 </Image>
+<Image> 697h3.mn.fits.gz,697h3.mn.fits.gz,355.569,-14.7034 355.569 -14.7034 1999.8350 </Image>
+<Image> 698h3.mn.fits.gz,698h3.mn.fits.gz,5.65017,-4.76019 5.65017 -4.76019 2000.6730 </Image>
+<Image> 699h3.mn.fits.gz,699h3.mn.fits.gz,15.6522,-4.77132 15.6522 -4.77132 2000.7250 </Image>
+<Image> 700h3.mn.fits.gz,700h3.mn.fits.gz,25.6433,-4.81306 25.6433 -4.81306 2000.7270 </Image>
+<Image> 701h3.mn.fits.gz,701h3.mn.fits.gz,35.6347,-4.89216 35.6347 -4.89216 2000.7490 </Image>
+<Image> 702h3.mn.fits.gz,702h3.mn.fits.gz,45.6297,-4.83325 45.6297 -4.83325 2000.6810 </Image>
+<Image> 703h3.mn.fits.gz,703h3.mn.fits.gz,55.6344,-4.91981 55.6344 -4.91981 2000.7580 </Image>
+<Image> 704h3.mn.fits.gz,704h3.mn.fits.gz,65.5560,-4.88754 65.5560 -4.88754 2000.0040 </Image>
+<Image> 705h3.mn.fits.gz,705h3.mn.fits.gz,75.5566,-4.93500 75.5566 -4.93500 2000.0100 </Image>
+<Image> 706h3.mn.fits.gz,706h3.mn.fits.gz,85.5494,-4.98477 85.5494 -4.98477 2000.0210 </Image>
+<Image> 707h3.mn.fits.gz,707h3.mn.fits.gz,95.5660,-5.02641 95.5660 -5.02641 2000.0950 </Image>
+<Image> 708h3.mn.fits.gz,708h3.mn.fits.gz,105.616,-5.08411 105.616 -5.08411 2000.0180 </Image>
+<Image> 709h3.mn.fits.gz,709h3.mn.fits.gz,115.607,-5.13432 115.607 -5.13432 1999.9500 </Image>
+<Image> 710h3.mn.fits.gz,710h3.mn.fits.gz,125.609,-5.17310 125.609 -5.17310 1999.9530 </Image>
+<Image> 711h3.mn.fits.gz,711h3.mn.fits.gz,135.612,-5.21411 135.612 -5.21411 1999.9450 </Image>
+<Image> 712h3.mn.fits.gz,712h3.mn.fits.gz,145.605,-5.25898 145.605 -5.25898 1999.9550 </Image>
+<Image> 713h3.mn.fits.gz,713h3.mn.fits.gz,155.585,-5.23280 155.585 -5.23280 2000.1720 </Image>
+<Image> 714h3.mn.fits.gz,714h3.mn.fits.gz,165.629,-5.30809 165.629 -5.30809 2000.1110 </Image>
+<Image> 715h3.mn.fits.gz,715h3.mn.fits.gz,175.553,-5.29644 175.553 -5.29644 1999.2810 </Image>
+<Image> 716h3.mn.fits.gz,716h3.mn.fits.gz,185.549,-5.30936 185.549 -5.30936 1999.2900 </Image>
+<Image> 717h3.mn.fits.gz,717h3.mn.fits.gz,195.610,-5.24992 195.610 -5.24992 2000.2570 </Image>
+<Image> 718h3.mn.fits.gz,718h3.mn.fits.gz,205.632,-5.29804 205.632 -5.29804 2000.1200 </Image>
+<Image> 719h3.mn.fits.gz,719h3.mn.fits.gz,215.646,-5.24742 215.646 -5.24742 2000.1740 </Image>
+<Image> 720h3.mn.fits.gz,720h3.mn.fits.gz,225.672,-5.20614 225.672 -5.20614 2000.1910 </Image>
+<Image> 721h3.mn.fits.gz,721h3.mn.fits.gz,235.661,-5.16779 235.661 -5.16779 2000.2590 </Image>
+<Image> 722h3.mn.fits.gz,722h3.mn.fits.gz,245.651,-5.16389 245.651 -5.16389 2000.1960 </Image>
+<Image> 723h3.mn.fits.gz,723h3.mn.fits.gz,255.659,-5.11740 255.659 -5.11740 2000.2680 </Image>
+<Image> 724h3.mn.fits.gz,724h3.mn.fits.gz,265.664,-5.05898 265.664 -5.05898 2000.3280 </Image>
+<Image> 725h3.mn.fits.gz,725h3.mn.fits.gz,275.675,-5.00433 275.675 -5.00433 2000.3440 </Image>
+<Image> 726h3.mn.fits.gz,726h3.mn.fits.gz,285.684,-4.96686 285.684 -4.96686 2000.3500 </Image>
+<Image> 727h3.mn.fits.gz,727h3.mn.fits.gz,295.659,-4.90327 295.659 -4.90327 2000.3610 </Image>
+<Image> 728h3.mn.fits.gz,728h3.mn.fits.gz,305.669,-4.89776 305.669 -4.89776 2000.4130 </Image>
+<Image> 729h3.mn.fits.gz,729h3.mn.fits.gz,315.661,-4.83666 315.661 -4.83666 2000.6560 </Image>
+<Image> 730h3.mn.fits.gz,730h3.mn.fits.gz,325.620,-4.69335 325.620 -4.69335 2000.6510 </Image>
+<Image> 731h3.mn.fits.gz,731h3.mn.fits.gz,335.658,-4.78548 335.658 -4.78548 2000.6510 </Image>
+<Image> 732h3.mn.fits.gz,732h3.mn.fits.gz,345.586,-4.71581 345.586 -4.71581 2000.7460 </Image>
+<Image> 733h3.mn.fits.gz,733h3.mn.fits.gz,355.599,-4.72013 355.599 -4.72013 2000.7440 </Image>
+<Image> 734h3.mn.fits.gz,734h3.mn.fits.gz,5.58622,5.33473 5.58622 5.33473 2000.6700 </Image>
+<Image> 735h3.mn.fits.gz,735h3.mn.fits.gz,15.6853,5.22510 15.6853 5.22510 2000.6590 </Image>
+<Image> 736h3.mn.fits.gz,736h3.mn.fits.gz,25.6758,5.19082 25.6758 5.19082 2000.6670 </Image>
+<Image> 737h3.mn.fits.gz,737h3.mn.fits.gz,35.6850,5.14244 35.6850 5.14244 2000.7300 </Image>
+<Image> 738h3.mn.fits.gz,738h3.mn.fits.gz,45.6908,5.14639 45.6908 5.14639 2000.6730 </Image>
+<Image> 739h3.mn.fits.gz,739h3.mn.fits.gz,55.6864,5.04667 55.6864 5.04667 2000.8040 </Image>
+<Image> 740h3.mn.fits.gz,740h3.mn.fits.gz,65.7068,5.01532 65.7068 5.01532 2000.7470 </Image>
+<Image> 741h3.mn.fits.gz,741h3.mn.fits.gz,75.5948,5.05933 75.5948 5.05933 2000.0070 </Image>
+<Image> 742h3.mn.fits.gz,742h3.mn.fits.gz,85.6100,5.00536 85.6100 5.00536 2000.0180 </Image>
+<Image> 743h3.mn.fits.gz,743h3.mn.fits.gz,95.5979,4.95867 95.5979 4.95867 2000.0780 </Image>
+<Image> 744h3.mn.fits.gz,744h3.mn.fits.gz,105.686,4.88896 105.686 4.88896 2000.0130 </Image>
+<Image> 745h3.mn.fits.gz,745h3.mn.fits.gz,115.616,4.85472 115.616 4.85472 2000.0950 </Image>
+<Image> 746h3.mn.fits.gz,746h3.mn.fits.gz,125.686,4.81438 125.686 4.81438 2000.0860 </Image>
+<Image> 747h3.mn.fits.gz,747h3.mn.fits.gz,135.699,4.76557 135.699 4.76557 2000.1000 </Image>
+<Image> 748h3.mn.fits.gz,748h3.mn.fits.gz,145.670,4.75099 145.670 4.75099 2000.1770 </Image>
+<Image> 749h3.mn.fits.gz,749h3.mn.fits.gz,155.662,4.68652 155.662 4.68652 2000.1060 </Image>
+<Image> 750h3.mn.fits.gz,750h3.mn.fits.gz,165.656,4.69138 165.656 4.69138 2000.0980 </Image>
+<Image> 751h3.mn.fits.gz,751h3.mn.fits.gz,175.695,4.68976 175.695 4.68976 2000.2560 </Image>
+<Image> 752h3.mn.fits.gz,752h3.mn.fits.gz,185.654,4.68706 185.654 4.68706 2000.1060 </Image>
+<Image> 753h3.mn.fits.gz,753h3.mn.fits.gz,195.680,4.69988 195.680 4.69988 2000.2620 </Image>
+<Image> 754h3.mn.fits.gz,754h3.mn.fits.gz,205.638,4.69462 205.638 4.69462 2000.1120 </Image>
+<Image> 755h3.mn.fits.gz,755h3.mn.fits.gz,215.646,4.71079 215.646 4.71079 2000.1690 </Image>
+<Image> 756h3.mn.fits.gz,756h3.mn.fits.gz,225.623,4.78583 225.623 4.78583 2000.1770 </Image>
+<Image> 757h3.mn.fits.gz,757h3.mn.fits.gz,235.626,4.77703 235.626 4.77703 2000.1940 </Image>
+<Image> 758h3.mn.fits.gz,758h3.mn.fits.gz,245.667,4.84659 245.667 4.84659 2000.2650 </Image>
+<Image> 759h3.mn.fits.gz,759h3.mn.fits.gz,255.645,4.89822 255.645 4.89822 2000.2760 </Image>
+<Image> 760h3.mn.fits.gz,760h3.mn.fits.gz,265.641,4.94401 265.641 4.94401 2000.2790 </Image>
+<Image> 761h3.mn.fits.gz,761h3.mn.fits.gz,275.633,4.95291 275.633 4.95291 2000.3410 </Image>
+<Image> 762h3.mn.fits.gz,762h3.mn.fits.gz,285.643,5.02128 285.643 5.02128 2000.3580 </Image>
+<Image> 763h3.mn.fits.gz,763h3.mn.fits.gz,295.648,5.06180 295.648 5.06180 2000.3470 </Image>
+<Image> 764h3.mn.fits.gz,764h3.mn.fits.gz,305.655,5.07314 305.655 5.07314 2000.4100 </Image>
+<Image> 765h3.mn.fits.gz,765h3.mn.fits.gz,315.564,5.25563 315.564 5.25563 2000.6530 </Image>
+<Image> 766h3.mn.fits.gz,766h3.mn.fits.gz,325.575,5.28937 325.575 5.28937 2000.6700 </Image>
+<Image> 767h3.mn.fits.gz,767h3.mn.fits.gz,335.704,5.18849 335.704 5.18849 2000.6750 </Image>
+<Image> 768h3.mn.fits.gz,768h3.mn.fits.gz,345.595,5.32856 345.595 5.32856 2000.6020 </Image>
+<Image> 769h3.mn.fits.gz,769h3.mn.fits.gz,355.665,5.22228 355.665 5.22228 2000.6560 </Image>
+<Image> 935h3.mn.fits.gz,935h3.mn.fits.gz,55.1185,-87.3251 55.1185 -87.3251 1999.9230 </Image>
+<Image> 936h3.mn.fits.gz,936h3.mn.fits.gz,180.310,-87.8335 180.310 -87.8335 1999.5820 </Image>
+<Image> 937h3.mn.fits.gz,937h3.mn.fits.gz,305.431,-87.2219 305.431 -87.2219 1999.6240 </Image>
+    </Images>
+</Survey>

@@ -1,0 +1,226 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName>GRANAT_SIGMA_${U},GRANAT/SIGMA ${U},
+  ${PRIME}
+  </ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>GRANAT/SIGMA ${FU}</Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+The Soviet orbital observatory GRANAT was launched in December 1989 and
+was operational till November 1998. One of the main instruments
+of the observatory was the French-Soviet hard X-ray coded mask telescope SIGMA
+(Paul et al.1 1991, Adv.Space Res., 11, 279). It was the first
+space telescope that used coded aperture technique for reconstruction of
+sky images in hard X-rays (35-1300 keV). The angular
+resolution of the telescope was  approximately 12' and the accuracy of a source
+localization is  approximately 2-3'.<p>
+
+SIGMA discovered numerious interesting hard X-ray sources including
+GRS 1758-258, which is located
+only 40' from bright soft X-ray source GX 5-1. It
+detected hard X-ray flux from X-ray burster A1742-294, which is very
+near to bright black hole binary 1E1740.7-2942. SIGMA set an upper
+limit on the hard X-ray flux of from the central supermassive black hole in
+our Galaxy.<p>
+
+During the period 1990-1998 SIGMA observed more that one quarter of the sky
+with sensitivity better than 100 mCrab. The Galactic Center region
+had the deepest exposure ( approximately 9 million sec), with the
+sensitivity to a source discovery (S/N &gt;  ~ 5) or approximately
+10 mCrab.<p>
+
+A list of all detected sources with references to publications
+on them is presented in the paper of Revnivtsev et al. 2004, Astr. Lett. v.6.
+In these survey images (40-100 keV) all performed observations are
+averaged together.  Transient sources that were discovered by
+SIGMA may not visible in the averaged image.
+<p>
+This survey has some features that users should
+keep in mind. The SIGMA telescope is a complicated instrument and
+is strongly dominated by the accuracy of the background subtraction.
+The presence of a very bright source in the field of view of the telescope
+sometimes can not be fully accounted for and as a result of it some 'ghost'
+sources can appear. Such features can be seen in the regions near
+very bright sources like Crab Nebula, Cyg X-1, Nova Per 1992,
+Nova Mus 1991, Nova Oph 1993, and in the Galactic Center region.
+In addition to its nominal field of view (~17x17 deg)
+located around the optical axis of the telescope, SIGMA had another
+window of relatively high transparency of its shield,
+approximately 20-30&#176 apart from the optical axis.
+Becuase of this a very  bright sources like Cyg X-1 can
+cause non zero illumination of the SIGMA
+detector if they are located approximately 20-30&#176 from the optical axis.
+The ring-like features caused by this effect, can be seen around Cyg X-1,
+and Nova Per 1992.
+<p>
+
+The count rate of detected sources (or upper limits)
+can be roughly translated into mCrab using the fact that
+that Crab nebula gives the count rate approximately 2.8e<sup>-3</sup> cnts/s in the units, provided in 'flux' maps
+
+]]>
+  </Description>
+
+  <Settings>
+    <Scale> .054129846000   </Scale>
+    <GeometryTwin>GRANAT_SIGMA_flux, GRANAT_SIGMA_sig</GeometryTwin>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance>
+      <![CDATA[
+      High Energy Astrophysics Department, 
+      Space Research Institute, Moscow, Russia; CEA, Centre d'Etudes de
+      Saclay Orme des Merisiers, France; Centre d'Etude Spatiale
+      des Rayonnements, Toulouse, France; F&eacute;d&eacute;ration de 
+      Recherche Astroparticule et Cosmologie Universit&eacute; de Paris, France]]>
+    </Provenance>
+    <Copyright>   Public Domain  </Copyright>
+    <Regime>      X-ray          </Regime>
+    <NSurvey>     2 (significance and flux)   </NSurvey>
+    <Frequency>   16 EHz     </Frequency>
+    <Bandpass>    10-24 EHz  </Bandpass>
+    <Coverage>    Approximately one quarter of the sky </Coverage>
+    <Scale>       3.24 arc minutes/pix  </Scale>
+    <Units>       Statistical significance, Flux </Units>
+    <Resolution>  12 arc minutes </Resolution>
+    <Coordinates> Equatorial     </Coordinates>
+    <Projection>  Gnomonic       </Projection>
+    <Equinox>     1950           </Equinox>
+    <Epoch> 	  1983-1989      </Epoch>
+
+    <!-- The Reference is likely to include an anchor to an on-line source and
+         is put in a CDATA element.-->
+    <Reference>
+<![CDATA[
+    <a href="http://adsabs.harvard.edu/abs/2004AstL...30..382R">Hard X-ray sky survey with the SIGMA telescope aboard
+    GRANAT observatory</i>,
+    Revnivtsev M., Sunyaev R., Gilfanov M., Churazov E., Goldwurm A., Paul J.,
+    Mandrou P., Roques J.-P.,  <i>Astronomy Letters</i> 2004, v.30 (ADS) </a>
+
+]]>
+    </Reference>
+  </MetaTable>
+  
+  <!-- Online text is displayed in a HTML rendering of output.
+       The online text can include the special strings $ra,$dec and $size
+       which are replaced by the J2000 RA, J2000 Dec or size in degrees
+       of the search just completed.  If online text is present
+       it will usually contain XML and should be within a CDATA element.
+    -->
+  <OnlineText/>
+
+  <!-- The text included in the FITS element should be added to the FITS
+       header for the image generated by the file.  Note that we
+       do not include the MetaTable information which may be extracted
+       from the MetaTable elements.  We include the FITS element in
+       a CDATA to preserve any special characters and spacing
+    -->
+  <FITS>
+<![CDATA[
+SURVEY  = 'GRANAT/SIGMA ${U}'
+INSTRUME= 'SIGMA'
+TELESCOP= 'GRANAT'
+COMMENT
+COMMENT  Properties of original survey:
+COMMENT  Provenance - High Energy Astrophysics Department, Space Research 
+COMMENT       Institute, Moscow, Russia; CEA, Centre d'Etudes de 
+COMMENT       Saclay Orme des Merisiers, France; Centre d'Etude 
+COMMENT       Spatiale des Rayonnements, Toulouse, France; Fe'de'ration 
+COMMENT       de Recherche Astroparticule et Cosmologie Universite' de 
+COMMENT       Paris, France
+COMMENT
+COMMENT  Copyright - Public domain
+COMMENT  Frequency - 40-100 keV
+COMMENT  Pixel Scale - 3.24 arc minutes
+COMMENT  Pixel Units - flux
+COMMENT  Resolution - 12 arc minutes
+COMMENT  Coordinate System - Equatorial
+COMMENT  Projection - Gnomonic
+COMMENT  Epoch - 1989-1998
+COMMENT
+]]>
+  </FITS>
+  
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    360 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/sigma/${D}/ </SpellPrefix>
+        <SpellSuffix> ,Tan,B1.9500000000E+03,1000,1000,0.054129839,0.054129846 </SpellSuffix>
+<Image> sigma_skymap_40_100keV_ra0_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec-20_${f}conv.fits,0.00,-20.0001000000 0.00 -20.0001000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec29_${f}conv.fits,0.00,29.9999000000 0.00 29.9999000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec-45_${f}conv.fits,0.00,-45.0001000000 0.00 -45.0001000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec4_${f}conv.fits,0.00,4.9999000000 0.00 4.9999000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec54_${f}conv.fits,0.00,54.9999000000 0.00 54.9999000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec-70_${f}conv.fits,0.00,-70.0001000000 0.00 -70.0001000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra0_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra0_dec79_${f}conv.fits,0.00,79.9999000000 0.00 79.9999000000 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec-20_${f}conv.fits,120.000010,-20.000100 120.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec29_${f}conv.fits,120.000010,29.999900 120.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec-45_${f}conv.fits,120.000010,-45.000100 120.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec4_${f}conv.fits,120.000010,4.999900 120.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec54_${f}conv.fits,120.000010,54.999900 120.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec-70_${f}conv.fits,120.000010,-70.000100 120.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra120_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra120_dec79_${f}conv.fits,120.000010,79.999900 120.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec-20_${f}conv.fits,160.000010,-20.000100 160.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec29_${f}conv.fits,160.000010,29.999900 160.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec-45_${f}conv.fits,160.000010,-45.000100 160.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec4_${f}conv.fits,160.000010,4.999900 160.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec54_${f}conv.fits,160.000010,54.999900 160.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec-70_${f}conv.fits,160.000010,-70.000100 160.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra160_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra160_dec79_${f}conv.fits,160.000010,79.999900 160.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec-20_${f}conv.fits,200.000010,-20.000100 200.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec29_${f}conv.fits,200.000010,29.999900 200.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec-45_${f}conv.fits,200.000010,-45.000100 200.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec4_${f}conv.fits,200.000010,4.999900 200.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec54_${f}conv.fits,200.000010,54.999900 200.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec-70_${f}conv.fits,200.000010,-70.000100 200.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra200_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra200_dec79_${f}conv.fits,200.000010,79.999900 200.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec-20_${f}conv.fits,240.000010,-20.000100 240.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec29_${f}conv.fits,240.000010,29.999900 240.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec-45_${f}conv.fits,240.000010,-45.000100 240.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec4_${f}conv.fits,240.000010,4.999900 240.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec54_${f}conv.fits,240.000010,54.999900 240.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec-70_${f}conv.fits,240.000010,-70.000100 240.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra240_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra240_dec79_${f}conv.fits,240.000010,79.999900 240.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec-20_${f}conv.fits,280.000010,-20.000100 280.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec29_${f}conv.fits,280.000010,29.999900 280.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec-45_${f}conv.fits,280.000010,-45.000100 280.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec4_${f}conv.fits,280.000010,4.999900 280.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec54_${f}conv.fits,280.000010,54.999900 280.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec-70_${f}conv.fits,280.000010,-70.000100 280.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra280_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra280_dec79_${f}conv.fits,280.000010,79.999900 280.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec-20_${f}conv.fits,320.000010,-20.000100 320.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec29_${f}conv.fits,320.000010,29.999900 320.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec-45_${f}conv.fits,320.000010,-45.000100 320.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec4_${f}conv.fits,320.000010,4.999900 320.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec54_${f}conv.fits,320.000010,54.999900 320.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec-70_${f}conv.fits,320.000010,-70.000100 320.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra320_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra320_dec79_${f}conv.fits,320.000010,79.999900 320.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec-20_${f}conv.fits,40.000010,-20.000100 40.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec29_${f}conv.fits,40.000010,29.999900 40.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec-45_${f}conv.fits,40.000010,-45.000100 40.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec4_${f}conv.fits,40.000010,4.999900 40.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec54_${f}conv.fits,40.000010,54.999900 40.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec-70_${f}conv.fits,40.000010,-70.000100 40.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra40_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra40_dec79_${f}conv.fits,40.000010,79.999900 40.000010 79.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec-20_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec-20_${f}conv.fits,80.000010,-20.000100 80.000010 -20.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec29_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec29_${f}conv.fits,80.000010,29.999900 80.000010 29.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec-45_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec-45_${f}conv.fits,80.000010,-45.000100 80.000010 -45.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec4_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec4_${f}conv.fits,80.000010,4.999900 80.000010 4.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec54_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec54_${f}conv.fits,80.000010,54.999900 80.000010 54.999900 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec-70_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec-70_${f}conv.fits,80.000010,-70.000100 80.000010 -70.000100 0.0 </Image>
+<Image> sigma_skymap_40_100keV_ra80_dec79_${f}conv.fits,sigma_skymap_40_100keV_ra80_dec79_${f}conv.fits,80.000010,79.999900 80.000010 79.999900 0.0 </Image>
+    </Images>
+</Survey>

@@ -1,0 +1,198 @@
+
+---------------------------
+SkyView-in-a-Jar execution:
+
+This document gives an overview of the common arguments to
+the SkyView-in-a-Jar application.  For more a comprehensize discussion
+of all arguments see the SkyView-in-a-Jar User's Guide.
+
+Usage:
+   java -jar skyview.jar [key=arg] [key=arg] ...
+   java -cp skyview.jar skyview.executive.Imager [key=arg] ...
+
+  Keys are not case sensitive but values may be.
+  Values specifying more than one value use a comma as a separator.
+  
+  If no keys are specified, this text and the
+  default valid surveys are listed.
+
+  Valid keys include:
+  
+   Survey:     A survey for which an image is requested (e.g, WENSS, DSS)
+               (Required, with no default.)
+                 To request multiple surveys, separate them by commas.  
+		 Survey names are not case sensitive.
+                 The 'user' survey references data given in 
+		 the UserFile argument
+		 
+   Settings:   A list of one or more files from which settings are read.
+               File settings are processed after argument settings.
+
+
+
+        -- Keys that define the geometry of the output image. --
+   			 
+   Position:   The longitude and latitude of the center 
+               of the image.  This may be given as coordinates
+               or as a target name [No default]
+	       
+   Lon:        The decimal longitude of the center of the 
+               image [No default]
+	       
+   Lat:        The decimal latitude of the center of the 
+               image [No default]	       
+	       
+   - Either Position or Lon and Lat must be specified.
+	
+   Coordinates:A string giving the coordinate system and epoch (if required)
+                 used, e.g., J, J2000, B1950, ICRS, Gal, H2010.438 [J]
+		 
+   Equinox:    Epoch of equinox of coordinates [2000]   
+		 
+   Projection: The three letter FITS WCS specification of the projection. [Tan] 
+   
+   Scale:      The pixels scale in degrees (may be one or two values) 
+               [survey dependent]
+	       
+   Size:       The size of the entire image in degrees [scale*pixels] 
+   
+   - Generally you specify either scale or size but not both.
+	       
+   Pixels:     The number of pixels in the image 
+               (may be one or two values) [300]
+	       
+   Rotation:   A rotation angle in the projection plane [0]
+
+
+         -- Keys that control optional graphical outputs --
+	 
+   Quicklook:  The format desired for quicklook output.  
+               JPEG, GIF, BMP and TIFF are supported.  
+	       If another graphic keyword is used without
+	       specifying the format it defaults to JPEG.
+	       
+   Scaling:    How the output pixel intensities are to be scaled.
+               Linear, Log, Sqrt, HistEq are supported
+               [Linear]
+	       
+   Min:        Set all smaller pixel values to this value before scaling.
+   
+   Max:        Set all larger pixel values to this value before scaling.
+   
+   RGB:        Create a three color overlay 
+	      
+   RGBSmooth:  Box smoothing for planes of RGBImages
+	       
+   Invert:     Invert the color table response (or gray scale 
+               if no color lookup table is defined).
+	       
+   LUT:        Load a color lookup table.  See the users guide 
+               for lists of internal color tables and files
+	       supplied in the JAR.  User generated color
+	       tables may also be used.
+	       
+   Grid:       Plot a grid of the image or specified coordinate system
+               as an image overlay.
+   
+   GridLabels: Label the grid lines with the coordinate entries
+   
+   PlotScale:  Scaling for plot symbols
+   
+   PlotFontSize: Size of plot text in points.
+   
+   PlotColor:  Color of plot graphics
+	       
+	 -- Catalog query keys --
+	 
+   Catalog:    The names of the catalogs to be queried, or URLs
+               that specify VOTable outputs.
+   
+   CatalogFile:The name of a file in which to print the IDs, positions,
+               and pixel locations of the catalog entries found.
+	       
+   CatalogRadius:
+   	       A maximum radius from the center of the image for which
+	       catalog entries are desired.
+	       
+   CatalogQualifier:
+               A qualification on a column of the returned table (e.g. vmag<10)
+	       
+   CatalogIDs: When plotting catalog positions print the numeric ID
+               of the catalog entry
+
+
+         -- Keys that define the sampling used. --
+
+   Sampler:    The sampling algorithm to be used. 
+               NN, LI, Lanczos[n], Spline[n], Clip [NN]
+	       
+   Ebins:      Specification of sampling in energy dimension: e0,de,ne 
+                 [survey dependent for 3-d surveys]
+                 e0 is the starting offset of the first output bin.
+                 de is the width of the output bins (relative to the input).
+                 n  is th number of output bins.
+
+
+         -- Keys that set characteristics of the output FITS file. --
+
+   Output:     The output file stem [output]
+   
+   Compress:   If specified the output is gzip compressed
+   
+   Float:      If specified the output is 4 byte rather than 8 byte real
+   
+   NoFITS:     A FITS file should not be produced.  
+   
+   
+         -- Smoothing
+   Smooth:     A box size (or sizes for non-square box) for a box car smoothing.
+
+
+         -- Contours
+	 
+   Contour:    Create a contour map overlay
+   
+   ContourSmooth: Smoothing to be applied to survey before contouring
+
+         -- Keys that set where to look for survey and store survey data. --
+
+   XMLRoot:    A directory of XML files that contain survey descriptions
+   
+   SurveyManifest: Overrides the name of the resource used to look 
+               for the survey manifest (normally included in JAR).
+	       
+   SurveyXML:  A file or files giving XML descriptions of surveys
+   
+   UserFile:   A file (or list of files) that defines the 'User' survey.
+               These are the actual survey images not survey metadata.
+   
+   Cache:      A directory (or comma delimited set of directories) 
+               where cached files are to be found.  The first cache directory is
+               where survey files used in this request will be saved.
+	       
+   PurgeCache: Delete any survey files downloaded in this request.
+		 
+
+
+         -- Keys that define the classes used for processing the request. --
+
+   Deedger:      Class that eliminates transitions at input image boundaries.
+   
+   SurveyFinder: Class that loads and finds surveys given survey names/IDs
+   
+   ImageFinder:  Class that finds images in a survey to use in a mosaic.
+   
+   PreProcessor: Class[es] to process input images before resampling.
+   
+   Mosaicker:    Class that actually mosaics survey data to create output image.
+   
+   PostProcessor: Class[es] that process the output image after mosaicking.
+
+         -- Keys that change the behavior of the process.
+
+   ImageJ:  Leave an ImageJ session running with the generated images when
+            finished.
+   
+   
+------
+This Jar includes release 1.38k of ImageJ  (see http://rsb.info.nih.gov/ij)

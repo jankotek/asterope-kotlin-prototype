@@ -1,0 +1,202 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName> COBE${T}, COBE DIRBE/${T}</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>Cosmic Background Explorer DIRBE ${FT}</Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+The DIRBE Project Data Sets cover the whole sky and provide photometric data
+in 10 bands ranging in wavelength from 1.25 to 240 microns. SkyView has supported
+three maps: an early averaged map including including zodiacal and
+Galactic components (COBE DIRBE (OLD)),  a more recent cleaner version of 
+that data (COBE DIRBE/AAM) and a map with the zodaical light subtracted out 
+(COBE DIRBE/ZSMA).  The early data is no longer supported.  Please contact us if you
+want access to these data.
+<P>
+Detailed descriptions of the DIRBE, the data processing, and the data products
+are given in an Explanatory Supplement. A Small Source Spectral Energy Distribution
+Browser can be used to assess the visibility of an unresolved or small extended source
+in the DIRBE data and see its spectral energy distribution. As noted in section
+5.6.6 of the Explanatory Supplement, the DIRBE Time-ordered Data are required to
+derive definitive point source fluxes.
+
+<p>
+These maps provide an estimate of the infrared intensity at each pixel and 
+wavelength band based on an interpolation of the observations made at 
+various times at solar elongations close to 90&#176. 
+<P>
+These COBE DIRBE maps are a combination original ten band passes with the following wavelengths:
+
+<UL>
+  <LI>Band 1  - 1.25 &#181m
+  <LI>Band 2  - 2.2  &#181m
+  <LI>Band 3  - 3.5  &#181m
+  <LI>Band 4  - 4.9  &#181m
+  <LI>Band 5  -  12  &#181m
+  <LI>Band 6  -  25  &#181m
+  <li>Band 7  -  60  &#181m
+  <li>Band 8  - 100  &#181m
+  <li>Band 9  - 140  &#181m
+  <li>Band 10 - 240  &#181m
+
+</ul>
+<p>
+The default two dimensional array uses Band 8 (100 &#181m).
+<P>
+The COBE DIRBE/Annual Average Maps (AAM) is the cumulative weighted
+average of the photometry. This average is calculated using the
+weighted number of observations from each Weekly Averaged Map
+( WtNumObs from the Weekly Averaged Map) as the weight, such that
+annual_average =sum( weekly_average * weekly_weight )/ sum( weekly_weight )
+<p>
+COBE DIRBE/Zodi-Subtracted Mission Average (ZSMA) Skymap represents
+the extra-Solar system sky brightness. It is the average
+residual map that results after the modelled interplanetary dust (IPD) signal
+is subtracted from each of the DIRBE Weekly Skymaps from the cryogenic mission.
+Individual weekly residual maps can be reconstructed from the data supplied in
+the DIRBE Sky and Zodi Atlas (DSZA).
+]]>
+  </Description>
+
+  <Settings>
+    <Scale> 0.351563  </Scale>
+    <Ebins> 8,1,1 </Ebins>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance>
+                  COBE Team
+    </Provenance>
+    <Copyright>   Public Domain  </Copyright>
+    <Regime>      Infrared       </Regime>
+    <NSurvey>     2 (10 bands)   </NSurvey>
+    <Frequency>   1.25-240 THz
+    <![CDATA[
+    <table>
+    <tr><th colspan=3>Frequency Bands</th></tr>
+    <tr><th>Band</th><th>Central</th><th>Min</th><th><Max</th></tr>
+   <tr><td>10<td> <td>1.2491 THz</td> <td>1.0016 THz</td> <td>1.4966 THz</td></tr>
+   <tr><td> 9<td> <td>2.1414 THz</td> <td>1.8394 THz</td> <td>2.1717 THz</td></tr>
+   <tr><td> 8<td> <td>2.9979 THz</td> <td>2.5159 THz</td> <td>3.4799 THz</td></tr>
+   <tr><td> 7<td> <td>4.9965 THz</td> <td>3.8365 THz</td> <td>6.1565 THz</td></tr>
+   <tr><td> 6<td> <td>11.992 THz</td> <td>9.9270 THz</td> <td>14.057 THz</td></tr>
+   <tr><td> 5<td> <td>24.983 THz</td> <td>18.333 THz</td> <td>31.633 THz</td></tr>
+   <tr><td> 4<td> <td>61.182 THz</td> <td>57.087 THz</td> <td>65.277 THz</td></tr>
+   <tr><td> 3<td> <td>85.655 THz</td> <td>74.655 THz</td> <td>96.655 THz</td></tr>
+   <tr><td> 2<td> <td>136.70 THz</td> <td>1.2550 THz</td> <td>147.90 THz</td></tr>
+   <tr><td> 1<td> <td>239.83 THz</td> <td>210.08 THz</td> <td>269.58 THz</td></tr>
+   </table>
+    ]]>
+    </Frequency>
+    <Coverage>    All-sky        </Coverage>
+    <Scale>       0.32 deg/pix  </Scale>
+    <Units>       MJy/sr         </Units>
+    <Resolution>  ca. .75 deg    </Resolution>
+    <Coordinates> Ecliptic       </Coordinates>
+    <Projection>  CobeCube (CSC) </Projection>
+    <Equinox>     2000           </Equinox>
+    <Epoch> 	  1989-1990      </Epoch>
+    <!-- The Reference is likely to include an anchor to an on-line source and
+         is put in a CDATA element.-->
+    <Reference>
+<![CDATA[
+COBE Diffuse Infrared Background Experiment (DIRBE)
+Explanatory Supplement</i> ed. M.G. Hauser, T. Kelsall, D. Leisawitz, and
+J. Weiland COBE Ref. Pub. No. 97-A (Greenbelt, MD: NASA/GSFC)
+available in electronic form (in a slightly more up-to-date version)
+from the <a href="http://lambda.gsfc.nasa.gov/product/cobe/">COBE Web page</a>.
+Specific <a href=http://lambda.gsfc.nasa.gov/product/cobe/about_dirbe.cfm>DIRBE information</a>
+is available including an <a href=http://lambda.gsfc.nasa.gov/data/cobe/dirbe/doc/des_v2_3_ch4.ps>instrument description (PostScript)</a>.
+]]>
+    </Reference>
+  </MetaTable>
+  
+  <!-- Online text is displayed in a HTML rendering of output.
+       The online text can include the special strings $ra,$dec and $size
+       which are replaced by the J2000 RA, J2000 Dec or size in degrees
+       of the search just completed.  If online text is present
+       it will usually contain XML and should be within a CDATA element.
+    -->
+  <OnlineText/>
+
+  <!-- The text included in the FITS element should be added to the FITS
+       header for the image generated by the file.  Note that we
+       do not include the MetaTable information which may be extracted
+       from the MetaTable elements.  We include the FITS element in
+       a CDATA to preserve any special characters and spacing
+    -->
+  <FITS>
+<![CDATA[
+SURVEY  = 'COBE DIRBE/${T}'
+COMMENT -- Following comments extracted from original FITS file -
+DATE-MAP= '04/04/96'           / Date of original file creation (dd/mm/yy)      
+ORIGIN  = 'CDAC    '           / Cosmology Data Analysis Center                 
+TELESCOP= 'COBE    '           / Cosmic Background Explorer satellite           
+INSTRUME= 'DIRBE   '           / COBE instrument [DIRBE, DMR, FIRAS]            
+OBJECT  = 'ALL-SKY '           / part of sky given [e.g., ALL-SKY, WEEKLY-SKY,  
+COMMENT                        /         DAILY-SKY, GAL-SLICE, FACE ...]        
+EQUINOX =               2000.0 / equinox of coords in following tables          
+REFERENC= 'COBE/DIRBE Explanatory Supplement,' /                                
+REFERENC= 'ed. M.G. Hauser, T. Kelsall, D. Leisawitz, and J. Weiland,' /        
+REFERENC= 'COBE Ref. Pub. No. 97-A (Greenbelt,MD: NASA/GSFC),' /                
+REFERENC= 'available in electronic form from the NSSDC.' /                      
+COMMENT                                                                         
+COMMENT     COBE specific keywords                                              
+DATE-BEG= '11/12/89'           / date of initial data represented (dd/mm/yy)    
+DATE-END= '21/09/90'           / date of final data represented   (dd/mm/yy)    
+PIXRESOL=                    9 / Quad tree pixel resolution [6, 9]              
+COMMENT                                                                         
+COMMENT     DIRBE specific keywords                                             
+VERSION = 'Pass 3B '           / Version of Data Reduction Software             
+SOLELONG= 'ALL     '           / all available solar elongations included       
+APPVEC  = 'COMBINED'           / data having different approach vectors         
+COMMENT                        / are combined during processing                 
+ZLREMOV =                    F / zodiacal foreground removal indicator          
+COMMENT                        / if 'T(rue)', zodi foreground has been removed  
+COMMENT                        / if 'F(alse)', observed sky brightness is given 
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT   -------------------------------------------------------------------   
+COMMENT   ===================================================================   
+COMMENT   DIRBE Sky Brightness Information:                                     
+COMMENT   ===================================================================   
+COMMENT   -------------------------------------------------------------------   
+COMMENT       Cumulative weighted average of the photometry.         
+COMMENT        This average is calculated using the weighted number of          
+COMMENT        observations from each Weekly Averaged Map ( WtNumObs from       
+COMMENT        the Weekly Averaged Map) as the weight, such that                
+COMMENT        annual_average =                                                 
+COMMENT           sum( weekly_average * weekly_weight )/ sum( weekly_weight )   
+COMMENT                                                                         
+COMMENT        The photometric measurement is given as a                        
+COMMENT        spectral intensity, I(nu) in MJy/sr, and                         
+COMMENT        is quoted at the nominal wavelength                              
+COMMENT        for a source with nu*I(nu) = constant  -- i.e.,                  
+COMMENT        a color correction is required if the source                     
+COMMENT        spectrum differs from nu*I(nu) = constant.                       
+COMMENT        Data which have been replaced by flagged values                  
+COMMENT        in processing have values .LE. -16375.                           
+COMMENT                                                                         
+BUNIT   = 'MJy/sr  '           /  
+]]>
+  </FITS>
+  
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    360 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/cobe/ </SpellPrefix>
+        <SpellSuffix> ,Csc,E2000,1024,768,0.351563,0.351563 </SpellSuffix>
+        <Image> ${t}.fits,${t}.fits,896.5,384.5 0 0 1990 </Image>
+    </Images>
+</Survey>

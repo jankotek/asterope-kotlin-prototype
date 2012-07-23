@@ -1,0 +1,43 @@
+# This file contains the default settings for the SkyView Java application.
+# These settings may be overriden by the user.
+
+# Default image values
+# Note that the equinox in the coordinates field
+# takes precedence over a separate equinox, so
+# we shouldn't use a default coordinate system with an equinox.
+coordinates=J
+equinox=2000
+projection=Tan
+equinox=2000
+sampler=Default
+pixels=300
+
+# Name resolver[s] to be used
+resolver=NED-SIMBAD
+
+# Output image information
+output=output
+
+# Document locations
+xmlroot=$SKYVIEW_XMLROOT
+
+SurveyManifest=surveys/survey.manifest
+SurveyFinder=skyview.survey.XMLSurveyFinder
+
+# Classes that might need to see the settings before processing begins
+SettingsUpdaters=BatchCompatibility,SettingsFixer,skyview.request.ToastGridder
+
+# Postprocessors that should only be called in the final stages of a primary image.
+# E.g., should NOT be called when getting a contour image.
+FinalPostProcessor=skyview.ij.IJProcessor,skyview.data.BoxSmoother,skyview.vo.CatalogPostProcessor
+
+# URLs
+UrlLocalHelp=http://skyview.gsfc.nasa.gov/help/help.html
+UrlCoordinates=http://heasarc.gsfc.nasa.gov/cgi-bin/Tools/convcoord/convcoord.pl?NoCache=y&Output=Batch&
+
+Url.NED=http://nedwww.ipac.caltech.edu/cgi-bin/nph-NEDobjsearch?search_type=Near+Position+Search&of=xml_main&
+Url.SIMBAD=http://simbad.u-strasbg.fr/simbad-conesearch.pl?
+Url.VizierBase=http://vizier.u-strasbg.fr/viz-bin/votable/-dtd/-A?-out.add=_RAJ2000,_DEJ2000&-source=
+Url.HeasarcBase=http://heasarc.gsfc.nasa.gov/xamin/vo/cone?table=
+
+SIABase=http://skyview.gsfc.nasa.gov/cgi-bin/images?

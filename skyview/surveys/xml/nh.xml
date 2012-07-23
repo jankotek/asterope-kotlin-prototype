@@ -1,0 +1,42 @@
+<Survey>
+  <ShortName>nh,nH</ShortName>
+  <Name>Dickey and Lockman HI map</Name>
+  <Description><![CDATA[
+This survey is derived from the 21cm maps presented by Dickey and Lockman
+in the <i>ARAA</i> 28, p215.  The nH is derived assuming optically thin
+emission. The nH given should be considered a lower limit when the nH is
+greater than several times 10<sup>20</sup>.
+  ]]>
+  </Description>
+  <Settings>
+    <Scale> 0.675 </Scale>
+  </Settings>
+  <MetaTable>
+    <Provenance>  provided by S. Snowden from data by Dickey and Lockman </Provenance>
+    <Regime>      Radio							 </Regime>    
+    <Copyright>   Public domain						 </Copyright> 
+    <Frequency>   1420 MHz line survey					 </Frequency>
+    <Bandpass>    1418.8 - 1421.2 MHz                                    </Bandpass>
+    <PixelScale>  40' 							 </PixelScale>
+    <PixelUnit>   atoms/cm^2						 </PixelUnit> 
+    <Resolution>  1 degree						 </Resolution>
+    <Coordinates> Galactic						 </Coordinates>
+    <Projection>  Aitoff						 </Projection>
+    <Epoch>       1980 to 1990						 </Epoch>
+    <Reference>   
+    <![CDATA[
+    <a href='http://adsabs.harvard.edu/abs/1990ARA%26A..28..215D'>Dickey and Lockman, ARAA 28, 1990, 215 (ADS)
+    ]]>
+    </Reference>
+  </MetaTable>
+  <Fits><![CDATA[
+SURVEY  = 'nH'
+BUNIT   = 'cm^-2   '                              
+]]></Fits>
+  <Images>
+     <ImageFactory>   skyview.survey.FitsImageFactory </ImageFactory>
+     <ImageSize>      360                               </ImageSize>
+     <FilePrefix>     surveys/data/                  </FilePrefix>
+     <Image>          nh.fits 0.00000 0.0000 1980.00  </Image>
+  </Images>
+</Survey>

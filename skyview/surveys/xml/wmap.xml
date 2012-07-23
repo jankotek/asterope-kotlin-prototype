@@ -1,0 +1,72 @@
+<Survey>
+  <ShortName>WMAP${T},WMAP ${T},WMAP-${T}</ShortName>
+  
+  <Name>WMAP Seven Year ${T}-Band</Name>
+  
+  <Description>
+<![CDATA[
+  These data represent the 7 year co-added maps for each of the five frequency bands
+  in the WMAP dataset.
+  
+  The original data are available at the <http://lambda.gsfc.nasa.gov>LAMBDA archive</a>.
+  
+  <p>
+  The original data are stored in HEALPix pixels.  SkyView treats HEALPix as a standard
+  projection but assumes that the HEALPix data is in a projection plane with a rotation of -45 degrees.
+  The rotation transforms the HEALPix pixels from diamonds to squares so that the boundaries of the
+  pixels are treated properly.  The special HealPixImage class is used so that SkyView can use
+  the HEALPix FITS files directly.  The HealPixImage simulates a rectangular image but
+  translates the pixels from that image to the nested HEALPix structure that is used
+  by the WMAP data.
+  </p>
+  ]]>
+  
+  </Description>
+  <Settings>
+    <Scale> 0.1757 </Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance>        WMAP Mission/LAMBDA archive </Provenance>
+    <Copyright>         Public Domain               </Copyright>
+    <Regime>            Infrared                    </Regime>
+    <NSurvey>           1                           </NSurvey>
+    <Frequency>         ${F} GHz                      </Frequency>
+    <Bandpass>          ${B} GHz                 </Bandpass>
+    <Coverage>          AllSky                      </Coverage>
+    <PixelScale>        7.5'                        </PixelScale>
+    <PixelUnits>        millikelvins                </PixelUnits>
+    <Resolution>        0.88 degree beam size       </Resolution>
+    <CoordinateSystem>  Galactic                    </CoordinateSystem>
+    <Projection>        HEALPix                     </Projection>
+    <Epoch>             2000-2007                   </Epoch>
+    <Reference>  
+      <![CDATA[
+        <a href=http://lambda.gsfc.nasa.gov>LAMBDA archive</a>
+        or <a href="http://adsabs.harvard.edu/abs/2011ApJS..192...18K">Seven year results</a>
+      ]]>
+    </Reference>
+  </MetaTable>
+  
+  <OnlineText/>
+
+  <FITS>
+<![CDATA[
+SURVEY  = 'WMAP-${T}'
+BUNIT   = 'mK'
+COMMENT Original data in level 9 HEALPix image
+]]>
+  </FITS>
+  
+  <Images>
+    <FilePrefix> /skyview8/newsurveys/wmap7/ </FilePrefix>
+    
+    <ImageFactory>
+         skyview.survey.HealPixImageFactory
+    </ImageFactory>
+    <ImageSize> 360 </ImageSize>
+    
+    <Image> wmap_band_imap_r9_7yr_${T}_v4.fits 135. 0. 2005</Image>
+  </Images>
+</Survey>

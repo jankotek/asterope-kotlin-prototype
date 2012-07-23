@@ -1,0 +1,109 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName>BAT${U}${K},BAT${U}${I},BAT ${U} ${K},BAT${U} ${I}, BAT${U}</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>Swift BAT All-Sky Survey: ${FU} ${K} keV</Name>
+  
+  <Description>
+   <![CDATA[
+The BAT Hard X-ray Survey data is a product of the BAT instrument on
+the Swift observatory.  Swift/BAT is a wide field-of-view (70x100
+degrees) hard X-ray imager consisting of a coded mask and large array
+of CdZnTe detectors (5000 cm<sup>2</sup>). The primary purpose of BAT is the
+detection gamma-ray bursts and the BAT survey data is collected during
+the search for gamma-ray bursts.
+<p>
+BAT is sensitive in the energy range 14-195 keV.  The data from the
+first 9 months of the survey is divided into 4 energy channels: 14-24,
+24-50, 50-100, and 100-195 keV.  Each of these is represented as separate
+survey, and an averaged survey over all bands is also given.
+<p>
+The all sky maps are presented in two forms, the significance maps and
+the flux maps.  The significance maps are the count rate divided by
+the noise (sigma RMS) in a region of the map around the position. The
+noise is variable across the sky due to variable exposure and
+systematic noise. The noise is Gaussian and and the significances can
+be interpreted with the usual Gaussian probabilities. A threshold of
+4.8 sigma for the blind detection of sources in the BAT survey
+corresponds to about 1 false detection on the whole sky.
+<p>
+The BAT flux map is scaled from the Crab rate in the survey and
+normalized to an assumed Crab spectrum of 10.4 E<sup>-2.15</sup>
+photons.cm<sup>2</sup>/sec/keV. Due to the large number of randomly distributed
+gamma-ray burst pointings that contribute to any point in the image,
+this is an accurate characterization for the whole sky.  The 4.8 sigma
+threshold in the 9-month survey covers 80% of the sky at flux
+threshold of 3.5x10<sup>-11</sup> ergs/cm<sup>2</sup>/s in the 14-195 keV band and covers 1/3
+of the sky near the ecliptic poles at 2.5x10<sup>-11</sup> ergs/cm<sup>2</sup>/s.
+    ]]>
+   
+  </Description>
+
+  <Settings>
+    <Scale> 0.083333333</Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance> 
+    <![CDATA[
+      NASA BAT Team
+    ]]>
+    </Provenance> 
+    <Copyright>
+    <![CDATA[Public domain
+    ]]>
+    </Copyright>
+    <Regime>      X-ray       </Regime>
+    <NSurvey>     10           </NSurvey>
+    <Frequency>   ${E} EHz </Frequency>
+    <Bandpass>    ${B} EHz </Bandpass>
+    <Coverage>    All-sky </Coverage>
+    <PixelScale>  5'  </PixelScale>
+    <PixelUnits>  ${FU} </PixelUnits>
+    <Resolution>  10' </Resolution>
+    <Coordinates> Galactic    </Coordinates>
+    <Equinox>                 </Equinox> 
+    <Projection>  Zenital Equal Area    </Projection>>
+    <Epoch>       2007   </Epoch>
+    <!-- The Reference is likely to include an anchor to an on-line source and
+         is put in a CDATA element.-->
+    <Reference>
+<![CDATA[
+   <a href=http://adsabs.harvard.edu/abs/2008ApJ...681..113T> Paper 1</a>,
+   <a href=http://adsabs.harvard.edu/abs/2010ApJS..186..378T> Paper 2</a>
+]]>
+    </Reference>
+  </MetaTable>
+  <OnlineText>
+
+<![CDATA[
+      <p><strong>BAT Associated images:
+      <br/>
+      <a href="runquery.pl?survey=batflux${I}&lon=$reqxpos&lat=$reqypos&sampler=$sampler&projection=$_projection&size=$size&pixels=$pixels&coordinates=$_coordinatesystem"> Flux map </a>.<br/>
+      <a href="runquery.pl?survey=batsig${I}&lon=$reqxpos&lat=$reqypos&sampler=$sampler&projection=$_projection&size=$size&pixels=$pixels&coordinates=$_coordinatesystem"> Significance map </a>.<br/>
+
+ ]]>
+  </OnlineText>
+
+    -->
+  <FITS>
+<![CDATA[
+SURVEY  = 'BAT ${FU} ${K}'
+INSTRUME= 'Swift/BAT'
+]]>
+  </FITS>
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    180 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/bat/ </SpellPrefix>
+        <SpellSuffix> ,Zea,G,1119,1119,0.0833333333,0.0833333333 </SpellSuffix>
+        <Image> bat${f}-${I}_c0.fits,bat${f}-${I}_c0.fits,90,0    90   0 2007 </Image>
+        <Image> bat${f}-${I}_c1.fits,bat${f}-${I}_c1.fits,0,0      0   0 2007 </Image>
+        <Image> bat${f}-${I}_c2.fits,bat${f}-${I}_c2.fits,270,0  270   0 2007 </Image>
+        <Image> bat${f}-${I}_c3.fits,bat${f}-${I}_c3.fits,180,0  180   0 2007 </Image>
+        <Image> bat${f}-${I}_c4.fits,bat${f}-${I}_c4.fits,0,90     0  90 2007 </Image>
+        <Image> bat${f}-${I}_c5.fits,bat${f}-${I}_c5.fits,0,-90    0 -90 2007 </Image>
+    </Images>
+</Survey>

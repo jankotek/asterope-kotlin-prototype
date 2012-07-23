@@ -1,0 +1,420 @@
+V1.0
+Initial release.
+
+v1.01
+Fixed bug in skyview.geometry.Deedger (now skyview.geometry.deedger.BoundaryAverage)
+where image 0 is not renormalized.
+
+Added and reorganized de-edging classes.
+There are now four classes for deedging.
+   skyview.geometry.Deedger  simply delegates to an object of a default class (currently
+     BoundaryMedian).
+   skyview.geometry.deedger.BoundaryAverage  is what the old de-edger used to be.
+   skyview.geometry.deedger.BoundaryMedian   minimizes the change in median values across a boundary.
+   skyview.geometry.deedger.ImageMedian      normalizes the medians of the constituent images and
+                                             is very similar to the IDL version of SkyView.
+					
+V1.9
+
+Added functionality for creating quicklook images (JPEG, GIF, BMP, TIFF)
+using included ImageJ library (see http://rsb.info.nih.gov/ij).
+This includes quicklook image creation, scaling, min,max and color tables.
+The skyview.ij.IJProcessor class handles the interface to the ImageJ functionality.
+Additional work is expected here.
+
+Added skyview.executive.SettingsUpdater interface and implemented this for
+in the BatchCompatibility and IJProcessor classes.  Adding the SettingsUpdaters Setting.
+This defines classes that want to see and perhaps modify the settings before
+processing begins.
+
+Changed Settings.getArray to return a 0-length array of strings rather than a null
+when there is no setting for the requested key.
+
+Changed PostProcessing to allow for named types of postprocessors.  Otherwise
+when the IJProcessor added itself to the postprocessor list then a user could
+not override that in the Survey settings.  Now the deedger (and potentially
+other types of postprocessors) can be handled independently.  I suppose the list
+of postprocessor types could be a Setting too, but for the moment it is
+hardwired into Imager.  Users should specify deedger=class rather than postprocess=class
+when requesting a deedger, although in most cases where graphics output is not
+requested there the later would also work.
+
+Added source code to JAR file.
+
+
+V2.0
+
+Added catalog querying using VO cone search and catalog 
+handling settings: Catalog, CatalogRadius, CatalogIDs, 
+CatalogFields, CatalogFile, CatalogFilter.  New classes
+skyview.vo.ConeQuerier, skyview.vo.CatalogProcessor, 
+skyview.vo.CatalogPostProcessor.
+
+Added gridding and gridding settings: Grid, GridLabels.
+New class skyview.data.Gridder.  Gridding implies graphics.
+
+Added getKeys and processFile methods to Settings.
+Added Setting "Settings" to enable settings to be read from a file.
+Imager now records the settings used in the FITS header.
+
+Imager now exits explicitly when done.  Sometimes it seemed
+to hang when there were multiple threads from catalog
+queries even though the threads apparently terminated normally.
+
+Several getter methods were added to WCS to get the individual
+elements of the transformation.  Gridder needed to find
+the Coordinate system used.
+
+Added StrictGeometry setting and updated RecursiveImageFinder (and Imager)
+to use it to find the best image for each pixel individually.
+
+Updated ImageJ routine ImageProcessor to fully support AWT headless processing
+using BufferedImage's.  Updated skyview.ij.IJProcessor to
+allow it to use Java graphics when desired but easily revert
+to ImageJ when done.
+
+Added 'ImageJ' setting to start an ImageJ application with
+the generated images.
+
+When graphics are requested ensures that either ImageJ or Quicklook
+is specified and if neither is, then sets Quicklook=jpg.
+
+Changed DSS surveys.  The DSS used to be a combination of red
+amd blue data depending on the declination.  It is now the DSS1R survey, an
+all sky survey in the red.  The DSS1B and DSS2IR
+surveys were also added.  This was prompted by changes in the URLs supported at
+ST ScI.
+
+Updated BatchCompatiblity class to tranlate GRIDDD and CATLOG arguments.
+Added list of Catalog names to be translated since this application
+uses the short names not the longer catalog titles used in the old
+SkyView system.
+
+v2.00a
+
+Fixed SDSSZ Survey definition file (it was pointing to the SDSSG band)
+
+v2.00b
+
+Changed reference to keyword "gui" to "imagej" when deciding
+whether to exit when done.
+
+--
+
+Changed ij.plugin.JpegWriter to allow - to be used to indicate
+using STDOUT for the output stream.
+
+Changed skyview.request.SourceCoordinates to call HEASARC name resolver
+more efficiently (adding NoCache parameter which is incorrectly named).
+
+Added NoExit setting to disable System.exit when we don't want it.
+
+Added CopyWCS setting to allow users to duplicate an existing WCS.
+
+Fixed WCS.checkDSS so that SkyView images derived from the DSS aren't
+assumed to use a DSS output frame.  [This probably needs some work
+for generating the FITS representation of the WCS when it really
+is a DSS or NEAT projection.]
+
+Added some more error output to UserSurvey.
+
+Added quicklook=object to allow users to use the ImageJ images
+generated in Java programs after completion of the SkyView
+portions of the code.
+
+Added PNG support
+   Moved PNG_Writer to ij/plugin 
+   Added PNG's to IJProcessor
+   
+Changed survey/DSSImage to allow tiles to be URLs as well as files.
+
+Changed survey descriptions for SDSS and DSS2 surveys to
+create double images by default (like all other surveys).  Users
+can put "FLOAT" in their settings file if they wish to get
+FLOAT images by default.
+
+Updated the nom.tam classes to use the latest versions.  The
+JAR used very old versions of these classes.  This doesn't
+affect SkyView itself.
+
+Change FitsImage to allow access to the FITS header.
+
+Asked for larger region in SIAPGenerator to make sure all
+useful images are available.
+
+Added some new array fields to use arrays in computations rather
+than ArrayLists which substantially speeds up operations.
+
+Added three new ImageFinders:
+   BorderImageFinder looks not only at the corner pixels in the
+recursive box strategy, but also at the edges.  This should obviate
+the need to use StrictGeometry.  This will likely become the
+standard image finder.  It also uses a better algorithm for deciding
+to keep candidate images as it goes to finer and finer boxes.
+
+   ScaledBorderFinder uses the distance from the edge scaled by the
+total size of the image rather than the unscaled distance as the
+criterion for best pixel.
+
+   MaxExpImageFinder looks for the image containing the pixel,
+and having non-NaN flux, that has the maximum exposure.  It is unclear
+if this will work properly at the edges when a high-order resampler
+is used.  [Even if we restrict ourselves a few pixels from the
+nominal edge, it would be very costly to check that there are no
+NaN's in the vicinity.]
+
+Updated the SDSS surveys to DR5.
+
+Fixed the default scale of the Ha survey.
+
+Fixed a roundoff error problem with the Zea projection which
+made requests around 0,0 fail.
+
+Put into Subversion and replaced CSH build scripts with Ant.
+Moved code to use subversion repository and Ant compile scripts.
+
+--- Changes to FITS library ---
+  Major transformations of all test code to use Junit and automated
+  checking rather than comparing print outs.
+
+  nom.tam.fits.utilities package created and FitsCopy and FitsReader
+  classes were moved there.
+
+  A few test classes, e.g., BigImage and RMFUpdTest were deleted and
+  their functions subsumed into the other tests.
+
+  Test routines now considered standard part of library.
+  Note that the test routines use Annotations and may not compile
+  with versions of Java prior to 1.5.
+
+  New features:
+
+  ArrayFuncs: Added arrayEquals() methods which allow comparison
+            of arrays of arbitrary dimensionality.  Used extensively
+	    in the updated test classes.
+
+  Bug fixes:
+  AsciiTable: Setting a row, column or element de-nulls any
+            elements that were set to null.
+	    Fixed offsets in columns after column was deleted.
+	    
+  FitsUtil:   Fixed bug in maxLength which looked for nulls in
+            the array pointer rather than the individual strings.
+	    Added check for nulls in stringsToByteArray
+	    
+  HeaderCard: Truncated String in one argument constructor to
+            a maximum of 80 characters.
+	    
+
+  BinaryTable: Fixed handling of columns with 0 width (e.g.,
+            0 length strings, or arrays of 0 length.
+	    
+  ColumnTable: Fixed handling of columns with 0 width.
+  
+
+V2.1 Major changes to support CGI operations, contours and smoothing
+
+
+Added IRIS, nH, EUVE and ROSAT WFC surveys
+
+Updated survey documents to fix documentation.
+Added Old DSS survey.  Note the this replaces
+the DSS1R survey in the previous version. 
+DSS1R is still available but DSS and 'Digitized Sky Survey'
+now refer to the original release of the DSS which contains
+data in different colors in different regions of the sky.
+
+Added CGIInitiator class to transform CGI parameters to Settings.
+It uses the HTMLWriter and RGBWriter settings to find postprocessors
+that can write the HTML to be associated with images.   Defaults
+added to skyview.settings.
+
+Modified Settings to allow stack of settings and push and pop operations.
+
+Major modifications of Imager
+   - Split up processSurvey into discrete steps
+   - Allow caching of partially processed images for re-use in contours
+   - Interface to CGIInitiator
+   
+Added HTMLWriter and RBGWriter postprocessors.  These create HTML output
+based upon the surveys created.  They use template files included in the
+JAR in the CGIFiles area which has been added to the JAR.  These processors
+using the HeaderTemplate, SurveyTemplate and FooterTemplate settings to
+find the template files.  The default skyview.settings has been updated
+to supply these.
+
+Added XMLSurveyDescription.  This creates a description of one or all of the
+surveys described for which we have an XML description in HTML.  This uses
+an XSLT file included in the CGIFiles area.
+
+BoxSmoother added.  This does a simple box-car smoothing of an image.  The
+Smooth setting is used to apply this to images.  It is also used to smooth 
+quicklook outputs using ContourSmooth and RGBSmooth settings.  BoxSmoother
+added to skyview.settings as a SettingsUpdater.
+
+Contourer added.  This provides contour maps of an image.  It is invoked
+by the Contour setting.  Since a contour image need not be one of the image
+surveys, this requires substantial rethinking of how to do processing if we
+don't want to have to redo processing -- especially since we can do different
+processing on the contour image than on the same image returned as a regular
+survey.  E.g.,
+    survey=xx,yy contour=yy contoursmooth=10
+smooths yy when it is being contoured, but not when it is being displayed 
+as the underlying image.
+
+Added RGBSmooth Setting which allows for differential smoothing of constituents
+of an RGB image -- but does not affect the FITS outputs.
+
+Updated IJProcessor to handle new Contour and RGB capabilities.
+
+The Mosaicker class was changed so that it did not modify the 'match' input
+when mosaicking an image.
+
+Minor changes were made to the ImageFactories so that all prefixes are
+handled in the factories.  Previously the FilePrefix was being prepended
+before the factory method was called and the spell prefix prepended inside
+the factory.
+
+Updates to XMLSurvey to read more of descriptor files to support
+HTMLWriters.
+
+Updates to all processors to handle (normally by just returning)
+null outputs.  This is because the HTMLWriter needs to handle such
+errors by writing an HTML warning for the user.
+
+Changed default cache to use directory "./skycache/" rather than
+the current directory.
+
+Updated ImageJ to version V1.38K.
+
+Major changes to SourceCoordinates to limit functionality to
+parsing/resolving target/position inputs.
+
+Moved most processing classes from skyview.geometry to skyview.process.
+The idea is that skyview.geometry should be independent of any
+SkyView settings.
+
+Added Offset methods
+
+Added preliminary RASS survey descriptions
+
+Changed FITS writing so that curl method is no longer called.  Should
+substantially reduce memory footprint for very large images.
+
+---
+
+V2.2
+
+Added SIA package to allow building an SIA service on top of SkyView
+
+Added LocalURL setting to translate URLs to local files where necessary.
+Modified CachingImageFactory.
+
+Modified CachingImageFactory to try to download if it has trouble
+reading a cached file.
+
+Made methods for parsing Settings files public, so that CGIInitiator
+can have CGI specific settings files. 
+
+Several updates to CGIInitator to use OutputRoot setting and to
+exit when done (since otherwise the process seems to hang).
+OutputRoot specifies the root of the output file when a
+specific name is not given
+
+Ensured that HTMLWriter writes HTTP header.
+
+Added SaveBySurvey setting so that cache will be subdivided
+into directories organized by the survey name.
+
+Lots of changes for release.
+
+Added FindRetry setting for Car/Ait tiled surveys, but a better
+solution is needed to handle areas near discontinuities.  Find/Retry
+should be specified for any tiled survey which has data near
+a discontinuity in the coordinate system.
+
+Modified ij.process.ImageProcessor to handle rotated strings
+internally rather than patching them in in skyview.ij.IJProcessor.
+New methods addPlotString(), clearPlotStrings(), and plotStrings().
+
+Added addColor() method to ImageProcessor to allow users to add
+a color to the LUT if it isn't already there.
+
+Modified skyview.ij.IJProcessor in response to changes in ImageProcessor.
+
+Updated XMLSurveyDescription to allow header and trailer files
+
+V2.3
+
+Added skyview.executive.Batch to run a series of requests. (Beta)
+
+Added skyview.process.BackupMosaicker (using settings BackupSurvey)
+to allow one survey to fill in gaps in another.  Probably need
+to be able to scale (in intensity) backup surveys independently. (Beta)
+
+Made CGIInitiator explicitly add IJProcessor before HTMLWriter.
+This means that quicklook images are generated before HTML that
+links to them so that HTML can be sent to user immediately.
+
+Fixed Mosiacker to ignore DepthSampler if input data was scalar.
+
+Change IJProcessor to scale Log/Sqrt somewhat differently.
+
+Fixed Gridder to handle RA labels/intervals correctly.
+
+Re-enabled PlotFontSize settings which was forgotten when
+we string handling to ImageJ.
+
+Have DSS2 surveys use DSS plate solution rather than local.
+
+Add new constructor in FloatProcess (skymap.org)
+
+Add new LUTs (skymap.org)
+
+Change Imager to handle spaces in pixel specification better
+
+Split reuseMatch from loadMatch to fix errors when processing
+multiple surveys.
+
+#####
+v2.4, v2.5
+TEA and TOAST support
+#####
+
+December 2009
+
+Tried to solve problem of clip resampling going over edges with
+new Straddle classes and associated code in Clip sampler.
+This has been tested only for the Aitoff and Car projection.
+Needs to be done for the CSC projection.
+
+Added offset +- functionality to drawing capabilities.  That allows
+us to draw offset from any of the corners of the image (as well as
+the default which is the center).
+
+Added annotation keyword.  This is basically a duplicate of the
+drawfile keyword, with the idea being that system required drawing using
+annotation but user specified drawing uses drawfile.
+
+Added Mellinger surveys.
+
+Added initial Fermi surveys.
+
+Allow multiple values in Scaler so that different surveys can be scaled differently.
+E.g., Scaler=Log,Log,Linear scales the first and second surveys using
+Log scaling and the last survey using Linear scaling.  If there are more
+surveys than scale entries, then selected scale continues rotating through
+the user supplied values.
+
+Changed FitsImage to ensure proper scaling of byte images.  These were
+being treated as signed and should be unsigned.
+
+Added the MaxRequestSize and LargeImage settings.  If the request is
+larger than MaxRequestSize, the condidate images are given in LargeImage.
+This required some changes in how we parse the <Images> area of the XML
+since we sometimes want to read it but ignore the <Image> entries.
+
+
+
+
+

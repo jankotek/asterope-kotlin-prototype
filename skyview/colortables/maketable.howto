@@ -1,0 +1,13 @@
+Commands used to create a b-w inverse colortable for the java version
+of Skyview
+IDL> r=indgen(256)
+IDL> r=(r-255)*(-1)
+IDL> r=byte(r)
+IDL> g=r
+IDL> b=r
+IDL> xx=[[r],[g],[b]]  
+IDL> openw,1,"inverse.bin"
+IDL> writeu,1,xx
+IDL> close,1
+
+

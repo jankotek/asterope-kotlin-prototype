@@ -1,0 +1,124 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName>RASSBck${I},rassback${I},RASS Background ${I}</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>ROSAT All-Sky X-ray Background Survey: Band ${I}</Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+These maps present maps of 
+ROSAT soft X-ray all-sky survey as presented in Snowden et al, ApJ 485, 125 (1997).
+The maps cover approximately 98% of the sky.  These maps have had all point sources
+removed
+These surveys supercede the RASS0.25, RASS0.75 and RASS1.5 Kev surveys
+previously provided.  Those surveys may still be invoked in SkyView using
+batch and jar tools but are not accessible on the Web page.
+<p>
+The seven maps correspond to ranges in the pulse height analysis of the photons
+detected.  Since the energy resolution of the PSPC is poor, there is consider
+overlap between adjacent bands.
+
+<p>
+The energy range for the bands corresponds to:
+   <table><tr><th>Band</th><th>Energy range (keV)</th></tr>
+   <tr><td>Band 1</td><td>0.11 - 0.284</td><tr>
+   <tr><td>Band 2</td><td>0.14 - 0.284</td><tr>
+   <tr><td>Band 3</td><td>0.2 - 0.83</td></tr>
+   <tr><td>Band 4</td><td>0.44 - 1.01</td><tr>
+   <tr><td>Band 5</td><td>0.56 - 1.21</td><tr>
+   <tr><td>Band 6</td><td>0.73 - 1.56</td><tr>
+   <tr><td>Band 7</td><td>1.05 - 2.04</td><tr>
+   </table>
+Note the substantial overlap between bands.  Each photon detected is assigned to
+a band based on the pulse height analysis for that photon, but the energy resolution
+of the detectors is relatively poor.  Also note that Band 3 was not
+included in the reference paper due to poor statistics and background modeling.
+   
+<p>
+SkyView has several other sets of surveys derived from ROSAT data
+with substantially higher resolution and which include point sources.
+The RASS surveys are derived from the RASS all sky survey.  These include count
+and intensity maps.  The PSPC maps are dervived from the PSPC pointed observations
+which were combined by SkyView.  The HRI survey is derived from a similar mosaicking
+of all HRI observations.  
+    ]]>
+  </Description>
+  
+  <!-- These settings are used where the user may not have made an explicit selection
+       and where no system defaults exist.
+    -->
+  <Settings>
+    <!-- The scale of this image -->
+    <Scale> .2 </Scale>
+    <!-- Other surveys with identical image geometries -->
+    <GeometryTwin>RASSBCK1,RASSBCK2,RASSBCK4,RASSBCK5,RASSBCK6,RASSBCK7</GeometryTwin>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+<Provenance> 
+    <![CDATA[
+Max Planck Institute for Exterrestrial Physics (Garching FRG)
+    ]]>
+    </Provenance> 
+    <Copyright>
+    <![CDATA[MPI but data may be used for scientific
+purposes so long as appropriate reference is included.
+    ]]>
+    </Copyright>
+    <Regime>      X-ray     </Regime>
+    <NSurvey>     6         </NSurvey>
+    <Frequency>   ${F} PHz </Frequency>
+    <Bandpass>    ${B} PHz </Bandpass>
+    <Coverage>    All-sky   </Coverage>
+    <PixelScale>  0.2     </PixelScale>
+    <PixelUnits>  <![CDATA[10<sup>-6</sup>counts/s]]> </PixelUnits>
+    <Resolution>  <![CDATA[ca. 2&#176]]> </Resolution>
+    <Coordinates> Galactic  </Coordinates>
+    <Projection>  Zenithal Equal Area    </Projection>>
+    <Epoch>       1990-07 to 1991-02, 1991-8  </Epoch>
+
+    <!-- The Reference is likely to include an anchor to an on-line source and
+         is put in a CDATA element.-->
+    <Reference>
+<![CDATA[S.L. Snowden, et al.,
+<a href="http://adsabs.harvard.edu/abs/1997ApJ...485..125S"><i>Ap,J</i>, Vol.485 (1997), pp.125</a>
+]]>
+    </Reference>
+  </MetaTable>
+  
+  <OnlineText/>
+
+  <FITS>
+<![CDATA[
+SURVEY  = 'RASSBCK${I}'
+                                                                
+HISTORY  ROSAT XRT/PSPC All-Sky Survey Soft X-ray Diffuse Background            
+HISTORY  Reference:                                                             
+           
+HISTORY  S.L. Snowden, et al ApJ 485, p 125 (1997)
+HISTORY  Use of this map is permitted for scientific purposes as lo 
+HISTORY  ng as reference is made to the aforementioned publication.       
+HISTORY  Contact person: Michael Freyberg, MPE Garching, Germany 
+]]>
+  </FITS>
+    
+  <Images>
+    <ImageFactory> skyview.survey.CachingImageFactory </ImageFactory>
+    
+    <!-- The image size gives the minimum dimension of an image. -->
+    <ImageSize> 270 </ImageSize>
+    <SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/rassbck/ </SpellPrefix>
+    <SpellSuffix> ,Zea,G,512,512,0.20,0.20 </SpellSuffix>
+
+     <Image>g000p00r${I}.fits,g000p00r${I}.fits,0.0000,0.0000 0.00 0.00 1991</Image>
+     <Image>g090p00r${I}.fits,g090p00r${I}.fits,90.0000,0.0000 90.00 0.00 1991</Image>
+     <Image>g180p00r${I}.fits,g180p00r${I}.fits,180.0000,0.0000 180.0 0.0 1991</Image>
+     <Image>g270p00r${I}.fits,g270p00r${I}.fits,270.0000,0.0000 270.0 0.0 1991</Image>
+     <Image>g000p90r${I}.fits,g000p90r${I}.fits,0.0000,90.0000   0.0 90.0 1991</Image>
+     <Image>g000m90r${I}.fits,g000m90r${I}.fits,0.0000,-90.0000 0.0 -90.0 1991</Image>
+  </Images>
+</Survey>

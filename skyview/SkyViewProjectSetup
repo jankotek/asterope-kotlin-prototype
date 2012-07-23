@@ -1,0 +1,65 @@
+How do we setup SkyView as a NetBeans Project?
+
+1. First organize the directory structure in which we are going to save
+SkyView content.
+    - SkyView
+        /Source: Content that is to be compiled before being used in SkyView
+                 (currently only /java subdirectory)
+           Handling ImageJ:
+             Got rid of all ImageJ code except for files that we have editted.
+             Will create ImageJ jar with original ImageJ content.  When we create
+             SkyView jar we compile using ImageJ jar in class path to satisfy references
+             to routines we don't update (we only have about 6 ImageJ Java files).
+             Then when we create the SkyView jar we put in the SkyView generated
+             ImageJ class files directly and then do an update where we add any
+             ImageJ class files from an ImageJ jar but do not replace any class
+             files already extent.  So in principle we should be able to switch
+             to a new ImageJ easily (in practice we need to worry about whether
+             the new version is compatible with the version we used in compiling
+             our modified classes).
+        /Web:    Content that will go directly into the SkyView web site
+                 (HTML, js, operations)
+                 Operations content is put here but the directories have
+                 .htaccess that ensures the operations tools cannot be
+                 accessed through the web.
+        /Data:   Content that will not be compiled but is used in creating
+                 content for SkyView other than by compilation
+
+2. Deliver into the CM system (we should only do this once) using svn import
+
+If not the first time, then checkout a current version of the system from
+   file:///software/jira/svn/skyview
+
+3. Create a New Project (Java with existing sources).  Note that since we
+do not use Servlets, this is not a Web project.  When doing this we will need
+to add in the source directory .../source/java for the Java code.
+
+4. Edit project properties/Libraries to add needed Jar files:
+     FITS (or can use FITS project if available)
+     jsamp
+     ImageJ
+     Junit (for testing -- this is provided by NetBeans so use Add Library rather than
+     Add JAR)
+
+5. In Properties/Sources add links to Web and Data directories (if we had non-java code
+   we would likely need a link to the non-Java subdirectories of Source).  May look like
+   Java packages which isn't optimal but not a big deal.
+6. Edit build.xml to add SkyView specific actions (notably adding appropriate content
+   to skyview.jar).  Have yet add appropriate 'install' target that copies web content
+   and jar to appropriate locations.
+
+
+Running SkyView from the Jar.
+
+This just requires the SkyView jar which is built as an executable JAR with
+with skyview.executive.Imager as the main class.  When the JAR runs, most image
+creation requests will download data.  A skycache subdirectory (this can
+be controlled by various settings) will be created to cache the downloaded images.
+Some surveys do not allow caching.
+
+Creating the SkyView Web site:
+
+To create the SkyView web site we need the content of the Web directory installed.
+A copy of the SkyView jar must be places in the cgifile/lib directory
+
+Two directories are currently used to store created files:

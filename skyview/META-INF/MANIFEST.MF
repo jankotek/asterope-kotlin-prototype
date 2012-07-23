@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 20.6-b01 (Sun Microsystems Inc.)
+Main-Class: skyview.executive.Imager
+X-COMMENT: Main-Class will be added automatically by build
+Class-Path: lib/FITSLibrary.jar lib/junit-4.5.jar lib/jsamp-1.2.jar li
+ b/ij_138k.jar lib/standard.jar lib/jstl.jar
+

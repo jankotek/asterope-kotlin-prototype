@@ -1,0 +1,531 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName> IRIS${M}, IRIS ${M} micron,IRIS ${M}</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>Improved Reprocessing of the IRAS Survey: ${M}</Name>
+  
+  <Description>
+   <![CDATA[
+   The IRIS data is a reprocessing of the IRAS data set
+   and has the same geometry as the IRAS Sky Survey Atlas (ISSA, 
+   labeled as IRAS nnn micron in <i>SkyView</i>) surveys.
+   This new generation of IRAS images, called IRIS, 
+   benefits from a better zodiacal light subtraction, 
+   from a calibration and zero level compatible with DIRBE, 
+   and from a better destriping. 
+   At 100 micron the IRIS product is also a significant improvement 
+   from the Schlegel et al. (1998) maps. 
+   IRIS keeps the full ISSA resolution, 
+   it includes well calibrated point sources and the 
+   diffuse emission calibration at scales smaller 
+   than 1 degree was corrected for the variation of 
+   the IRAS detector responsivity with scale and brightness. 
+   The uncertainty on the IRIS calibration and zero level 
+   are dominated by the uncertainty on the DIRBE calibration 
+   and on the accuracy of the zodiacal light model.   
+   <p>
+   More information about the IRIS dataset is available at 
+   <a href=http://www.cita.utoronto.ca/~mamd/IRIS> the IRIS Web site</a>
+   whence most of the preceding description came.
+    ]]>
+  </Description>
+  <Settings>
+    <!-- The scale of this image -->
+    <Scale> 0.025 </Scale>
+    <!-- Other surveys with identical image geometries -->
+    <GeometryTwin>IRIS12,IRIS25,IRIS60,IRIS100</GeometryTwin>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance>
+    <![CDATA[
+    Original IRAS data: NASA/JPL IPAC, <br>
+    IRIS Reprocessing: Canadian Institute for Theoretical Astrophysics/Institut
+    d'Astrophysique Spatiale<br>
+    See the 
+    <a href=http://www.cita.utoronto.ca/~mamd/IRIS> IRIS Web site</a>.
+    ]]>
+    </Provenance>
+    <Copyright>   Public         </Copyright>
+    <Regime>      Infrared       </Regime>
+    <NSurvey>     4              </NSurvey>
+    <Frequency>   ${F} THz       </Frequency>
+    <Bandpass>    ${B} THz </Bandpass>
+    <Coverage>    All-sky        </Coverage>
+    <Scale>       0.025 deg/pix  </Scale>
+    <Units>       MJy/sr         </Units>
+    <Resolution>  2'             </Resolution>
+    <Coordinates> Equatorial     </Coordinates>
+    <Projection>  Gnomonic(TAN)  </Projection>
+    <Equinox>     1950           </Equinox>
+    <Epoch> 	  1983           </Epoch>
+    <Reference>
+<![CDATA[
+    <a href=http://adsabs.harvard.edu/abs/2005ApJS..157..302M>
+    M. Miville-Deschenes and G. Lagache, IRIS: A New Generation of IRAS Maps,
+    Ap.J.Supplement 157, 302, 2005</a>
+]]>
+    </Reference>
+  </MetaTable>
+  
+  <OnlineText/>
+
+  <FITS>
+<![CDATA[
+SURVEY  = 'IRIS ${M} micron'
+BUNIT   = 'MJY/SR  '                  / INTENSITY                        
+TELESCOP= 'IRAS    '
+INSTRUME= 'IRIS    '           / Improved Reprocessing of the IRAS Survey
+AUTHORS = 'Marc-Antoine Miville-Deschenes & Guilaine Lagache'
+COMMENT = 'IRIS is a reprocessing of the ISSA plates' /
+AUTODEGL=                    T / Automatic deglitching
+DESTRIPE=                    T / Wavelet/Fourier Destriping
+COR-GAIN=                    T / Scale and brightness dependant gain correction
+COR-OFFS=                    T / Offset correction based on DIRBE data
+]]>
+  </FITS>
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    12.5 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/iris${M}/ </SpellPrefix>
+        <SpellSuffix> ,Tan,B1950.00,500,500,0.025,0.025 </SpellSuffix>
+<Image> I001B${I}H0.fits,xI001B${I}H0.fits,0.00000,-90.0000 0.00000 -90.0000 1980.00 </Image>
+<Image> I002B${I}H0.fits,xI002B${I}H0.fits,0.00000,-80.0000 0.00000 -80.0000 1980.00 </Image>
+<Image> I003B${I}H0.fits,xI003B${I}H0.fits,45.0000,-80.0000 45.0000 -80.0000 1980.00 </Image>
+<Image> I004B${I}H0.fits,xI004B${I}H0.fits,90.0000,-80.0000 90.0000 -80.0000 1980.00 </Image>
+<Image> I005B${I}H0.fits,xI005B${I}H0.fits,135.000,-80.0000 135.000 -80.0000 1980.00 </Image>
+<Image> I006B${I}H0.fits,xI006B${I}H0.fits,180.000,-80.0000 180.000 -80.0000 1980.00 </Image>
+<Image> I007B${I}H0.fits,xI007B${I}H0.fits,225.000,-80.0000 225.000 -80.0000 1980.00 </Image>
+<Image> I008B${I}H0.fits,xI008B${I}H0.fits,270.000,-80.0000 270.000 -80.0000 1980.00 </Image>
+<Image> I009B${I}H0.fits,xI009B${I}H0.fits,315.000,-80.0000 315.000 -80.0000 1980.00 </Image>
+<Image> I010B${I}H0.fits,xI010B${I}H0.fits,0.00000,-70.0000 0.00000 -70.0000 1980.00 </Image>
+<Image> I011B${I}H0.fits,xI011B${I}H0.fits,26.0000,-70.0000 26.0000 -70.0000 1980.00 </Image>
+<Image> I012B${I}H0.fits,xI012B${I}H0.fits,52.0000,-70.0000 52.0000 -70.0000 1980.00 </Image>
+<Image> I013B${I}H0.fits,xI013B${I}H0.fits,78.0000,-70.0000 78.0000 -70.0000 1980.00 </Image>
+<Image> I014B${I}H0.fits,xI014B${I}H0.fits,104.000,-70.0000 104.000 -70.0000 1980.00 </Image>
+<Image> I015B${I}H0.fits,xI015B${I}H0.fits,130.000,-70.0000 130.000 -70.0000 1980.00 </Image>
+<Image> I016B${I}H0.fits,xI016B${I}H0.fits,156.000,-70.0000 156.000 -70.0000 1980.00 </Image>
+<Image> I017B${I}H0.fits,xI017B${I}H0.fits,182.000,-70.0000 182.000 -70.0000 1980.00 </Image>
+<Image> I018B${I}H0.fits,xI018B${I}H0.fits,208.000,-70.0000 208.000 -70.0000 1980.00 </Image>
+<Image> I019B${I}H0.fits,xI019B${I}H0.fits,234.000,-70.0000 234.000 -70.0000 1980.00 </Image>
+<Image> I020B${I}H0.fits,xI020B${I}H0.fits,260.000,-70.0000 260.000 -70.0000 1980.00 </Image>
+<Image> I021B${I}H0.fits,xI021B${I}H0.fits,286.000,-70.0000 286.000 -70.0000 1980.00 </Image>
+<Image> I022B${I}H0.fits,xI022B${I}H0.fits,312.000,-70.0000 312.000 -70.0000 1980.00 </Image>
+<Image> I023B${I}H0.fits,xI023B${I}H0.fits,338.000,-70.0000 338.000 -70.0000 1980.00 </Image>
+<Image> I024B${I}H0.fits,xI024B${I}H0.fits,0.00000,-60.0000 0.00000 -60.0000 1980.00 </Image>
+<Image> I025B${I}H0.fits,xI025B${I}H0.fits,19.0000,-60.0000 19.0000 -60.0000 1980.00 </Image>
+<Image> I026B${I}H0.fits,xI026B${I}H0.fits,38.0000,-60.0000 38.0000 -60.0000 1980.00 </Image>
+<Image> I027B${I}H0.fits,xI027B${I}H0.fits,57.0000,-60.0000 57.0000 -60.0000 1980.00 </Image>
+<Image> I028B${I}H0.fits,xI028B${I}H0.fits,76.0000,-60.0000 76.0000 -60.0000 1980.00 </Image>
+<Image> I029B${I}H0.fits,xI029B${I}H0.fits,95.0000,-60.0000 95.0000 -60.0000 1980.00 </Image>
+<Image> I030B${I}H0.fits,xI030B${I}H0.fits,114.000,-60.0000 114.000 -60.0000 1980.00 </Image>
+<Image> I031B${I}H0.fits,xI031B${I}H0.fits,133.000,-60.0000 133.000 -60.0000 1980.00 </Image>
+<Image> I032B${I}H0.fits,xI032B${I}H0.fits,152.000,-60.0000 152.000 -60.0000 1980.00 </Image>
+<Image> I033B${I}H0.fits,xI033B${I}H0.fits,171.000,-60.0000 171.000 -60.0000 1980.00 </Image>
+<Image> I034B${I}H0.fits,xI034B${I}H0.fits,190.000,-60.0000 190.000 -60.0000 1980.00 </Image>
+<Image> I035B${I}H0.fits,xI035B${I}H0.fits,209.000,-60.0000 209.000 -60.0000 1980.00 </Image>
+<Image> I036B${I}H0.fits,xI036B${I}H0.fits,228.000,-60.0000 228.000 -60.0000 1980.00 </Image>
+<Image> I037B${I}H0.fits,xI037B${I}H0.fits,247.000,-60.0000 247.000 -60.0000 1980.00 </Image>
+<Image> I038B${I}H0.fits,xI038B${I}H0.fits,266.000,-60.0000 266.000 -60.0000 1980.00 </Image>
+<Image> I039B${I}H0.fits,xI039B${I}H0.fits,285.000,-60.0000 285.000 -60.0000 1980.00 </Image>
+<Image> I040B${I}H0.fits,xI040B${I}H0.fits,304.000,-60.0000 304.000 -60.0000 1980.00 </Image>
+<Image> I041B${I}H0.fits,xI041B${I}H0.fits,323.000,-60.0000 323.000 -60.0000 1980.00 </Image>
+<Image> I042B${I}H0.fits,xI042B${I}H0.fits,342.000,-60.0000 342.000 -60.0000 1980.00 </Image>
+<Image> I043B${I}H0.fits,xI043B${I}H0.fits,0.00000,-50.0000 0.00000 -50.0000 1980.00 </Image>
+<Image> I044B${I}H0.fits,xI044B${I}H0.fits,15.0000,-50.0000 15.0000 -50.0000 1980.00 </Image>
+<Image> I045B${I}H0.fits,xI045B${I}H0.fits,30.0000,-50.0000 30.0000 -50.0000 1980.00 </Image>
+<Image> I046B${I}H0.fits,xI046B${I}H0.fits,45.0000,-50.0000 45.0000 -50.0000 1980.00 </Image>
+<Image> I047B${I}H0.fits,xI047B${I}H0.fits,60.0000,-50.0000 60.0000 -50.0000 1980.00 </Image>
+<Image> I048B${I}H0.fits,xI048B${I}H0.fits,75.0000,-50.0000 75.0000 -50.0000 1980.00 </Image>
+<Image> I049B${I}H0.fits,xI049B${I}H0.fits,90.0000,-50.0000 90.0000 -50.0000 1980.00 </Image>
+<Image> I050B${I}H0.fits,xI050B${I}H0.fits,105.000,-50.0000 105.000 -50.0000 1980.00 </Image>
+<Image> I051B${I}H0.fits,xI051B${I}H0.fits,120.000,-50.0000 120.000 -50.0000 1980.00 </Image>
+<Image> I052B${I}H0.fits,xI052B${I}H0.fits,135.000,-50.0000 135.000 -50.0000 1980.00 </Image>
+<Image> I053B${I}H0.fits,xI053B${I}H0.fits,150.000,-50.0000 150.000 -50.0000 1980.00 </Image>
+<Image> I054B${I}H0.fits,xI054B${I}H0.fits,165.000,-50.0000 165.000 -50.0000 1980.00 </Image>
+<Image> I055B${I}H0.fits,xI055B${I}H0.fits,180.000,-50.0000 180.000 -50.0000 1980.00 </Image>
+<Image> I056B${I}H0.fits,xI056B${I}H0.fits,195.000,-50.0000 195.000 -50.0000 1980.00 </Image>
+<Image> I057B${I}H0.fits,xI057B${I}H0.fits,210.000,-50.0000 210.000 -50.0000 1980.00 </Image>
+<Image> I058B${I}H0.fits,xI058B${I}H0.fits,225.000,-50.0000 225.000 -50.0000 1980.00 </Image>
+<Image> I059B${I}H0.fits,xI059B${I}H0.fits,240.000,-50.0000 240.000 -50.0000 1980.00 </Image>
+<Image> I060B${I}H0.fits,xI060B${I}H0.fits,255.000,-50.0000 255.000 -50.0000 1980.00 </Image>
+<Image> I061B${I}H0.fits,xI061B${I}H0.fits,270.000,-50.0000 270.000 -50.0000 1980.00 </Image>
+<Image> I062B${I}H0.fits,xI062B${I}H0.fits,285.000,-50.0000 285.000 -50.0000 1980.00 </Image>
+<Image> I063B${I}H0.fits,xI063B${I}H0.fits,300.000,-50.0000 300.000 -50.0000 1980.00 </Image>
+<Image> I064B${I}H0.fits,xI064B${I}H0.fits,315.000,-50.0000 315.000 -50.0000 1980.00 </Image>
+<Image> I065B${I}H0.fits,xI065B${I}H0.fits,330.000,-50.0000 330.000 -50.0000 1980.00 </Image>
+<Image> I066B${I}H0.fits,xI066B${I}H0.fits,345.000,-50.0000 345.000 -50.0000 1980.00 </Image>
+<Image> I067B${I}H0.fits,xI067B${I}H0.fits,0.00000,-40.0000 0.00000 -40.0000 1980.00 </Image>
+<Image> I068B${I}H0.fits,xI068B${I}H0.fits,13.0000,-40.0000 13.0000 -40.0000 1980.00 </Image>
+<Image> I069B${I}H0.fits,xI069B${I}H0.fits,26.0000,-40.0000 26.0000 -40.0000 1980.00 </Image>
+<Image> I070B${I}H0.fits,xI070B${I}H0.fits,39.0000,-40.0000 39.0000 -40.0000 1980.00 </Image>
+<Image> I071B${I}H0.fits,xI071B${I}H0.fits,52.0000,-40.0000 52.0000 -40.0000 1980.00 </Image>
+<Image> I072B${I}H0.fits,xI072B${I}H0.fits,65.0000,-40.0000 65.0000 -40.0000 1980.00 </Image>
+<Image> I073B${I}H0.fits,xI073B${I}H0.fits,78.0000,-40.0000 78.0000 -40.0000 1980.00 </Image>
+<Image> I074B${I}H0.fits,xI074B${I}H0.fits,91.0000,-40.0000 91.0000 -40.0000 1980.00 </Image>
+<Image> I075B${I}H0.fits,xI075B${I}H0.fits,104.000,-40.0000 104.000 -40.0000 1980.00 </Image>
+<Image> I076B${I}H0.fits,xI076B${I}H0.fits,117.000,-40.0000 117.000 -40.0000 1980.00 </Image>
+<Image> I077B${I}H0.fits,xI077B${I}H0.fits,130.000,-40.0000 130.000 -40.0000 1980.00 </Image>
+<Image> I078B${I}H0.fits,xI078B${I}H0.fits,143.000,-40.0000 143.000 -40.0000 1980.00 </Image>
+<Image> I079B${I}H0.fits,xI079B${I}H0.fits,156.000,-40.0000 156.000 -40.0000 1980.00 </Image>
+<Image> I080B${I}H0.fits,xI080B${I}H0.fits,169.000,-40.0000 169.000 -40.0000 1980.00 </Image>
+<Image> I081B${I}H0.fits,xI081B${I}H0.fits,182.000,-40.0000 182.000 -40.0000 1980.00 </Image>
+<Image> I082B${I}H0.fits,xI082B${I}H0.fits,195.000,-40.0000 195.000 -40.0000 1980.00 </Image>
+<Image> I083B${I}H0.fits,xI083B${I}H0.fits,208.000,-40.0000 208.000 -40.0000 1980.00 </Image>
+<Image> I084B${I}H0.fits,xI084B${I}H0.fits,221.000,-40.0000 221.000 -40.0000 1980.00 </Image>
+<Image> I085B${I}H0.fits,xI085B${I}H0.fits,234.000,-40.0000 234.000 -40.0000 1980.00 </Image>
+<Image> I086B${I}H0.fits,xI086B${I}H0.fits,247.000,-40.0000 247.000 -40.0000 1980.00 </Image>
+<Image> I087B${I}H0.fits,xI087B${I}H0.fits,260.000,-40.0000 260.000 -40.0000 1980.00 </Image>
+<Image> I088B${I}H0.fits,xI088B${I}H0.fits,273.000,-40.0000 273.000 -40.0000 1980.00 </Image>
+<Image> I089B${I}H0.fits,xI089B${I}H0.fits,286.000,-40.0000 286.000 -40.0000 1980.00 </Image>
+<Image> I090B${I}H0.fits,xI090B${I}H0.fits,299.000,-40.0000 299.000 -40.0000 1980.00 </Image>
+<Image> I091B${I}H0.fits,xI091B${I}H0.fits,312.000,-40.0000 312.000 -40.0000 1980.00 </Image>
+<Image> I092B${I}H0.fits,xI092B${I}H0.fits,325.000,-40.0000 325.000 -40.0000 1980.00 </Image>
+<Image> I093B${I}H0.fits,xI093B${I}H0.fits,338.000,-40.0000 338.000 -40.0000 1980.00 </Image>
+<Image> I094B${I}H0.fits,xI094B${I}H0.fits,351.000,-40.0000 351.000 -40.0000 1980.00 </Image>
+<Image> I095B${I}H0.fits,xI095B${I}H0.fits,0.00000,-30.0000 0.00000 -30.0000 1980.00 </Image>
+<Image> I096B${I}H0.fits,xI096B${I}H0.fits,11.5000,-30.0000 11.5000 -30.0000 1980.00 </Image>
+<Image> I097B${I}H0.fits,xI097B${I}H0.fits,23.0000,-30.0000 23.0000 -30.0000 1980.00 </Image>
+<Image> I098B${I}H0.fits,xI098B${I}H0.fits,34.5000,-30.0000 34.5000 -30.0000 1980.00 </Image>
+<Image> I099B${I}H0.fits,xI099B${I}H0.fits,46.0000,-30.0000 46.0000 -30.0000 1980.00 </Image>
+<Image> I100B${I}H0.fits,xI100B${I}H0.fits,57.5000,-30.0000 57.5000 -30.0000 1980.00 </Image>
+<Image> I101B${I}H0.fits,xI101B${I}H0.fits,69.0000,-30.0000 69.0000 -30.0000 1980.00 </Image>
+<Image> I102B${I}H0.fits,xI102B${I}H0.fits,80.5000,-30.0000 80.5000 -30.0000 1980.00 </Image>
+<Image> I103B${I}H0.fits,xI103B${I}H0.fits,92.0000,-30.0000 92.0000 -30.0000 1980.00 </Image>
+<Image> I104B${I}H0.fits,xI104B${I}H0.fits,103.500,-30.0000 103.500 -30.0000 1980.00 </Image>
+<Image> I105B${I}H0.fits,xI105B${I}H0.fits,115.000,-30.0000 115.000 -30.0000 1980.00 </Image>
+<Image> I106B${I}H0.fits,xI106B${I}H0.fits,126.500,-30.0000 126.500 -30.0000 1980.00 </Image>
+<Image> I107B${I}H0.fits,xI107B${I}H0.fits,138.000,-30.0000 138.000 -30.0000 1980.00 </Image>
+<Image> I108B${I}H0.fits,xI108B${I}H0.fits,149.500,-30.0000 149.500 -30.0000 1980.00 </Image>
+<Image> I109B${I}H0.fits,xI109B${I}H0.fits,161.000,-30.0000 161.000 -30.0000 1980.00 </Image>
+<Image> I110B${I}H0.fits,xI110B${I}H0.fits,172.500,-30.0000 172.500 -30.0000 1980.00 </Image>
+<Image> I111B${I}H0.fits,xI111B${I}H0.fits,184.000,-30.0000 184.000 -30.0000 1980.00 </Image>
+<Image> I112B${I}H0.fits,xI112B${I}H0.fits,195.500,-30.0000 195.500 -30.0000 1980.00 </Image>
+<Image> I113B${I}H0.fits,xI113B${I}H0.fits,207.000,-30.0000 207.000 -30.0000 1980.00 </Image>
+<Image> I114B${I}H0.fits,xI114B${I}H0.fits,218.500,-30.0000 218.500 -30.0000 1980.00 </Image>
+<Image> I115B${I}H0.fits,xI115B${I}H0.fits,230.000,-30.0000 230.000 -30.0000 1980.00 </Image>
+<Image> I116B${I}H0.fits,xI116B${I}H0.fits,241.500,-30.0000 241.500 -30.0000 1980.00 </Image>
+<Image> I117B${I}H0.fits,xI117B${I}H0.fits,253.000,-30.0000 253.000 -30.0000 1980.00 </Image>
+<Image> I118B${I}H0.fits,xI118B${I}H0.fits,264.500,-30.0000 264.500 -30.0000 1980.00 </Image>
+<Image> I119B${I}H0.fits,xI119B${I}H0.fits,276.000,-30.0000 276.000 -30.0000 1980.00 </Image>
+<Image> I120B${I}H0.fits,xI120B${I}H0.fits,287.500,-30.0000 287.500 -30.0000 1980.00 </Image>
+<Image> I121B${I}H0.fits,xI121B${I}H0.fits,299.000,-30.0000 299.000 -30.0000 1980.00 </Image>
+<Image> I122B${I}H0.fits,xI122B${I}H0.fits,310.500,-30.0000 310.500 -30.0000 1980.00 </Image>
+<Image> I123B${I}H0.fits,xI123B${I}H0.fits,322.000,-30.0000 322.000 -30.0000 1980.00 </Image>
+<Image> I124B${I}H0.fits,xI124B${I}H0.fits,333.500,-30.0000 333.500 -30.0000 1980.00 </Image>
+<Image> I125B${I}H0.fits,xI125B${I}H0.fits,345.000,-30.0000 345.000 -30.0000 1980.00 </Image>
+<Image> I126B${I}H0.fits,xI126B${I}H0.fits,356.500,-30.0000 356.500 -30.0000 1980.00 </Image>
+<Image> I127B${I}H0.fits,xI127B${I}H0.fits,0.00000,-20.0000 0.00000 -20.0000 1980.00 </Image>
+<Image> I128B${I}H0.fits,xI128B${I}H0.fits,10.5000,-20.0000 10.5000 -20.0000 1980.00 </Image>
+<Image> I129B${I}H0.fits,xI129B${I}H0.fits,21.0000,-20.0000 21.0000 -20.0000 1980.00 </Image>
+<Image> I130B${I}H0.fits,xI130B${I}H0.fits,31.5000,-20.0000 31.5000 -20.0000 1980.00 </Image>
+<Image> I131B${I}H0.fits,xI131B${I}H0.fits,42.0000,-20.0000 42.0000 -20.0000 1980.00 </Image>
+<Image> I132B${I}H0.fits,xI132B${I}H0.fits,52.5000,-20.0000 52.5000 -20.0000 1980.00 </Image>
+<Image> I133B${I}H0.fits,xI133B${I}H0.fits,63.0000,-20.0000 63.0000 -20.0000 1980.00 </Image>
+<Image> I134B${I}H0.fits,xI134B${I}H0.fits,73.5000,-20.0000 73.5000 -20.0000 1980.00 </Image>
+<Image> I135B${I}H0.fits,xI135B${I}H0.fits,84.0000,-20.0000 84.0000 -20.0000 1980.00 </Image>
+<Image> I136B${I}H0.fits,xI136B${I}H0.fits,94.5000,-20.0000 94.5000 -20.0000 1980.00 </Image>
+<Image> I137B${I}H0.fits,xI137B${I}H0.fits,105.000,-20.0000 105.000 -20.0000 1980.00 </Image>
+<Image> I138B${I}H0.fits,xI138B${I}H0.fits,115.500,-20.0000 115.500 -20.0000 1980.00 </Image>
+<Image> I139B${I}H0.fits,xI139B${I}H0.fits,126.000,-20.0000 126.000 -20.0000 1980.00 </Image>
+<Image> I140B${I}H0.fits,xI140B${I}H0.fits,136.500,-20.0000 136.500 -20.0000 1980.00 </Image>
+<Image> I141B${I}H0.fits,xI141B${I}H0.fits,147.000,-20.0000 147.000 -20.0000 1980.00 </Image>
+<Image> I142B${I}H0.fits,xI142B${I}H0.fits,157.500,-20.0000 157.500 -20.0000 1980.00 </Image>
+<Image> I143B${I}H0.fits,xI143B${I}H0.fits,168.000,-20.0000 168.000 -20.0000 1980.00 </Image>
+<Image> I144B${I}H0.fits,xI144B${I}H0.fits,178.500,-20.0000 178.500 -20.0000 1980.00 </Image>
+<Image> I145B${I}H0.fits,xI145B${I}H0.fits,189.000,-20.0000 189.000 -20.0000 1980.00 </Image>
+<Image> I146B${I}H0.fits,xI146B${I}H0.fits,199.500,-20.0000 199.500 -20.0000 1980.00 </Image>
+<Image> I147B${I}H0.fits,xI147B${I}H0.fits,210.000,-20.0000 210.000 -20.0000 1980.00 </Image>
+<Image> I148B${I}H0.fits,xI148B${I}H0.fits,220.500,-20.0000 220.500 -20.0000 1980.00 </Image>
+<Image> I149B${I}H0.fits,xI149B${I}H0.fits,231.000,-20.0000 231.000 -20.0000 1980.00 </Image>
+<Image> I150B${I}H0.fits,xI150B${I}H0.fits,241.500,-20.0000 241.500 -20.0000 1980.00 </Image>
+<Image> I151B${I}H0.fits,xI151B${I}H0.fits,252.000,-20.0000 252.000 -20.0000 1980.00 </Image>
+<Image> I152B${I}H0.fits,xI152B${I}H0.fits,262.500,-20.0000 262.500 -20.0000 1980.00 </Image>
+<Image> I153B${I}H0.fits,xI153B${I}H0.fits,273.000,-20.0000 273.000 -20.0000 1980.00 </Image>
+<Image> I154B${I}H0.fits,xI154B${I}H0.fits,283.500,-20.0000 283.500 -20.0000 1980.00 </Image>
+<Image> I155B${I}H0.fits,xI155B${I}H0.fits,294.000,-20.0000 294.000 -20.0000 1980.00 </Image>
+<Image> I156B${I}H0.fits,xI156B${I}H0.fits,304.500,-20.0000 304.500 -20.0000 1980.00 </Image>
+<Image> I157B${I}H0.fits,xI157B${I}H0.fits,315.000,-20.0000 315.000 -20.0000 1980.00 </Image>
+<Image> I158B${I}H0.fits,xI158B${I}H0.fits,325.500,-20.0000 325.500 -20.0000 1980.00 </Image>
+<Image> I159B${I}H0.fits,xI159B${I}H0.fits,336.000,-20.0000 336.000 -20.0000 1980.00 </Image>
+<Image> I160B${I}H0.fits,xI160B${I}H0.fits,346.500,-20.0000 346.500 -20.0000 1980.00 </Image>
+<Image> I161B${I}H0.fits,xI161B${I}H0.fits,357.000,-20.0000 357.000 -20.0000 1980.00 </Image>
+<Image> I162B${I}H0.fits,xI162B${I}H0.fits,0.00000,-10.0000 0.00000 -10.0000 1980.00 </Image>
+<Image> I163B${I}H0.fits,xI163B${I}H0.fits,10.0000,-10.0000 10.0000 -10.0000 1980.00 </Image>
+<Image> I164B${I}H0.fits,xI164B${I}H0.fits,20.0000,-10.0000 20.0000 -10.0000 1980.00 </Image>
+<Image> I165B${I}H0.fits,xI165B${I}H0.fits,30.0000,-10.0000 30.0000 -10.0000 1980.00 </Image>
+<Image> I166B${I}H0.fits,xI166B${I}H0.fits,40.0000,-10.0000 40.0000 -10.0000 1980.00 </Image>
+<Image> I167B${I}H0.fits,xI167B${I}H0.fits,50.0000,-10.0000 50.0000 -10.0000 1980.00 </Image>
+<Image> I168B${I}H0.fits,xI168B${I}H0.fits,60.0000,-10.0000 60.0000 -10.0000 1980.00 </Image>
+<Image> I169B${I}H0.fits,xI169B${I}H0.fits,70.0000,-10.0000 70.0000 -10.0000 1980.00 </Image>
+<Image> I170B${I}H0.fits,xI170B${I}H0.fits,80.0000,-10.0000 80.0000 -10.0000 1980.00 </Image>
+<Image> I171B${I}H0.fits,xI171B${I}H0.fits,90.0000,-10.0000 90.0000 -10.0000 1980.00 </Image>
+<Image> I172B${I}H0.fits,xI172B${I}H0.fits,100.000,-10.0000 100.000 -10.0000 1980.00 </Image>
+<Image> I173B${I}H0.fits,xI173B${I}H0.fits,110.000,-10.0000 110.000 -10.0000 1980.00 </Image>
+<Image> I174B${I}H0.fits,xI174B${I}H0.fits,120.000,-10.0000 120.000 -10.0000 1980.00 </Image>
+<Image> I175B${I}H0.fits,xI175B${I}H0.fits,130.000,-10.0000 130.000 -10.0000 1980.00 </Image>
+<Image> I176B${I}H0.fits,xI176B${I}H0.fits,140.000,-10.0000 140.000 -10.0000 1980.00 </Image>
+<Image> I177B${I}H0.fits,xI177B${I}H0.fits,150.000,-10.0000 150.000 -10.0000 1980.00 </Image>
+<Image> I178B${I}H0.fits,xI178B${I}H0.fits,160.000,-10.0000 160.000 -10.0000 1980.00 </Image>
+<Image> I179B${I}H0.fits,xI179B${I}H0.fits,170.000,-10.0000 170.000 -10.0000 1980.00 </Image>
+<Image> I180B${I}H0.fits,xI180B${I}H0.fits,180.000,-10.0000 180.000 -10.0000 1980.00 </Image>
+<Image> I181B${I}H0.fits,xI181B${I}H0.fits,190.000,-10.0000 190.000 -10.0000 1980.00 </Image>
+<Image> I182B${I}H0.fits,xI182B${I}H0.fits,200.000,-10.0000 200.000 -10.0000 1980.00 </Image>
+<Image> I183B${I}H0.fits,xI183B${I}H0.fits,210.000,-10.0000 210.000 -10.0000 1980.00 </Image>
+<Image> I184B${I}H0.fits,xI184B${I}H0.fits,220.000,-10.0000 220.000 -10.0000 1980.00 </Image>
+<Image> I185B${I}H0.fits,xI185B${I}H0.fits,230.000,-10.0000 230.000 -10.0000 1980.00 </Image>
+<Image> I186B${I}H0.fits,xI186B${I}H0.fits,240.000,-10.0000 240.000 -10.0000 1980.00 </Image>
+<Image> I187B${I}H0.fits,xI187B${I}H0.fits,250.000,-10.0000 250.000 -10.0000 1980.00 </Image>
+<Image> I188B${I}H0.fits,xI188B${I}H0.fits,260.000,-10.0000 260.000 -10.0000 1980.00 </Image>
+<Image> I189B${I}H0.fits,xI189B${I}H0.fits,270.000,-10.0000 270.000 -10.0000 1980.00 </Image>
+<Image> I190B${I}H0.fits,xI190B${I}H0.fits,280.000,-10.0000 280.000 -10.0000 1980.00 </Image>
+<Image> I191B${I}H0.fits,xI191B${I}H0.fits,290.000,-10.0000 290.000 -10.0000 1980.00 </Image>
+<Image> I192B${I}H0.fits,xI192B${I}H0.fits,300.000,-10.0000 300.000 -10.0000 1980.00 </Image>
+<Image> I193B${I}H0.fits,xI193B${I}H0.fits,310.000,-10.0000 310.000 -10.0000 1980.00 </Image>
+<Image> I194B${I}H0.fits,xI194B${I}H0.fits,320.000,-10.0000 320.000 -10.0000 1980.00 </Image>
+<Image> I195B${I}H0.fits,xI195B${I}H0.fits,330.000,-10.0000 330.000 -10.0000 1980.00 </Image>
+<Image> I196B${I}H0.fits,xI196B${I}H0.fits,340.000,-10.0000 340.000 -10.0000 1980.00 </Image>
+<Image> I197B${I}H0.fits,xI197B${I}H0.fits,350.000,-10.0000 350.000 -10.0000 1980.00 </Image>
+<Image> I198B${I}H0.fits,xI198B${I}H0.fits,0.00000,0.00000 0.00000 0.00000 1980.00 </Image>
+<Image> I199B${I}H0.fits,xI199B${I}H0.fits,10.0000,0.00000 10.0000 0.00000 1980.00 </Image>
+<Image> I200B${I}H0.fits,xI200B${I}H0.fits,20.0000,0.00000 20.0000 0.00000 1980.00 </Image>
+<Image> I201B${I}H0.fits,xI201B${I}H0.fits,30.0000,0.00000 30.0000 0.00000 1980.00 </Image>
+<Image> I202B${I}H0.fits,xI202B${I}H0.fits,40.0000,0.00000 40.0000 0.00000 1980.00 </Image>
+<Image> I203B${I}H0.fits,xI203B${I}H0.fits,50.0000,0.00000 50.0000 0.00000 1980.00 </Image>
+<Image> I204B${I}H0.fits,xI204B${I}H0.fits,60.0000,0.00000 60.0000 0.00000 1980.00 </Image>
+<Image> I205B${I}H0.fits,xI205B${I}H0.fits,70.0000,0.00000 70.0000 0.00000 1980.00 </Image>
+<Image> I206B${I}H0.fits,xI206B${I}H0.fits,80.0000,0.00000 80.0000 0.00000 1980.00 </Image>
+<Image> I207B${I}H0.fits,xI207B${I}H0.fits,90.0000,0.00000 90.0000 0.00000 1980.00 </Image>
+<Image> I208B${I}H0.fits,xI208B${I}H0.fits,100.000,0.00000 100.000 0.00000 1980.00 </Image>
+<Image> I209B${I}H0.fits,xI209B${I}H0.fits,110.000,0.00000 110.000 0.00000 1980.00 </Image>
+<Image> I210B${I}H0.fits,xI210B${I}H0.fits,120.000,0.00000 120.000 0.00000 1980.00 </Image>
+<Image> I211B${I}H0.fits,xI211B${I}H0.fits,130.000,0.00000 130.000 0.00000 1980.00 </Image>
+<Image> I212B${I}H0.fits,xI212B${I}H0.fits,140.000,0.00000 140.000 0.00000 1980.00 </Image>
+<Image> I213B${I}H0.fits,xI213B${I}H0.fits,150.000,0.00000 150.000 0.00000 1980.00 </Image>
+<Image> I214B${I}H0.fits,xI214B${I}H0.fits,160.000,0.00000 160.000 0.00000 1980.00 </Image>
+<Image> I215B${I}H0.fits,xI215B${I}H0.fits,170.000,0.00000 170.000 0.00000 1980.00 </Image>
+<Image> I216B${I}H0.fits,xI216B${I}H0.fits,180.000,0.00000 180.000 0.00000 1980.00 </Image>
+<Image> I217B${I}H0.fits,xI217B${I}H0.fits,190.000,0.00000 190.000 0.00000 1980.00 </Image>
+<Image> I218B${I}H0.fits,xI218B${I}H0.fits,200.000,0.00000 200.000 0.00000 1980.00 </Image>
+<Image> I219B${I}H0.fits,xI219B${I}H0.fits,210.000,0.00000 210.000 0.00000 1980.00 </Image>
+<Image> I220B${I}H0.fits,xI220B${I}H0.fits,220.000,0.00000 220.000 0.00000 1980.00 </Image>
+<Image> I221B${I}H0.fits,xI221B${I}H0.fits,230.000,0.00000 230.000 0.00000 1980.00 </Image>
+<Image> I222B${I}H0.fits,xI222B${I}H0.fits,240.000,0.00000 240.000 0.00000 1980.00 </Image>
+<Image> I223B${I}H0.fits,xI223B${I}H0.fits,250.000,0.00000 250.000 0.00000 1980.00 </Image>
+<Image> I224B${I}H0.fits,xI224B${I}H0.fits,260.000,0.00000 260.000 0.00000 1980.00 </Image>
+<Image> I225B${I}H0.fits,xI225B${I}H0.fits,270.000,0.00000 270.000 0.00000 1980.00 </Image>
+<Image> I226B${I}H0.fits,xI226B${I}H0.fits,280.000,0.00000 280.000 0.00000 1980.00 </Image>
+<Image> I227B${I}H0.fits,xI227B${I}H0.fits,290.000,0.00000 290.000 0.00000 1980.00 </Image>
+<Image> I228B${I}H0.fits,xI228B${I}H0.fits,300.000,0.00000 300.000 0.00000 1980.00 </Image>
+<Image> I229B${I}H0.fits,xI229B${I}H0.fits,310.000,0.00000 310.000 0.00000 1980.00 </Image>
+<Image> I230B${I}H0.fits,xI230B${I}H0.fits,320.000,0.00000 320.000 0.00000 1980.00 </Image>
+<Image> I231B${I}H0.fits,xI231B${I}H0.fits,330.000,0.00000 330.000 0.00000 1980.00 </Image>
+<Image> I232B${I}H0.fits,xI232B${I}H0.fits,340.000,0.00000 340.000 0.00000 1980.00 </Image>
+<Image> I233B${I}H0.fits,xI233B${I}H0.fits,350.000,0.00000 350.000 0.00000 1980.00 </Image>
+<Image> I234B${I}H0.fits,xI234B${I}H0.fits,0.00000,10.0000 0.00000 10.0000 1980.00 </Image>
+<Image> I235B${I}H0.fits,xI235B${I}H0.fits,10.0000,10.0000 10.0000 10.0000 1980.00 </Image>
+<Image> I236B${I}H0.fits,xI236B${I}H0.fits,20.0000,10.0000 20.0000 10.0000 1980.00 </Image>
+<Image> I237B${I}H0.fits,xI237B${I}H0.fits,30.0000,10.0000 30.0000 10.0000 1980.00 </Image>
+<Image> I238B${I}H0.fits,xI238B${I}H0.fits,40.0000,10.0000 40.0000 10.0000 1980.00 </Image>
+<Image> I239B${I}H0.fits,xI239B${I}H0.fits,50.0000,10.0000 50.0000 10.0000 1980.00 </Image>
+<Image> I240B${I}H0.fits,xI240B${I}H0.fits,60.0000,10.0000 60.0000 10.0000 1980.00 </Image>
+<Image> I241B${I}H0.fits,xI241B${I}H0.fits,70.0000,10.0000 70.0000 10.0000 1980.00 </Image>
+<Image> I242B${I}H0.fits,xI242B${I}H0.fits,80.0000,10.0000 80.0000 10.0000 1980.00 </Image>
+<Image> I243B${I}H0.fits,xI243B${I}H0.fits,90.0000,10.0000 90.0000 10.0000 1980.00 </Image>
+<Image> I244B${I}H0.fits,xI244B${I}H0.fits,100.000,10.0000 100.000 10.0000 1980.00 </Image>
+<Image> I245B${I}H0.fits,xI245B${I}H0.fits,110.000,10.0000 110.000 10.0000 1980.00 </Image>
+<Image> I246B${I}H0.fits,xI246B${I}H0.fits,120.000,10.0000 120.000 10.0000 1980.00 </Image>
+<Image> I247B${I}H0.fits,xI247B${I}H0.fits,130.000,10.0000 130.000 10.0000 1980.00 </Image>
+<Image> I248B${I}H0.fits,xI248B${I}H0.fits,140.000,10.0000 140.000 10.0000 1980.00 </Image>
+<Image> I249B${I}H0.fits,xI249B${I}H0.fits,150.000,10.0000 150.000 10.0000 1980.00 </Image>
+<Image> I250B${I}H0.fits,xI250B${I}H0.fits,160.000,10.0000 160.000 10.0000 1980.00 </Image>
+<Image> I251B${I}H0.fits,xI251B${I}H0.fits,170.000,10.0000 170.000 10.0000 1980.00 </Image>
+<Image> I252B${I}H0.fits,xI252B${I}H0.fits,180.000,10.0000 180.000 10.0000 1980.00 </Image>
+<Image> I253B${I}H0.fits,xI253B${I}H0.fits,190.000,10.0000 190.000 10.0000 1980.00 </Image>
+<Image> I254B${I}H0.fits,xI254B${I}H0.fits,200.000,10.0000 200.000 10.0000 1980.00 </Image>
+<Image> I255B${I}H0.fits,xI255B${I}H0.fits,210.000,10.0000 210.000 10.0000 1980.00 </Image>
+<Image> I256B${I}H0.fits,xI256B${I}H0.fits,220.000,10.0000 220.000 10.0000 1980.00 </Image>
+<Image> I257B${I}H0.fits,xI257B${I}H0.fits,230.000,10.0000 230.000 10.0000 1980.00 </Image>
+<Image> I258B${I}H0.fits,xI258B${I}H0.fits,240.000,10.0000 240.000 10.0000 1980.00 </Image>
+<Image> I259B${I}H0.fits,xI259B${I}H0.fits,250.000,10.0000 250.000 10.0000 1980.00 </Image>
+<Image> I260B${I}H0.fits,xI260B${I}H0.fits,260.000,10.0000 260.000 10.0000 1980.00 </Image>
+<Image> I261B${I}H0.fits,xI261B${I}H0.fits,270.000,10.0000 270.000 10.0000 1980.00 </Image>
+<Image> I262B${I}H0.fits,xI262B${I}H0.fits,280.000,10.0000 280.000 10.0000 1980.00 </Image>
+<Image> I263B${I}H0.fits,xI263B${I}H0.fits,290.000,10.0000 290.000 10.0000 1980.00 </Image>
+<Image> I264B${I}H0.fits,xI264B${I}H0.fits,300.000,10.0000 300.000 10.0000 1980.00 </Image>
+<Image> I265B${I}H0.fits,xI265B${I}H0.fits,310.000,10.0000 310.000 10.0000 1980.00 </Image>
+<Image> I266B${I}H0.fits,xI266B${I}H0.fits,320.000,10.0000 320.000 10.0000 1980.00 </Image>
+<Image> I267B${I}H0.fits,xI267B${I}H0.fits,330.000,10.0000 330.000 10.0000 1980.00 </Image>
+<Image> I268B${I}H0.fits,xI268B${I}H0.fits,340.000,10.0000 340.000 10.0000 1980.00 </Image>
+<Image> I269B${I}H0.fits,xI269B${I}H0.fits,350.000,10.0000 350.000 10.0000 1980.00 </Image>
+<Image> I270B${I}H0.fits,xI270B${I}H0.fits,0.00000,20.0000 0.00000 20.0000 1980.00 </Image>
+<Image> I271B${I}H0.fits,xI271B${I}H0.fits,10.5000,20.0000 10.5000 20.0000 1980.00 </Image>
+<Image> I272B${I}H0.fits,xI272B${I}H0.fits,21.0000,20.0000 21.0000 20.0000 1980.00 </Image>
+<Image> I273B${I}H0.fits,xI273B${I}H0.fits,31.5000,20.0000 31.5000 20.0000 1980.00 </Image>
+<Image> I274B${I}H0.fits,xI274B${I}H0.fits,42.0000,20.0000 42.0000 20.0000 1980.00 </Image>
+<Image> I275B${I}H0.fits,xI275B${I}H0.fits,52.5000,20.0000 52.5000 20.0000 1980.00 </Image>
+<Image> I276B${I}H0.fits,xI276B${I}H0.fits,63.0000,20.0000 63.0000 20.0000 1980.00 </Image>
+<Image> I277B${I}H0.fits,xI277B${I}H0.fits,73.5000,20.0000 73.5000 20.0000 1980.00 </Image>
+<Image> I278B${I}H0.fits,xI278B${I}H0.fits,84.0000,20.0000 84.0000 20.0000 1980.00 </Image>
+<Image> I279B${I}H0.fits,xI279B${I}H0.fits,94.5000,20.0000 94.5000 20.0000 1980.00 </Image>
+<Image> I280B${I}H0.fits,xI280B${I}H0.fits,105.000,20.0000 105.000 20.0000 1980.00 </Image>
+<Image> I281B${I}H0.fits,xI281B${I}H0.fits,115.500,20.0000 115.500 20.0000 1980.00 </Image>
+<Image> I282B${I}H0.fits,xI282B${I}H0.fits,126.000,20.0000 126.000 20.0000 1980.00 </Image>
+<Image> I283B${I}H0.fits,xI283B${I}H0.fits,136.500,20.0000 136.500 20.0000 1980.00 </Image>
+<Image> I284B${I}H0.fits,xI284B${I}H0.fits,147.000,20.0000 147.000 20.0000 1980.00 </Image>
+<Image> I285B${I}H0.fits,xI285B${I}H0.fits,157.500,20.0000 157.500 20.0000 1980.00 </Image>
+<Image> I286B${I}H0.fits,xI286B${I}H0.fits,168.000,20.0000 168.000 20.0000 1980.00 </Image>
+<Image> I287B${I}H0.fits,xI287B${I}H0.fits,178.500,20.0000 178.500 20.0000 1980.00 </Image>
+<Image> I288B${I}H0.fits,xI288B${I}H0.fits,189.000,20.0000 189.000 20.0000 1980.00 </Image>
+<Image> I289B${I}H0.fits,xI289B${I}H0.fits,199.500,20.0000 199.500 20.0000 1980.00 </Image>
+<Image> I290B${I}H0.fits,xI290B${I}H0.fits,210.000,20.0000 210.000 20.0000 1980.00 </Image>
+<Image> I291B${I}H0.fits,xI291B${I}H0.fits,220.500,20.0000 220.500 20.0000 1980.00 </Image>
+<Image> I292B${I}H0.fits,xI292B${I}H0.fits,231.000,20.0000 231.000 20.0000 1980.00 </Image>
+<Image> I293B${I}H0.fits,xI293B${I}H0.fits,241.500,20.0000 241.500 20.0000 1980.00 </Image>
+<Image> I294B${I}H0.fits,xI294B${I}H0.fits,252.000,20.0000 252.000 20.0000 1980.00 </Image>
+<Image> I295B${I}H0.fits,xI295B${I}H0.fits,262.500,20.0000 262.500 20.0000 1980.00 </Image>
+<Image> I296B${I}H0.fits,xI296B${I}H0.fits,273.000,20.0000 273.000 20.0000 1980.00 </Image>
+<Image> I297B${I}H0.fits,xI297B${I}H0.fits,283.500,20.0000 283.500 20.0000 1980.00 </Image>
+<Image> I298B${I}H0.fits,xI298B${I}H0.fits,294.000,20.0000 294.000 20.0000 1980.00 </Image>
+<Image> I299B${I}H0.fits,xI299B${I}H0.fits,304.500,20.0000 304.500 20.0000 1980.00 </Image>
+<Image> I300B${I}H0.fits,xI300B${I}H0.fits,315.000,20.0000 315.000 20.0000 1980.00 </Image>
+<Image> I301B${I}H0.fits,xI301B${I}H0.fits,325.500,20.0000 325.500 20.0000 1980.00 </Image>
+<Image> I302B${I}H0.fits,xI302B${I}H0.fits,336.000,20.0000 336.000 20.0000 1980.00 </Image>
+<Image> I303B${I}H0.fits,xI303B${I}H0.fits,346.500,20.0000 346.500 20.0000 1980.00 </Image>
+<Image> I304B${I}H0.fits,xI304B${I}H0.fits,357.000,20.0000 357.000 20.0000 1980.00 </Image>
+<Image> I305B${I}H0.fits,xI305B${I}H0.fits,0.00000,30.0000 0.00000 30.0000 1980.00 </Image>
+<Image> I306B${I}H0.fits,xI306B${I}H0.fits,11.5000,30.0000 11.5000 30.0000 1980.00 </Image>
+<Image> I307B${I}H0.fits,xI307B${I}H0.fits,23.0000,30.0000 23.0000 30.0000 1980.00 </Image>
+<Image> I308B${I}H0.fits,xI308B${I}H0.fits,34.5000,30.0000 34.5000 30.0000 1980.00 </Image>
+<Image> I309B${I}H0.fits,xI309B${I}H0.fits,46.0000,30.0000 46.0000 30.0000 1980.00 </Image>
+<Image> I310B${I}H0.fits,xI310B${I}H0.fits,57.5000,30.0000 57.5000 30.0000 1980.00 </Image>
+<Image> I311B${I}H0.fits,xI311B${I}H0.fits,69.0000,30.0000 69.0000 30.0000 1980.00 </Image>
+<Image> I312B${I}H0.fits,xI312B${I}H0.fits,80.5000,30.0000 80.5000 30.0000 1980.00 </Image>
+<Image> I313B${I}H0.fits,xI313B${I}H0.fits,92.0000,30.0000 92.0000 30.0000 1980.00 </Image>
+<Image> I314B${I}H0.fits,xI314B${I}H0.fits,103.500,30.0000 103.500 30.0000 1980.00 </Image>
+<Image> I315B${I}H0.fits,xI315B${I}H0.fits,115.000,30.0000 115.000 30.0000 1980.00 </Image>
+<Image> I316B${I}H0.fits,xI316B${I}H0.fits,126.500,30.0000 126.500 30.0000 1980.00 </Image>
+<Image> I317B${I}H0.fits,xI317B${I}H0.fits,138.000,30.0000 138.000 30.0000 1980.00 </Image>
+<Image> I318B${I}H0.fits,xI318B${I}H0.fits,149.500,30.0000 149.500 30.0000 1980.00 </Image>
+<Image> I319B${I}H0.fits,xI319B${I}H0.fits,161.000,30.0000 161.000 30.0000 1980.00 </Image>
+<Image> I320B${I}H0.fits,xI320B${I}H0.fits,172.500,30.0000 172.500 30.0000 1980.00 </Image>
+<Image> I321B${I}H0.fits,xI321B${I}H0.fits,184.000,30.0000 184.000 30.0000 1980.00 </Image>
+<Image> I322B${I}H0.fits,xI322B${I}H0.fits,195.500,30.0000 195.500 30.0000 1980.00 </Image>
+<Image> I323B${I}H0.fits,xI323B${I}H0.fits,207.000,30.0000 207.000 30.0000 1980.00 </Image>
+<Image> I324B${I}H0.fits,xI324B${I}H0.fits,218.500,30.0000 218.500 30.0000 1980.00 </Image>
+<Image> I325B${I}H0.fits,xI325B${I}H0.fits,230.000,30.0000 230.000 30.0000 1980.00 </Image>
+<Image> I326B${I}H0.fits,xI326B${I}H0.fits,241.500,30.0000 241.500 30.0000 1980.00 </Image>
+<Image> I327B${I}H0.fits,xI327B${I}H0.fits,253.000,30.0000 253.000 30.0000 1980.00 </Image>
+<Image> I328B${I}H0.fits,xI328B${I}H0.fits,264.500,30.0000 264.500 30.0000 1980.00 </Image>
+<Image> I329B${I}H0.fits,xI329B${I}H0.fits,276.000,30.0000 276.000 30.0000 1980.00 </Image>
+<Image> I330B${I}H0.fits,xI330B${I}H0.fits,287.500,30.0000 287.500 30.0000 1980.00 </Image>
+<Image> I331B${I}H0.fits,xI331B${I}H0.fits,299.000,30.0000 299.000 30.0000 1980.00 </Image>
+<Image> I332B${I}H0.fits,xI332B${I}H0.fits,310.500,30.0000 310.500 30.0000 1980.00 </Image>
+<Image> I333B${I}H0.fits,xI333B${I}H0.fits,322.000,30.0000 322.000 30.0000 1980.00 </Image>
+<Image> I334B${I}H0.fits,xI334B${I}H0.fits,333.500,30.0000 333.500 30.0000 1980.00 </Image>
+<Image> I335B${I}H0.fits,xI335B${I}H0.fits,345.000,30.0000 345.000 30.0000 1980.00 </Image>
+<Image> I336B${I}H0.fits,xI336B${I}H0.fits,356.500,30.0000 356.500 30.0000 1980.00 </Image>
+<Image> I337B${I}H0.fits,xI337B${I}H0.fits,0.00000,40.0000 0.00000 40.0000 1980.00 </Image>
+<Image> I338B${I}H0.fits,xI338B${I}H0.fits,13.0000,40.0000 13.0000 40.0000 1980.00 </Image>
+<Image> I339B${I}H0.fits,xI339B${I}H0.fits,26.0000,40.0000 26.0000 40.0000 1980.00 </Image>
+<Image> I340B${I}H0.fits,xI340B${I}H0.fits,39.0000,40.0000 39.0000 40.0000 1980.00 </Image>
+<Image> I341B${I}H0.fits,xI341B${I}H0.fits,52.0000,40.0000 52.0000 40.0000 1980.00 </Image>
+<Image> I342B${I}H0.fits,xI342B${I}H0.fits,65.0000,40.0000 65.0000 40.0000 1980.00 </Image>
+<Image> I343B${I}H0.fits,xI343B${I}H0.fits,78.0000,40.0000 78.0000 40.0000 1980.00 </Image>
+<Image> I344B${I}H0.fits,xI344B${I}H0.fits,91.0000,40.0000 91.0000 40.0000 1980.00 </Image>
+<Image> I345B${I}H0.fits,xI345B${I}H0.fits,104.000,40.0000 104.000 40.0000 1980.00 </Image>
+<Image> I346B${I}H0.fits,xI346B${I}H0.fits,117.000,40.0000 117.000 40.0000 1980.00 </Image>
+<Image> I347B${I}H0.fits,xI347B${I}H0.fits,130.000,40.0000 130.000 40.0000 1980.00 </Image>
+<Image> I348B${I}H0.fits,xI348B${I}H0.fits,143.000,40.0000 143.000 40.0000 1980.00 </Image>
+<Image> I349B${I}H0.fits,xI349B${I}H0.fits,156.000,40.0000 156.000 40.0000 1980.00 </Image>
+<Image> I350B${I}H0.fits,xI350B${I}H0.fits,169.000,40.0000 169.000 40.0000 1980.00 </Image>
+<Image> I351B${I}H0.fits,xI351B${I}H0.fits,182.000,40.0000 182.000 40.0000 1980.00 </Image>
+<Image> I352B${I}H0.fits,xI352B${I}H0.fits,195.000,40.0000 195.000 40.0000 1980.00 </Image>
+<Image> I353B${I}H0.fits,xI353B${I}H0.fits,208.000,40.0000 208.000 40.0000 1980.00 </Image>
+<Image> I354B${I}H0.fits,xI354B${I}H0.fits,221.000,40.0000 221.000 40.0000 1980.00 </Image>
+<Image> I355B${I}H0.fits,xI355B${I}H0.fits,234.000,40.0000 234.000 40.0000 1980.00 </Image>
+<Image> I356B${I}H0.fits,xI356B${I}H0.fits,247.000,40.0000 247.000 40.0000 1980.00 </Image>
+<Image> I357B${I}H0.fits,xI357B${I}H0.fits,260.000,40.0000 260.000 40.0000 1980.00 </Image>
+<Image> I358B${I}H0.fits,xI358B${I}H0.fits,273.000,40.0000 273.000 40.0000 1980.00 </Image>
+<Image> I359B${I}H0.fits,xI359B${I}H0.fits,286.000,40.0000 286.000 40.0000 1980.00 </Image>
+<Image> I360B${I}H0.fits,xI360B${I}H0.fits,299.000,40.0000 299.000 40.0000 1980.00 </Image>
+<Image> I361B${I}H0.fits,xI361B${I}H0.fits,312.000,40.0000 312.000 40.0000 1980.00 </Image>
+<Image> I362B${I}H0.fits,xI362B${I}H0.fits,325.000,40.0000 325.000 40.0000 1980.00 </Image>
+<Image> I363B${I}H0.fits,xI363B${I}H0.fits,338.000,40.0000 338.000 40.0000 1980.00 </Image>
+<Image> I364B${I}H0.fits,xI364B${I}H0.fits,351.000,40.0000 351.000 40.0000 1980.00 </Image>
+<Image> I365B${I}H0.fits,xI365B${I}H0.fits,0.00000,50.0000 0.00000 50.0000 1980.00 </Image>
+<Image> I366B${I}H0.fits,xI366B${I}H0.fits,15.0000,50.0000 15.0000 50.0000 1980.00 </Image>
+<Image> I367B${I}H0.fits,xI367B${I}H0.fits,30.0000,50.0000 30.0000 50.0000 1980.00 </Image>
+<Image> I368B${I}H0.fits,xI368B${I}H0.fits,45.0000,50.0000 45.0000 50.0000 1980.00 </Image>
+<Image> I369B${I}H0.fits,xI369B${I}H0.fits,60.0000,50.0000 60.0000 50.0000 1980.00 </Image>
+<Image> I370B${I}H0.fits,xI370B${I}H0.fits,75.0000,50.0000 75.0000 50.0000 1980.00 </Image>
+<Image> I371B${I}H0.fits,xI371B${I}H0.fits,90.0000,50.0000 90.0000 50.0000 1980.00 </Image>
+<Image> I372B${I}H0.fits,xI372B${I}H0.fits,105.000,50.0000 105.000 50.0000 1980.00 </Image>
+<Image> I373B${I}H0.fits,xI373B${I}H0.fits,120.000,50.0000 120.000 50.0000 1980.00 </Image>
+<Image> I374B${I}H0.fits,xI374B${I}H0.fits,135.000,50.0000 135.000 50.0000 1980.00 </Image>
+<Image> I375B${I}H0.fits,xI375B${I}H0.fits,150.000,50.0000 150.000 50.0000 1980.00 </Image>
+<Image> I376B${I}H0.fits,xI376B${I}H0.fits,165.000,50.0000 165.000 50.0000 1980.00 </Image>
+<Image> I377B${I}H0.fits,xI377B${I}H0.fits,180.000,50.0000 180.000 50.0000 1980.00 </Image>
+<Image> I378B${I}H0.fits,xI378B${I}H0.fits,195.000,50.0000 195.000 50.0000 1980.00 </Image>
+<Image> I379B${I}H0.fits,xI379B${I}H0.fits,210.000,50.0000 210.000 50.0000 1980.00 </Image>
+<Image> I380B${I}H0.fits,xI380B${I}H0.fits,225.000,50.0000 225.000 50.0000 1980.00 </Image>
+<Image> I381B${I}H0.fits,xI381B${I}H0.fits,240.000,50.0000 240.000 50.0000 1980.00 </Image>
+<Image> I382B${I}H0.fits,xI382B${I}H0.fits,255.000,50.0000 255.000 50.0000 1980.00 </Image>
+<Image> I383B${I}H0.fits,xI383B${I}H0.fits,270.000,50.0000 270.000 50.0000 1980.00 </Image>
+<Image> I384B${I}H0.fits,xI384B${I}H0.fits,285.000,50.0000 285.000 50.0000 1980.00 </Image>
+<Image> I385B${I}H0.fits,xI385B${I}H0.fits,300.000,50.0000 300.000 50.0000 1980.00 </Image>
+<Image> I386B${I}H0.fits,xI386B${I}H0.fits,315.000,50.0000 315.000 50.0000 1980.00 </Image>
+<Image> I387B${I}H0.fits,xI387B${I}H0.fits,330.000,50.0000 330.000 50.0000 1980.00 </Image>
+<Image> I388B${I}H0.fits,xI388B${I}H0.fits,345.000,50.0000 345.000 50.0000 1980.00 </Image>
+<Image> I389B${I}H0.fits,xI389B${I}H0.fits,0.00000,60.0000 0.00000 60.0000 1980.00 </Image>
+<Image> I390B${I}H0.fits,xI390B${I}H0.fits,19.0000,60.0000 19.0000 60.0000 1980.00 </Image>
+<Image> I391B${I}H0.fits,xI391B${I}H0.fits,38.0000,60.0000 38.0000 60.0000 1980.00 </Image>
+<Image> I392B${I}H0.fits,xI392B${I}H0.fits,57.0000,60.0000 57.0000 60.0000 1980.00 </Image>
+<Image> I393B${I}H0.fits,xI393B${I}H0.fits,76.0000,60.0000 76.0000 60.0000 1980.00 </Image>
+<Image> I394B${I}H0.fits,xI394B${I}H0.fits,95.0000,60.0000 95.0000 60.0000 1980.00 </Image>
+<Image> I395B${I}H0.fits,xI395B${I}H0.fits,114.000,60.0000 114.000 60.0000 1980.00 </Image>
+<Image> I396B${I}H0.fits,xI396B${I}H0.fits,133.000,60.0000 133.000 60.0000 1980.00 </Image>
+<Image> I397B${I}H0.fits,xI397B${I}H0.fits,152.000,60.0000 152.000 60.0000 1980.00 </Image>
+<Image> I398B${I}H0.fits,xI398B${I}H0.fits,171.000,60.0000 171.000 60.0000 1980.00 </Image>
+<Image> I399B${I}H0.fits,xI399B${I}H0.fits,190.000,60.0000 190.000 60.0000 1980.00 </Image>
+<Image> I400B${I}H0.fits,xI400B${I}H0.fits,209.000,60.0000 209.000 60.0000 1980.00 </Image>
+<Image> I401B${I}H0.fits,xI401B${I}H0.fits,228.000,60.0000 228.000 60.0000 1980.00 </Image>
+<Image> I402B${I}H0.fits,xI402B${I}H0.fits,247.000,60.0000 247.000 60.0000 1980.00 </Image>
+<Image> I403B${I}H0.fits,xI403B${I}H0.fits,266.000,60.0000 266.000 60.0000 1980.00 </Image>
+<Image> I404B${I}H0.fits,xI404B${I}H0.fits,285.000,60.0000 285.000 60.0000 1980.00 </Image>
+<Image> I405B${I}H0.fits,xI405B${I}H0.fits,304.000,60.0000 304.000 60.0000 1980.00 </Image>
+<Image> I406B${I}H0.fits,xI406B${I}H0.fits,323.000,60.0000 323.000 60.0000 1980.00 </Image>
+<Image> I407B${I}H0.fits,xI407B${I}H0.fits,342.000,60.0000 342.000 60.0000 1980.00 </Image>
+<Image> I408B${I}H0.fits,xI408B${I}H0.fits,0.00000,70.0000 0.00000 70.0000 1980.00 </Image>
+<Image> I409B${I}H0.fits,xI409B${I}H0.fits,26.0000,70.0000 26.0000 70.0000 1980.00 </Image>
+<Image> I410B${I}H0.fits,xI410B${I}H0.fits,52.0000,70.0000 52.0000 70.0000 1980.00 </Image>
+<Image> I411B${I}H0.fits,xI411B${I}H0.fits,78.0000,70.0000 78.0000 70.0000 1980.00 </Image>
+<Image> I412B${I}H0.fits,xI412B${I}H0.fits,104.000,70.0000 104.000 70.0000 1980.00 </Image>
+<Image> I413B${I}H0.fits,xI413B${I}H0.fits,130.000,70.0000 130.000 70.0000 1980.00 </Image>
+<Image> I414B${I}H0.fits,xI414B${I}H0.fits,156.000,70.0000 156.000 70.0000 1980.00 </Image>
+<Image> I415B${I}H0.fits,xI415B${I}H0.fits,182.000,70.0000 182.000 70.0000 1980.00 </Image>
+<Image> I416B${I}H0.fits,xI416B${I}H0.fits,208.000,70.0000 208.000 70.0000 1980.00 </Image>
+<Image> I417B${I}H0.fits,xI417B${I}H0.fits,234.000,70.0000 234.000 70.0000 1980.00 </Image>
+<Image> I418B${I}H0.fits,xI418B${I}H0.fits,260.000,70.0000 260.000 70.0000 1980.00 </Image>
+<Image> I419B${I}H0.fits,xI419B${I}H0.fits,286.000,70.0000 286.000 70.0000 1980.00 </Image>
+<Image> I420B${I}H0.fits,xI420B${I}H0.fits,312.000,70.0000 312.000 70.0000 1980.00 </Image>
+<Image> I421B${I}H0.fits,xI421B${I}H0.fits,338.000,70.0000 338.000 70.0000 1980.00 </Image>
+<Image> I422B${I}H0.fits,xI422B${I}H0.fits,0.00000,80.0000 0.00000 80.0000 1980.00 </Image>
+<Image> I423B${I}H0.fits,xI423B${I}H0.fits,45.0000,80.0000 45.0000 80.0000 1980.00 </Image>
+<Image> I424B${I}H0.fits,xI424B${I}H0.fits,90.0000,80.0000 90.0000 80.0000 1980.00 </Image>
+<Image> I425B${I}H0.fits,xI425B${I}H0.fits,135.000,80.0000 135.000 80.0000 1980.00 </Image>
+<Image> I426B${I}H0.fits,xI426B${I}H0.fits,180.000,80.0000 180.000 80.0000 1980.00 </Image>
+<Image> I427B${I}H0.fits,xI427B${I}H0.fits,225.000,80.0000 225.000 80.0000 1980.00 </Image>
+<Image> I428B${I}H0.fits,xI428B${I}H0.fits,270.000,80.0000 270.000 80.0000 1980.00 </Image>
+<Image> I429B${I}H0.fits,xI429B${I}H0.fits,315.000,80.0000 315.000 80.0000 1980.00 </Image>
+<Image> I430B${I}H0.fits,xI430B${I}H0.fits,0.00000,90.0000 0.00000 90.0000 1980.00 </Image>
+    </Images>
+</Survey>

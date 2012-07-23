@@ -1,0 +1,69 @@
+<Survey>
+  <ShortName>Fermi ${I}, Fermi${I}, Fermi band ${I}</ShortName>
+  
+  <Name>Fermi Counts Map: Band ${I}</Name>
+  
+  <Description>
+   <![CDATA[
+
+This survey is derived from summing the weekly results of the Fermi mission.
+The current map includes 196 maps.  The overall coverage of the Fermi mission
+is now sufficiently uniform, that we provide only a counts map rather than dividing
+by ab exoposure map.  Photons with an earth zenith angle of greater than 100 degrees
+are rejected.  Data is broken into 5 energy bands
+<ul>
+<li> 30-100 MeV Band 1 </li>
+<li> 100-300 MeV Band 2 </li>
+<li> 300-1000 MeV Band 3 </li>
+<li> 1-3 GeV Band 4 </li>
+<li> 3-300 GeV Band 5 </li>
+</ul>
+]]>
+  </Description>
+  <Settings>
+    <GeometryTwin>fermi1,fermi2,fermi3,fermi4,fermi5</GeometryTwin>
+    <Scale> 0.1 </Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance>  Fermi LAT instrument team, NASA Goddard Space  Flight Center
+    </Provenance>
+    <Copyright>   Public domain       </Copyright>
+    <Regime>      Gamma Ray           </Regime>
+    <NSurveys>    5                   </NSurveys>
+    <Frequency>   ${F} ZHz </Frequency>
+    <Bandwidth>   ${B} ZHz (${BeV})</Bandwidth>
+    <Coverage>    All-sky             </Coverage>
+    <Resolution>  ${R} degrees. </Resolution>
+    <PixelScale>  0.1 degrees/pixel   </PixelScale>
+    <PixelUnits>  counts </PixelUnits>
+    <Coordinates> Equatorial          </Coordinates>
+    <Equinox>     2000                </Equinox>
+    <Projection>  Rectangular         </Projection>
+    <Epoch>       2008-2012           </Epoch>
+    <Reference>
+      <![CDATA[
+      <a href="http://fermi.gsfc.nasa.gov/ssc/observations/types/allsky">Data</a>
+      and <a href="http://adsabs.harvard.edu/abs/2009ApJ...697.1071A">survey paper (ADS)</a>
+      ]]>
+    </Reference>
+  </MetaTable>
+  
+  <OnlineText/>
+
+  <FITS>
+<![CDATA[
+SURVEY  = 'FERMI Band ${I}'       / ${BeV}
+ORIGIN  = 'GSFC    '           / File produced at Goddard Space Flight Center   
+TELESCOP= 'FERMI LAT'          / 
+]]>
+  </FITS>
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/fermi/ </SpellPrefix>
+        <SpellSuffix> ,Car,J2000,3600,1800,0.1,0.1 </SpellSuffix>
+        <ImageSize>    360                            </ImageSize>
+        <Image>        fermisum_${I}.fits,fermisum_${I}.fits,1800,900 0 0 2010       </Image>
+    </Images>
+</Survey>

@@ -1,0 +1,72 @@
+<Survey>
+  <!-- The Short name is used when the survey is part of a list -->
+  <ShortName> SFD${T1},SFD ${T1}, SFD ${T2}</ShortName>
+  
+  <!-- This is a more complete descriptive name -->
+  <Name>Schlegel, Finkbeiner and Davis ${T2} survey</Name>
+  
+  <!-- A text description of the survey.  This may include HTML and
+       if so would normally be included in a CDATA element. -->
+  <Description>
+   <![CDATA[
+The full sky 100 micron map is a reprocessed composite of the COBE/DIRBE 
+and IRAS/ISSA maps, with the zodiacal foreground and confirmed point 
+sources removed.  Artifacts from the IRAS scan pattern were removed.
+The result of these manipulations is a map with DIRBE-quality calibration 
+and IR AS resolution.
+]]>
+  </Description>
+
+  <Settings>
+    <Scale> 0.039564679  </Scale>
+  </Settings>
+  
+  <!-- The MetaTable includes a set of standard metadata about the survey -->
+  <MetaTable>
+    <Provenance> David J. Schlegel, Douglas P. Finkbeiner 
+and Marc Davis, Princeton University and University of California, Berkeley  </Provenance>
+    <Copyright>     Public domain           </Copyright>
+    <Regime>        Infrared                </Regime>
+    <Frequency>     3 THz                   </Frequency>
+    <Bandpass>      2.519 - 3.612 THz       </Bandpass>
+    <Coverage>      All-sky                 </Coverage>
+    <PixelScale>    2.4'/pixel              </PixelScale>
+    <PixelUnits>    ${U}
+    MegaJanskies per steradian (100 micron map) and E(B-V) reddening (Dust map)</PixelUnits>
+    <Resolution>    6' full-width half-maximum</Resolution>
+    <Coordinates>   Galactic                </Coordinates>
+    <Projection>    Zenith Equal Area       </Projection>
+    <Equinox>       2000                    </Equinox>
+    <Epoch>         1983                    </Epoch>
+    <Reference>     <![CDATA[
+David J. Schlegel, Douglas P. Finkbeiner, &amp; Marc Davis , 1998,
+<a href="http://adsabs.harvard.edu/abs/1998ApJ...500..525S">Maps of Dust Infrared Emission for Use in Estimation of Reddening and Cosmic Microwave Background Radiation Foregrounds (ADS)</a>.  See also
+<a href="http://astron.berkeley.edu/~marc/dust/index.html">Dirbe/IRAS Dust Maps</a>
+]]> </Reference>
+
+  </MetaTable>
+  <FITS>
+<![CDATA[
+SURVEY  = 'SFD ${T2}'
+BUNIT   = '${U}  '                    /
+ORIGIN  = 'PRINCETON U/UC BERKELEY'   /  INSTITUTION                     
+TELESCOP= 'IRAS/COBE'                 /                                  
+COMMENT   
+]]>
+  </FITS>
+  
+  <!-- The Images area includes descriptors of the images in the survey
+       and replaces the config file in the previous version of SkyView.
+       Each Image line has 4 tokens: filename, J2000 RA, J2000 Dec and
+       Epoch of the image.
+    -->
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    90 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/sfd_dust/ </SpellPrefix>
+        <SpellSuffix> ,Zea,G,4096,4096,0.0395646818624,0.0395646818624 </SpellSuffix>
+        <Image> SFD_${F}_sgp_0.fits,SFD_${F}_sgp_0.fits,90.,-90.000  12.9 -27.13 1999.0 </Image>
+        <Image> SFD_${F}_ngp_0.fits,SFD_${F}_ngp_0.fits,270.000,90.000   192.9  27.13 1999.0 </Image>
+    </Images>
+</Survey>

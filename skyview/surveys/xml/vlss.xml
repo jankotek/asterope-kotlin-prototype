@@ -1,0 +1,417 @@
+<Survey>
+  <ShortName>VLSS,4MASS,VLSS</ShortName>
+  
+  <Name>VLA Low-frequency Sky Survey</Name>
+  
+  <Description>
+   <![CDATA[
+   The VLA Low-Frequency Sky Survey (VLSS) is a 74 MHz continuum survey 
+   covering the entire sky north of -30 degrees declination. Using the 
+   VLA in BnA and B-configurations, it will map the entire survey region 
+   at a resolution of 80" and with an average rms noise of 0.1 Jy/beam. 
+    ]]>
+  </Description>
+  
+  <Settings>
+    <Scale> 0.00694444444 </Scale>
+  </Settings>
+  
+  <MetaTable>
+    <Provenance> 
+    <![CDATA[
+    <b>VLSS Team: </b>R.A. Perley, J.J. Condon,  W.D. Cotton (NRAO);
+    A.S. Cohen, W.M. Lane (NRC/NRL),
+    N.E. Kassim, T.J.W. Lazio (NRL),
+    W.C. Erickson (UMd)
+    ]]>
+    </Provenance> 
+    <Copyright>
+    </Copyright>
+    <Regime>      Radio         </Regime>
+    <NSurvey>     1             </NSurvey>
+    <Frequency>   74 MHz  </Frequency>
+    <Bandpass>    73.712 - 73.888 MHz </Bandpass>
+    <Coverage>     Declinations above -30 degrees </Coverage>
+    <PixelScale>  25"/pixel     </PixelScale>
+    <PixelUnits>  Janskies/beam </PixelUnits>
+    <Resolution>  80"           </Resolution>
+    <Coordinates> Equatorial    </Coordinates>
+    <Equinox>     2000          </Equinox> 
+    <Projection>  Orthographic (Sin)  </Projection>>
+    <Epoch>       2001-2007 </Epoch>
+    <Reference>
+<![CDATA[
+<a href='http://adsabs.harvard.edu/abs/2007AJ....134.1245C'>ADS</a><br>
+<a href="http://lwa.nrl.navy.mil/VLSS/">VLSS home page </a> 
+or <a href="http://lwa.nrl.navy.mil/VLSS/proposal.ps">the VLSS proposal </a>
+]]>
+    </Reference>
+  </MetaTable>
+  
+  <OnlineText/>
+
+  <FITS>
+<![CDATA[
+SURVEY  = 'VLSS    '
+TELESCOP= 'VLA     '                                                            
+OBSERVER= 'VLSS GRP'                                                            
+BUNIT   = 'JY/BEAM ' 
+]]>
+  </FITS>
+  
+    <Images>
+        <ImageFactory> skyview.survey.CachingImageFactory</ImageFactory>
+        <ImageSize>    6 </ImageSize>
+	<SpellPrefix>  http://skyview.gsfc.nasa.gov/surveys/vlss/ </SpellPrefix>
+        <SpellSuffix> ,Sin,J2000,2048,2048,0.0069444444,0.0069444444 </SpellSuffix>
+    <Image> 0000+050.FITS.gz,0000+050.FITS.gz,0,5               0.00       5.00       2006 </Image>
+    <Image> 0000+150.FITS.gz,0000+150.FITS.gz,0,15              0.00      15.00       2006 </Image>
+    <Image> 0000+250.FITS.gz,0000+250.FITS.gz,0,25              0.00      25.00       2006 </Image>
+    <Image> 0000+350.FITS.gz,0000+350.FITS.gz,0,35              0.00      35.00       2006 </Image>
+    <Image> 0000+450.FITS.gz,0000+450.FITS.gz,0,45              0.00      45.00       2006 </Image>
+    <Image> 0000+550.FITS.gz,0000+550.FITS.gz,0,55              0.00      55.00       2006 </Image>
+    <Image> 0000+650.FITS.gz,0000+650.FITS.gz,0,65              0.00      65.00       2006 </Image>
+    <Image> 0000+750.FITS.gz,0000+750.FITS.gz,0,75              0.00      75.00       2006 </Image>
+    <Image> 0000+850.FITS.gz,0000+850.FITS.gz,0,85              0.00      85.00       2006 </Image>
+    <Image> 0000-050.FITS.gz,0000-050.FITS.gz,0,-5              0.00      -5.00       2006 </Image>
+    <Image> 0000-150.FITS.gz,0000-150.FITS.gz,0,-15             0.00     -15.00       2006 </Image>
+    <Image> 0000-250.FITS.gz,0000-250.FITS.gz,0,-25             0.00     -25.00       2006 </Image>
+    <Image> 0000-350.FITS.gz,0000-350.FITS.gz,0,-35             0.00     -35.00       2006 </Image>
+    <Image> 0040+050.FITS.gz,0040+050.FITS.gz,10,5             10.00       5.00       2006 </Image>
+    <Image> 0040+150.FITS.gz,0040+150.FITS.gz,10,15            10.00      15.00       2006 </Image>
+    <Image> 0040-050.FITS.gz,0040-050.FITS.gz,10,-5            10.00      -5.00       2006 </Image>
+    <Image> 0040-150.FITS.gz,0040-150.FITS.gz,10,-15           10.00     -15.00       2006 </Image>
+    <Image> 0045+250.FITS.gz,0045+250.FITS.gz,11.25,25         11.25      25.00       2006 </Image>
+    <Image> 0045-250.FITS.gz,0045-250.FITS.gz,11.25,-25        11.25     -25.00       2006 </Image>
+    <Image> 0048+350.FITS.gz,0048+350.FITS.gz,12,35            12.00      35.00       2006 </Image>
+    <Image> 0048+450.FITS.gz,0048+450.FITS.gz,12,45            12.00      45.00       2006 </Image>
+    <Image> 0048-350.FITS.gz,0048-350.FITS.gz,12,-35           12.00     -35.00       2006 </Image>
+    <Image> 0100+550.FITS.gz,0100+550.FITS.gz,15,55            15.00      55.00       2006 </Image>
+    <Image> 0120+050.FITS.gz,0120+050.FITS.gz,20,5             20.00       5.00       2006 </Image>
+    <Image> 0120+150.FITS.gz,0120+150.FITS.gz,20,15            20.00      15.00       2006 </Image>
+    <Image> 0120+650.FITS.gz,0120+650.FITS.gz,20,65            20.00      65.00       2006 </Image>
+    <Image> 0120-050.FITS.gz,0120-050.FITS.gz,20,-5            20.00      -5.00       2006 </Image>
+    <Image> 0120-150.FITS.gz,0120-150.FITS.gz,20,-15           20.00     -15.00       2006 </Image>
+    <Image> 0130+250.FITS.gz,0130+250.FITS.gz,22.5,25          22.50      25.00       2006 </Image>
+    <Image> 0130-250.FITS.gz,0130-250.FITS.gz,22.5,-25         22.50     -25.00       2006 </Image>
+    <Image> 0136+350.FITS.gz,0136+350.FITS.gz,24,35            24.00      35.00       2006 </Image>
+    <Image> 0136+450.FITS.gz,0136+450.FITS.gz,24,45            24.00      45.00       2006 </Image>
+    <Image> 0136-350.FITS.gz,0136-350.FITS.gz,24,-35           24.00     -35.00       2006 </Image>
+    <Image> 0200+050.FITS.gz,0200+050.FITS.gz,30,5             30.00       5.00       2006 </Image>
+    <Image> 0200+150.FITS.gz,0200+150.FITS.gz,30,15            30.00      15.00       2006 </Image>
+    <Image> 0200+550.FITS.gz,0200+550.FITS.gz,30,55            30.00      55.00       2006 </Image>
+    <Image> 0200+750.FITS.gz,0200+750.FITS.gz,30,75            30.00      75.00       2006 </Image>
+    <Image> 0200-050.FITS.gz,0200-050.FITS.gz,30,-5            30.00      -5.00       2006 </Image>
+    <Image> 0200-150.FITS.gz,0200-150.FITS.gz,30,-15           30.00     -15.00       2006 </Image>
+    <Image> 0215+250.FITS.gz,0215+250.FITS.gz,33.75,25         33.75      25.00       2006 </Image>
+    <Image> 0215-250.FITS.gz,0215-250.FITS.gz,33.75,-25        33.75     -25.00       2006 </Image>
+    <Image> 0224+350.FITS.gz,0224+350.FITS.gz,36,35            36.00      35.00       2006 </Image>
+    <Image> 0224+450.FITS.gz,0224+450.FITS.gz,36,45            36.00      45.00       2006 </Image>
+    <Image> 0224-350.FITS.gz,0224-350.FITS.gz,36,-35           36.00     -35.00       2006 </Image>
+    <Image> 0240+050.FITS.gz,0240+050.FITS.gz,40,5             40.00       5.00       2006 </Image>
+    <Image> 0240+150.FITS.gz,0240+150.FITS.gz,40,15            40.00      15.00       2006 </Image>
+    <Image> 0240+650.FITS.gz,0240+650.FITS.gz,40,65            40.00      65.00       2006 </Image>
+    <Image> 0240-050.FITS.gz,0240-050.FITS.gz,40,-5            40.00      -5.00       2006 </Image>
+    <Image> 0240-150.FITS.gz,0240-150.FITS.gz,40,-15           40.00     -15.00       2006 </Image>
+    <Image> 0300+250.FITS.gz,0300+250.FITS.gz,45,25            45.00      25.00       2006 </Image>
+    <Image> 0300+550.FITS.gz,0300+550.FITS.gz,45,55            45.00      55.00       2006 </Image>
+    <Image> 0300-250.FITS.gz,0300-250.FITS.gz,45,-25           45.00     -25.00       2006 </Image>
+    <Image> 0312+350.FITS.gz,0312+350.FITS.gz,48,35            48.00      35.00       2006 </Image>
+    <Image> 0312+450.FITS.gz,0312+450.FITS.gz,48,45            48.00      45.00       2006 </Image>
+    <Image> 0312-350.FITS.gz,0312-350.FITS.gz,48,-35           48.00     -35.00       2006 </Image>
+    <Image> 0320+050.FITS.gz,0320+050.FITS.gz,50,5             50.00       5.00       2006 </Image>
+    <Image> 0320+150.FITS.gz,0320+150.FITS.gz,50,15            50.00      15.00       2006 </Image>
+    <Image> 0320-050.FITS.gz,0320-050.FITS.gz,50,-5            50.00      -5.00       2006 </Image>
+    <Image> 0320-150.FITS.gz,0320-150.FITS.gz,50,-15           50.00     -15.00       2006 </Image>
+    <Image> 0345+250.FITS.gz,0345+250.FITS.gz,56.25,25         56.25      25.00       2006 </Image>
+    <Image> 0345-250.FITS.gz,0345-250.FITS.gz,56.25,-25        56.25     -25.00       2006 </Image>
+    <Image> 0400+050.FITS.gz,0400+050.FITS.gz,60,5             60.00       5.00       2006 </Image>
+    <Image> 0400+150.FITS.gz,0400+150.FITS.gz,60,15            60.00      15.00       2006 </Image>
+    <Image> 0400+350.FITS.gz,0400+350.FITS.gz,60,35            60.00      35.00       2006 </Image>
+    <Image> 0400+450.FITS.gz,0400+450.FITS.gz,60,45            60.00      45.00       2006 </Image>
+    <Image> 0400+550.FITS.gz,0400+550.FITS.gz,60,55            60.00      55.00       2006 </Image>
+    <Image> 0400+650.FITS.gz,0400+650.FITS.gz,60,65            60.00      65.00       2006 </Image>
+    <Image> 0400+750.FITS.gz,0400+750.FITS.gz,60,75            60.00      75.00       2006 </Image>
+    <Image> 0400+850.FITS.gz,0400+850.FITS.gz,60,85            60.00      85.00       2006 </Image>
+    <Image> 0400-050.FITS.gz,0400-050.FITS.gz,60,-5            60.00      -5.00       2006 </Image>
+    <Image> 0400-150.FITS.gz,0400-150.FITS.gz,60,-15           60.00     -15.00       2006 </Image>
+    <Image> 0400-350.FITS.gz,0400-350.FITS.gz,60,-35           60.00     -35.00       2006 </Image>
+    <Image> 0430+250.FITS.gz,0430+250.FITS.gz,67.5,25          67.50      25.00       2006 </Image>
+    <Image> 0430-250.FITS.gz,0430-250.FITS.gz,67.5,-25         67.50     -25.00       2006 </Image>
+    <Image> 0440+050.FITS.gz,0440+050.FITS.gz,70,5             70.00       5.00       2006 </Image>
+    <Image> 0440+150.FITS.gz,0440+150.FITS.gz,70,15            70.00      15.00       2006 </Image>
+    <Image> 0440-050.FITS.gz,0440-050.FITS.gz,70,-5            70.00      -5.00       2006 </Image>
+    <Image> 0440-150.FITS.gz,0440-150.FITS.gz,70,-15           70.00     -15.00       2006 </Image>
+    <Image> 0448+350.FITS.gz,0448+350.FITS.gz,72,35            72.00      35.00       2006 </Image>
+    <Image> 0448+450.FITS.gz,0448+450.FITS.gz,72,45            72.00      45.00       2006 </Image>
+    <Image> 0448-350.FITS.gz,0448-350.FITS.gz,72,-35           72.00     -35.00       2006 </Image>
+    <Image> 0500+550.FITS.gz,0500+550.FITS.gz,75,55            75.00      55.00       2006 </Image>
+    <Image> 0515+250.FITS.gz,0515+250.FITS.gz,78.75,25         78.75      25.00       2006 </Image>
+    <Image> 0515-250.FITS.gz,0515-250.FITS.gz,78.75,-25        78.75     -25.00       2006 </Image>
+    <Image> 0520+050.FITS.gz,0520+050.FITS.gz,80,5             80.00       5.00       2006 </Image>
+    <Image> 0520+150.FITS.gz,0520+150.FITS.gz,80,15            80.00      15.00       2006 </Image>
+    <Image> 0520+650.FITS.gz,0520+650.FITS.gz,80,65            80.00      65.00       2006 </Image>
+    <Image> 0520-050.FITS.gz,0520-050.FITS.gz,80,-5            80.00      -5.00       2006 </Image>
+    <Image> 0520-150.FITS.gz,0520-150.FITS.gz,80,-15           80.00     -15.00       2006 </Image>
+    <Image> 0536+350.FITS.gz,0536+350.FITS.gz,84,35            84.00      35.00       2006 </Image>
+    <Image> 0536+450.FITS.gz,0536+450.FITS.gz,84,45            84.00      45.00       2006 </Image>
+    <Image> 0536-350.FITS.gz,0536-350.FITS.gz,84,-35           84.00     -35.00       2006 </Image>
+    <Image> 0600+050.FITS.gz,0600+050.FITS.gz,90,5             90.00       5.00       2006 </Image>
+    <Image> 0600+150.FITS.gz,0600+150.FITS.gz,90,15            90.00      15.00       2006 </Image>
+    <Image> 0600+250.FITS.gz,0600+250.FITS.gz,90,25            90.00      25.00       2006 </Image>
+    <Image> 0600+550.FITS.gz,0600+550.FITS.gz,90,55            90.00      55.00       2006 </Image>
+    <Image> 0600+750.FITS.gz,0600+750.FITS.gz,90,75            90.00      75.00       2006 </Image>
+    <Image> 0600-050.FITS.gz,0600-050.FITS.gz,90,-5            90.00      -5.00       2006 </Image>
+    <Image> 0600-150.FITS.gz,0600-150.FITS.gz,90,-15           90.00     -15.00       2006 </Image>
+    <Image> 0600-250.FITS.gz,0600-250.FITS.gz,90,-25           90.00     -25.00       2006 </Image>
+    <Image> 0624+350.FITS.gz,0624+350.FITS.gz,96,35            96.00      35.00       2006 </Image>
+    <Image> 0624+450.FITS.gz,0624+450.FITS.gz,96,45            96.00      45.00       2006 </Image>
+    <Image> 0624-350.FITS.gz,0624-350.FITS.gz,96,-35           96.00     -35.00       2006 </Image>
+    <Image> 0640+050.FITS.gz,0640+050.FITS.gz,100,5           100.00       5.00       2006 </Image>
+    <Image> 0640+150.FITS.gz,0640+150.FITS.gz,100,15          100.00      15.00       2006 </Image>
+    <Image> 0640+650.FITS.gz,0640+650.FITS.gz,100,65          100.00      65.00       2006 </Image>
+    <Image> 0640-050.FITS.gz,0640-050.FITS.gz,100,-5          100.00      -5.00       2006 </Image>
+    <Image> 0640-150.FITS.gz,0640-150.FITS.gz,100,-15         100.00     -15.00       2006 </Image>
+    <Image> 0645+250.FITS.gz,0645+250.FITS.gz,101.25,25       101.25      25.00       2006 </Image>
+    <Image> 0645-250.FITS.gz,0645-250.FITS.gz,101.25,-25      101.25     -25.00       2006 </Image>
+    <Image> 0700+550.FITS.gz,0700+550.FITS.gz,105,55          105.00      55.00       2006 </Image>
+    <Image> 0712+350.FITS.gz,0712+350.FITS.gz,108,35          108.00      35.00       2006 </Image>
+    <Image> 0712+450.FITS.gz,0712+450.FITS.gz,108,45          108.00      45.00       2006 </Image>
+    <Image> 0712-350.FITS.gz,0712-350.FITS.gz,108,-35         108.00     -35.00       2006 </Image>
+    <Image> 0720+050.FITS.gz,0720+050.FITS.gz,110,5           110.00       5.00       2006 </Image>
+    <Image> 0720+150.FITS.gz,0720+150.FITS.gz,110,15          110.00      15.00       2006 </Image>
+    <Image> 0720-050.FITS.gz,0720-050.FITS.gz,110,-5          110.00      -5.00       2006 </Image>
+    <Image> 0720-150.FITS.gz,0720-150.FITS.gz,110,-15         110.00     -15.00       2006 </Image>
+    <Image> 0730+250.FITS.gz,0730+250.FITS.gz,112.5,25        112.50      25.00       2006 </Image>
+    <Image> 0730-250.FITS.gz,0730-250.FITS.gz,112.5,-25       112.50     -25.00       2006 </Image>
+    <Image> 0800+050.FITS.gz,0800+050.FITS.gz,120,5           120.00       5.00       2006 </Image>
+    <Image> 0800+150.FITS.gz,0800+150.FITS.gz,120,15          120.00      15.00       2006 </Image>
+    <Image> 0800+350.FITS.gz,0800+350.FITS.gz,120,35          120.00      35.00       2006 </Image>
+    <Image> 0800+450.FITS.gz,0800+450.FITS.gz,120,45          120.00      45.00       2006 </Image>
+    <Image> 0800+550.FITS.gz,0800+550.FITS.gz,120,55          120.00      55.00       2006 </Image>
+    <Image> 0800+650.FITS.gz,0800+650.FITS.gz,120,65          120.00      65.00       2006 </Image>
+    <Image> 0800+750.FITS.gz,0800+750.FITS.gz,120,75          120.00      75.00       2006 </Image>
+    <Image> 0800+850.FITS.gz,0800+850.FITS.gz,120,85          120.00      85.00       2006 </Image>
+    <Image> 0800-050.FITS.gz,0800-050.FITS.gz,120,-5          120.00      -5.00       2006 </Image>
+    <Image> 0800-150.FITS.gz,0800-150.FITS.gz,120,-15         120.00     -15.00       2006 </Image>
+    <Image> 0800-350.FITS.gz,0800-350.FITS.gz,120,-35         120.00     -35.00       2006 </Image>
+    <Image> 0815+250.FITS.gz,0815+250.FITS.gz,123.75,25       123.75      25.00       2006 </Image>
+    <Image> 0815-250.FITS.gz,0815-250.FITS.gz,123.75,-25      123.75     -25.00       2006 </Image>
+    <Image> 0840+050.FITS.gz,0840+050.FITS.gz,130,5           130.00       5.00       2006 </Image>
+    <Image> 0840+150.FITS.gz,0840+150.FITS.gz,130,15          130.00      15.00       2006 </Image>
+    <Image> 0840-050.FITS.gz,0840-050.FITS.gz,130,-5          130.00      -5.00       2006 </Image>
+    <Image> 0840-150.FITS.gz,0840-150.FITS.gz,130,-15         130.00     -15.00       2006 </Image>
+    <Image> 0848+350.FITS.gz,0848+350.FITS.gz,132,35          132.00      35.00       2006 </Image>
+    <Image> 0848+450.FITS.gz,0848+450.FITS.gz,132,45          132.00      45.00       2006 </Image>
+    <Image> 0848-350.FITS.gz,0848-350.FITS.gz,132,-35         132.00     -35.00       2006 </Image>
+    <Image> 0900+250.FITS.gz,0900+250.FITS.gz,135,25          135.00      25.00       2006 </Image>
+    <Image> 0900+550.FITS.gz,0900+550.FITS.gz,135,55          135.00      55.00       2006 </Image>
+    <Image> 0900-250.FITS.gz,0900-250.FITS.gz,135,-25         135.00     -25.00       2006 </Image>
+    <Image> 0920+050.FITS.gz,0920+050.FITS.gz,140,5           140.00       5.00       2006 </Image>
+    <Image> 0920+150.FITS.gz,0920+150.FITS.gz,140,15          140.00      15.00       2006 </Image>
+    <Image> 0920+650.FITS.gz,0920+650.FITS.gz,140,65          140.00      65.00       2006 </Image>
+    <Image> 0920-050.FITS.gz,0920-050.FITS.gz,140,-5          140.00      -5.00       2006 </Image>
+    <Image> 0920-150.FITS.gz,0920-150.FITS.gz,140,-15         140.00     -15.00       2006 </Image>
+    <Image> 0936+350.FITS.gz,0936+350.FITS.gz,144,35          144.00      35.00       2006 </Image>
+    <Image> 0936+450.FITS.gz,0936+450.FITS.gz,144,45          144.00      45.00       2006 </Image>
+    <Image> 0936-350.FITS.gz,0936-350.FITS.gz,144,-35         144.00     -35.00       2006 </Image>
+    <Image> 0945+250.FITS.gz,0945+250.FITS.gz,146.25,25       146.25      25.00       2006 </Image>
+    <Image> 0945-250.FITS.gz,0945-250.FITS.gz,146.25,-25      146.25     -25.00       2006 </Image>
+    <Image> 1000+050.FITS.gz,1000+050.FITS.gz,150,5           150.00       5.00       2006 </Image>
+    <Image> 1000+150.FITS.gz,1000+150.FITS.gz,150,15          150.00      15.00       2006 </Image>
+    <Image> 1000+550.FITS.gz,1000+550.FITS.gz,150,55          150.00      55.00       2006 </Image>
+    <Image> 1000+750.FITS.gz,1000+750.FITS.gz,150,75          150.00      75.00       2006 </Image>
+    <Image> 1000-050.FITS.gz,1000-050.FITS.gz,150,-5          150.00      -5.00       2006 </Image>
+    <Image> 1000-150.FITS.gz,1000-150.FITS.gz,150,-15         150.00     -15.00       2006 </Image>
+    <Image> 1024+350.FITS.gz,1024+350.FITS.gz,156,35          156.00      35.00       2006 </Image>
+    <Image> 1024+450.FITS.gz,1024+450.FITS.gz,156,45          156.00      45.00       2006 </Image>
+    <Image> 1024-350.FITS.gz,1024-350.FITS.gz,156,-35         156.00     -35.00       2006 </Image>
+    <Image> 1030+250.FITS.gz,1030+250.FITS.gz,157.5,25        157.50      25.00       2006 </Image>
+    <Image> 1030-250.FITS.gz,1030-250.FITS.gz,157.5,-25       157.50     -25.00       2006 </Image>
+    <Image> 1040+050.FITS.gz,1040+050.FITS.gz,160,5           160.00       5.00       2006 </Image>
+    <Image> 1040+150.FITS.gz,1040+150.FITS.gz,160,15          160.00      15.00       2006 </Image>
+    <Image> 1040+650.FITS.gz,1040+650.FITS.gz,160,65          160.00      65.00       2006 </Image>
+    <Image> 1040-050.FITS.gz,1040-050.FITS.gz,160,-5          160.00      -5.00       2006 </Image>
+    <Image> 1040-150.FITS.gz,1040-150.FITS.gz,160,-15         160.00     -15.00       2006 </Image>
+    <Image> 1100+550.FITS.gz,1100+550.FITS.gz,165,55          165.00      55.00       2006 </Image>
+    <Image> 1112+350.FITS.gz,1112+350.FITS.gz,168,35          168.00      35.00       2006 </Image>
+    <Image> 1112+450.FITS.gz,1112+450.FITS.gz,168,45          168.00      45.00       2006 </Image>
+    <Image> 1112-350.FITS.gz,1112-350.FITS.gz,168,-35         168.00     -35.00       2006 </Image>
+    <Image> 1115+250.FITS.gz,1115+250.FITS.gz,168.75,25       168.75      25.00       2006 </Image>
+    <Image> 1115-250.FITS.gz,1115-250.FITS.gz,168.75,-25      168.75     -25.00       2006 </Image>
+    <Image> 1120+050.FITS.gz,1120+050.FITS.gz,170,5           170.00       5.00       2006 </Image>
+    <Image> 1120+150.FITS.gz,1120+150.FITS.gz,170,15          170.00      15.00       2006 </Image>
+    <Image> 1120-050.FITS.gz,1120-050.FITS.gz,170,-5          170.00      -5.00       2006 </Image>
+    <Image> 1120-150.FITS.gz,1120-150.FITS.gz,170,-15         170.00     -15.00       2006 </Image>
+    <Image> 1200+050.FITS.gz,1200+050.FITS.gz,180,5           180.00       5.00       2006 </Image>
+    <Image> 1200+150.FITS.gz,1200+150.FITS.gz,180,15          180.00      15.00       2006 </Image>
+    <Image> 1200+250.FITS.gz,1200+250.FITS.gz,180,25          180.00      25.00       2006 </Image>
+    <Image> 1200+350.FITS.gz,1200+350.FITS.gz,180,35          180.00      35.00       2006 </Image>
+    <Image> 1200+450.FITS.gz,1200+450.FITS.gz,180,45          180.00      45.00       2006 </Image>
+    <Image> 1200+550.FITS.gz,1200+550.FITS.gz,180,55          180.00      55.00       2006 </Image>
+    <Image> 1200+650.FITS.gz,1200+650.FITS.gz,180,65          180.00      65.00       2006 </Image>
+    <Image> 1200+750.FITS.gz,1200+750.FITS.gz,180,75          180.00      75.00       2006 </Image>
+    <Image> 1200+850.FITS.gz,1200+850.FITS.gz,180,85          180.00      85.00       2006 </Image>
+    <Image> 1200-050.FITS.gz,1200-050.FITS.gz,180,-5          180.00      -5.00       2006 </Image>
+    <Image> 1200-150.FITS.gz,1200-150.FITS.gz,180,-15         180.00     -15.00       2006 </Image>
+    <Image> 1200-250.FITS.gz,1200-250.FITS.gz,180,-25         180.00     -25.00       2006 </Image>
+    <Image> 1200-350.FITS.gz,1200-350.FITS.gz,180,-35         180.00     -35.00       2006 </Image>
+    <Image> 1240+050.FITS.gz,1240+050.FITS.gz,190,5           190.00       5.00       2006 </Image>
+    <Image> 1240+150.FITS.gz,1240+150.FITS.gz,190,15          190.00      15.00       2006 </Image>
+    <Image> 1240-050.FITS.gz,1240-050.FITS.gz,190,-5          190.00      -5.00       2006 </Image>
+    <Image> 1240-150.FITS.gz,1240-150.FITS.gz,190,-15         190.00     -15.00       2006 </Image>
+    <Image> 1245+250.FITS.gz,1245+250.FITS.gz,191.25,25       191.25      25.00       2006 </Image>
+    <Image> 1245-250.FITS.gz,1245-250.FITS.gz,191.25,-25      191.25     -25.00       2006 </Image>
+    <Image> 1248+350.FITS.gz,1248+350.FITS.gz,192,35          192.00      35.00       2006 </Image>
+    <Image> 1248+450.FITS.gz,1248+450.FITS.gz,192,45          192.00      45.00       2006 </Image>
+    <Image> 1248-350.FITS.gz,1248-350.FITS.gz,192,-35         192.00     -35.00       2006 </Image>
+    <Image> 1300+550.FITS.gz,1300+550.FITS.gz,195,55          195.00      55.00       2006 </Image>
+    <Image> 1320+050.FITS.gz,1320+050.FITS.gz,200,5           200.00       5.00       2006 </Image>
+    <Image> 1320+150.FITS.gz,1320+150.FITS.gz,200,15          200.00      15.00       2006 </Image>
+    <Image> 1320+650.FITS.gz,1320+650.FITS.gz,200,65          200.00      65.00       2006 </Image>
+    <Image> 1320-050.FITS.gz,1320-050.FITS.gz,200,-5          200.00      -5.00       2006 </Image>
+    <Image> 1320-150.FITS.gz,1320-150.FITS.gz,200,-15         200.00     -15.00       2006 </Image>
+    <Image> 1330+250.FITS.gz,1330+250.FITS.gz,202.5,25        202.50      25.00       2006 </Image>
+    <Image> 1330-250.FITS.gz,1330-250.FITS.gz,202.5,-25       202.50     -25.00       2006 </Image>
+    <Image> 1336+350.FITS.gz,1336+350.FITS.gz,204,35          204.00      35.00       2006 </Image>
+    <Image> 1336+450.FITS.gz,1336+450.FITS.gz,204,45          204.00      45.00       2006 </Image>
+    <Image> 1336-350.FITS.gz,1336-350.FITS.gz,204,-35         204.00     -35.00       2006 </Image>
+    <Image> 1400+050.FITS.gz,1400+050.FITS.gz,210,5           210.00       5.00       2006 </Image>
+    <Image> 1400+150.FITS.gz,1400+150.FITS.gz,210,15          210.00      15.00       2006 </Image>
+    <Image> 1400+550.FITS.gz,1400+550.FITS.gz,210,55          210.00      55.00       2006 </Image>
+    <Image> 1400+750.FITS.gz,1400+750.FITS.gz,210,75          210.00      75.00       2006 </Image>
+    <Image> 1400-050.FITS.gz,1400-050.FITS.gz,210,-5          210.00      -5.00       2006 </Image>
+    <Image> 1400-150.FITS.gz,1400-150.FITS.gz,210,-15         210.00     -15.00       2006 </Image>
+    <Image> 1415+250.FITS.gz,1415+250.FITS.gz,213.75,25       213.75      25.00       2006 </Image>
+    <Image> 1415-250.FITS.gz,1415-250.FITS.gz,213.75,-25      213.75     -25.00       2006 </Image>
+    <Image> 1424+350.FITS.gz,1424+350.FITS.gz,216,35          216.00      35.00       2006 </Image>
+    <Image> 1424+450.FITS.gz,1424+450.FITS.gz,216,45          216.00      45.00       2006 </Image>
+    <Image> 1424-350.FITS.gz,1424-350.FITS.gz,216,-35         216.00     -35.00       2006 </Image>
+    <Image> 1440+050.FITS.gz,1440+050.FITS.gz,220,5           220.00       5.00       2006 </Image>
+    <Image> 1440+150.FITS.gz,1440+150.FITS.gz,220,15          220.00      15.00       2006 </Image>
+    <Image> 1440+650.FITS.gz,1440+650.FITS.gz,220,65          220.00      65.00       2006 </Image>
+    <Image> 1440-050.FITS.gz,1440-050.FITS.gz,220,-5          220.00      -5.00       2006 </Image>
+    <Image> 1440-150.FITS.gz,1440-150.FITS.gz,220,-15         220.00     -15.00       2006 </Image>
+    <Image> 1500+250.FITS.gz,1500+250.FITS.gz,225,25          225.00      25.00       2006 </Image>
+    <Image> 1500+550.FITS.gz,1500+550.FITS.gz,225,55          225.00      55.00       2006 </Image>
+    <Image> 1500-250.FITS.gz,1500-250.FITS.gz,225,-25         225.00     -25.00       2006 </Image>
+    <Image> 1512+350.FITS.gz,1512+350.FITS.gz,228,35          228.00      35.00       2006 </Image>
+    <Image> 1512+450.FITS.gz,1512+450.FITS.gz,228,45          228.00      45.00       2006 </Image>
+    <Image> 1512-350.FITS.gz,1512-350.FITS.gz,228,-35         228.00     -35.00       2006 </Image>
+    <Image> 1520+050.FITS.gz,1520+050.FITS.gz,230,5           230.00       5.00       2006 </Image>
+    <Image> 1520+150.FITS.gz,1520+150.FITS.gz,230,15          230.00      15.00       2006 </Image>
+    <Image> 1520-050.FITS.gz,1520-050.FITS.gz,230,-5          230.00      -5.00       2006 </Image>
+    <Image> 1520-150.FITS.gz,1520-150.FITS.gz,230,-15         230.00     -15.00       2006 </Image>
+    <Image> 1545+250.FITS.gz,1545+250.FITS.gz,236.25,25       236.25      25.00       2006 </Image>
+    <Image> 1545-250.FITS.gz,1545-250.FITS.gz,236.25,-25      236.25     -25.00       2006 </Image>
+    <Image> 1600+050.FITS.gz,1600+050.FITS.gz,240,5           240.00       5.00       2006 </Image>
+    <Image> 1600+150.FITS.gz,1600+150.FITS.gz,240,15          240.00      15.00       2006 </Image>
+    <Image> 1600+350.FITS.gz,1600+350.FITS.gz,240,35          240.00      35.00       2006 </Image>
+    <Image> 1600+450.FITS.gz,1600+450.FITS.gz,240,45          240.00      45.00       2006 </Image>
+    <Image> 1600+550.FITS.gz,1600+550.FITS.gz,240,55          240.00      55.00       2006 </Image>
+    <Image> 1600+650.FITS.gz,1600+650.FITS.gz,240,65          240.00      65.00       2006 </Image>
+    <Image> 1600+750.FITS.gz,1600+750.FITS.gz,240,75          240.00      75.00       2006 </Image>
+    <Image> 1600+850.FITS.gz,1600+850.FITS.gz,240,85          240.00      85.00       2006 </Image>
+    <Image> 1600-050.FITS.gz,1600-050.FITS.gz,240,-5          240.00      -5.00       2006 </Image>
+    <Image> 1600-150.FITS.gz,1600-150.FITS.gz,240,-15         240.00     -15.00       2006 </Image>
+    <Image> 1630+250.FITS.gz,1630+250.FITS.gz,247.5,25        247.50      25.00       2006 </Image>
+    <Image> 1630-250.FITS.gz,1630-250.FITS.gz,247.5,-25       247.50     -25.00       2006 </Image>
+    <Image> 1640+050.FITS.gz,1640+050.FITS.gz,250,5           250.00       5.00       2006 </Image>
+    <Image> 1640+150.FITS.gz,1640+150.FITS.gz,250,15          250.00      15.00       2006 </Image>
+    <Image> 1640-050.FITS.gz,1640-050.FITS.gz,250,-5          250.00      -5.00       2006 </Image>
+    <Image> 1640-150.FITS.gz,1640-150.FITS.gz,250,-15         250.00     -15.00       2006 </Image>
+    <Image> 1648+350.FITS.gz,1648+350.FITS.gz,252,35          252.00      35.00       2006 </Image>
+    <Image> 1648+450.FITS.gz,1648+450.FITS.gz,252,45          252.00      45.00       2006 </Image>
+    <Image> 1700+550.FITS.gz,1700+550.FITS.gz,255,55          255.00      55.00       2006 </Image>
+    <Image> 1715+250.FITS.gz,1715+250.FITS.gz,258.75,25       258.75      25.00       2006 </Image>
+    <Image> 1715-250.FITS.gz,1715-250.FITS.gz,258.75,-25      258.75     -25.00       2006 </Image>
+    <Image> 1720+050.FITS.gz,1720+050.FITS.gz,260,5           260.00       5.00       2006 </Image>
+    <Image> 1720+150.FITS.gz,1720+150.FITS.gz,260,15          260.00      15.00       2006 </Image>
+    <Image> 1720+650.FITS.gz,1720+650.FITS.gz,260,65          260.00      65.00       2006 </Image>
+    <Image> 1720-050.FITS.gz,1720-050.FITS.gz,260,-5          260.00      -5.00       2006 </Image>
+    <Image> 1720-150.FITS.gz,1720-150.FITS.gz,260,-15         260.00     -15.00       2006 </Image>
+    <Image> 1736+350.FITS.gz,1736+350.FITS.gz,264,35          264.00      35.00       2006 </Image>
+    <Image> 1736+450.FITS.gz,1736+450.FITS.gz,264,45          264.00      45.00       2006 </Image>
+    <Image> 1800+050.FITS.gz,1800+050.FITS.gz,270,5           270.00       5.00       2006 </Image>
+    <Image> 1800+150.FITS.gz,1800+150.FITS.gz,270,15          270.00      15.00       2006 </Image>
+    <Image> 1800+250.FITS.gz,1800+250.FITS.gz,270,25          270.00      25.00       2006 </Image>
+    <Image> 1800+550.FITS.gz,1800+550.FITS.gz,270,55          270.00      55.00       2006 </Image>
+    <Image> 1800+750.FITS.gz,1800+750.FITS.gz,270,75          270.00      75.00       2006 </Image>
+    <Image> 1800-050.FITS.gz,1800-050.FITS.gz,270,-5          270.00      -5.00       2006 </Image>
+    <Image> 1800-150.FITS.gz,1800-150.FITS.gz,270,-15         270.00     -15.00       2006 </Image>
+    <Image> 1800-250.FITS.gz,1800-250.FITS.gz,270,-25         270.00     -25.00       2006 </Image>
+    <Image> 1824+350.FITS.gz,1824+350.FITS.gz,276,35          276.00      35.00       2006 </Image>
+    <Image> 1824+450.FITS.gz,1824+450.FITS.gz,276,45          276.00      45.00       2006 </Image>
+    <Image> 1840+050.FITS.gz,1840+050.FITS.gz,280,5           280.00       5.00       2006 </Image>
+    <Image> 1840+150.FITS.gz,1840+150.FITS.gz,280,15          280.00      15.00       2006 </Image>
+    <Image> 1840+650.FITS.gz,1840+650.FITS.gz,280,65          280.00      65.00       2006 </Image>
+    <Image> 1840-050.FITS.gz,1840-050.FITS.gz,280,-5          280.00      -5.00       2006 </Image>
+    <Image> 1840-150.FITS.gz,1840-150.FITS.gz,280,-15         280.00     -15.00       2006 </Image>
+    <Image> 1845+250.FITS.gz,1845+250.FITS.gz,281.25,25       281.25      25.00       2006 </Image>
+    <Image> 1900+550.FITS.gz,1900+550.FITS.gz,285,55          285.00      55.00       2006 </Image>
+    <Image> 1912+350.FITS.gz,1912+350.FITS.gz,288,35          288.00      35.00       2006 </Image>
+    <Image> 1912+450.FITS.gz,1912+450.FITS.gz,288,45          288.00      45.00       2006 </Image>
+    <Image> 1920+050.FITS.gz,1920+050.FITS.gz,290,5           290.00       5.00       2006 </Image>
+    <Image> 1920+150.FITS.gz,1920+150.FITS.gz,290,15          290.00      15.00       2006 </Image>
+    <Image> 1920-050.FITS.gz,1920-050.FITS.gz,290,-5          290.00      -5.00       2006 </Image>
+    <Image> 1920-150.FITS.gz,1920-150.FITS.gz,290,-15         290.00     -15.00       2006 </Image>
+    <Image> 1930+250.FITS.gz,1930+250.FITS.gz,292.5,25        292.50      25.00       2006 </Image>
+    <Image> 2000+050.FITS.gz,2000+050.FITS.gz,300,5           300.00       5.00       2006 </Image>
+    <Image> 2000+150.FITS.gz,2000+150.FITS.gz,300,15          300.00      15.00       2006 </Image>
+    <Image> 2000+350.FITS.gz,2000+350.FITS.gz,300,35          300.00      35.00       2006 </Image>
+    <Image> 2000+450.FITS.gz,2000+450.FITS.gz,300,45          300.00      45.00       2006 </Image>
+    <Image> 2000+550.FITS.gz,2000+550.FITS.gz,300,55          300.00      55.00       2006 </Image>
+    <Image> 2000+650.FITS.gz,2000+650.FITS.gz,300,65          300.00      65.00       2006 </Image>
+    <Image> 2000+750.FITS.gz,2000+750.FITS.gz,300,75          300.00      75.00       2006 </Image>
+    <Image> 2000+850.FITS.gz,2000+850.FITS.gz,300,85          300.00      85.00       2006 </Image>
+    <Image> 2000-050.FITS.gz,2000-050.FITS.gz,300,-5          300.00      -5.00       2006 </Image>
+    <Image> 2000-150.FITS.gz,2000-150.FITS.gz,300,-15         300.00     -15.00       2006 </Image>
+    <Image> 2015+250.FITS.gz,2015+250.FITS.gz,303.75,25       303.75      25.00       2006 </Image>
+    <Image> 2040+050.FITS.gz,2040+050.FITS.gz,310,5           310.00       5.00       2006 </Image>
+    <Image> 2040+150.FITS.gz,2040+150.FITS.gz,310,15          310.00      15.00       2006 </Image>
+    <Image> 2040-050.FITS.gz,2040-050.FITS.gz,310,-5          310.00      -5.00       2006 </Image>
+    <Image> 2040-150.FITS.gz,2040-150.FITS.gz,310,-15         310.00     -15.00       2006 </Image>
+    <Image> 2048+350.FITS.gz,2048+350.FITS.gz,312,35          312.00      35.00       2006 </Image>
+    <Image> 2048+450.FITS.gz,2048+450.FITS.gz,312,45          312.00      45.00       2006 </Image>
+    <Image> 2048-350.FITS.gz,2048-350.FITS.gz,312,-35         312.00     -35.00       2006 </Image>
+    <Image> 2100+250.FITS.gz,2100+250.FITS.gz,315,25          315.00      25.00       2006 </Image>
+    <Image> 2100+550.FITS.gz,2100+550.FITS.gz,315,55          315.00      55.00       2006 </Image>
+    <Image> 2100-250.FITS.gz,2100-250.FITS.gz,315,-25         315.00     -25.00       2006 </Image>
+    <Image> 2120+050.FITS.gz,2120+050.FITS.gz,320,5           320.00       5.00       2006 </Image>
+    <Image> 2120+150.FITS.gz,2120+150.FITS.gz,320,15          320.00      15.00       2006 </Image>
+    <Image> 2120+650.FITS.gz,2120+650.FITS.gz,320,65          320.00      65.00       2006 </Image>
+    <Image> 2120-050.FITS.gz,2120-050.FITS.gz,320,-5          320.00      -5.00       2006 </Image>
+    <Image> 2120-150.FITS.gz,2120-150.FITS.gz,320,-15         320.00     -15.00       2006 </Image>
+    <Image> 2136+350.FITS.gz,2136+350.FITS.gz,324,35          324.00      35.00       2006 </Image>
+    <Image> 2136+450.FITS.gz,2136+450.FITS.gz,324,45          324.00      45.00       2006 </Image>
+    <Image> 2136-350.FITS.gz,2136-350.FITS.gz,324,-35         324.00     -35.00       2006 </Image>
+    <Image> 2145+250.FITS.gz,2145+250.FITS.gz,326.25,25       326.25      25.00       2006 </Image>
+    <Image> 2145-250.FITS.gz,2145-250.FITS.gz,326.25,-25      326.25     -25.00       2006 </Image>
+    <Image> 2200+050.FITS.gz,2200+050.FITS.gz,330,5           330.00       5.00       2006 </Image>
+    <Image> 2200+150.FITS.gz,2200+150.FITS.gz,330,15          330.00      15.00       2006 </Image>
+    <Image> 2200+550.FITS.gz,2200+550.FITS.gz,330,55          330.00      55.00       2006 </Image>
+    <Image> 2200+750.FITS.gz,2200+750.FITS.gz,330,75          330.00      75.00       2006 </Image>
+    <Image> 2200-050.FITS.gz,2200-050.FITS.gz,330,-5          330.00      -5.00       2006 </Image>
+    <Image> 2200-150.FITS.gz,2200-150.FITS.gz,330,-15         330.00     -15.00       2006 </Image>
+    <Image> 2224+350.FITS.gz,2224+350.FITS.gz,336,35          336.00      35.00       2006 </Image>
+    <Image> 2224+450.FITS.gz,2224+450.FITS.gz,336,45          336.00      45.00       2006 </Image>
+    <Image> 2224-350.FITS.gz,2224-350.FITS.gz,336,-35         336.00     -35.00       2006 </Image>
+    <Image> 2230+250.FITS.gz,2230+250.FITS.gz,337.5,25        337.50      25.00       2006 </Image>
+    <Image> 2230-250.FITS.gz,2230-250.FITS.gz,337.5,-25       337.50     -25.00       2006 </Image>
+    <Image> 2240+050.FITS.gz,2240+050.FITS.gz,340,5           340.00       5.00       2006 </Image>
+    <Image> 2240+150.FITS.gz,2240+150.FITS.gz,340,15          340.00      15.00       2006 </Image>
+    <Image> 2240+650.FITS.gz,2240+650.FITS.gz,340,65          340.00      65.00       2006 </Image>
+    <Image> 2240-050.FITS.gz,2240-050.FITS.gz,340,-5          340.00      -5.00       2006 </Image>
+    <Image> 2240-150.FITS.gz,2240-150.FITS.gz,340,-15         340.00     -15.00       2006 </Image>
+    <Image> 2300+550.FITS.gz,2300+550.FITS.gz,345,55          345.00      55.00       2006 </Image>
+    <Image> 2312+350.FITS.gz,2312+350.FITS.gz,348,35          348.00      35.00       2006 </Image>
+    <Image> 2312+450.FITS.gz,2312+450.FITS.gz,348,45          348.00      45.00       2006 </Image>
+    <Image> 2312-350.FITS.gz,2312-350.FITS.gz,348,-35         348.00     -35.00       2006 </Image>
+    <Image> 2315+250.FITS.gz,2315+250.FITS.gz,348.75,25       348.75      25.00       2006 </Image>
+    <Image> 2315-250.FITS.gz,2315-250.FITS.gz,348.75,-25      348.75     -25.00       2006 </Image>
+    <Image> 2320+050.FITS.gz,2320+050.FITS.gz,350,5           350.00       5.00       2006 </Image>
+    <Image> 2320+150.FITS.gz,2320+150.FITS.gz,350,15          350.00      15.00       2006 </Image>
+    <Image> 2320-050.FITS.gz,2320-050.FITS.gz,350,-5          350.00      -5.00       2006 </Image>
+    <Image> 2320-150.FITS.gz,2320-150.FITS.gz,350,-15         350.00     -15.00       2006 </Image>
+    </Images>
+</Survey>

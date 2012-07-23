@@ -1,0 +1,76 @@
+# Test file should draw an X
+
+color white
+-10 10
+ 10 -10
+ 
+  10 10
+ -10 -10
+
+circle 0 0 20
+text 0 0 0 Center
+ 
+# Twice as big and offset
+
+thick 2
+color red
+
+offset 50 0
+scale 2
+-10  10
+ 10 -10
+ 
+  10 10
+ -10 -10
+ 
+circle 0 0 20
+text 0 0 45 Offset Angle
+
+
+offset 25 0
+circle 0 0 20
+offset 25 0
+circle 0 0 20
+
+reset
+
+offset -25 0
+circle 0 0 20
+
+reset
+
+color green
+rotate 30
+offset 100 0
+circle 0 0 20
+text 0 100 0 Green!
+text 0 130 30 Greener (more angle)
+
+reset
+
+offset 100 100
+text 0 0 0 100,100
+
+reset
+
+offset 100 -100
+text 0 0 0 100,-100
+
+reset
+
+offset -100 -100
+text 0 0 0 -100,-100
+
+reset
+
+offset -100 100
+text 0 0 0 -100,100
+
+reset
+
+scale 1.5
+color green
+text 100 100 0 100,100
+text -100 100 0 -100,100
+text 100 -100 0 100,-100
+text -100 -100 0 -100,-100
