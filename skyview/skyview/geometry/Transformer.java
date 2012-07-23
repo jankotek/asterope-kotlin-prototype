@@ -13,9 +13,13 @@ package skyview.geometry;
  *   <li> Scaler 2/2:          Affine transformations in the projection plane
  *   <li> Converter:           Apply a series of conversions in turn.
  * The numbers after the type indicate the dimensionality of the input/output.
+ *
+ * @param IN    indicates input dimension (Vector2D or Vector3D)
+ * @param OUT  indicates output dimension (Vector2D or Vector3D)
+ * @
  */
 
-public abstract class Transformer implements skyview.Component {
+public abstract class Transformer<IN,OUT> implements skyview.Component {
     
     
     /** Temporaries that may be used in the conversion.
@@ -57,7 +61,7 @@ public abstract class Transformer implements skyview.Component {
      *  matters, then the inverse is to be applied after the original
      *  transformation.  This is primarily an issue with Converters.
      */
-    public abstract Transformer inverse() throws TransformationException;
+    public abstract Transformer<OUT, IN> inverse() throws TransformationException;
     
     /** Convert a single point where the output vector is supplied.
      *  @param in   The input vector.

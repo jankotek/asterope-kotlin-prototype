@@ -1,13 +1,15 @@
 package skyview.geometry;
 
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 /** This class defines a non-linear distortion in the image plane.
     Normally the forward distortion converts from a fiducial
     projection plane to some distorted coordinates.  The reverse
     distortion transforms from the distorted coordinates back
     to the fiducial coordinates.
   */
-public abstract class SphereDistorter extends Transformer implements skyview.Component {
+public abstract class SphereDistorter extends Transformer<Vector3D, Vector3D> implements skyview.Component {
     
     /** A name for this object */
     public String getName() {

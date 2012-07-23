@@ -1,12 +1,14 @@
 package skyview.geometry;
 
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
 import static org.apache.commons.math3.util.FastMath.*;
 
 /*
  * This class defines a rotater operater that may
  * be used to rotate vectors in 3-D space.
  */
-public class Rotater extends Transformer implements skyview.Component {
+public class Rotater extends Transformer<Vector2D, Vector2D> implements skyview.Component {
     
     
     /** The matrix coefficients. */

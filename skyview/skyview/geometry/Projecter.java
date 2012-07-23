@@ -1,9 +1,12 @@
 package skyview.geometry;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
 /** This class projects a point from the celestial sphere
  *  to a projection plane.
  */
-public abstract class Projecter extends Transformer {
+public abstract class Projecter extends Transformer<Vector3D, Vector2D> {
     
     /** Get the inverse */
     public abstract Deprojecter inverse();

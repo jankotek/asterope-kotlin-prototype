@@ -1,11 +1,13 @@
 
 package skyview.geometry;
 
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+
 import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class does 2-D scalings, rotations and linear transformations.
  */
-public class Scaler extends Transformer implements skyview.Component {
+public class Scaler extends Transformer<Vector2D, Vector2D> implements skyview.Component {
     
     /** Parameters of the transformation */
     double x0  = 0;
