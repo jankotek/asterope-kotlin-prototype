@@ -4,6 +4,8 @@ import skyview.executive.Settings;
 import skyview.geometry.Transformer;
 import skyview.geometry.Deprojecter;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class provides for the
  *  translation between coordinates and
  *  an HTM-based projection.
@@ -64,7 +66,7 @@ public class Toa extends skyview.geometry.Projecter {
     /** This factor converts the grid from [-1,1] to [-pi/2,pi/2].
      *  This corresponds to having a radian scaling at the origin.
      */
-    private final static double RSCALE  = Math.PI/2;
+    private final static double RSCALE  = PI/2;
  
     /** Rotation vectors for the longitude quadrants.
      *  We only deal with the first quadrant.
@@ -154,12 +156,12 @@ public class Toa extends skyview.geometry.Projecter {
 	    } else {
 		gridSub = Integer.parseInt(params[3]);
 	    }
-	    double nTile    = Math.pow(2, gridLevel);
+	    double nTile    = pow(2, gridLevel);
 	
             gridOffX  = (2*gridX-nTile)/nTile;
 	    gridOffY  = (2*gridY-nTile)/nTile;
-	    nPix      = Math.pow(2,gridSub)+1;
-	    gridDelta = 2./Math.pow(2,gridLevel+gridSub);
+	    nPix      = pow(2,gridSub)+1;
+	    gridDelta = 2./pow(2,gridLevel+gridSub);
 	    
 	    gridValues = tile(gridLevel, gridX, gridY, gridSub);
 	}
@@ -167,7 +169,7 @@ public class Toa extends skyview.geometry.Projecter {
     
     public boolean validPosition(double[] plane) {
 	return super.validPosition(plane) &&
-	  Math.abs(plane[0]) <= RSCALE && Math.abs(plane[1]) <= RSCALE;
+	  abs(plane[0]) <= RSCALE && abs(plane[1]) <= RSCALE;
     }
 			       
     /** Specify precision used in non-grid project/deproject calculations */
@@ -190,25 +192,25 @@ public class Toa extends skyview.geometry.Projecter {
 	// We interpret 0,91 as being equivalent to 180,89.	
 	// More outre example: 0,365 -> 180,-185 -> 0,5
 
-	while (Math.abs(lat) > Math.PI/2) {
-	    if (lat > Math.PI/2) {
-	        lat = Math.PI-lat;
-	    } if (lat < -Math.PI/2) {
-	        lat = -Math.PI-lat;
+	while (abs(lat) > PI/2) {
+	    if (lat > PI/2) {
+	        lat = PI-lat;
+	    } if (lat < -PI/2) {
+	        lat = -PI-lat;
 	    }
-	    lon = lon + Math.PI;
+	    lon = lon + PI;
 	}
 	
 	// Find the starting square.
 	while (lon < 0) {
-	    lon += 2*Math.PI;
+	    lon += 2*PI;
 	}
-	while (lon >= 2*Math.PI) {
-	    lon -= 2*Math.PI;
+	while (lon >= 2*PI) {
+	    lon -= 2*PI;
 	}
 	
-	int    square = (int)(2*lon/Math.PI) % 4;
-	double offset = Math.PI*square/2;
+	int    square = (int)(2*lon/PI) % 4;
+	double offset = PI*square/2;
 	
 	lon           = lon-offset;
 	
@@ -219,7 +221,7 @@ public class Toa extends skyview.geometry.Projecter {
 	
 	if (!dir) {
 	    // Flip to the other triangle.
-	    lat = Math.abs(lat);
+	    lat = abs(lat);
 	}
 	    
 	double[] pos = find(lon, lat);
@@ -243,9 +245,9 @@ public class Toa extends skyview.geometry.Projecter {
     public double[] find(double lon, double lat) {
 	
 	double[] unit = {
-	    Math.cos(lon)*Math.cos(lat),
-	    Math.sin(lon)*Math.cos(lat),
-	    Math.sin(lat)
+	    cos(lon)*cos(lat),
+	    sin(lon)*cos(lat),
+	    sin(lat)
 	};
         transform(unit, result);
 	return result;
@@ -358,7 +360,7 @@ public class Toa extends skyview.geometry.Projecter {
 	    
 	plane[0] *= RSCALE*signx;
 	plane[1] =  RSCALE*(plane[1])*signy;
-//	System.out.printf("%.6f,%.6f -> %.6f,%.6f,%.6f -> %.6f,%.6f\n",Math.toDegrees(Math.atan2(unit[1], unit[0])), Math.toDegrees(Math.asin(unit[2])),unit[0],unit[1],unit[2],plane[0],plane[1]);
+//	System.out.printf("%.6f,%.6f -> %.6f,%.6f,%.6f -> %.6f,%.6f\n",toDegrees(atan2(unit[1], unit[0])), toDegrees(asin(unit[2])),unit[0],unit[1],unit[2],plane[0],plane[1]);
     }
     
     int findTriangle(double[] unit, double[][] vectors, double[][] midpoints) {
@@ -423,7 +425,7 @@ public class Toa extends skyview.geometry.Projecter {
 	z = v1[2] + v2[2];
 	     
 	
-	double tmp = Math.sqrt(x*x + y*y + z*z);
+	double tmp = sqrt(x*x + y*y + z*z);
 	w[0] = x/tmp;
 	w[1] = y/tmp;
 	w[2] = z/tmp;
@@ -431,7 +433,7 @@ public class Toa extends skyview.geometry.Projecter {
     
     public double[][][] tile(int level, int ix, int iy, int subdiv) {
 	
-	int dim = (int) Math.pow(2, subdiv);
+	int dim = (int) pow(2, subdiv);
 	int d2  = dim/2;
 	double[][][] coords = new double[dim+1][dim+1][3];
 	
@@ -472,7 +474,7 @@ public class Toa extends skyview.geometry.Projecter {
     
     double[][] bounds(int level, int ix, int iy) {
 	
-	int pow = (int)Math.pow(2,level-1);
+	int pow = (int)pow(2,level-1);
 	int tx  = ix/pow;
 	int ty  = iy/pow;
 	double[][] coords;
@@ -497,7 +499,7 @@ public class Toa extends skyview.geometry.Projecter {
 	if (level == 0) {
 	    return coords;
 	}
-	int pow = (int)Math.pow(2, level-1);
+	int pow = (int)pow(2, level-1);
 	
 	int tx = x/pow;
 	int ty = y/pow;
@@ -599,8 +601,8 @@ public class Toa extends skyview.geometry.Projecter {
 		x = x-gridOffX;
 		y = y-gridOffY;
 		
-		double tx = Math.floor(x/gridDelta + 0.5);
-	        double ty = Math.floor(y/gridDelta + 0.5);
+		double tx = floor(x/gridDelta + 0.5);
+	        double ty = floor(y/gridDelta + 0.5);
 		
 		
 		if (tx >= 0 && tx <= nPix && ty >= 0 && ty <= nPix) {
@@ -693,7 +695,7 @@ public class Toa extends skyview.geometry.Projecter {
 	    double xs = vectors[0][0] + vectors[1][0] + vectors[2][0];
 	    double ys = vectors[0][1] + vectors[1][1] + vectors[2][1];
             double zs = vectors[0][2] + vectors[1][2] + vectors[2][2];
-	    double norm = Math.sqrt(xs*xs + ys*ys + zs*zs);
+	    double norm = sqrt(xs*xs + ys*ys + zs*zs);
 	
  	    double[] unit = {xs/norm, ys/norm, zs/norm};
 	    unit[0] *= signx;
@@ -706,8 +708,8 @@ public class Toa extends skyview.geometry.Projecter {
 	
 	double[] coords = skyview.geometry.Util.coord(vector);
 	System.out.printf("%s: %12.5f %12.5f (%9.5f %9.5f %9.5f)\n",
-			  prefix, Math.toDegrees(coords[0]),
-			  Math.toDegrees(coords[1]),
+			  prefix, toDegrees(coords[0]),
+			  toDegrees(coords[1]),
 			  vector[0], vector[1], vector[2]);
     }
     
@@ -715,12 +717,12 @@ public class Toa extends skyview.geometry.Projecter {
 	double[] unit = new double[3];
 	double[] plane = new double[2];
 	
-	double ra  = Math.toRadians(Double.parseDouble(args[0]));
-	double dec = Math.toRadians(Double.parseDouble(args[1]));
+	double ra  = toRadians(Double.parseDouble(args[0]));
+	double dec = toRadians(Double.parseDouble(args[1]));
 	
-	unit[2] = Math.sin(dec);
-	unit[0] = Math.cos(ra)*Math.cos(dec);
-	unit[1] = Math.sin(ra)*Math.cos(dec);
+	unit[2] = sin(dec);
+	unit[0] = cos(ra)*cos(dec);
+	unit[1] = sin(ra)*cos(dec);
 	
 	Toa tp = new Toa();
 	tp.transform(unit,plane);
@@ -732,11 +734,11 @@ public class Toa extends skyview.geometry.Projecter {
     }
     
     public double[] shadowPoint(double x, double y) {
-	if (Math.abs(x) == Math.abs(y)) {
+	if (abs(x) == abs(y)) {
 	    return new double[]{x,y};
 	}
 	
-	else if (Math.abs(y) > Math.abs(x)) {
+	else if (abs(y) > abs(x)) {
 	    if (y > 0) {
 		return new double[]{x,2*RSCALE-y};
 	    } else {

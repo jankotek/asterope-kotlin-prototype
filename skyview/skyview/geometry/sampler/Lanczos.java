@@ -1,6 +1,8 @@
 
 package skyview.geometry.sampler;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class implements a nearest neighbor sampling
   * scheme.
   */
@@ -43,8 +45,8 @@ public class Lanczos extends skyview.geometry.Sampler {
     
     private void init (int n) {
 	this.nLobe = n;
-	this.coef  = Math.PI/n;
-	this.coef2 = coef*Math.PI;
+	this.coef  = PI/n;
+	this.coef2 = coef*PI;
 	xw = new double[2*n];
 	yw = new double[2*n];
     }
@@ -62,8 +64,8 @@ public class Lanczos extends skyview.geometry.Sampler {
 	double x = out[0]-0.5;
 	double y = out[1]-0.5;
 
-        int ix = (int) Math.floor(x);
-	int iy = (int) Math.floor(y);
+        int ix = (int) floor(x);
+	int iy = (int) floor(y);
 	
 	double dx = ix - x - (nLobe-1);
 	double dy = iy - y - (nLobe-1);
@@ -75,19 +77,19 @@ public class Lanczos extends skyview.geometry.Sampler {
 	    
 	} else {
 	    for (int xc=0; xc < 2*nLobe; xc += 1) {
-		if (Math.abs(dx) < 1.e-10) {
+		if (abs(dx) < 1.e-10) {
 		    xw[xc] = 1;
 		} else {
-		    xw[xc] = Math.sin(coef*dx)*Math.sin(Math.PI*dx)/(coef2*dx*dx);
+		    xw[xc] = sin(coef*dx)*sin(PI*dx)/(coef2*dx*dx);
 		}
 		dx += 1;
 	    }
 	    
 	    for (int yc=0; yc < 2*nLobe; yc += 1) {
-		if (Math.abs(dy) < 1.e-10) {
+		if (abs(dy) < 1.e-10) {
 		    yw[yc] = 1;
 		} else {
-		    yw[yc] = Math.sin(coef*dy)*Math.sin(Math.PI*dy)/(coef2*dy*dy);
+		    yw[yc] = sin(coef*dy)*sin(PI*dy)/(coef2*dy*dy);
 		}
 		dy += 1;
 	    }

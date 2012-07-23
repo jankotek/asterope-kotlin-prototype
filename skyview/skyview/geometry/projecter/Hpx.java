@@ -1,11 +1,11 @@
 package skyview.geometry.projecter;
 
-import static java.lang.Math.PI;
 
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
 
+import static org.apache.commons.math3.util.FastMath.*;
 
 /**
  *  This class treats the HealPix projection as being
@@ -57,7 +57,7 @@ public class Hpx extends Projecter {
     };
     
     private static final double[][] tileOffsets= {
-	  {2*Math.PI, 0}
+	  {2*PI, 0}
     };
     
     /** The coordinates of the corners of squares 0 to 11. */   
@@ -73,7 +73,7 @@ public class Hpx extends Projecter {
     private double[] zp = {0.75*PI, 0};
     
     // Recall sin(45)=cos(45) = 1/sqrt(2)
-    private double isqrt2 = 1./Math.sqrt(2);
+    private double isqrt2 = 1./sqrt(2);
     
     private int nSide;
     private int nPixel;
@@ -94,7 +94,7 @@ public class Hpx extends Projecter {
     
     /** @param dim The power of two giving the number of pixels
      *             along an edge of a square.  The total number
-     *             of pixels in the projection is 12 * Math.pow(2, 2*dim)
+     *             of pixels in the projection is 12 * pow(2, 2*dim)
      */
     public Hpx(int dim) {
 	setDimension(dim);
@@ -103,7 +103,7 @@ public class Hpx extends Projecter {
     public void setDimension(int dim) {
 	this.dim = dim;
 	
-	nSide   = (int) Math.pow(2, dim);
+	nSide   = (int) pow(2, dim);
 	nSq     = nSide * nSide;
 	nPixel  = 12*nSq;
 	sqDelta = 1./nSide;
@@ -133,7 +133,7 @@ public class Hpx extends Projecter {
     
     public boolean validPosition(double[] plane) {
 	return super.validPosition(plane) &&
-	  Math.abs(plane[1]) <= Math.PI/2 - Math.abs(Math.PI/4 - (Math.abs(plane[0])% Math.PI/2));
+	  abs(plane[1]) <= PI/2 - abs(PI/4 - (abs(plane[0])% PI/2));
     }
 	  
     /** Get the lower left corner in the oblique projection */
@@ -212,29 +212,29 @@ public class Hpx extends Projecter {
 	}
 	
 	// Check that we are in the valid region.
-	if (Math.abs(y) > 0.5*PI) {
+	if (abs(y) > 0.5*PI) {
 	    System.arraycopy(error, 0, unit, 0, error.length);
 	    return;
 	}
-	if (Math.abs(y) > 0.25*PI) {
+	if (abs(y) > 0.25*PI) {
 	    double posit = (x/PI) % 0.5; 
-	    double yt    = Math.abs(y)/PI;
+	    double yt    = abs(y)/PI;
 	    
 	    // Add a small delta to allow for roundoff.
-	    if (yt > (0.5-Math.abs(posit-0.25))+1.e-13 ) {
+	    if (yt > (0.5-abs(posit-0.25))+1.e-13 ) {
 		System.arraycopy(error, 0, unit, 0, error.length);
 	        return;
 	    }
 	}
 	
 	double ra, sdec;
-	if (Math.abs(y) < PI/4) {
+	if (abs(y) < PI/4) {
 	    ra   = x;
 	    sdec = (8*y/(3*PI));
 	    
 	} else {
 	    
-	    double yabs = Math.abs(y);
+	    double yabs = abs(y);
 	    double xt   = x % (PI/2);
 	    ra  = x - (yabs - PI/4)/(yabs-PI/2) * (xt - PI/4);
 	    if (Double.isNaN(ra)) {
@@ -247,9 +247,9 @@ public class Hpx extends Projecter {
 		sdec = -1;
 	    }
 	}
-	double cdec = Math.sqrt(1-sdec*sdec);
-	unit[0] = Math.cos(ra)*cdec;
-	unit[1] = Math.sin(ra)*cdec;
+	double cdec = sqrt(1-sdec*sdec);
+	unit[0] = cos(ra)*cdec;
+	unit[1] = sin(ra)*cdec;
 	unit[2] = sdec;
 	return;
     }
@@ -257,15 +257,15 @@ public class Hpx extends Projecter {
 
     public static void proj(double[] unit, double[] proj) {
 	
-	if (Math.abs(unit[2]) < 2./3) {
-	    proj[0] = Math.atan2(unit[1], unit[0]);
+	if (abs(unit[2]) < 2./3) {
+	    proj[0] = atan2(unit[1], unit[0]);
 	    if (proj[0] < 0) {
 		proj[0] += 2*PI;
 	    }
 	    proj[1] = 3*PI/8 * unit[2];
 	    
 	} else {
-	    double phi = Math.atan2(unit[1], unit[0]);
+	    double phi = atan2(unit[1], unit[0]);
 	    if (phi < 0) {
 		phi += 2*PI;
 	    }
@@ -279,17 +279,17 @@ public class Hpx extends Projecter {
 		sign = -1;
 	    }
 	    
-	    double sigma = sign*(2-Math.sqrt(3*(1-z)));
-	    proj[0] = phi - (Math.abs(sigma)-1)*(phit-PI/4);
+	    double sigma = sign*(2-sqrt(3*(1-z)));
+	    proj[0] = phi - (abs(sigma)-1)*(phit-PI/4);
 	    proj[1] = PI*sigma/4;
 	}
-	double x = proj[0]/Math.PI;
-	double y = proj[1]/Math.PI;
+	double x = proj[0]/PI;
+	double y = proj[1]/PI;
 	// We move the right half of tile 4 and all of tile 3 back by 2 PI
         // so that the standard region is appropriate for the 4x6 region in the
 	// rotated coordinates.
 	if (x > 1.5 && y > 1.75-x)  {
-	    proj[0] -= 2*Math.PI;
+	    proj[0] -= 2*PI;
 	}
     }
     
@@ -337,8 +337,8 @@ public class Hpx extends Projecter {
     public int getObliquePixel(double u, double v) {
 	
 	
-	double xSq  = Math.floor(u);
-        double ySq  = Math.floor(v);
+	double xSq  = floor(u);
+        double ySq  = floor(v);
 	
 	
 	// Find out which tile we are in.
@@ -445,17 +445,17 @@ public class Hpx extends Projecter {
 	double y = Double.parseDouble(args[3]);
 	double[] unit = new double[3];
 	double[] proj = new double[2];
-	double xr = Math.toRadians(x);
-	double yr = Math.toRadians(y);
-	unit[0] = Math.cos(xr)*Math.cos(yr);
-	unit[1] = Math.sin(xr)*Math.cos(yr);
-	unit[2] = Math.sin(yr);
+	double xr = toRadians(x);
+	double yr = toRadians(y);
+	unit[0] = cos(xr)*cos(yr);
+	unit[1] = sin(xr)*cos(yr);
+	unit[2] = sin(yr);
 	
         ob.proj(unit, proj);
 	
 	ob.deproj(proj, unit);
-	System.out.println("  deproj back to:"+Math.toDegrees(Math.atan2(unit[1], unit[0]))+" "+
-			                       Math.toDegrees(Math.asin(unit[2])));
+	System.out.println("  deproj back to:"+toDegrees(atan2(unit[1], unit[0]))+" "+
+			                       toDegrees(asin(unit[2])));
 	
 	System.out.println("Pixel is:"+ob.getPixel(proj));
     }

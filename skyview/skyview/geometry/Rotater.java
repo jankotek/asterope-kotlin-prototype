@@ -1,6 +1,6 @@
 package skyview.geometry;
 
-import static java.lang.Math.abs;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /*
  * This class defines a rotater operater that may
@@ -242,8 +242,8 @@ public class Rotater extends Transformer implements skyview.Component {
             } else {
                angle = psi;
 	    }
-            double s = Math.sin(angle);
-            double c = Math.cos(angle);
+            double s = sin(angle);
+            double c = cos(angle);
 
 //          Identify the axis
             axis = order.charAt(n);

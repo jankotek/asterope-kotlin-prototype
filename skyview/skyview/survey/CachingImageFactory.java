@@ -16,6 +16,7 @@ import skyview.geometry.Scaler;
 import skyview.geometry.Projection;
 import skyview.geometry.CoordinateSystem;
 import skyview.geometry.WCS;
+import static org.apache.commons.math3.util.FastMath.*;
 
 import java.io.File;
 
@@ -115,23 +116,23 @@ public class CachingImageFactory implements ImageFactory {
 	// First create the scaler. 
 	if (tokens.length == 10) {
 	    // Just CDELTs specified.
-	    double dx = Math.toRadians(Double.parseDouble(tokens[8]));
-	    double dy = Math.toRadians(Double.parseDouble(tokens[9]));
+	    double dx = toRadians(Double.parseDouble(tokens[8]));
+	    double dy = toRadians(Double.parseDouble(tokens[9]));
 	
 	    s = new Scaler(0.5*nx, 0.5*ny, -1/dx, 0, 0, 1/dy);
 	    
 	} else {
-	    double m00 = Math.toRadians(Double.parseDouble(tokens[8]));
-	    double m01 = Math.toRadians(Double.parseDouble(tokens[9]));
-	    double m10 = Math.toRadians(Double.parseDouble(tokens[10]));
-	    double m11 = Math.toRadians(Double.parseDouble(tokens[11]));
+	    double m00 = toRadians(Double.parseDouble(tokens[8]));
+	    double m01 = toRadians(Double.parseDouble(tokens[9]));
+	    double m10 = toRadians(Double.parseDouble(tokens[10]));
+	    double m11 = toRadians(Double.parseDouble(tokens[11]));
 	    double det = m00*m11 - m10*m01;
 	    s = new Scaler(0.5*nx, 0.5*ny, m11/det, -m01/det, -m10/det, m00/det);
 	}
 	
 	Projection p;
-	double     crval1 = Math.toRadians(Double.parseDouble(tokens[2]));
-	double     crval2 = Math.toRadians(Double.parseDouble(tokens[3]));
+	double     crval1 = toRadians(Double.parseDouble(tokens[2]));
+	double     crval2 = toRadians(Double.parseDouble(tokens[3]));
 	try {
 	    if (tokens[4].equalsIgnoreCase("Car") || 
 		tokens[4].equalsIgnoreCase("Ait") || 
@@ -146,12 +147,12 @@ public class CachingImageFactory implements ImageFactory {
 	    } else if (tokens[4].equalsIgnoreCase("Ncp")) {
 				
 	        // Sin projection with projection centered at pole.
-		double[] xproj = new double[] {crval1, Math.PI/2};
+		double[] xproj = new double[] {crval1, PI/2};
 		if (crval2 < 0) {
 		    xproj[1] = - xproj[1];
 		}
 		
-		double poleOffset = Math.sin(xproj[1]-crval2);
+		double poleOffset = sin(xproj[1]-crval2);
 		// Have we handled South pole here?
 	        
 	        p = new Projection("Sin", xproj);
@@ -159,7 +160,7 @@ public class CachingImageFactory implements ImageFactory {
 	        // NCP scales the Y-axis to accommodate the distortion of the SIN projection away
 	        // from the pole.
 	        Scaler ncpScale = new Scaler(0, poleOffset, 1, 0, 0, 1);
-	        ncpScale = ncpScale.add(new Scaler(0., 0., 1,0,0,1/Math.sin( crval2 ) ) );
+	        ncpScale = ncpScale.add(new Scaler(0., 0., 1,0,0,1/sin( crval2 ) ) );
 		s = ncpScale.add(s);
 		
 	    } else {

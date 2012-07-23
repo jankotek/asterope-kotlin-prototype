@@ -1,5 +1,8 @@
 package skyview.util;
 
+
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** Scale an object linearly.
  */
 public class SqrtScaler extends Scaler {
@@ -53,7 +56,7 @@ public class SqrtScaler extends Scaler {
 	}
 	min = smallestPositive;
 	if (min < getMaxVal()) {
-	    scale = (getMaxOutput()-getMinOutput())/(Math.sqrt(getMaxVal() - Math.sqrt(smallestPositive)));
+	    scale = (getMaxOutput()-getMinOutput())/(sqrt(getMaxVal() - sqrt(smallestPositive)));
 	}
     }
 	
@@ -65,7 +68,7 @@ public class SqrtScaler extends Scaler {
 	if (val <= min) {
 	    return (byte) getMinOutput();
 	} else {
-	    return (byte) ((Math.sqrt(val)-Math.sqrt(min))*scale + getMinOutput());
+	    return (byte) ((sqrt(val)-sqrt(min))*scale + getMinOutput());
 	}
     }
 }

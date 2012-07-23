@@ -4,7 +4,6 @@ import skyview.geometry.CoordinateSystem;
 import skyview.geometry.Rotater;
 import skyview.geometry.SphereDistorter;
 
-import static java.lang.Math.*;
 
 
 /** This class implements Besselian coordinate systems.

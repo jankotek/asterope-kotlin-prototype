@@ -3,10 +3,12 @@ package skyview.util;
 import skyview.util.SmartIntArray;
 import java.text.DecimalFormat;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** utlity functions to use with SkyView */
 public class Utilities {
 
-    static final double pi = Math.PI;
+    static final double pi = PI;
 
     /** Calculates angular distance between two points on a sphere.
       * All angles are measured in degrees.  
@@ -18,15 +20,15 @@ public class Utilities {
       */
     public static double angularDistance(double cx1, double cy1, 
 					 double cx2, double cy2) {
-      double xx1=Math.toRadians(cx1);
-      double yy1=Math.toRadians(cy1);
-      double xx2=Math.toRadians(cx2);
-      double yy2=Math.toRadians(cy2);
+      double xx1=toRadians(cx1);
+      double yy1=toRadians(cy1);
+      double xx2=toRadians(cx2);
+      double yy2=toRadians(cy2);
 
-      double distRad=Math.acos(Math.sin(yy1) * Math.sin(yy2) +
-	            Math.cos(yy1) * Math.cos(yy2) *
-                    Math.cos(xx2 - xx1));
-      return Math.toDegrees(distRad); 
+      double distRad=acos(sin(yy1) * sin(yy2) +
+	            cos(yy1) * cos(yy2) *
+                    cos(xx2 - xx1));
+      return toDegrees(distRad);
     }
 
     /** The the extremum values in an array
@@ -131,10 +133,10 @@ public class Utilities {
      */
     public static double  adjustCoordX(double  c ) {
 	
-        if (c > Math.PI) {
-	    c -= 2*Math.PI; 
-	} else if (c < -Math.PI) { 
-	    c += 2*Math.PI; 
+        if (c > PI) {
+	    c -= 2*PI;
+	} else if (c < -PI) {
+	    c += 2*PI;
 	}
         return c;
     }
@@ -153,10 +155,10 @@ public class Utilities {
      */
     public static double  adjustCoordY(double  c ) {
 
-        if (c < -Math.PI/2) { 
-	    c = -Math.PI - c; 
-	} else if (c > Math.PI/2) { 
-	    c = Math.PI - c; 
+        if (c < -PI/2) {
+	    c = -PI - c;
+	} else if (c > PI/2) {
+	    c = PI - c;
 	}
         return c;
     }
@@ -281,7 +283,7 @@ public class Utilities {
 	
        double val= 
 	   Double.valueOf(str.substring(0,e_loc-1).trim()).doubleValue() *
-	   Math.pow(10,Double.valueOf(str.substring(e_loc+1,str.length()).
+	   pow(10,Double.valueOf(str.substring(e_loc+1,str.length()).
 	   trim()).doubleValue());
        return val;
     }
@@ -328,7 +330,7 @@ public class Utilities {
 	    
 	} else if (precision >= offset.length) {
 	    delta = offset[offset.length-1] / 
-	             Math.pow(10,precision-offset.length+1);
+	             pow(10,precision-offset.length+1);
 	} else {
 	    delta = offset[precision];
 	}
@@ -337,7 +339,7 @@ public class Utilities {
 	
 	
 	if (value < 0) {
-	    value = Math.abs(value);
+	    value = abs(value);
 	    str.append("-");
 	}
 	
@@ -385,7 +387,7 @@ public class Utilities {
 	    
 	    } else {
 	
-	        double mult = Math.pow(10, precision-4);
+	        double mult = pow(10, precision-4);
 		
 	        long fracMod = (long) (mult);
 		

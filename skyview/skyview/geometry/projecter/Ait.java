@@ -1,7 +1,6 @@
 package skyview.geometry.projecter;
 
-import static java.lang.Math.sqrt;
-import static java.lang.Math.abs;
+import static org.apache.commons.math3.util.FastMath.*;
 
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
@@ -9,8 +8,10 @@ import skyview.geometry.Transformer;
 
 import skyview.geometry.sampler.Clip;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class implements the AIT (Hammer-Aitov)
- *  projection.  This version uses only the Math.sqrt
+ *  projection.  This version uses only the sqrt
  *  function without any calls to trigonometric functions.
  */
 
@@ -164,20 +165,20 @@ public class Ait extends Projecter {
 	}
 	
 	clat = sqrt(clat);
-	double lon = Math.atan2(pnt[1],pnt[0]);
+	double lon = atan2(pnt[1],pnt[0]);
 	if (lon <= 0) {
-	    lon += 2*Math.PI;
+	    lon += 2*PI;
 	} else {
-	    lon -= 2*Math.PI;
+	    lon -= 2*PI;
 	}
 	
-        double gamma = (1+clat*Math.cos(lon/2));
+        double gamma = (1+clat*cos(lon/2));
 	if (gamma > 0) {
 	    gamma = sqrt(2/gamma);
 	} else {
 	    gamma = 0;
 	}
-	double[] res = new double[] {2*gamma*clat*Math.sin(lon/2), gamma*slat};
+	double[] res = new double[] {2*gamma*clat*sin(lon/2), gamma*slat};
 	
 	// This can sometimes happen if we are on the edge.
 	if ((x > 0 && res[0] > 0) || (x < 0 && res[0] < 0) ) {
@@ -242,8 +243,8 @@ public class Ait extends Projecter {
 	double ra = Double.parseDouble(args[0]);
 	double dec = Double.parseDouble(args[1]);
 	
-	double rra = Math.toRadians(ra);
-	double rdec = Math.toRadians(dec);
+	double rra = toRadians(ra);
+	double rdec = toRadians(dec);
 	double[] unit = skyview.geometry.Util.unit(rra, dec);
 	double[] pnt = new double[2];
 	p.transform(unit,pnt);

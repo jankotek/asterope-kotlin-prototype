@@ -1,7 +1,7 @@
 package skyview.geometry.csys;
 
-import static java.lang.Math.*;
-import skyview.geometry.CoordinateSystem;
+
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** A helioecliptic coordinate system at a given epoch.
  *  This gives a coordinate system where the Sun is at the
@@ -67,7 +67,7 @@ public class Helioecliptic extends Ecliptic
        // allow for the Venus perturbations using the mean anomaly of Venus MV
 
        double mv = 212.603219 + ((58517.803875*t) % 360) ;
-       double  vencorr = 4.8 * Math.cos((299.1017 + mv - me)*dtor) + 
+       double  vencorr = 4.8 * cos((299.1017 + mv - me)*dtor) +
                   5.5 * cos((148.3133 +  2.0 * mv  -  2.0 * me )*dtor) + 
                   2.5 * cos((315.9433 +  2.0 * mv  -  3.0 * me )*dtor) + 
                   1.6 * cos((345.2533 +  3.0 * mv  -  4.0 * me )*dtor) + 

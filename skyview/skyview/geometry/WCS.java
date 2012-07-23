@@ -2,10 +2,7 @@ package skyview.geometry;
 
 import static java.lang.Double.NaN;
 import static java.lang.Double.isNaN;
-import static java.lang.Math.sin;
-import static java.lang.Math.cos;
-import static java.lang.Math.toRadians;
-import static java.lang.Math.toDegrees;
+import static org.apache.commons.math3.util.FastMath.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -113,7 +110,7 @@ public class WCS extends Converter {
 	// Use the determinant of the transformation matrix to get the scale
 	double[] p   = s.getParams();
         double   det = p[2]*p[5]-p[3]*p[4];
-	wcsScale     = 1/Math.sqrt(Math.abs(det));
+	wcsScale     = 1/sqrt(abs(det));
     }
     
     /** Which axis is the longitude */
@@ -469,7 +466,7 @@ public class WCS extends Converter {
             try {
                 double lon = h.getDoubleValue("CRVAL"+lonAxis);
                 if (lon != 0) {
-                    proj.setReference(Math.toRadians(lon), 0);
+                    proj.setReference(toRadians(lon), 0);
                 }
             } catch (Exception e) {
                 System.err.println("Unable to read reference longitude in Cartesian projection");
@@ -545,7 +542,7 @@ public class WCS extends Converter {
 	    } else if (lonType.equals("NCP")) {
 		
 	        // Sin projection with projection centered at pole.
-		double[] xproj = new double[] {toRadians(crval1), Math.PI/2};
+		double[] xproj = new double[] {toRadians(crval1), PI/2};
 		if (crval2 < 0) {
 		    xproj[1] = - xproj[1];
 		}
@@ -648,7 +645,7 @@ public class WCS extends Converter {
 	double cdelt1 = - plateScale/1000 * xPixelSize/3600;
 	double cdelt2 =   plateScale/1000 * yPixelSize/3600;
 	
-	wcsScale = Math.abs(cdelt1);
+	wcsScale = abs(cdelt1);
 	
 	// This gives cdelts in degrees per pixel.  
 	
@@ -666,8 +663,8 @@ public class WCS extends Converter {
 	CoordinateSystem coords = CoordinateSystem.factory("J2000");
 	this.csys   = coords;
 	
-	cdelt1 = Math.toRadians(cdelt1);
-	cdelt2 = Math.toRadians(cdelt2);
+	cdelt1 = toRadians(cdelt1);
+	cdelt2 = toRadians(cdelt2);
 	
 	Scaler s = new Scaler(-cdelt1*crpix1, -cdelt2*crpix2, cdelt1, 0, 0, cdelt2);
 	
@@ -725,7 +722,7 @@ public class WCS extends Converter {
 	wcsKeys.put("CDELT1", toDegrees(cd1));
 	wcsKeys.put("CDELT2", toDegrees(cd2));
 	
-	wcsScale   = Math.abs(cd1);
+	wcsScale   = abs(cd1);
 	
 	double cp1 = h.getDoubleValue("CRPIX1");
 	double cp2 = h.getDoubleValue("CRPIX2");
@@ -814,8 +811,8 @@ public class WCS extends Converter {
       throws Exception {
 	
 	if (proj.isFixedProjection()) {
-	    h.addValue("CRVAL1", Math.toDegrees(proj.getReferencePoint()[0]), "Fixed reference center");
-	    h.addValue("CRVAL2", Math.toDegrees(proj.getReferencePoint()[1]), "Fixed reference center");
+	    h.addValue("CRVAL1", toDegrees(proj.getReferencePoint()[0]), "Fixed reference center");
+	    h.addValue("CRVAL2", toDegrees(proj.getReferencePoint()[1]), "Fixed reference center");
 	} else {
 	    h.addValue("CRVAL1", crval[0], "Reference longitude");
 	    h.addValue("CRVAL2", crval[1], "Reference latitude");
@@ -870,20 +867,20 @@ public class WCS extends Converter {
 	// so we'll need to invert the scaler.
 	// 
 	// Do we need a matrix?  
-	if (Math.abs(s.a01) < 1.e-14 && Math.abs(s.a10) < 1.e-14) {
+	if (abs(s.a01) < 1.e-14 && abs(s.a10) < 1.e-14) {
 	    // No cross terms, so we'll just use CDELTs
-	    h.addValue("CDELT1", Math.toDegrees(1/s.a00), "X scale");
-	    h.addValue("CDELT2", Math.toDegrees(1/s.a11), "Y scale");
+	    h.addValue("CDELT1", toDegrees(1/s.a00), "X scale");
+	    h.addValue("CDELT2", toDegrees(1/s.a11), "Y scale");
 	} else {
 	    // We have cross terms.  It's simplest
 	    // just to use the CD matrix and not worry about
 	    // normalization.  First invert the matrix to get
 	    // the transformation in the direction that FITS uses.
 	    Scaler rev = s.inverse();
-	    h.addValue("CD1_1", Math.toDegrees(rev.a00), "Matrix element");
-	    h.addValue("CD1_2", Math.toDegrees(rev.a01), "Matrix element");
-	    h.addValue("CD2_1", Math.toDegrees(rev.a10), "Matrix element");
-	    h.addValue("CD2_2", Math.toDegrees(rev.a11), "Matrix element");
+	    h.addValue("CD1_1", toDegrees(rev.a00), "Matrix element");
+	    h.addValue("CD1_2", toDegrees(rev.a01), "Matrix element");
+	    h.addValue("CD2_1", toDegrees(rev.a10), "Matrix element");
+	    h.addValue("CD2_2", toDegrees(rev.a11), "Matrix element");
 	}
     }
     

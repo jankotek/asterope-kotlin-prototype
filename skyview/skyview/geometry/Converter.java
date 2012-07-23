@@ -1,5 +1,7 @@
 package skyview.geometry;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** A converter applies a succession of transformations on the data */
 public class Converter extends Transformer implements skyview.Component {
     
@@ -129,8 +131,8 @@ public class Converter extends Transformer implements skyview.Component {
 	}
 	    
 	if (arr.length == 3) {
-	    double ra  = Math.toDegrees(Math.atan2(arr[1], arr[0]));
-	    double dec = Math.toDegrees(Math.asin(arr[2]));
+	    double ra  = toDegrees(atan2(arr[1], arr[0]));
+	    double dec = toDegrees(asin(arr[2]));
 	    System.err.printf("%2d %-20s %10.5f %10.5f   %10.6f %10.6f %10.5f\n",
 			      index, label, ra, dec, arr[0], arr[1], arr[2]);
 	    
@@ -138,7 +140,7 @@ public class Converter extends Transformer implements skyview.Component {
 	    
 	    System.err.printf("%2d %-20s %10.6f %10.6f   %10.5f %10.5f\n",
 			      index, label, arr[0], arr[1],
-			      Math.toDegrees(arr[0]), Math.toDegrees(arr[1]));
+			      toDegrees(arr[0]), toDegrees(arr[1]));
 	    
 	} else {
             System.err.printf("%2d %-20s Vector length: %d\n", 

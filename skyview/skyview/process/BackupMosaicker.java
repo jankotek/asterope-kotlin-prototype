@@ -19,6 +19,8 @@ import nom.tam.fits.Header;
 
 import java.util.ArrayList;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This mosaicker is used to create a mosaic where
  *  if there are pixels unfilled by the primary survey
  *  one or more secondary surveys are invoked to fill them.
@@ -95,12 +97,12 @@ public class BackupMosaicker extends Mosaicker {
 	        output.getWCS().inverse().transform(cpix, cunit);
 			       
 	        cpix = skyview.geometry.Util.coord(cunit);
-	        cpix[0]= Math.toDegrees(cpix[0]);
-	        cpix[1]= Math.toDegrees(cpix[1]);
+	        cpix[0]= toDegrees(cpix[0]);
+	        cpix[1]= toDegrees(cpix[1]);
 		pos = new Position(cpix[0], cpix[1], "J2000");
 		
 		// Find the dimension of the output image.
-		maxSize = Math.max(width, height)*output.getWCS().getScale()*180/Math.PI;
+		maxSize = max(width, height)*output.getWCS().getScale()*180/PI;
 	    }
 
 	    // Get candidate images from the survey.

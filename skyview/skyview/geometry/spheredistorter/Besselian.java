@@ -3,8 +3,8 @@ package skyview.geometry.spheredistorter;
 import skyview.geometry.SphereDistorter;
 import skyview.geometry.Transformer;
 
-import static java.lang.Math.*;
 
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class implements the distortion of Besselian coordinate systems.
  */
@@ -165,7 +165,7 @@ public class Besselian extends skyview.geometry.SphereDistorter {
             }
     
             // Make sure we output a unit vector.
-            double rxyz = Math.sqrt (y[0]*y[0] + y[1]*y[1] + y[2]*y[2]);
+            double rxyz = sqrt (y[0]*y[0] + y[1]*y[1] + y[2]*y[2]);
     
             for (int i=0; i<3; i += 1) {
                 y[i]  /= rxyz;

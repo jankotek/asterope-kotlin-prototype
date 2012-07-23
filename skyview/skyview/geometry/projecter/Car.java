@@ -1,15 +1,13 @@
 package skyview.geometry.projecter;
 
-import skyview.geometry.*;
 
 import static java.lang.Double.NaN;
-import static java.lang.Math.*;
 
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
 
-import skyview.geometry.sampler.Clip;
+import static org.apache.commons.math3.util.FastMath.*;
 
 
 /** This class implements the Cartesian (rectangular)
@@ -40,11 +38,11 @@ public final class Car extends Projecter {
     
     /** Get tile offsets */
     public double getXTiling() {
-	return 2*Math.PI;
+	return 2*PI;
     }
     /** Get tile offsets */
     public double getYTiling() {
-	return 2*Math.PI;
+	return 2*PI;
     }
     
     /** Is this an inverse of some other transformation? */
@@ -55,11 +53,11 @@ public final class Car extends Projecter {
     /** Find the shadow to this point */
     public double[] shadowPoint(double x, double y) {
 	if (x > 0) {
-	    return new double[]{x-2*Math.PI, y};
+	    return new double[]{x-2*PI, y};
 	} else if (x < 0) {
-	    return new double[]{x+2*Math.PI, y};
+	    return new double[]{x+2*PI, y};
 	} else {
-	    return new double[]{2*Math.PI, y};
+	    return new double[]{2*PI, y};
 	}
     }
     
@@ -99,7 +97,7 @@ public final class Car extends Projecter {
     public double[] tissot(double x, double y) {
         // Depends only on the latitude which we assume to
         // be in the range |b| <= pi/2
-        return new double[] {1./Math.sin(y), 1, 0};
+        return new double[] {1./sin(y), 1, 0};
     }
 		      
     public class CarDeproj extends Deprojecter {
@@ -124,11 +122,11 @@ public final class Car extends Projecter {
 	}
 	
 	public double getXTiling() {
-	    return 2*Math.PI;
+	    return 2*PI;
 	}
 	
 	public double getYTiling() {
-	    return 2*Math.PI;
+	    return 2*PI;
 	}
     
         /** Deproject a point from the plane to the sphere.

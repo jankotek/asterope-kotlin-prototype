@@ -1,7 +1,7 @@
 
 package skyview.geometry;
 
-import static java.lang.Math.abs;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class does 2-D scalings, rotations and linear transformations.
  */
@@ -143,7 +143,7 @@ public class Scaler extends Transformer implements skyview.Component {
      *  and the output.
      */
     public double scale() {
-	return Math.sqrt((a00 + a01)*(a00+a01)+(a10+a11)*(a10+a11))/Math.sqrt(2);
+	return sqrt((a00 + a01)*(a00+a01)+(a10+a11)*(a10+a11))/sqrt(2);
     }
     
     /** Interchange the X and Y axes */

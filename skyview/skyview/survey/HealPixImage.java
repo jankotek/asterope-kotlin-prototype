@@ -12,6 +12,7 @@ import skyview.geometry.WCS;
 import skyview.geometry.Projection;
 import skyview.geometry.CoordinateSystem;
 import skyview.geometry.Scaler;
+import static org.apache.commons.math3.util.FastMath.*;
 
 import skyview.geometry.projecter.Hpx;
 
@@ -102,16 +103,16 @@ public class HealPixImage extends Image {
 	    
 	    // The 0,0 point of the oblique projection is at (+2,+2) squares.
 	    // This is at the point (3 pi/4, 0) in the original projection.
-	    Scaler s1 = new Scaler(-3*Math.PI/4, 0, 1, 0, 0, 1);
+	    Scaler s1 = new Scaler(-3*PI/4, 0, 1, 0, 0, 1);
 	    
-	    double isqrt2 = 1 / Math.sqrt(2);
+	    double isqrt2 = 1 / sqrt(2);
 	    
 	    // Now rotate by 45 degrees to get into the oblique projection.
 	    s1 = s1.add(new Scaler(0., 0., isqrt2, isqrt2, -isqrt2, isqrt2));
 	    
 	    // Each square has a length of pi/sqrt(8), so pixels
 	    // have a length of pi/(nside*sqrt(8))
-	    double pixlen = Math.PI/(nside*Math.sqrt(8));
+	    double pixlen = PI/(nside*sqrt(8));
 	    
 	    // The oblique projection is 4x6 squares, so the
 	    // center is 2x3 squares from the bottom left corner.

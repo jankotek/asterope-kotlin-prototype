@@ -4,7 +4,7 @@
 
 package skyview.geometry;
 
-import static java.lang.Math.*;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public final class Util {
     

@@ -1,6 +1,7 @@
 package skyview.geometry.distorter;
 
-import static java.lang.Math.*;
+import static org.apache.commons.math3.util.FastMath.*;
+
 import static java.lang.Double.NaN;
 import skyview.geometry.Distorter;
 import skyview.geometry.Transformer;
@@ -18,7 +19,7 @@ public class DSS extends Distorter
     
     private double CONS2R    = toDegrees(1)*3600;
     private double COND2R    = 1.745329252e-2;
-    private double TWOPI     = 2*Math.PI;
+    private double TWOPI     = 2*PI;
     private double TOLERANCE = 0.0000005;
     
 

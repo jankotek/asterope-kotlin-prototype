@@ -6,6 +6,8 @@ import skyview.executive.Settings;
 import skyview.survey.Image;
 import org.apache.commons.math3.special.Erf;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /**
  *
  * @author tmcglynn
@@ -20,7 +22,7 @@ public class GaussSmoother extends WeightedSmoother {
             sigma = 2;
         }
 
-        int sz = (int) Math.ceil(sigma);
+        int sz = (int) ceil(sigma);
         // Go out 3 sigma to both sides and then add in a center pixel.
         int dim = 2*(3*sz) + 1;
   
@@ -28,7 +30,7 @@ public class GaussSmoother extends WeightedSmoother {
         double sum = 0;
         int pos = 0;
         int pix = 0;
-        double div = 1./Math.sqrt(2)/sigma;
+        double div = 1./sqrt(2)/sigma;
 
         sz = dim/2;
   

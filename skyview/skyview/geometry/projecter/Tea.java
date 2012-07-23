@@ -5,6 +5,8 @@ import skyview.geometry.Transformer;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Util;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class provides for the
  *  translation between coordinates and the TEA Equal Area projection.
  *  <p>
@@ -17,8 +19,8 @@ import skyview.geometry.Util;
  */  
 public class Tea extends skyview.geometry.Projecter {
     
-    private static final double sqrt2 = Math.sqrt(2);
-    private static final double rat   = Math.sqrt(Math.PI);
+    private static final double sqrt2 = sqrt(2);
+    private static final double rat   = sqrt(PI);
     
     private Straddle myStraddler = new OctaStraddle(rat, this);
     
@@ -71,12 +73,12 @@ public class Tea extends skyview.geometry.Projecter {
 	
 	// Output offset
 	//  z = sin(theta)
-	double t   = Math.sqrt((1-copy[2])/2);
-	double lat = Math.atan2(copy[1], copy[0]);
-	double u   = 4*t*lat/Math.PI; 
+	double t   = sqrt((1-copy[2])/2);
+	double lat = atan2(copy[1], copy[0]);
+	double u   = 4*t*lat/PI;
 	
 	double x = t*sqrt2 - u/sqrt2;
-	double y = u/Math.sqrt(2);
+	double y = u/sqrt(2);
 	
 	if (flipped) {
 	    u = 1-x;
@@ -91,7 +93,7 @@ public class Tea extends skyview.geometry.Projecter {
 	
 //	double[] coo = Util.coord(unit);
 //	System.err.printf("Project: %.3f,%.3f  ->  %.3f %.3f\n",
-//			   Math.toDegrees(coo[0]), Math.toDegrees(coo[1]),
+//			   toDegrees(coo[0]), toDegrees(coo[1]),
 //			   plane[0], plane[1]);
 	plane[0] = rat*x;
 	plane[1] = rat*y;
@@ -174,10 +176,10 @@ public class Tea extends skyview.geometry.Projecter {
 	    
 	    double z = 0;
 	    if (t > 0) {
-	        double l = Math.PI/4 * u/t;
+	        double l = PI/4 * u/t;
 		z = 1-2*t*t;
-		x = Math.cos(l)*z;
-		y = Math.sin(l)*z;
+		x = cos(l)*z;
+		y = sin(l)*z;
 	    } else {
 		z = 1;
 		x = 0;
@@ -193,7 +195,7 @@ public class Tea extends skyview.geometry.Projecter {
 //	    double[] coo = Util.coord(sphere);
 //	    System.err.printf("DeProject: %.3f %.3f  ->  %.3f %.3f\n",
 //			   plane[0], plane[1],
-//			   Math.toDegrees(coo[0]), Math.toDegrees(coo[1])
+//			   toDegrees(coo[0]), toDegrees(coo[1])
 //			   );
         }
 	
@@ -216,8 +218,8 @@ public class Tea extends skyview.geometry.Projecter {
 	System.out.println(
 	    "Original map coordinates: "+pos[0]+" "+pos[1]+"\n"+
 	    "Transform to vector:      "+unit[0]+" "+unit[1]+" "+unit[2]+"\n"+
-	    "At sphericalccoordinates: "+Math.toDegrees(coords[0])+
-			                 " "+Math.toDegrees(coords[1])+"\n"+
+	    "At sphericalccoordinates: "+toDegrees(coords[0])+
+			                 " "+toDegrees(coords[1])+"\n"+
 	    "Back to map coordinates:  "+npos[0]+" "+npos[1]);
     }
     

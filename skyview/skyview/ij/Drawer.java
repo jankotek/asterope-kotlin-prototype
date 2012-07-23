@@ -16,6 +16,7 @@ import java.io.FileReader;
 import ij.ImagePlus;
 
 import java.util.ArrayList;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** Draw lines specified in a user file. */
 public class Drawer {
@@ -62,10 +63,10 @@ public class Drawer {
     // Add in a rotation.
     void rotate(String angle) {
 	try {
-	    double xangle = Math.toRadians(Double.parseDouble(angle));
+	    double xangle = toRadians(Double.parseDouble(angle));
 	    currentAngle += xangle;
-	    a00 =  a11 = Math.cos(currentAngle);
-	    a01 = -Math.sin(currentAngle);
+	    a00 =  a11 = cos(currentAngle);
+	    a01 = -sin(currentAngle);
 	    a10 = -a01;
 	} catch (Exception e) {
 	    System.err.println("  Draw error: rotate:"+angle);
@@ -369,11 +370,11 @@ public class Drawer {
 	double factor = 1;
 	
 	if (last == '"') {
-	    factor = Math.toRadians(1/3600.);
+	    factor = toRadians(1/3600.);
 	} else if (last == '\'') {
-	    factor = Math.toRadians(1/60.);
+	    factor = toRadians(1/60.);
 	} else if (last == 'd' || last == 'D') {
-	    factor = Math.toRadians(1);
+	    factor = toRadians(1);
 	}
 	if (factor != 1) {
 	    val = val.substring(0,val.length()-1);
@@ -462,7 +463,7 @@ public class Drawer {
 	    double ang = Double.parseDouble(fields[2]);
 	    
 	    if (!Double.isNaN(pnt[0])) {
-	        proc.plotString(fields[3], x0+pnt[0], y0+pnt[1], Math.toRadians(-(Math.toDegrees(currentAngle)+ang)));
+	        proc.plotString(fields[3], x0+pnt[0], y0+pnt[1], toRadians(-(toDegrees(currentAngle)+ang)));
 	    }
 	    
 	} catch (Exception e) {

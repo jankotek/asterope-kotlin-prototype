@@ -38,6 +38,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class uses ImageJ to create non-FITS image products.
  *  The following keyword settings are supported:
  * 
@@ -211,11 +213,11 @@ public class IJProcessor implements skyview.process.Processor {
 	    System.err.println("Scaling has Max < Min");
 	}
 	if (scale.equals("sqrt")) {
-	    mn = (float) Math.sqrt(mn);
-	    mx = (float) Math.sqrt(mx);
+	    mn = (float) sqrt(mn);
+	    mx = (float) sqrt(mx);
 	} else if (scale.equals("log")) {
-	    mn = (float) Math.log(mn);
-	    mx = (float)  Math.log(mx);
+	    mn = (float) log(mn);
+	    mx = (float)  log(mx);
 	}
 	float delta   = (mx-mn)/256;
 	float[] data = (float[]) ip.getPixels();
@@ -353,19 +355,19 @@ public class IJProcessor implements skyview.process.Processor {
 		        }
 		        double len = 0;
 		        for (int j=1; j<line.length; j += 1) {
-			    len += Math.abs(line[j][0]-line[j-1][0]) +
-			           Math.abs(line[j][1]-line[j-1][1]);
+			    len += abs(line[j][0]-line[j-1][0]) +
+			           abs(line[j][1]-line[j-1][1]);
 		        }
 		        if (len < 30) {
 			    continue;
 		        }
 		        int p = (int)(0.3*lines[i].length);
-		        double angle = Math.atan2(-line[p][1]+line[p-1][1], line[p][0]-line[p-1][0]);
+		        double angle = atan2(-line[p][1]+line[p-1][1], line[p][0]-line[p-1][0]);
 			// Make sure the letters aren't upside down.
-			if (angle > Math.PI/2) {
-			    angle -= Math.PI;
-			} else if (angle < -Math.PI/2) {
-			    angle += Math.PI;
+			if (angle > PI/2) {
+			    angle -= PI;
+			} else if (angle < -PI/2) {
+			    angle += PI;
 			}
 		        plotString(labels[i], line[p][0], line[p][1], angle);
 		    }
@@ -379,8 +381,8 @@ public class IJProcessor implements skyview.process.Processor {
     }
     
     void plotString(String label, double x, double y, double angle) {
-	double sa = Math.sin(angle);
-	double ca = Math.cos(angle);
+	double sa = sin(angle);
+	double ca = cos(angle);
         // Use local version to accommodate angle...
 	ip.addPlotString(label, x+3*sa+0.5, ny-(y+ca+0.5), angle);
     }

@@ -1,6 +1,6 @@
 package skyview.geometry;
 
-import java.lang.reflect.*;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class implements projection algorithms to/from a projection
   * plane and the unit sphere.  Data on the unit sphere is normally
@@ -23,7 +23,7 @@ public class Projection {
       * but it can be the coordinate origin for other projections
       * and can in principl be anything...
       */
-    private double[]		refProj= new double[]{0,Math.PI/2};
+    private double[]		refProj= new double[]{0,PI/2};
     private boolean             refSet = false;
     
     private boolean             fixedProjection = false;
@@ -158,8 +158,8 @@ public class Projection {
 	}
 	  
 	// We need to rotate the reference pixel to the pole.
-//	rotation = new Rotater("ZYZ", Math.PI+reference[0], -(Math.PI/2 - reference[1]), Math.PI/2);
-	rotation = new Rotater("ZYZ", reference[0],  -reference[1]+Math.PI/2, Math.PI/2); 
+//	rotation = new Rotater("ZYZ", PI+reference[0], -(PI/2 - reference[1]), PI/2);
+	rotation = new Rotater("ZYZ", reference[0],  -reference[1]+PI/2, PI/2);
 	if (specialReference() != null) {
 	    double[] spec = specialReference();
 	    rotation = rotation.add(new Rotater("ZYZ", spec[0], spec[1], spec[2]));

@@ -15,6 +15,7 @@
 package skyview.geometry.sampler;
 
 import skyview.survey.Image;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public class Spline extends skyview.geometry.Sampler {
     
@@ -109,10 +110,10 @@ public class Spline extends skyview.geometry.Sampler {
 	yi0 -= .05*dy + splineDegree;
 	yie += .05*dy + splineDegree;
 	
-	int ixi0 = (int) Math.floor(xi0);
-	int ixie = (int) Math.ceil(xie);
-	int iyi0 = (int) Math.floor(yi0);
-	int iyie = (int) Math.ceil(yie);
+	int ixi0 = (int) floor(xi0);
+	int ixie = (int) ceil(xie);
+	int iyi0 = (int) floor(yi0);
+	int iyie = (int) ceil(yie);
 	
 	if (ixi0 < 0) {
 	    ixi0 = 0;
@@ -164,22 +165,22 @@ public class Spline extends skyview.geometry.Sampler {
     	switch (splineDegree) {
 	 case 2:
 	    			NbPoles = 1;
-	    			Pole[0] = Math.sqrt(8.0) - 3.0;
+	    			Pole[0] = sqrt(8.0) - 3.0;
 	    			break;
 	 case 3:
 	    			NbPoles = 1;
-	    			Pole[0] = Math.sqrt(3.0) - 2.0;
+	    			Pole[0] = sqrt(3.0) - 2.0;
 	    			break;
 	 case 4:
 	    			NbPoles = 2;
-	    			Pole[0] = Math.sqrt(664.0 - Math.sqrt(438976.0)) + Math.sqrt(304.0) - 19.0;
-	    			Pole[1] = Math.sqrt(664.0 + Math.sqrt(438976.0)) - Math.sqrt(304.0) - 19.0;
+	    			Pole[0] = sqrt(664.0 - sqrt(438976.0)) + sqrt(304.0) - 19.0;
+	    			Pole[1] = sqrt(664.0 + sqrt(438976.0)) - sqrt(304.0) - 19.0;
 	    			break;
 	 case 5:
 	    			NbPoles = 2;
-	    			Pole[0] = Math.sqrt(135.0 / 2.0 - Math.sqrt(17745.0 / 4.0)) + Math.sqrt(105.0 / 4.0)
+	    			Pole[0] = sqrt(135.0 / 2.0 - sqrt(17745.0 / 4.0)) + sqrt(105.0 / 4.0)
 	      				- 13.0 / 2.0;
-	    			Pole[1] = Math.sqrt(135.0 / 2.0 + Math.sqrt(17745.0 / 4.0)) - Math.sqrt(105.0 / 4.0)
+	    			Pole[1] = sqrt(135.0 / 2.0 + sqrt(17745.0 / 4.0)) - sqrt(105.0 / 4.0)
 	      				- 13.0 / 2.0;
 	    			break;
 	 default:
@@ -271,7 +272,7 @@ public class Spline extends skyview.geometry.Sampler {
     	int Horizon = DataLength;
 	
     	if (Tolerance > 0.0) {
-	    Horizon = (int)Math.ceil(Math.log(Tolerance) / Math.log(Math.abs(z)));
+	    Horizon = (int)ceil(log(Tolerance) / log(abs(z)));
 	}
     	if (Horizon < DataLength) {
 	    		/* accelerated loop */
@@ -287,7 +288,7 @@ public class Spline extends skyview.geometry.Sampler {
 	    /* full loop */
 	    zn = z;
 	    iz = 1.0 / z;
-	    z2n = Math.pow(z, (double)(DataLength - 1));
+	    z2n = pow(z, (double)(DataLength - 1));
 	    Sum = c[0] + z2n * c[DataLength - 1];
 	    z2n *= z2n * iz;
 	    for (int n = 1; n <= DataLength - 2; n++) {
@@ -402,8 +403,8 @@ public class Spline extends skyview.geometry.Sampler {
     
     	/* compute the interpolation indexes */
     	if (splineDegree % 2  != 0) {
-	    i = (int)Math.floor(x) - splineDegree / 2;
-	    j = (int)Math.floor(y) - splineDegree / 2;
+	    i = (int)floor(x) - splineDegree / 2;
+	    j = (int)floor(y) - splineDegree / 2;
 	    
 	    for (int k = 0; k <= splineDegree; k++) {
 		 xIndex[k] = i++;
@@ -411,8 +412,8 @@ public class Spline extends skyview.geometry.Sampler {
 	    }
 	}
     	else {
-	    i = (int)Math.floor(x + 0.5) - splineDegree / 2;
-	    j = (int)Math.floor(y + 0.5) - splineDegree / 2;
+	    i = (int)floor(x + 0.5) - splineDegree / 2;
+	    j = (int)floor(y + 0.5) - splineDegree / 2;
 	    for (int k = 0; k <= splineDegree; k++) {
 		xIndex[k] = i++;
 		yIndex[k] = j++;

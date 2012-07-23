@@ -3,6 +3,8 @@ package skyview.geometry.distorter;
 import skyview.geometry.Transformer;
 import skyview.geometry.Distorter;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class implements the NEAT radial distortion.
  */
 public class Neat extends Distorter {
@@ -43,7 +45,7 @@ public class Neat extends Distorter {
 	double dx = (x-x0);
 	double dy = (y-y0);
 	    
-	double rp = Math.sqrt(dx*dx + dy*dy);
+	double rp = sqrt(dx*dx + dy*dy);
 	    
 	if (rp > 0) {
 	    double t, delta;
@@ -57,7 +59,7 @@ public class Neat extends Distorter {
 	        t += delta/(1-3*scale*t*t); // derivative of equation
 		loopLimit += 1;
 		
-	    } while (Math.abs(delta) > 1.e-10  && loopLimit < 10);
+	    } while (abs(delta) > 1.e-10  && loopLimit < 10);
 	    
 	    dx = dx*t/rp;
 	    dy = dy*t/rp;
@@ -93,7 +95,7 @@ public class Neat extends Distorter {
 	    double dx = (x-x0);
 	    double dy = (y-y0);
 	    
-	    double r = Math.sqrt(dx*dx + dy*dy);
+	    double r = sqrt(dx*dx + dy*dy);
 	    
 	    if (r > 0) {
 	    

@@ -2,6 +2,7 @@ package skyview.geometry;
 
 
 import skyview.data.CoordinateFormatter;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class represents a position in the sky.  This
  *  class is used to pass a position that may be represented in different
@@ -42,7 +43,7 @@ public class Position {
 	} else {
 	    
 	    CoordinateSystem csys = CoordinateSystem.factory(frame);
-	    double[] unit         = Util.unit(Math.toRadians(l), Math.toRadians(b));
+	    double[] unit         = Util.unit(toRadians(l), toRadians(b));
 	    Converter conv        = new Converter();
 	    
 	    if (csys.getRotater() != null) {
@@ -54,8 +55,8 @@ public class Position {
 	    double[] j2000Unit = conv.transform(unit);
 	    double[] j2000C    = Util.coord(j2000Unit);
 	    
-	    coords[0] = Math.toDegrees(j2000C[0]);
-	    coords[1] = Math.toDegrees(j2000C[1]);
+	    coords[0] = toDegrees(j2000C[0]);
+	    coords[1] = toDegrees(j2000C[1]);
 	}
     }
     
@@ -84,7 +85,7 @@ public class Position {
 	    }
 
 	    CoordinateSystem csys = CoordinateSystem.factory(frame);
-	    double[] unit         = Util.unit(Math.toRadians(coords[0]), Math.toRadians(coords[1]));
+	    double[] unit         = Util.unit(toRadians(coords[0]), toRadians(coords[1]));
 	    Converter conv        = new Converter();
 	    
 	    if (csys.getSphereDistorter() != null) {
@@ -97,8 +98,8 @@ public class Position {
 	    
 	    double[] xUnit   = conv.transform(unit);
 	    double[] xCoords = Util.coord(xUnit);
-	    xCoords[0] = Math.toDegrees(xCoords[0]);
-	    xCoords[1] = Math.toDegrees(xCoords[1]);
+	    xCoords[0] = toDegrees(xCoords[0]);
+	    xCoords[1] = toDegrees(xCoords[1]);
 	    
 	    // Make sure longitude is within range.
 	    if (xCoords[0] < 0) {

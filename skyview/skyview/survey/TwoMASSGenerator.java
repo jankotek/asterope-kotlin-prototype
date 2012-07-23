@@ -14,6 +14,8 @@ import javax.xml.parsers.SAXParser;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This is s special class just defined for a specific 2MASS SIAP service.
  *  When we get a 2MASS service with better defined columns we can get rid of this
  *  class.
@@ -181,12 +183,12 @@ public class TwoMASSGenerator implements ImageGenerator {
 		// 2MASS specific....
 		// Note that this uses the ID which is also stored in the values 
 		String crota  = getUCD("crota2");
-		double rot = Math.toRadians(Double.parseDouble(crota));
+		double rot = toRadians(Double.parseDouble(crota));
 		String scale  = getUCD("VOX:Image_Scale");
 		String[] scales = Pattern.compile(" +").split(scale);
 		double xs = Double.parseDouble(scales[0]);
 		double ys = Double.parseDouble(scales[1]);
-		String scaling = Math.cos(rot)*xs +","+Math.sin(rot)*xs+","+Math.sin(rot)*ys+","+Math.cos(rot)*ys;
+		String scaling = cos(rot)*xs +","+sin(rot)*xs+","+sin(rot)*ys+","+cos(rot)*ys;
 		
 		
 		if (naxis == null) {

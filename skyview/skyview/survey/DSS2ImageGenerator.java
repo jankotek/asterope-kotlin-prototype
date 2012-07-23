@@ -2,6 +2,7 @@ package skyview.survey;
 
 
 import skyview.executive.Settings;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class generates DSS2 image spells. */
 public class DSS2ImageGenerator implements ImageGenerator {
@@ -23,7 +24,7 @@ public class DSS2ImageGenerator implements ImageGenerator {
 	
 	for (int i=0; i<data[0].length; i += 1) {
 	    int sz = 18;
-	    double delta = Math.abs(Math.abs(dec)-90);
+	    double delta = abs(abs(dec)-90);
 	    if (delta < 8) {
 		sz = 28;
 	    }
@@ -45,8 +46,8 @@ public class DSS2ImageGenerator implements ImageGenerator {
 
         double ddec   = 180./(ndec-1);
 
-        delta  = Math.toRadians(delta);
-        ddec   = Math.toRadians(ddec);
+        delta  = toRadians(delta);
+        ddec   = toRadians(ddec);
 
         double[] decs   = new double[ndec];
 	int[]    nra    = new int[ndec];
@@ -54,14 +55,14 @@ public class DSS2ImageGenerator implements ImageGenerator {
 	int count = 0;
 	
 	for (int i=0; i<ndec; i += 1) {
-	    decs[i] = -Math.PI/2 + ddec*i;
-	    nra[i]  = (int) (2*Math.PI/delta * Math.sin(Math.PI/2 - decs[i])) + 1;
+	    decs[i] = -PI/2 + ddec*i;
+	    nra[i]  = (int) (2*PI/delta * sin(PI/2 - decs[i])) + 1;
 	    count += nra[i];
 	}
 	
-	inRA   = Math.toRadians(inRA);
-	inDec  = Math.toRadians(inDec);
-	inSize = Math.toRadians(inSize);
+	inRA   = toRadians(inRA);
+	inDec  = toRadians(inDec);
+	inSize = toRadians(inSize);
 	
 	// This starts with the maximum possible number
 	double[] ra0   = new double[count];
@@ -74,18 +75,18 @@ public class DSS2ImageGenerator implements ImageGenerator {
         for (int iDec = 0; iDec < ndec; iDec += 1) {
 	    
             int    nr  = nra[iDec];
-	    double dRA  = 2*Math.PI/nr;
+	    double dRA  = 2*PI/nr;
 	    double cDec = decs[iDec];
 	    
 	    // Skip if Dec is too far off.
-	    if (Math.abs(cDec - inDec) < inSize) {
+	    if (abs(cDec - inDec) < inSize) {
 	    
 	        for (int jRA = 0; jRA < nr; jRA += 1) {
 		    double cRA = jRA*dRA;
 		
 		    if (skyview.geometry.Util.sphdist(cRA,cDec, inRA,inDec) < inSize) {
-		        ra0[outCount]  = Math.toDegrees(cRA);
-		        dec0[outCount] = Math.toDegrees(cDec);
+		        ra0[outCount]  = toDegrees(cRA);
+		        dec0[outCount] = toDegrees(cDec);
 		        ind0[outCount] = index + jRA;
 		        outCount += 1;
 		    }

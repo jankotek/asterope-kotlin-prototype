@@ -6,6 +6,8 @@ import skyview.geometry.Scaler;
 import skyview.geometry.Transformer;
 import skyview.geometry.TransformationException;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** A image that is a subset of an existing image.  Generally
  *  this class is expected to be used when we break down a larger
  *  image into subimages for sampling purposes.  Any action that
@@ -188,11 +190,11 @@ public class Subset extends Image {
 	    int cnt = 0;
 	    for (int i=0; i<sx; i += 1) {
 		int x = i*nx;
-		int wx = Math.min(nx, width-x);
+		int wx = min(nx, width-x);
 		
 		for (int j=0; j<sy; j += 1) {
 		    int y = j*ny;
-		    int wy = Math.min(ny, height-y);
+		    int wy = min(ny, height-y);
 		    
 		    subs[cnt] = new Subset(parent, x,y,0, wx,wy,depth);
 		    cnt += 1;
@@ -220,11 +222,11 @@ public class Subset extends Image {
 	    int cnt = 0;
 	    for (int i=0; i<sx; i += 1) {
 		int x = i*nx;
-		int wx = Math.min(nx, width-x);
+		int wx = min(nx, width-x);
 		
 		for (int j=0; j<sy; j += 1) {
 		    int y = j*ny;
-		    int wy = Math.min(ny, height-y);
+		    int wy = min(ny, height-y);
 		    int[] sub = new int[wx*wy];
 		    int offset = 0;
 		    for (int ay=y; ay<y+wy; ay += 1) {

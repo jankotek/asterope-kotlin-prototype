@@ -1,5 +1,8 @@
 package skyview.geometry.sampler;
 
+
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class implements a linear interpolation sampling
   * scheme.
   */
@@ -32,8 +35,8 @@ public class LI extends skyview.geometry.Sampler {
         if (x < 0 || x > inWidth-1 || y < 0 || y > inHeight-1) {
 	    return;
 	} else {
-	    int ix = (int) Math.floor(x);
-	    int iy = (int) Math.floor(y);
+	    int ix = (int) floor(x);
+	    int iy = (int) floor(y);
 	    double dx = x-ix;
 	    double dy = y-iy;
 	

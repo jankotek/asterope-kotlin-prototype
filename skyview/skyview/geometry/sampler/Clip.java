@@ -10,6 +10,7 @@ import skyview.survey.Image;
 
 import skyview.executive.Settings;
 
+import static org.apache.commons.math3.util.FastMath.*;
  
 /** 
  * The class implements a fast flux conserving resampling
@@ -245,7 +246,7 @@ public class Clip extends Sampler {
 	if (area <= 0) {
 	    return 0; // Roundoff presumably!
 	} else {
-	    return Math.sqrt(area)/2;
+	    return sqrt(area)/2;
 	}
     }
     
@@ -607,11 +608,11 @@ public class Clip extends Sampler {
 	
 	// Round the extrema of the pixel coordinates to
 	// integer values.
-	minX = Math.floor(minX);
-	maxX = Math.ceil(maxX);
+	minX = floor(minX);
+	maxX = ceil(maxX);
 	
-	minY = Math.floor(minY);
-	maxY = Math.ceil(maxY);
+	minY = floor(minY);
+	maxY = ceil(maxY);
 	
 	
 	// Check to see if pixel is entirely off original image.

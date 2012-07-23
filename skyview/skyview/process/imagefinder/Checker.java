@@ -7,6 +7,8 @@ import skyview.geometry.Sampler;
 import skyview.geometry.Transformer;
 import skyview.geometry.WCS;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class sees if any pixels have coverage.
  *  if there are any pixels that overlap with the survey
  *  region.
@@ -356,7 +358,7 @@ public class Checker extends ImageFinder {
 	        if (t2[1] > ny) yside += 1;
 	    }
 	    // I
-	    if (Math.abs(xside) != 4 && Math.abs(yside) != 4) {
+	    if (abs(xside) != 4 && abs(yside) != 4) {
 		newValid[i] = true;
 	    }
 	}
@@ -408,7 +410,7 @@ public class Checker extends ImageFinder {
      *  should return a negative number.
      */
     protected double minDist(double x, double y, double a, double b) {
-	return  Math.min(Math.min(x, a-x), Math.min(y, b-y));
+	return  min(min(x, a-x), min(y, b-y));
 	
     }
 

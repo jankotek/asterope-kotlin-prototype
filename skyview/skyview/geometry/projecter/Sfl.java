@@ -3,11 +3,12 @@ package skyview.geometry.projecter;
 import skyview.geometry.*;
 
 import static java.lang.Double.NaN;
-import static java.lang.Math.*;
 
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+
+import static org.apache.commons.math3.util.FastMath.*;
 
 
 /** This class implements the Sanson-Flamsteed (Sinusoidal)
@@ -45,7 +46,7 @@ public final class Sfl extends Projecter {
 	} else {
 	    plane[1] = atan2(sphere[2],
 			     sqrt(sphere[0]*sphere[0]+sphere[1]*sphere[1]));
-	    plane[0] = atan2(sphere[1], sphere[0])*Math.cos(plane[1]);
+	    plane[0] = atan2(sphere[1], sphere[0])*cos(plane[1]);
 	}
     }
     

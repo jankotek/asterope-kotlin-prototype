@@ -10,6 +10,7 @@ package skyview.geometry.projecter;
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public final class Sin extends Projecter {
     
@@ -91,7 +92,7 @@ public final class Sin extends Projecter {
 	    } else {
 	        sphere[0] = plane[0];
 	        sphere[1] = plane[1];
-	        sphere[2] = Math.sqrt(1 - plane[0]*plane[0] - plane[1]*plane[1]);
+	        sphere[2] = sqrt(1 - plane[0]*plane[0] - plane[1]*plane[1]);
 	    }
         }
     }

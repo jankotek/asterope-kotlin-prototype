@@ -10,6 +10,7 @@ package skyview.geometry.projecter;
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public class Tan extends Projecter {
     
@@ -56,8 +57,8 @@ public class Tan extends Projecter {
 
     /** Get the Tissot parameters. */
     public double[] tissot (double x, double y) {
-        double r = Math.sqrt(1 + x*x + y*y);
-        return new double[]{r*r, r, Math.atan2(x,y)};
+        double r = sqrt(1 + x*x + y*y);
+        return new double[]{r*r, r, atan2(x,y)};
     }
 
     public class TanDeproj extends Deprojecter {
@@ -94,7 +95,7 @@ public class Tan extends Projecter {
 	    
 	    } else {
 	    
-	        double factor = 1 / Math.sqrt(plane[0]*plane[0] + plane[1]*plane[1]+1);
+	        double factor = 1 / sqrt(plane[0]*plane[0] + plane[1]*plane[1]+1);
 	        sphere[0] = factor*plane[0];
 	        sphere[1] = factor*plane[1];
 	        sphere[2] = factor;

@@ -44,6 +44,8 @@ import java.lang.ref.SoftReference;
 
 import java.io.File;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /**
  *  This class generates an image or images from user inputs.
  *  Output images are created by sampling one or more input images
@@ -614,8 +616,8 @@ public class Imager {
 	wcs.inverse().transform(cpix, cunit);
 			       
 	cpix = skyview.geometry.Util.coord(cunit);
-	cpix[0]= Math.toDegrees(cpix[0]);
-	cpix[1]= Math.toDegrees(cpix[1]);
+	cpix[0]= toDegrees(cpix[0]);
+	cpix[1]= toDegrees(cpix[1]);
 	
 	if ( (cpix[0]!=cpix[0]) || (cpix[1]!=cpix[1])) {
 	    // Maybe on the edge of fixed projection, or
@@ -634,7 +636,7 @@ public class Imager {
     
     protected Image[] loadCandidates(Position pos) throws Exception {
         // Get max scale using scale and image size
-	double maxSize = Math.max(nx, ny)*wcs.getScale()*180/Math.PI;
+	double maxSize = max(nx, ny)*wcs.getScale()*180/PI;
 	if (maxSize <= 0) {
 	    throw new Exception("Ouput region has nil size");
 	}
@@ -1134,8 +1136,8 @@ public class Imager {
 	    if (Settings.has("RefCoords")) {
 		String[] coords = Settings.getArray("RefCoords");
 		try {
-		    double lon = Math.toRadians(Double.parseDouble(coords[0]));
-		    double lat = Math.toRadians(Double.parseDouble(coords[1]));
+		    double lon = toRadians(Double.parseDouble(coords[0]));
+		    double lat = toRadians(Double.parseDouble(coords[1]));
 		    if (lon != center[0] || lat != center[1]) {
 		        p.setReference(lon,lat);
 		        System.err.println("  Using non-standard image center:"+Settings.get("RefCoords"));
@@ -1155,21 +1157,21 @@ public class Imager {
 	    cvt.add(p.getRotater());
 	    cvt.add(p.getProjecter());
 	    double[] uv     = 
-	      skyview.geometry.Util.unit(Math.toRadians(lon), 
-	      Math.toRadians(lat));
+	      skyview.geometry.Util.unit(toRadians(lon),
+	      toRadians(lat));
 	    double[] coords = cvt.transform(uv);
-	    s = new Scaler(0.5*nx + coords[0]/Math.toRadians(xscale), 
-		           0.5*ny - coords[1]/Math.toRadians(yscale),
-		           -1/Math.toRadians(xscale), 0, 
-			   0, 1/Math.toRadians(yscale));
+	    s = new Scaler(0.5*nx + coords[0]/toRadians(xscale),
+		           0.5*ny - coords[1]/toRadians(yscale),
+		           -1/toRadians(xscale), 0,
+			   0, 1/toRadians(yscale));
 	
 	} else {
 	
-	    p = new Projection(proj, new double[]{Math.toRadians(lon), 
-  		                   Math.toRadians(lat)});
+	    p = new Projection(proj, new double[]{toRadians(lon),
+  		                   toRadians(lat)});
 	    s = new Scaler(0.5*nx, 0.5*ny, 
-		           -1/Math.toRadians(xscale), 0, 
-			   0, 1/Math.toRadians(yscale));
+		           -1/toRadians(xscale), 0,
+			   0, 1/toRadians(yscale));
         }	
 	
 	
@@ -1178,12 +1180,12 @@ public class Imager {
 	if (rot != null  && rot.length() > 0) {
 	    double angle;
 	    try {
-	        angle  = Math.toRadians(Double.parseDouble(rot));
+	        angle  = toRadians(Double.parseDouble(rot));
 	    } catch (Exception e) {
 		throw new Exception("Invalid rotation setting:"+rot);
 	    }
-	    Scaler rScale = new Scaler(0, 0, Math.cos(angle), Math.sin(angle), 
-        	                       -Math.sin(angle), Math.cos(angle));
+	    Scaler rScale = new Scaler(0, 0, cos(angle), sin(angle),
+        	                       -sin(angle), cos(angle));
 	    s = rScale.add(s);
 	}
 	

@@ -1,5 +1,7 @@
 package skyview.survey;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 import java.lang.Math;
 import java.io.*;
 
@@ -133,8 +135,8 @@ public class HDecompressor {
         decode();			// Launch decoding
         undigitize();		// Un-Digitize
       
-        if (tmp == null || tmp.length < Math.max(nx,ny)) {
-            tmp   = new int[Math.max(nx,ny)];
+        if (tmp == null || tmp.length < Math.max(nx, ny)) {
+            tmp   = new int[Math.max(nx, ny)];
             flag  = new boolean[Math.max(nx,ny)];
         }
        
@@ -457,7 +459,7 @@ public class HDecompressor {
 
         /* log2n is log2 of max(nqx,nqy) rounded up to next power of 2 */
         nqmax = (nqx>nqy) ? nqx : nqy;
-        log2n = (int)( Math.log(nqmax)/log2+0.5 );
+        log2n = (int)(log(nqmax)/log2+0.5 );
         if (nqmax > (1<<log2n)) log2n += 1;
 
         /* allocate scratch array for working space */
@@ -598,7 +600,7 @@ public class HDecompressor {
          * log2n is log2 of max(nx,ny) rounded up to next power of 2
          */
         int nmax  = (nx>ny) ? nx : ny;
-        int log2n = (int)(Math.log((double) nmax)/Math.log(2.0)+0.5);
+        int log2n = (int)(log((double) nmax)/log(2.0)+0.5);
 	
         if ( nmax > (1<<log2n) ) {
             log2n += 1;

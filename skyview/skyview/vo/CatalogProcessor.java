@@ -9,6 +9,8 @@ import skyview.geometry.DepthSampler;
 
 import skyview.executive.Settings;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 public class CatalogProcessor implements skyview.process.Processor {
     
     private static HashMap <String,ConeQuerier> requests = new HashMap<String,ConeQuerier>();
@@ -111,7 +113,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	if (Settings.has("CatalogRadius")) {
 	    try {
 		imageSize = Double.parseDouble(Settings.get("catalogradius"));
-		cosRad    = Math.cos(Math.toRadians(imageSize));
+		cosRad    = cos(toRadians(imageSize));
 		hasRad    = true;
 	    } catch (Exception e) {
 		System.err.println("  Invalid CatalogRadius setting:"+
@@ -123,7 +125,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	// Otherwise use the size of the image.  We overestimage
 	// a little but this should help accommodate strange geometries. 
 	if (imageSize < 0) {
-	    imageSize = Math.toDegrees(output.getWCS().getScale()*(nx+ny)/2.);
+	    imageSize = toDegrees(output.getWCS().getScale()*(nx+ny)/2.);
 	}
 	
 	// Get the RA and Dec (J2000) of the center of the image.
@@ -167,12 +169,12 @@ public class CatalogProcessor implements skyview.process.Processor {
 	    if (cat.startsWith("http:") || cat.startsWith("ftp:") ||
 		cat.startsWith("file:")) {
 		cq = new ConeQuerier(cat, "cat"+i, 
-		   Math.toDegrees(centerCoords[0]), 
-		   Math.toDegrees(centerCoords[1]),
+		   toDegrees(centerCoords[0]),
+		   toDegrees(centerCoords[1]),
 		   imageSize);
 		
 	    } else {
-	        cq = ConeQuerier.factory(cat, Math.toDegrees(centerCoords[0]), Math.toDegrees(centerCoords[1]), imageSize);
+	        cq = ConeQuerier.factory(cat, toDegrees(centerCoords[0]), toDegrees(centerCoords[1]), imageSize);
 	    }
 	    
 	    if (Settings.has("CatalogFields")) {
@@ -331,8 +333,8 @@ public class CatalogProcessor implements skyview.process.Processor {
 	    int  catCount = 0;
 	   
 	    for (int p=0; p<pos.length; p += 1) {
-		px[0] = Math.toRadians(pos[p][0]);
-		px[1] = Math.toRadians(pos[p][1]);
+		px[0] = toRadians(pos[p][0]);
+		px[1] = toRadians(pos[p][1]);
 		unit  = skyview.geometry.Util.unit(px);
 		
 	        outputImage.getWCS().transform(unit, px);
@@ -357,8 +359,8 @@ public class CatalogProcessor implements skyview.process.Processor {
 		        conv.transform(unit, unit);
 		        newCoo = skyview.geometry.Util.coord(unit);
 		    
-		        newCoo[0] = Math.toDegrees(newCoo[0]);
-		        newCoo[1] = Math.toDegrees(newCoo[1]);
+		        newCoo[0] = toDegrees(newCoo[0]);
+		        newCoo[1] = toDegrees(newCoo[1]);
 		    
 			
 		        String[] xx = null;

@@ -6,6 +6,7 @@ import skyview.process.ImageFinder;
 import skyview.geometry.Sampler;
 import skyview.geometry.Transformer;
 import skyview.geometry.WCS;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class finds the best images to be used for sampling using
  *  a recursive rectangle algorithm.  It looks for rectangles the
@@ -438,7 +439,7 @@ public abstract class RectRecurse extends ImageFinder {
 	        if (t2[1] < 0)  yside -= 1;
 	        if (t2[1] > ny) yside += 1;
 	    }
-	    if (Math.abs(xside) != 4 && Math.abs(yside) != 4) {
+	    if (abs(xside) != 4 && abs(yside) != 4) {
 		newValid[i] = true;
 	    }
 	}
@@ -490,7 +491,7 @@ public abstract class RectRecurse extends ImageFinder {
      *  should return a negative number.
      */
     protected double minDist(double x, double y, double a, double b) {
-	return  Math.min(Math.min(x, a-x), Math.min(y, b-y));
+	return  min(min(x, a-x), min(y, b-y));
 	
     }
 

@@ -1,11 +1,10 @@
 package skyview.geometry.projecter;
 
-import static java.lang.Math.sqrt;
-import static java.lang.Math.abs;
-
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This class implements the Mercator projection
  */
@@ -42,11 +41,11 @@ public class Mer extends Projecter {
 	if (sphere[0] == 0) {
 	    lon = 0;
 	} else {
-	    lon = Math.atan2(sphere[1], sphere[0]);
+	    lon = atan2(sphere[1], sphere[0]);
 	}
-	double lat = Math.asin(sphere[2]);
+	double lat = asin(sphere[2]);
 	
-	double x = Math.log(Math.tan(Math.PI/4 + lat));
+	double x = log(tan(PI/4 + lat));
 	plane[0] = lon;
 	plane[1] = x;
     }
@@ -71,9 +70,9 @@ public class Mer extends Projecter {
 	
 	double[] xx  = new double[]{x,y};
 	if (x <= 0) {
-	    xx[0] = x+2*Math.PI;
+	    xx[0] = x+2*PI;
 	} else {
-	    xx[0] = x-2*Math.PI;
+	    xx[0] = x-2*PI;
 	}
 	return xx;
     }
@@ -118,10 +117,10 @@ public class Mer extends Projecter {
          */
         public final void transform(double[] plane, double[] sphere) {
 	    double lon = plane[0];
-	    double lat = 2*Math.atan(Math.exp(plane[1])) - Math.PI/2;
-	    sphere[0] = Math.cos(lon)*Math.cos(lat);
-	    sphere[1] = Math.sin(lon)*Math.cos(lat);
-	    sphere[2] = Math.sin(lat);
+	    double lat = 2*atan(exp(plane[1])) - PI/2;
+	    sphere[0] = cos(lon)*cos(lat);
+	    sphere[1] = sin(lon)*cos(lat);
+	    sphere[2] = sin(lat);
 	}
     }
 }

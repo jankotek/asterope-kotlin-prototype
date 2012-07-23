@@ -1,5 +1,7 @@
 package skyview.util;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** Scale an object linearly.
  */
 public class LogScaler extends Scaler {
@@ -83,7 +85,7 @@ public class LogScaler extends Scaler {
 	
 	this.min = smallestPositive;
 	if (smallestPositive > 0 && smallestPositive < getMaxVal()) {
-	    this.scale = (getMaxOutput()-getMinOutput())/(Math.log(getMaxVal() - Math.log(smallestPositive)));
+	    this.scale = (getMaxOutput()-getMinOutput())/(log(getMaxVal() - log(smallestPositive)));
 	}
     }
     
@@ -95,7 +97,7 @@ public class LogScaler extends Scaler {
 	if (val <= min) {
 	    return (byte)getMinOutput();
 	} else {
-	    return (byte) ((Math.log(val)-Math.log(min))*scale + getMinOutput());
+	    return (byte) ((log(val)-log(min))*scale + getMinOutput());
 	}
     }
 }

@@ -10,6 +10,8 @@ import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 public class Stg extends Projecter {
     
     /** Get the name of the compontent */
@@ -88,12 +90,12 @@ public class Stg extends Projecter {
 		double x = plane[0];
 		double y = plane[1];
 		
-		double r     = Math.sqrt(x*x + y*y);
-		double theta = 2*Math.atan2(r, 2);
-		double z     = Math.cos(theta);
+		double r     = sqrt(x*x + y*y);
+		double theta = 2*atan2(r, 2);
+		double z     = cos(theta);
 		
 	        sphere[2] = z;
-		if (Math.abs(z) != 1) {
+		if (abs(z) != 1) {
 		    sphere[0] = plane[0]*(1+z)/2;
 		    sphere[1] = plane[1]*(1+z)/2;
 		} else {

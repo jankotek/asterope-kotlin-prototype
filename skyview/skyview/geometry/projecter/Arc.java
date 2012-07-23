@@ -14,6 +14,8 @@ import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 public class Arc extends Projecter {
 
     /** Get a name for the component */
@@ -52,7 +54,7 @@ public class Arc extends Projecter {
 		plane[0] = 0;
 		plane[1] = 0;
 	    } else {
-	        double ratio = (Math.PI/2 - Math.asin(sphere[2]))/Math.sqrt(denom);
+	        double ratio = (PI/2 - asin(sphere[2]))/sqrt(denom);
 	        plane[0] = ratio * sphere[0];
 	        plane[1] = ratio * sphere[1];
 	    }
@@ -62,7 +64,7 @@ public class Arc extends Projecter {
     
     public boolean validPosition(double[] plane) {
 	return super.validPosition(plane) &&
-	       (plane[0]*plane[0] + plane[1]*plane[1]) <= Math.PI*Math.PI;
+	       (plane[0]*plane[0] + plane[1]*plane[1]) <= PI*PI;
     }
 	
     
@@ -95,7 +97,7 @@ public class Arc extends Projecter {
          */
         public final void transform(double[] plane, double[] sphere) {
 	
-	    double r = Math.sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
+	    double r = sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
 	
 	    if ( !validPosition(plane)) {
 	        sphere[0] = Double.NaN;
@@ -103,12 +105,12 @@ public class Arc extends Projecter {
 	        sphere[2] = Double.NaN;
 	    
 	    } else {
-	        sphere[2]  = Math.cos(r);
+	        sphere[2]  = cos(r);
                 double pr_sinde=sphere[2];
                 double pr_sq_cosde=1 - pr_sinde*pr_sinde;
                 double ratio=0;    
                 if(r>0){
-                    ratio = Math.sqrt(pr_sq_cosde)/r;    
+                    ratio = sqrt(pr_sq_cosde)/r;
                 }
 	        sphere[0] = ratio * plane[0];
 	        sphere[1] = ratio * plane[1];

@@ -1,6 +1,7 @@
 package skyview.request;
 
 import skyview.executive.Settings;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** This finds the correct center and
   * scale for a user a TOAST grid output.
@@ -22,8 +23,8 @@ public class ToastGridder implements skyview.executive.SettingsUpdater {
 	
 	int div    = Integer.parseInt(Settings.get("Subdiv", "8"));
 	
-	int npix   = (int) Math.pow(2, div);
-	int ntile  = (int) Math.pow(2, level);
+	int npix   = (int) pow(2, div);
+	int ntile  = (int) pow(2, level);
 	
 	
 	double scale = 180./(npix*ntile);

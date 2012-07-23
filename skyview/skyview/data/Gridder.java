@@ -13,6 +13,8 @@ import skyview.geometry.CoordinateSystem;
 
 import java.util.ArrayList;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 class GridLine {
     /** a nx2 array of giving the x and y coordinates for a grid line. */
     double[][] line;
@@ -55,7 +57,7 @@ public class Gridder  {
      */
     private Scaler imageScaler;
     
-    private static final double MAX_CURVE = Math.cos(Math.toRadians(1));
+    private static final double MAX_CURVE = cos(toRadians(1));
     
     // The latitude limits (in decimal degrees)
     private double[] latLimits;
@@ -183,11 +185,11 @@ public class Gridder  {
 	} else {
 	    lonValues = ang.scaling(lonLimits[0], lonLimits[1]);
 	}
-	double lonLog = Math.log10(lonValues[1]);
+	double lonLog = log10(lonValues[1]);
 	if (sexagesimal) {
-	    lonLog = Math.log10(lonValues[1]/15);
+	    lonLog = log10(lonValues[1]/15);
 	}
-	double latLog = Math.log10(latValues[1]);
+	double latLog = log10(latValues[1]);
 	int lonPrec = (int)(3-lonLog);
 	int latPrec = (int)(3-latLog);
 	
@@ -217,9 +219,9 @@ public class Gridder  {
 	// flat equator Hpx projection) but probably
 	// means that we haven't thought out the tiling
 	// projections properly...
-	int mx =  Math.abs(tileXMin);
-	if (Math.abs(tileXMax) > mx) {
-	    mx = Math.abs(tileXMax);
+	int mx =  abs(tileXMin);
+	if (abs(tileXMax) > mx) {
+	    mx = abs(tileXMax);
 	}
 	
 	for (int itileX= -mx; itileX <= mx; itileX += 1) {
@@ -245,7 +247,7 @@ public class Gridder  {
 	    
 	    
 	    if (sexagesimal) {
-		if (Math.abs(lon-360) > 1.e-8) {
+		if (abs(lon-360) > 1.e-8) {
 		    fm.setSeparators(new String[]{"h", "m", "s"});
 	            setLabel(fm.format(lon/15, lonPrec));
 		} else {
@@ -390,7 +392,7 @@ public class Gridder  {
 	}
 	
 	for (int i=istart; i<npt+1; i += 1) {
-	    double[] coords = Util.unit(Math.toRadians(l0+dl*i), Math.toRadians(b0+db*i));
+	    double[] coords = Util.unit(toRadians(l0+dl*i), toRadians(b0+db*i));
 	    forward.transform(coords, newLine[i]);
 	}
 	return newLine;
@@ -447,8 +449,8 @@ public class Gridder  {
 	    }
 	    
 	    // If either segment is less than a pixel then we're OK.
-	    if ( (Math.abs(dx0)+Math.abs(dy0)) < 1 ||
-	         (Math.abs(dx1)+Math.abs(dy1)) < 1) {
+	    if ( (abs(dx0)+abs(dy0)) < 1 ||
+	         (abs(dx1)+abs(dy1)) < 1) {
 		continue;
 	    }
 	    
@@ -461,7 +463,7 @@ public class Gridder  {
 	    
 	    // Now compute the angle...
 	    double costh = (dx0*dx1 + dy0*dy1)/ 
-	                    (Math.sqrt(dx0*dx0 + dy0*dy0)*Math.sqrt(dx1*dx1+dy1*dy1));
+	                    (sqrt(dx0*dx0 + dy0*dy0)*sqrt(dx1*dx1+dy1*dy1));
 	    if (costh < MAX_CURVE) {
 		return true;
 	    }
@@ -643,7 +645,7 @@ public class Gridder  {
 	
 	double db = (b1-b0);
 	double dl = (l1-l0);
-	if (Math.abs(dl) > 180) {
+	if (abs(dl) > 180) {
 	    if (dl > 0) {
 		dl = 360-dl;
 	    } else {
@@ -655,7 +657,7 @@ public class Gridder  {
 	double[] lastGoodPix= goodPt.clone();
 	double[] pix = new double[2];
 	
-	while (Math.abs(dl) > BOUNDARY_LIMIT || Math.abs(db) > BOUNDARY_LIMIT) {
+	while (abs(dl) > BOUNDARY_LIMIT || abs(db) > BOUNDARY_LIMIT) {
 	    
 	    dl /= 2;
 	    db /= 2;
@@ -672,7 +674,7 @@ public class Gridder  {
 	    
 	    double testB = lastGoodB + db;
 	    
-	    double[] unit = Util.unit(Math.toRadians(testL), Math.toRadians(testB));
+	    double[] unit = Util.unit(toRadians(testL), toRadians(testB));
 	    forward.transform(unit, pix);
 	    if (!Double.isNaN(pix[0]+pix[1])) {
 		if (pix[0] < 0 || pix[0] > nx || pix[1] < 0 || pix[1] > ny) {
@@ -784,7 +786,7 @@ public class Gridder  {
 			// the tile offsets
 			unscaled = imageScaler.transform(tt);
 			if (tileDx > 0) {
-			    int test = (int) ((unscaled[0]+Math.signum(unscaled[0])*tileDx/2)/tileDx);
+			    int test = (int) ((unscaled[0]+signum(unscaled[0])*tileDx/2)/tileDx);
 			    if (test > tileXMax) { 
 				tileXMax = test;
 			    } else if (test < tileXMin) {
@@ -792,7 +794,7 @@ public class Gridder  {
 			    }
 			}
 			if (tileDy > 0) {
-			    int test = (int) ((unscaled[1]+Math.signum(unscaled[1])*tileDy/2)/tileDy);
+			    int test = (int) ((unscaled[1]+signum(unscaled[1])*tileDy/2)/tileDy);
 			    if (test > tileYMax) {
 				tileYMax = test;
 			    }
@@ -829,8 +831,8 @@ public class Gridder  {
 	}
 	
 	// Convert to latitudes.
-	double minLat = Math.toDegrees(Math.asin(minz));
-	double maxLat = Math.toDegrees(Math.asin(maxz));
+	double minLat = toDegrees(asin(minz));
+	double maxLat = toDegrees(asin(maxz));
 	
 	double minLon    =  720;
 	double maxLon    = -720;
@@ -849,7 +851,7 @@ public class Gridder  {
 		break;
 	    }
 	    
-	    double lon = Math.toDegrees(Math.atan2(y[i], x[i]));
+	    double lon = toDegrees(atan2(y[i], x[i]));
 	    if (lon < 0) {
 		lon += 360;
 	    }

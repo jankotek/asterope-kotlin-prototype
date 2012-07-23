@@ -6,6 +6,8 @@ import skyview.executive.Settings;
 
 import java.util.HashMap;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** Find countours of an image.  */
 public class Contourer {
     
@@ -236,7 +238,7 @@ public class Contourer {
 			  
 		    for (int line=mn+1; line <= mx; line += 1) {
 			
-			if ( Math.abs(line-v0) < Math.abs(line-v1) ) {
+			if ( abs(line-v0) < abs(line-v1) ) {
 			    result[j-1+i*nx] = line;
 			} else {
 			    result[j+i*nx]  = line;
@@ -266,7 +268,7 @@ public class Contourer {
 		    
 		    for (int line=mn+1; line<=mx; line += 1) {
 			
-			if ( Math.abs(line-v0) < Math.abs(line-v1) ) {
+			if ( abs(line-v0) < abs(line-v1) ) {
 			    result[j+(i-1)*nx] = line;
 			} else {
 			    result[j+i*nx]  = line;
@@ -338,16 +340,16 @@ public class Contourer {
 	public double func(double input) {
 	    if (input <= 0) {
 		if (minGt0 > 0) {
-		    return Math.log10(minGt0);
+		    return log10(minGt0);
 		} else {
 		    return -10;
 		}
 	    } else {
-		return Math.log10(input);
+		return log10(input);
 	    }
 	}
 	public double ifunc(double input) {
-	    return Math.pow(10., input);
+	    return pow(10., input);
 	}
     }
     
@@ -356,7 +358,7 @@ public class Contourer {
 	    if (input < 0) {
 		return 0;
 	    } else {
-		return Math.sqrt(input);
+		return sqrt(input);
 	    }
 	}
 	public double ifunc(double input) {

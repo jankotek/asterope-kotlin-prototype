@@ -1,6 +1,7 @@
 package skyview.geometry.projecter;
 
 
+
 /** This class implements the Zenithal Equal Area (ZEA)
  *  projection.  Note that the tangent point
  *  is assumed to be at the north pole.
@@ -11,6 +12,7 @@ package skyview.geometry.projecter;
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public class Zea extends Projecter {
 
@@ -53,8 +55,8 @@ public class Zea extends Projecter {
 		plane[0] = 0;
 		plane[1] = 0;
 	    } else {
-	        double ratio = Math.sqrt(num) / 
-	                   Math.sqrt(sphere[0]*sphere[0] + sphere[1]*sphere[1]);
+	        double ratio = sqrt(num) /
+	                   sqrt(sphere[0]*sphere[0] + sphere[1]*sphere[1]);
 	        plane[0] = ratio * sphere[0];
 	        plane[1] = ratio * sphere[1];
 	    }
@@ -103,11 +105,11 @@ public class Zea extends Projecter {
 	        sphere[2] = Double.NaN;
 	    
 	    } else {
-	        double r = Math.sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
+	        double r = sqrt(plane[0]*plane[0] + plane[1]*plane[1]);
 	        sphere[2]  = 1 - r*r/2;
 	        double ratio = (1-sphere[2]*sphere[2]);
 		if (ratio > 0) {
-		    ratio = Math.sqrt(ratio)/r;
+		    ratio = sqrt(ratio)/r;
 		} else {
 		    ratio = 0;
 		}

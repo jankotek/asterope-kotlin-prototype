@@ -29,6 +29,7 @@ package skyview.geometry.projecter;
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;
+import static org.apache.commons.math3.util.FastMath.*;
 
 public final class Csc extends skyview.geometry.Projecter {
     
@@ -64,8 +65,8 @@ public final class Csc extends skyview.geometry.Projecter {
      *  images since CRPIX1 is negative.
      */
     private static double[][] faceCenter = new double[][]{
-	  {0, Math.PI/2}, {0,0},            {Math.PI/2,0},
-	  {Math.PI, 0},   {3*Math.PI/2, 0}, {0, -Math.PI/2}
+	  {0, PI/2}, {0,0},            {PI/2,0},
+	  {PI, 0},   {3*PI/2, 0}, {0, -PI/2}
     };
 
     // Projection constants.
@@ -125,7 +126,7 @@ public final class Csc extends skyview.geometry.Projecter {
     
     /** This map can repeat in X. */
     public double getXTiling() {
-	return 2*Math.PI;
+	return 2*PI;
     }
     
     /** Project a point from the sphere to the plane.
@@ -144,8 +145,8 @@ public final class Csc extends skyview.geometry.Projecter {
 	    int    face = -1;
 	    double max  = 0;
 	    for (int i=0; i<3; i += 1) {
-		if (Math.abs(sphere[i]) > max) {
-		    max = Math.abs(sphere[i]);
+		if (abs(sphere[i]) > max) {
+		    max = abs(sphere[i]);
 		    face = i;
 		}
 	    }
@@ -184,13 +185,13 @@ public final class Csc extends skyview.geometry.Projecter {
 	        alpha*beta2*(1-alpha2) * (gam+(em-gam)*alpha2 +
 		(1-beta2)*(c_00+c_10*alpha2+c_01*beta2+ c_20*alpha4+c_11*alpha2*beta2+c_02*beta4)) +
 	        alpha*alpha2*(1-alpha2) * (ome-(1-alpha2)*(d_0+d_1*alpha2));
-	return Math.PI/4 * res;
+	return PI/4 * res;
     }
     
     public boolean validPosition(double[] plane) {
 	double x = plane[0];
 	double y = plane[1];
-	double p4  = Math.PI/4;
+	double p4  = PI/4;
         return super.validPosition(plane) && (
 	      (x >=  p4  &&  x <= 7*p4 && y >= -p4   && y <= p4) ||
 	      (x >= -p4  &&  x <= p4   && y >= -3*p4 && y <= 3*p4) );
@@ -246,8 +247,8 @@ public final class Csc extends skyview.geometry.Projecter {
 	    
 	        // Get the distance from the center of the face.
 	        // Normalize within the face to -1 to 1.
-	        x = (x - faceCenter[face][0])/(Math.PI/4);
-	        y = (y - faceCenter[face][1])/(Math.PI/4);
+	        x = (x - faceCenter[face][0])/(PI/4);
+	        y = (y - faceCenter[face][1])/(PI/4);
 	    
 	        double alpha = g(x,y);
 	        double beta  = g(y,x);
@@ -262,7 +263,7 @@ public final class Csc extends skyview.geometry.Projecter {
 	        sphere[etaIndex[face]] = 1*etaSign[face];
 	    
 	        // Now normalize back to a unit vector.
-	        double norm = 1/Math.sqrt(alpha*alpha + beta*beta + 1);
+	        double norm = 1/sqrt(alpha*alpha + beta*beta + 1);
 	        for (int i=0; i<3; i += 1) {
 	            sphere[i] *= norm;
 	        }
@@ -297,10 +298,10 @@ public final class Csc extends skyview.geometry.Projecter {
      */
     static private int findFace(double x, double y) {
 	
-	double p4 = Math.PI/4;
+	double p4 = PI/4;
 	
 	if (7*p4 >= x && x > -p4) {
-	    if (Math.abs(y) <= p4) {
+	    if (abs(y) <= p4) {
 		if (x > 5*p4) {
 		    return 4;
 		} else if (x > 3*p4) {
@@ -313,7 +314,7 @@ public final class Csc extends skyview.geometry.Projecter {
 	    }
 	}
 	
-	if (Math.abs(x) <= p4) {
+	if (abs(x) <= p4) {
 	    if (y <= 3*p4 && y >= p4) {
 		return 0;
 	    } else if (y <= -p4  && y >= -3*p4) { 

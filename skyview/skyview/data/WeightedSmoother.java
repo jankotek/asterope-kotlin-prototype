@@ -9,6 +9,8 @@ import skyview.geometry.DepthSampler;
 
 import nom.tam.fits.Header;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** Smooth an image using a rectangular array of weights */
 public abstract class WeightedSmoother implements Processor {
 
@@ -108,8 +110,8 @@ public abstract class WeightedSmoother implements Processor {
                     //   when we are at the edge of the input image.
                     //   Since we nx/ny are odd the filter is symmetric
                     //   around the current pixel.
-                    for (int py = Math.max(-ty, -y); py <= Math.min(ty, height-y-1); py += 1) {
-                        for (int px = Math.max(-tx, -x); px <= Math.min(tx, width-x-1); px += 1) {
+                    for (int py = max(-ty, -y); py <= min(ty, height-y-1); py += 1) {
+                        for (int px = max(-tx, -x); px <= min(tx, width-x-1); px += 1) {
                             xdata[(y+py) * width + x+px] +=
                                weights[(py+ty) * nx + (px+tx)] * data[pix];
                         }

@@ -2,6 +2,7 @@ package skyview.geometry.projecter;
 
 import skyview.geometry.Projecter;
 import skyview.geometry.sampler.Clip;
+import static org.apache.commons.math3.util.FastMath.*;
 
 /** Handle the Straddling of the Cartesion
  *  projection when a figure extends accross the Lon=180 line.
@@ -21,10 +22,10 @@ class CarStraddle extends Straddle {
    CarStraddle(Car inProj) {
        this((Projecter)inProj);
        doClip = true;
-       clipXMin = -Math.PI;
-       clipXMax =  Math.PI;
-       clipYMin = -Math.PI/2;
-       clipYMax =  Math.PI/2;
+       clipXMin = -PI;
+       clipXMax =  PI;
+       clipYMin = -PI/2;
+       clipYMax =  PI/2;
    }
    
    boolean straddle(double[][] vertices) {
@@ -33,7 +34,7 @@ class CarStraddle extends Straddle {
 	boolean neg  = false;
 	boolean both = false;
 	int n = vertices[0].length;
-	boolean debug = Math.abs(vertices[0][0]) > 179*Math.PI/180; 
+	boolean debug = abs(vertices[0][0]) > 179*PI/180;
 	
 	// First check to see if we have both positive and negative
 	// x values.  If not there is no issue.

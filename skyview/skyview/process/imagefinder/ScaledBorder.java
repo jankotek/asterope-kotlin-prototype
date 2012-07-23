@@ -1,5 +1,7 @@
 package skyview.process.imagefinder;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class works almost exactly like
  *  the BorderImageFinder, however when calculating
  *  the distance from the edge of the image, the distance
@@ -21,6 +23,6 @@ public class ScaledBorder extends RectRecurse {
      *  sizes in the survey.
      */
     protected double criterion(int i, int nx, int ny, double x, double y) {
-	return  minDist(x,y,nx,ny)/Math.sqrt(nx*nx+ny*ny);
+	return  minDist(x,y,nx,ny)/sqrt(nx*nx+ny*ny);
     }
 }

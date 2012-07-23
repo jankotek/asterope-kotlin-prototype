@@ -2,6 +2,8 @@ package skyview.geometry;
 
 import skyview.survey.Image;
 
+import static org.apache.commons.math3.util.FastMath.*;
+
 /** This class handles sampling in the depth dimension */
 public class DepthSampler implements skyview.Component {
     
@@ -62,9 +64,9 @@ public class DepthSampler implements skyview.Component {
 	    double zmax = (tz+1)*delta + zero;
 	    
 	    // Check special case that output pixel comes from only one input pixel.
-	    if (Math.floor(zmin) == Math.floor(zmax)  || (Math.floor(zmin) == zmin && delta == 1)) {
+	    if (floor(zmin) == floor(zmax)  || (floor(zmin) == zmin && delta == 1)) {
 		
-		int itz = (int)(Math.floor(zmin));
+		int itz = (int)(floor(zmin));
 		
 		int inOffset = itz*mx*my;
 	        int outOffset = tz*mx*my;
@@ -85,8 +87,8 @@ public class DepthSampler implements skyview.Component {
 	    } else {
 		
 		// More than one input pixel contributes to the output pixel.
-		int itzs = (int) Math.floor(zmin);
-		int itze = (int) Math.floor(zmax);
+		int itzs = (int) floor(zmin);
+		int itze = (int) floor(zmax);
 		
 		if (zmax == itze) {
 		    itze -= 1;
@@ -104,9 +106,9 @@ public class DepthSampler implements skyview.Component {
 		    
 		    // Check if the entire input pixel is not used...
 		    if (itz == itzs) {
-			rat = 1-(zmin-Math.floor(zmin));
+			rat = 1-(zmin-floor(zmin));
 		    } else if (itz == itze) {
-			rat = zmax - Math.floor(zmax);
+			rat = zmax - floor(zmax);
 		    }
 		    
 		    int inOffset  = itz*mx*my;
