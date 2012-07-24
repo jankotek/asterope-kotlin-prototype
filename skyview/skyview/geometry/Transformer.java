@@ -27,9 +27,7 @@ public abstract class Transformer<IN,OUT> implements skyview.Component {
      *  These temporaries are used rather than creating new arrays for
      *  multiple invocations.
      */
-    private double[] t2 = new double[2];
-    private double[] t3 = new double[3];
-    
+
     /** Get the dimensionality of the output vectors.
      */
     protected abstract int getOutputDimension();
@@ -104,7 +102,11 @@ public abstract class Transformer<IN,OUT> implements skyview.Component {
 	
 	int idim = getInputDimension();
 	int odim = getOutputDimension();
-	if (idim == 0 && odim == 0) {
+
+     double[] t2 = (idim==2 || odim==2)? new double[2] : null;
+     double[] t3 = (idim==3 || odim==3)? new double[3] : null;
+
+        if (idim == 0 && odim == 0) {
 	    // Identity transformations, e.g., converters that have no elements.
 	    for (int i=0; i<in.length; i += 1) {
 		System.arraycopy(in[i], 0, out[i], 0, in[i].length);
