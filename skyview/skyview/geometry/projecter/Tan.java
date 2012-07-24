@@ -1,7 +1,12 @@
 package skyview.geometry.projecter;
 
-/** This class implements the tangent (gnomonic)
- *  projection.  Note that the tangent point
+/**
+ *  This class implements the <a href="http://en.wikipedia.org/wiki/Gnomonic_projection">
+ *  tangent (gnomonic)</a>
+ *  projection.
+ *  The gnomonic projection can be visualized by placing a plane tangent to the celestial sphere and drawing lines from the center of the sphere, through the point to be projected and extending the line till it intersects the plane.  The point of tangency is the reference point of the projection.  Normally this is at (or near) the center of the image.  The gnomonic projection is probably the most common projection used for small astronomical images.  It can only represent half the sky and has significant distortions for fields larger than a few degrees.  The circle 90 degrees from the tangent point projects to infinity in the projection plane.   Great circles in the celestial sphere (e.g., lines of constant right ascension) transform to straight lines in the projection plane.
+ *  <p>
+ *  Note that the tangent point
  *  is assumed to be at the north pole.
  *  This class assumes preallocated arrays for
  *  maximum efficiency.

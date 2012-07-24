@@ -11,10 +11,11 @@ import skyview.geometry.Transformer;
 import static org.apache.commons.math3.util.FastMath.*;
 
 
-/** This class implements the Sanson-Flamsteed (Sinusoidal)
- *  projection.
+/**
+ * This class implements the <a href="http://en.wikipedia.org/wiki/Sinusoidal_projection">
+ *   Sanson-Flamsteed (Sinusoidal)</a>
+ *  projection. This is an all-sky projection similar to the Car projection, but where the horizontal extent at each latitude is reduced by the cosine of the latitude, resulting in an equal-area projection.  The suffix GLS is also recognized in FITS files for this projection.  This projection is normally used in all sky projections.
  */
-
 public final class Sfl extends Projecter {
     
     /** Get the name of the compontent */

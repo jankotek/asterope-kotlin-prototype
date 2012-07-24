@@ -10,9 +10,13 @@ import skyview.geometry.sampler.Clip;
 
 import static org.apache.commons.math3.util.FastMath.*;
 
-/** This class implements the AIT (Hammer-Aitov)
+/** This class implements the <a href="http://www.quadibloc.com/maps/meq0801.htm"> AIT (Hammer-Aitoff) </a>
  *  projection.  This version uses only the sqrt
  *  function without any calls to trigonometric functions.
+ *  <p/>
+ *  The Hammer-Aitoff or Aitoff (Ait):  The Aitoff projection is an equal-area projection that transforms the sky into a elliptical region.
+ *  The Aitoff projection is usually used for all sky projections around the origin.  Maximum distortions are much less severe than for the
+ *  Cartesian projection.
  */
 
 public class Ait extends Projecter {

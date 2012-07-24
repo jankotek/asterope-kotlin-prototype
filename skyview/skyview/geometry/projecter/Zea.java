@@ -2,13 +2,17 @@ package skyview.geometry.projecter;
 
 
 
-/** This class implements the Zenithal Equal Area (ZEA)
- *  projection.  Note that the tangent point
+/**
+ * This class implements the <a href="http://www.astron.nl/aips++/docs/memos/107/node11.html">
+ * Zenithal Equal Area (ZEA) </a>
+ *  projection.
+ *  This equal area projection transforms rings around a given reference point into rings in the projection varying the width of the rings in the projection plane to conserve area.  The point opposite the reference point is transformed into a bounding circle in the projection plane.  This equal area projection allows the user to select the region of minimum distortion unlike the Aitoff projection.
+ *  <p>
+ *  Note that the tangent point
  *  is assumed to be at the north pole.
  *  This class assumes preallocated arrays for
  *  maximum efficiency.
  */
-
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;

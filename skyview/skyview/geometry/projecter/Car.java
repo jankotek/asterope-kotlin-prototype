@@ -15,6 +15,11 @@ import static org.apache.commons.math3.util.FastMath.*;
  *  is assumed to be at the north pole.
  *  This class assumes preallocated arrays for
  *  maximum efficiency.
+ *   <p/>
+ * The Cartesian projection transforms coordinates directly into an RA/Dec plane.
+ * This projection is normally centered on the coordinate origin and has extreme distortions near the pole.
+ * It is often used for all-sky maps but can be used for limited regions so long as they are not near the pole.
+ *
  */
 
 public final class Car extends Projecter {

@@ -1,12 +1,16 @@
 package skyview.geometry.projecter;
 
-/** This class implements the Sine (Orthographic)
- *  projection.  Note that the tangent point
+/**
+ *  This class implements the <a href="http://en.wikipedia.org/wiki/Orthographic_projection_(cartography)">
+ *  Sine (Orthographic)</a>
+ *  projection.
+ *  The sine projection is commonly used for small scale images in astronomy especially for images in the radio.   This projection can be visualized in a fashion similar to the gnomonic projection with a plane tangent to the celestial sphere.  However in this case the line is drawn from the plane to the point on the sphere perpendicular to the plane.  As with the gnomonic projection only half the sphere can be represented in the projection plane, but the projection is finite.  A full sine projection looks like the sphere seen from a distance.  The NCP projection is a special case of the Sine projection where tangent point is fixed at the pole.
+ *  <p>
+ *  Note that the tangent point
  *  is assumed to be at the north pole.
  *  This class assumes preallocated arrays for
  *  maximum efficiency.
  */
-
 import skyview.geometry.Projecter;
 import skyview.geometry.Deprojecter;
 import skyview.geometry.Transformer;

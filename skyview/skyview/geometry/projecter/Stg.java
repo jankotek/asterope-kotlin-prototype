@@ -1,7 +1,16 @@
 package skyview.geometry.projecter;
 
-/** This class implements the stereoscopic (STG)
- *  projection.  Note that the tangent point
+/**
+ * This class implements the <a href="http://mathworld.wolfram.com/StereographicProjection.html">
+ *  stereographic (STG) </a>  projection.
+ *  This projection is similar to the Tan projection except that instead of drawing
+ *  lines from the center of the sphere, we draw lines from the point opposite
+ *  the tangent plane.  The entire sky projects to the full plane.
+ *  Circles on the sphere project to circles in the projection plane.
+ *  However the center of the circle on the sphere will not project to the
+ *  center of the corresponding circle in the plane.
+ *  <p>
+ *  Note that the tangent point
  *  is assumed to be at the north pole.
  *  The STG projection projects circles into circles.
  */

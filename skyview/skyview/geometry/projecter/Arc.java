@@ -1,7 +1,7 @@
 package skyview.geometry.projecter;
 
 
-/** This class implements the Zenithal Equidistant (Arc)
+/** This class implements the   <a href="http://www.astron.nl/aips++/docs/memos/107/node10.html">Zenithal Equidistant (Arc)</a>
  *  projection.  This projection has equidistant
  *  parallels of latitude.
  *  Note that the tangent point
