@@ -1,9 +1,9 @@
-package ij.process;
+package skyview.ij;
 
 import java.util.*;
 import java.awt.*;
 import java.awt.image.*;
-import ij.gui.*;
+
 
 /** This is an 32-bit floating-point image and methods that operate on that image. */
 public class FloatProcessor extends ImageProcessor {
@@ -26,7 +26,6 @@ public class FloatProcessor extends ImageProcessor {
 		this.height = height;
 		this.pixels = pixels;
 		this.cm = cm;
-		resetRoi();
 		if (pixels!=null)
 			findMinAndMax();
 	}
@@ -53,6 +52,16 @@ public class FloatProcessor extends ImageProcessor {
 		findMinAndMax();
 	}
 	
+	public FloatProcessor(int width, int height, double[] pixels, double fixedMin, double fixedMax) {
+		this(width, height);
+		for (int i=0; i<pixels.length; i++)
+			this.pixels[i] = (float)pixels[i];
+                //findMinAndMax();
+		setMinAndMax(fixedMin, fixedMax);
+		this.min = (float)fixedMin;
+		this.max = (float)fixedMax;
+	}
+	
 	/** Creates a FloatProcessor from a float[][] array using the default LUT. */
 	public FloatProcessor(float[][] array) {
 		width = array.length;
@@ -64,7 +73,6 @@ public class FloatProcessor extends ImageProcessor {
 				pixels[i++] = array[x][y];
 			}
 		}
-		resetRoi();
 		findMinAndMax();
 	}
 
@@ -98,14 +106,12 @@ public class FloatProcessor extends ImageProcessor {
 					max = value;
 			}
 		}
-		showProgress(1.0);
 	}
 
 	/**
 	Sets the min and max variables that control how real
 	pixel values are mapped to 0-255 screen values. Use
 	resetMinAndMax() to enable auto-scaling;
-	@see ij.plugin.frame.ContrastAdjuster 
 	*/
 	public void setMinAndMax(double min, double max) {
 		if (min==0.0 && max==0.0)
@@ -288,8 +294,7 @@ public class FloatProcessor extends ImageProcessor {
 
 	/** Draws a pixel in the current foreground color. */
 	public void drawPixel(int x, int y) {
-		if (x>=clipXMin && x<=clipXMax && y>=clipYMin && y<=clipYMax)
-			putPixel(x, y, Float.floatToIntBits(fillColor));
+	    putPixel(x, y, Float.floatToIntBits(fillColor));
 	}
 
 	/**	Returns a reference to the float array containing
@@ -319,13 +324,13 @@ public class FloatProcessor extends ImageProcessor {
 		if (pixels==null) pixels8 = null;
 	}
 
-	/** Copies the image contained in 'ip' to (xloc, yloc) using one of
-		the transfer modes defined in the Blitter interface. */
-	public void copyBits(ImageProcessor ip, int xloc, int yloc, int mode) {
-		//if (!(ip instanceof FloatProcessor))
-		//	throw new IllegalArgumentException("32-bit (real) image required");
-		new FloatBlitter(this).copyBits(ip, xloc, yloc, mode);
-	}
+//	/** Copies the image contained in 'ip' to (xloc, yloc) using one of
+//		the transfer modes defined in the Blitter interface. */
+//	public void copyBits(ImageProcessor ip, int xloc, int yloc, int mode) {
+//		//if (!(ip instanceof FloatProcessor))
+//		//	throw new IllegalArgumentException("32-bit (real) image required");
+//		new FloatBlitter(this).copyBits(ip, xloc, yloc, mode);
+//	}
 
 	public void applyTable(int[] lut) {}
 
@@ -394,8 +399,6 @@ public class FloatProcessor extends ImageProcessor {
 				}
 				pixels[i++] = v2;
 			}
-			if (y%20==0)
-				showProgress((double)(y-roiY)/roiHeight);
 		}
 		if (resetMinMax)
 			findMinAndMax();
@@ -486,10 +489,7 @@ public class FloatProcessor extends ImageProcessor {
 				sum /= scale;
 				pixels[offset++] = sum;
 			}
-			if (y%inc==0)
-				showProgress((double)(y-roiY)/roiHeight);
 		}
-		showProgress(1.0);
 	}
 
 	/** Filters using a 3x3 neighborhood. */
@@ -533,12 +533,8 @@ public class FloatProcessor extends ImageProcessor {
 	        			break;
 				}
 			}
-			if (y%inc==0)
-				showProgress((double)(y-roiY)/roiHeight);
 		}
-		if (type==BLUR_MORE)
-			showProgress(1.0);
-		else
+		if (type!=BLUR_MORE)
 			findMinAndMax();
 	}
 
@@ -586,10 +582,7 @@ public class FloatProcessor extends ImageProcessor {
     			} else
 					pixels[index++] = 0;
 			}
-			if (y%20==0)
-			showProgress((double)(y-roiY)/roiHeight);
 		}
-		showProgress(1.0);
 	}
 
 	public void flipVertical() {
@@ -690,10 +683,7 @@ public class FloatProcessor extends ImageProcessor {
 						pixels[index1++] = pixels2[index2+xsi];
 				}
 			}
-			if (y%20==0)
-			showProgress((double)(y-ymin)/height);
 		}
-		showProgress(1.0);
 	}
 
 	/** Uses bilinear interpolation to find the pixel value at real coordinates (x,y). */
@@ -747,10 +737,7 @@ public class FloatProcessor extends ImageProcessor {
 				} else
 		  			pixels2[index2++] = pixels[index1+(int)xs];
 			}
-			if (y%20==0)
-			showProgress((double)y/dstHeight);
 		}
-		showProgress(1.0);
 		return ip2;
 	}
 
@@ -786,11 +773,11 @@ public class FloatProcessor extends ImageProcessor {
 			super.resetThreshold();
 	}
 
-	/** Performs a convolution operation using the specified kernel. */
-	public void convolve(float[] kernel, int kernelWidth, int kernelHeight) {
-		snapshot();
-		new ij.plugin.filter.Convolver().convolve(this, kernel, kernelWidth, kernelHeight);
-	}
+//	/** Performs a convolution operation using the specified kernel. */
+//	public void convolve(float[] kernel, int kernelWidth, int kernelHeight) {
+//		snapshot();
+//		new ij.plugin.filter.Convolver().convolve(this, kernel, kernelWidth, kernelHeight);
+//	}
 
 	/** Not implemented. */
 	public void threshold(int level) {}

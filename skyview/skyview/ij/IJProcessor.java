@@ -1,23 +1,9 @@
 package skyview.ij;
 
-import ij.process.FloatProcessor;
-import ij.process.ByteProcessor;
-import ij.ImagePlus;
-import ij.ImageJ;
-import ij.process.ImageProcessor;
-import ij.io.FileSaver;
-import ij.process.ImageConverter;
-import ij.plugin.ContrastEnhancer;
-import ij.plugin.PNG_Writer;
-import ij.plugin.RGBStackMerge;
-import ij.ImageStack;
-import ij.IJ;
-
-import ij.plugin.filter.GaussianBlur;
 
 import skyview.survey.Image;
 import skyview.executive.Settings;
-import skyview.Component;
+
 import skyview.geometry.Sampler;
 import skyview.geometry.DepthSampler;
 
@@ -26,15 +12,16 @@ import skyview.data.Gridder;
 import skyview.data.Contourer;
 import skyview.data.BoxSmoother;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.IndexColorModel;
-import java.awt.image.ColorModel;
-import java.awt.Color;
-import java.awt.Font;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -65,9 +52,9 @@ import static org.apache.commons.math3.util.FastMath.*;
  */
 public class IJProcessor implements skyview.process.Processor {
     
-    private static ImageStack[] rgb = new ImageStack[3];
-    
-    private static ArrayList<ImagePlus> savedImages;
+    private static BufferedImage[] rgb = new BufferedImage[3];
+
+    private static ArrayList<BufferedImage> savedImages;
     
     private static String[] stdLUTs= {"fire", "grays", "ice", "spectrum", "3-3-2 rgb",
 	                   "red", "green", "cyan", "magenta", "yellow", "red/green"};
@@ -177,10 +164,8 @@ public class IJProcessor implements skyview.process.Processor {
 	    ip.sqrt();
 	}
 	if (scale.equals("histeq")) {
-	    ImagePlus imp = new ImagePlus(" ", ip);
-	    new ImageConverter(imp).convertToGray8();
-	    new ContrastEnhancer().equalize(imp);
-	    ip = imp.getProcessor();
+        ip = new ByteProcessor(ip.createImage());
+	    new ContrastEnhancer().equalize(ip);
 	} else {
 	    if (Settings.has("min") && Settings.has("max")) {
 		standardScale(scale);
@@ -225,7 +210,7 @@ public class IJProcessor implements skyview.process.Processor {
 	    data[i] = (data[i]-mn)/delta;
 	}
 	ip.setPixels(data);
-	ip = ip.convertToByte(false);
+	ip =  new ByteProcessor(ip.createImage()); // ip.convertToByte(false);
     }
     
     ImageProcessor getImageProcessor() {
@@ -384,7 +369,8 @@ public class IJProcessor implements skyview.process.Processor {
 	double sa = sin(angle);
 	double ca = cos(angle);
         // Use local version to accommodate angle...
-	ip.addPlotString(label, x+3*sa+0.5, ny-(y+ca+0.5), angle);
+        //TODO add string
+//	ip.addPlotString(label, x+3*sa+0.5, ny-(y+ca+0.5), angle);
     }
 		    
 
@@ -426,21 +412,38 @@ public class IJProcessor implements skyview.process.Processor {
 	    if (index < 3) {
 		
 	        String[] surveys = Settings.getArray("survey");
-	        rgb[index]      = new ImagePlus(surveys[index], ip).getStack();
+	        rgb[index]      = toBufferedImage(ip.createImage());
 		
 	        if (index == 2 || index == surveys.length-1) {
+              //merge images into RGB using Java Image API
+                BufferedImage img = new BufferedImage(ip.getWidth(),ip.getHeight(), BufferedImage.TYPE_INT_RGB);
+
+                for(int x= 0;x<img.getWidth();x++){
+                    for(int y=0;y<img.getHeight();y++){
+                        //TODO terribly inefficient, optimize !
+                        int r = new Color(rgb[0].getRGB(x,y)).getRed();
+                        int g = new Color(rgb[1].getRGB(x, y)).getGreen();
+                        int b = new Color(rgb[2].getRGB(x, y)).getBlue();
+                        Color c = new Color(r,g,b);
+                        img.setRGB(x,y,c.getRGB());
+                    }
+                }
+
+
 		    
-		    RGBStackMerge rsm = new RGBStackMerge();
-		    ImageStack is   = rsm.mergeStacks(output.getWidth(), output.getHeight(), 1,
-						    rgb[0], rgb[1], rgb[2], true);
-		    ImagePlus imp   = new ImagePlus("rgb", is);
+//		    RGBStackMerge rsm = new RGBStackMerge();
+//		    ImageStack is   = rsm.mergeStacks(output.getWidth(), output.getHeight(), 1,
+//						    rgb[0], rgb[1], rgb[2], true);
+//		    ImagePlus imp   = new ImagePlus("rgb", is);
 		    if (Settings.has("quicklook") ) {
 		        String filename = outStem.substring(0,outStem.length()-1)+"rgb.jpg";
-	                new FileSaver(imp).saveAsJpeg(filename);
+                try {
+                    ImageIO.write(img, "jpg",new File(filename));
+                } catch (IOException e) {
+                    throw new IOError(e);
+                }
+                //   new FileSaver(imp).saveAsJpeg(filename);
 		        System.err.println("  Writing 3-color image: "+filename);
-		    }
-		    if (Settings.has("imagej")) {
-			showImp(imp);
 		    }
 	        }
 	    }
@@ -450,7 +453,8 @@ public class IJProcessor implements skyview.process.Processor {
     }
     
     void setColor(String colorString) {
-	ip.plotStrings();
+// TODO plot strings
+//	ip.plotStrings();
 	Color col = getColor(colorString);
 	if (col != null) {
 	    if (colorHash == null) {
@@ -460,7 +464,7 @@ public class IJProcessor implements skyview.process.Processor {
 	        ip.addColor(col, 255-colorHash.size());
 		colorHash.add(col);
 	    }
-	    ip.setColor(col);
+	    ip.setColor(col.getRGB());
 	} else {
 	    System.err.println("  Unknown plot color specified:"+Settings.get("plotcolor"));
 	}
@@ -558,9 +562,7 @@ public class IJProcessor implements skyview.process.Processor {
 	}
 	    
 
-	ImagePlus imp = new ImagePlus("", ip);
-	new ImageConverter(imp).convertToGray8();
-	ip = imp.getProcessor();
+    ip = new ByteProcessor(ip.createImage());
 	ip.setValue(255);
 	
 	// Now we're done with the pixels -- we play
@@ -579,7 +581,8 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// Set the font if the user specified it.
 	if (setUserFont) {
-	    ip.setFont(userFont);
+//    TODO set font
+//	    ip.setFont(userFont);
 	}
 	processContour(Settings.get("contour"));
 	processCatalog(Settings.get("catalog"));
@@ -615,7 +618,8 @@ public class IJProcessor implements skyview.process.Processor {
 	}
 	
 	// This will be a NOP if there were no strings plotted.
-	ip.plotStrings();
+    //TODO plot strings
+	//ip.plotStrings();
 	
 	// This should be done after we add anything to the image
 	// It writes the output so we're done if we do this processing.
@@ -630,9 +634,10 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// Display the image.
 	if (Settings.has("imagej")) {
-	    String sname = Settings.getArray("survey")[index];
-	    imp = new ImagePlus(sname, ip);
-	    showImp(imp);
+        throw new UnsupportedOperationException("imagej not supported");
+//	    String sname = Settings.getArray("survey")[index];
+//	    imp = new ImagePlus(sname, ip);
+//	    showImp(imp);
 	}
     }
     
@@ -649,23 +654,14 @@ public class IJProcessor implements skyview.process.Processor {
 	}
     }
 
-    private void showImp(ImagePlus imp) {
-	if (imp == null) {
-	    return;
-	}
-        if (IJ.getInstance() == null) {
-	    ImageJ ij = new ImageJ();
-	    ij.setExitWhenQuitting(true);
-        }
-	imp.show();
-    }
      
     
     private void writeFile(String outStem, int index) {
 	
 	String    sname = Settings.getArray("survey")[index];
-	
-	ImagePlus imp1  = new ImagePlus(sname, ip);
+
+    BufferedImage imp1 = toBufferedImage(ip.createImage());
+
 	
 	String format = Settings.get("quicklook");
 	if (format == null  || format.length() == 0) {
@@ -677,46 +673,34 @@ public class IJProcessor implements skyview.process.Processor {
 	    format = "jpeg";
 	}
 	format = format.toLowerCase();
-	
+
+    try{
 	if (format.equals("object")) {
 	    if (savedImages == null) {
-		savedImages = new ArrayList<ImagePlus>();
+		savedImages = new ArrayList<BufferedImage>();
 	    }
 	    savedImages.add(imp1);
 	
-	} else if (format.equals("gif")) {
-	    ip = ip.convertToByte(true);
-//	    new ImageConverter(imp1).convertToGray8();
-	    new FileSaver(imp1).saveAsGif(outStem+".gif");
-	    System.err.println("  Creating quicklook image: "+outStem+".gif");
-	    
+
 	} else if (format.equals("jpeg") || format.equals("jpg")) {
 	    String file = outStem;
 	    if (!file.equals("-")) {
 		file += ".jpg";
 	    }
-	    new FileSaver(imp1).saveAsJpeg(file);
+        ImageIO.write(imp1, "jpg",new File(file));
 	    System.err.println("  Creating quicklook image: "+file);
 	    
-	} else if (format.equals("bmp")) {
-	    new FileSaver(imp1).saveAsBmp(outStem+".bmp");
-	    System.err.println("  Creating quicklook image: "+outStem+".bmp");
-	    
-	} else if (format.equals("tiff")) {
-	    new FileSaver(imp1).saveAsTiff(outStem+".tiff");
-	    System.err.println("  Creating quicklook image: "+outStem+".tiff");
-	    
+
 	} else if (format.equals("png")) {
-	    // PNG's are not builtin but we have moved the PNG_Writer to the plugin directory.
-	    try {
-	        new PNG_Writer().writeImage(imp1, outStem+".png");
+            ImageIO.write(imp1, "png",new File(outStem+".png"));
 	        System.err.println("  Creating quicklook image: "+outStem+".png");
-	    } catch (Exception e) {
-		System.err.println("  Error creating PNG: "+outStem+".png\nException: "+e);
-	    }
+
 	} else {
-	    System.err.println("  Error: Unrecognized quicklook format: "+format);
+	    System.err.println("  Error: Unrecognized quicklook format: " + format);
 	}
+    }catch(IOException e){
+        throw new IOError(e);
+    }
     }
 
     public void updateHeader(nom.tam.fits.Header header) {
@@ -732,11 +716,10 @@ public class IJProcessor implements skyview.process.Processor {
 	String lut = origLUT.toLowerCase();
 	for (int i=0; i<stdLUTs.length; i += 1) {
 	    if (stdLUTs[i].equals(lut)) {
-		ij.WindowManager.setTempCurrentImage(new ImagePlus(" ", ip));
 		if (lut.equals("3-3-2 rgb")) {
 		    lut = "3-3-2 RGB";
 		}
-		new ij.plugin.LutLoader().run(lut);
+		new LutLoader().run(lut, ip);
 	        return;
 	    }
 	}
@@ -816,7 +799,8 @@ public class IJProcessor implements skyview.process.Processor {
 	int ix1 = (int)(x1+.5);
 	int iy0 = (int)(y0+.5);
 	int iy1 = (int)(y1+.5);
-	ip.drawLine(ix0, iy0, ix1, iy1);
+        //TODO draw a line
+//	ip.drawLine(ix0, iy0, ix1, iy1);
     }
   
     /** This routine gets a Graphics (and probably Graphics2D)
@@ -827,9 +811,7 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// Convert to byte if needed.
 	if (! (ip instanceof ByteProcessor) ) {
-	    ImagePlus imp = new ImagePlus("", ip);
-	    new ImageConverter(imp).convertToGray8();
-	    ip = imp.getProcessor();
+        ip = new ByteProcessor(ip.createImage());
 	}
 	byte[] pixels = (byte[]) ip.getPixels();
 	
@@ -860,8 +842,57 @@ public class IJProcessor implements skyview.process.Processor {
 	}
 	return ximg;
     }
-    
-    public static ArrayList<ImagePlus> getSavedImages() {
-	return savedImages;
+
+
+    // This method returns a buffered image with the contents of an image
+    public static BufferedImage toBufferedImage(java.awt.Image image) {
+        if (image instanceof BufferedImage) {
+            return (BufferedImage)image;
+        }
+
+        // This code ensures that all the pixels in the image are loaded
+        image = new ImageIcon(image).getImage();
+
+        // Determine if the image has transparent pixels; for this method's
+        // implementation, see Determining If an Image Has Transparent Pixels
+        boolean hasAlpha = false;
+
+        // Create a buffered image with a format that's compatible with the screen
+        BufferedImage bimage = null;
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            // Determine the type of transparency of the new buffered image
+            int transparency = Transparency.OPAQUE;
+            if (hasAlpha) {
+                transparency = Transparency.BITMASK;
+            }
+
+            // Create the buffered image
+            GraphicsDevice gs = ge.getDefaultScreenDevice();
+            GraphicsConfiguration gc = gs.getDefaultConfiguration();
+            bimage = gc.createCompatibleImage(
+                    image.getWidth(null), image.getHeight(null), transparency);
+        } catch (HeadlessException e) {
+            // The system does not have a screen
+        }
+
+        if (bimage == null) {
+            // Create a buffered image using the default color model
+            int type = BufferedImage.TYPE_INT_RGB;
+            if (hasAlpha) {
+                type = BufferedImage.TYPE_INT_ARGB;
+            }
+            bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
+        }
+
+        // Copy image to buffered image
+        Graphics g = bimage.createGraphics();
+
+        // Paint the image onto the buffered image
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+
+        return bimage;
     }
+
 }

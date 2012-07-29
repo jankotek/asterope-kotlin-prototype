@@ -1,9 +1,6 @@
 package skyview.ij;
 
-import java.awt.Font;
-
 import skyview.executive.Settings;
-import skyview.geometry.Transformer;
 import skyview.geometry.CoordinateSystem;
 import skyview.geometry.Projection;
 import skyview.geometry.Converter;
@@ -13,7 +10,7 @@ import skyview.geometry.WCS;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import ij.ImagePlus;
+
 
 import java.util.ArrayList;
 import static org.apache.commons.math3.util.FastMath.*;
@@ -250,8 +247,8 @@ public class Drawer {
 	    if (fields.length > 1) {
 		font = fields[1];
 	    }
-	    
-	    proc.getImageProcessor().setFont(new Font(font, Font.PLAIN, pointSize));
+	    //TODO set font
+//	    proc.getImageProcessor().setFont(new Font(font, Font.PLAIN, pointSize));
 	} catch (Exception e) {
 	    System.err.println("  Draw: Unable to set font:"+val);
 	}
@@ -348,7 +345,8 @@ public class Drawer {
 	
     void thick(String val) {
 	try {
-	    proc.getImageProcessor().setLineWidth(Integer.parseInt(val));
+        //TODO set line width
+//	    proc.getImageProcessor().setLineWidth(Integer.parseInt(val));
 	} catch (Exception e) {
 	    System.err.println("  Draw error setting thickness:"+val);
 	}
@@ -399,8 +397,9 @@ public class Drawer {
 	        r = r*scale;
 	    
 		int diam = (int) (r+0.5);
-		if (!Double.isNaN(pnt[0])) { 
-		    proc.getImageProcessor().drawOval((int)(x0+pnt[0]-diam/2+0.5), (int)(y0-(pnt[1]+diam/2+0.5)), diam, diam);
+		if (!Double.isNaN(pnt[0])) {
+            //TODO draw oval on image
+//		    proc.getImageProcessor().drawOval((int)(x0+pnt[0]-diam/2+0.5), (int)(y0-(pnt[1]+diam/2+0.5)), diam, diam);
 		}
 		OK = true;
 	    }

@@ -1,19 +1,12 @@
-package ij.process;
+package skyview.ij;
 
 import java.util.*;
 import java.awt.*;
 import java.awt.image.*;
-import java.lang.reflect.*; 
-import ij.gui.*;
-import ij.util.*;
 
 /**
    This abstract class is the superclass for classes that process
    the four data types (byte, short, float and RGB) supported by ImageJ.
-   @see ByteProcessor
-   @see ShortProcessor
-   @see FloatProcessor
-   @see ColorProcessor
 */
 public abstract class ImageProcessor extends Object {
 
@@ -44,14 +37,7 @@ public abstract class ImageProcessor extends Object {
     int           fgColor   = 0;
     protected int lineWidth = 1;
     
-    protected int         cx, cy; //current drawing coordinates
-    protected Font        font;
-    protected FontMetrics fontMetrics;
-    protected boolean     antialiasedText;
-    protected boolean     boldFont;
-    static    Frame       frame;
-		
-    ProgressBar           progressBar;
+
     protected int         width, snapshotWidth;
     protected int         height, snapshotHeight;
     protected int         roiX, roiY, roiWidth, roiHeight;
@@ -79,10 +65,7 @@ public abstract class ImageProcessor extends Object {
     protected MemoryImageSource source;
     protected Image       img;
     protected boolean     newPixels;
-    protected Color       drawingColor = Color.white;
-    protected int         clipXMin, clipXMax, clipYMin, clipYMax; // clip rect used by drawTo, drawLine, drawDot and drawPixel 
-    
-    protected int         justification = LEFT_JUSTIFY;
+
     protected int         lutUpdateMode;
     
     protected WritableRaster raster;
@@ -121,68 +104,8 @@ public abstract class ImageProcessor extends Object {
 	}
     }
     
-    public void plotStrings() {
-	
-	if (plotStrings != null  && plotStrings.size() > 0) {
-	    Image img;
-	    if (getColorModel() instanceof IndexColorModel) {
-	        img              = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_INDEXED, (IndexColorModel) getColorModel());
-	    } else {
-	        img              = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_INDEXED);
-	    }
-	    Graphics2D g           = (Graphics2D) img.getGraphics();
-	    g.drawImage(this.createImage(), 0, 0, null);
-	    g.setColor(drawingColor);
-	    if (font==null)
-		font = new Font("SansSerif", Font.PLAIN, 12);
-	    g.setFont(font);
-            FontMetrics metrics    = g.getFontMetrics(font);
-	    int fontHeight         = metrics.getHeight();
-	    int descent            = metrics.getDescent();
-	    
-	    for (PlotString ps: plotStrings) {
-		
-		String text = ps.text;
-		
-		int x = (int)(ps.x+0.5);
-		int y = (int)(ps.y+0.5);
-		
-		double angle = ps.angle;
-		
-	        if (ps.angle != 0) {
-	            g.rotate(angle, x, y);
-	        }
-	    
-	        int sWidth = metrics.stringWidth(text);
-	        g.drawString(text, x-sWidth/2, y);
-		
-	        if (angle != 0) {
-	            g.rotate(-angle, x, y);
-	        }
-	    }
-	    
-	    g.dispose();
-	    ImageProcessor ip = new ByteProcessor(img);
-	    if (this instanceof ByteProcessor) {
-	        ip = ip.convertToByte(false);
-//	        if (isInvertedLut())
-//	 	    ip.invert();
-	    }
-	    insert(ip, 0, 0);
-	}
-	clearPlotStrings();
-    }
 
-    protected void showProgress(double percentDone) {
-	if (progressBar!=null)
-            progressBar.show(percentDone);
-    }
-    
-    // Obsolete
-    protected void hideProgress() {
-	showProgress(1.0);
-    }
-		
+
     /** Returns the width of this image in pixels. */
     public int getWidth() {
 	    return width;
@@ -216,8 +139,8 @@ public abstract class ImageProcessor extends Object {
     /** Sets the color model. Must be an IndexColorModel (aka LUT)
 	for all processors except the ColorProcessor. */
     public void setColorModel(ColorModel cm) {
-	if (!(this instanceof ColorProcessor) && !(cm instanceof IndexColorModel))
-	    throw new IllegalArgumentException("Must be IndexColorModel");
+//	if (!(this instanceof ColorProcessor) && !(cm instanceof IndexColorModel))
+//	    throw new IllegalArgumentException("Must be IndexColorModel");
 	this.cm   = cm;
 	baseCM    = null;
 	rLUT1     = rLUT2 = null;
@@ -425,17 +348,10 @@ public abstract class ImageProcessor extends Object {
 	return isPseudoColor;
     }
 
-    /** Sets the default fill/draw value to the pixel
-	value closest to the specified color. */
-    public abstract void setColor(Color color);
-    
-    /** Adds the color to the end of the color model
-     *  if not already there.
-     */
-    public boolean addColor(Color color) {
-	return addColor(color, -1);
-    }
-    
+    /** Sets the pixel at (x,y) to the current fill/draw value. */
+    public abstract void drawPixel(int x, int y);
+
+
     /** Adds the color to the color model at the specified
      *  index.
      */
@@ -523,8 +439,8 @@ public abstract class ImageProcessor extends Object {
         can be RED_LUT, BLACK_AND_WHITE_LUT, OVER_UNDER_LUT or NO_LUT_UPDATE.
 	Thresholding of RGB images is not supported. */
     public void setThreshold(double minThreshold, double maxThreshold, int lutUpdate) {
-	if (this instanceof ColorProcessor)
-	    return;
+//	if (this instanceof ColorProcessor)
+//	    return;
 	
 	this.minThreshold = minThreshold;
 	this.maxThreshold = maxThreshold;
@@ -637,158 +553,6 @@ public abstract class ImageProcessor extends Object {
 	    resetThreshold();
     }
 
-    /** Defines a rectangular region of interest and sets the mask 
-	to null if this ROI is not the same size as the previous one. 
-        @see ImageProcessor#resetRoi		
-      */
-    public void setRoi(Rectangle roi) {
-	if (roi==null)
-	    resetRoi();
-	else
-	    setRoi(roi.x, roi.y, roi.width, roi.height);
-    }
-
-    /** Defines a rectangular region of interest and sets the mask to 
-	null if this ROI is not the same size as the previous one. 
-	@see ImageProcessor#resetRoi		
-      */
-    public void setRoi(int x, int y, int rwidth, int rheight) {
-	if (x<0 || y<0 || x+rwidth>width || y+rheight>height) {
-	    //find intersection of roi and this image
-	    Rectangle r1 = new Rectangle(x, y, rwidth, rheight);
-	    Rectangle r2 = r1.intersection(new Rectangle(0, 0, width, height));
-	    
-	    if (r2.width<=0 || r2.height<=0) {
-		roiX=0; roiY=0; roiWidth=0; roiHeight=0;
-		xMin=0; xMax=0; yMin=0; yMax=0;
-		mask=null;
-		return;
-	    }
-	    
-	    if (mask!=null && mask.getWidth()==rwidth && mask.getHeight()==rheight) {
-		Rectangle r3 = new Rectangle(0, 0, r2.width, r2.height);
-		if (x<0) r3.x = -x;
-		if (y<0) r3.y = -y;
-		mask.setRoi(r3);
-		mask = mask.crop();
-	    }
-	    roiX=r2.x; roiY=r2.y; roiWidth=r2.width; roiHeight=r2.height;
-	    
-	} else {
-	    roiX=x; roiY=y; roiWidth=rwidth; roiHeight=rheight;
-	}
-	
-	if (mask!=null && (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight))
-	    mask = null;
-	
-	//setup limits for 3x3 filters
-	xMin = Math.max(roiX, 1);
-	xMax = Math.min(roiX + roiWidth - 1, width - 2);
-	yMin = Math.max(roiY, 1);
-	yMax = Math.min(roiY + roiHeight - 1, height - 2);
-    }
-	
-    /** Defines a non-rectangular region of interest that will consist of a
-	rectangular ROI and a mask. After processing, call <code>reset(mask)</code>
-	to restore non-masked pixels. Here is an example:
-	<pre>
-	   ip.setRoi(new OvalRoi(50, 50, 100, 50));
-	   ip.fill();
-	   ip.reset(ip.getMask());
-	</pre>
-	The example assumes <code>snapshot()</code> has been called, which is the case
-	for code executed in the <code>run()</code> method of plugins that implement the 
-	<code>PlugInFilter</code> interface.
-	@see ij.ImagePlus#getRoi
-      */
-    public void setRoi(ij.gui.Roi roi) {
-	if (roi==null)
-	    resetRoi();
-	else {
-	    setMask(roi.getMask());
-	    setRoi(roi.getBounds());
-	}
-    }
-
-    /** Defines a polygonal region of interest that will consist of a
-	rectangular ROI and a mask. After processing, call <code>reset(mask)</code>
-	to restore non-masked pixels. Here is an example:
-	<pre>
-	Polygon p = new Polygon();
-	p.addPoint(50, 0); p.addPoint(100, 100); p.addPoint(0, 100);
-	ip.setRoi(triangle);
-	ip.invert();
-	ip.reset(ip.getMask());
-	</pre>
-	The example assumes <code>snapshot()</code> has been called, which is the case
-	for code executed in the <code>run()</code> method of plugins that implement the 
-	<code>PlugInFilter</code> interface.
-	@see ij.gui.Roi#getPolygon
-	@see ImageProcessor#drawPolygon
-	@see ImageProcessor#fillPolygon
-      */
-    public void setRoi(Polygon roi) {
-	if (roi==null) {
-	    resetRoi(); 
-	    return;
-	}
-	
-	Rectangle bounds = roi.getBounds();
-	for (int i=0; i<roi.npoints; i++) {
-	    roi.xpoints[i] -= bounds.x;
-	    roi.ypoints[i] -= bounds.y;
-	}
-	
-	PolygonFiller pf = new PolygonFiller();
-	pf.setPolygon(roi.xpoints, roi.ypoints, roi.npoints);
-	ImageProcessor mask = pf.getMask(bounds.width, bounds.height);
-	
-	setMask(mask);
-	setRoi(bounds);
-	
-	for (int i=0; i<roi.npoints; i++) {
-	    roi.xpoints[i] += bounds.x;
-	    roi.ypoints[i] += bounds.y;
-	}
-    }
-
-    /** Sets the ROI (Region of Interest) and clipping rectangle to the entire image. */
-    public void resetRoi() {
-	roiX     = 0; roiY = 0; roiWidth = width; roiHeight = height;
-	xMin     = 1; xMax = width-2; yMin = 1; yMax = height-2;
-	mask     = null;
-	clipXMin = 0; clipXMax = width-1; clipYMin = 0; clipYMax = height-1; 
-    }
-
-    /** Returns a Rectangle that represents the current
-	region of interest. */
-    public Rectangle getRoi() {
-	return new Rectangle(roiX, roiY, roiWidth, roiHeight);
-    }
-
-    /** Defines a byte mask that limits processing to an
-	irregular ROI. Background pixels in the mask have
-        a value of zero. */
-    public void setMask(ImageProcessor mask) {
-	this.mask = mask;
-    }
-
-    /** For images with irregular ROIs, returns a mask, otherwise, 
-	returns null. Pixels outside the mask have a value of zero. */
-    public ImageProcessor getMask() {
-	return mask;
-    }
-
-    /** Returns the mask byte array, or null if there is no mask. */
-    public byte[] getMaskArray() {
-	return mask!=null?(byte[])mask.getPixels():null;
-    }
-
-    /** Assigns a progress bar to this processor. Set 'pb' to
-	null to disable the progress bar. */
-    public void setProgressBar(ProgressBar pb) {
-	progressBar = pb;
-    }
 
     /** Setting 'interpolate' true causes scale(), resize(),
 	rotate() and getLine() to do bilinear interpolation. */
@@ -801,10 +565,6 @@ public abstract class ImageProcessor extends Object {
 	return interpolate;
     }
 
-    /** Obsolete. */
-    public boolean isKillable() {
-	return false;
-    }
 
     private void process(int op, double value) {
 	double SCALE = 255.0/Math.log(255.0);
@@ -877,45 +637,7 @@ public abstract class ImageProcessor extends Object {
 	applyTable(lut);
     }
 
-    /**
-	Returns an array containing the pixel values along the
-	line starting at (x1,y1) and ending at (x2,y2). For byte
-	and short images, returns calibrated values if a calibration
-	table has been set using setCalibrationTable().
-	@see ImageProcessor#setInterpolate
-      */
-    public double[] getLine(double x1, double y1, double x2, double y2) {
-	double dx   = x2-x1;
-	double dy   = y2-y1;
-	
-	int    n    = (int)Math.round(Math.sqrt(dx*dx + dy*dy));
-	
-	double xinc = dx/n;
-	double yinc = dy/n;
-	
-	n++;
-	
-	double[] data = new double[n];
-	double   rx   = x1;
-	double   ry   = y1;
-	
-	if (interpolate) {
-	    for (int i=0; i<n; i++) {
-		data[i] = getInterpolatedValue(rx, ry);
-		rx     += xinc;
-		ry     += yinc;
-	    }
-	    
-	} else {
-	    for (int i=0; i<n; i++) {
-		data[i] = getPixelValue((int)(rx+0.5), (int)(ry+0.5));
-		rx += xinc;
-		ry += yinc;
-	    }
-	}
-	return data;
-    }
-	
+
     /** Returns the pixel values along the horizontal line starting at (x,y). */
     public void getRow(int x, int y, int[] data, int length) {
 	for (int i=0; i<length; i++)
@@ -942,328 +664,7 @@ public abstract class ImageProcessor extends Object {
 	      putPixel(x, y++, data[i]);
     }
 
-    /**
-	Sets the current drawing location.
-	@see ImageProcessor#lineTo
-	@see ImageProcessor#drawString
-    */
-    public void moveTo(int x, int y) {
-	cx = x;
-	cy = y;
-    }
-	
-    /** Sets the line width used by lineTo() and drawDot(). */
-    public void setLineWidth(int width) {
-	lineWidth = width;
-	if (lineWidth<1) 
-	    lineWidth = 1;
-    }
-		
-    /** Draws a line from the current drawing location to (x,y). */
-    public void lineTo(int x2, int y2) {
-	
-	int dx = x2-cx;
-	int dy = y2-cy;
-	
-	int absdx = dx>=0?dx:-dx;
-	int absdy = dy>=0?dy:-dy;
-	
-	int n = absdy>absdx?absdy:absdx;
-	
-	double xinc = (double)dx/n;
-	double yinc = (double)dy/n;
-	
-	double x = cx<0?cx-0.5:cx+0.5;
-	double y = cy<0?cy-0.5:cy+0.5;
-	
-	n++;
-	
-	cx = x2; cy = y2;
-	
-	if (n>1000000)
-	  return;
-	
-	do {
-	    if (lineWidth==1)
-		drawPixel((int)x, (int)y);
-	    else if (lineWidth==2)
-		drawDot2((int)x, (int)y);
-	    else
-		drawDot((int)x, (int)y);
-	    
-	    x += xinc;
-	    y += yinc;
-	    
-	} while (--n>0);
-	
-	if (lineWidth>2) 
-	    resetRoi();
-    }
-		
-     /** Draws a line from (x1,y1) to (x2,y2). */
-     public void drawLine(int x1, int y1, int x2, int y2) {
-	moveTo(x1, y1);
-	lineTo(x2, y2);
-    }
 
-    /** Draws a rectangle. */
-    public void drawRect(int x, int y, int width, int height) {
-	if (width<1 || height<1)
-		return;
-	if (lineWidth==1) {
-	    moveTo(x, y);
-	    lineTo(x+width-1, y);
-	    lineTo(x+width-1, y+height-1);
-	    lineTo(x, y+height-1);
-	    lineTo(x, y);
-	    
-	} else {
-	    moveTo(x, y);
-	    lineTo(x+width, y);
-	    lineTo(x+width, y+height);
-	    lineTo(x, y+height);
-	    lineTo(x, y);
-	}
-    }
-
-    /** Draws an elliptical shape. */
-    public void drawOval(int x, int y, int width, int height) {
-	
-	OvalRoi oval = new OvalRoi(x, y, width, height);
-	drawPolygon(oval.getPolygon());
-    }
-
-    /** Fills an elliptical shape. */
-    public void fillOval(int x, int y, int width, int height) {
-	OvalRoi oval = new OvalRoi(x, y, width, height);
-	fillPolygon(oval.getPolygon());
-    }
-
-    /** Draws a polygon. */
-    public void drawPolygon(Polygon p) {
-	moveTo(p.xpoints[0], p.ypoints[0]);
-	for (int i=0; i<p.npoints; i++)
-	    lineTo(p.xpoints[i], p.ypoints[i]);
-	
-	lineTo(p.xpoints[0], p.ypoints[0]);
-    }
-
-    /** Fills a polygon. */
-    public void fillPolygon(Polygon p) {
-	setRoi(p);
-	fill(getMask());
-	resetRoi();
-    }
-
-    /** Obsolete */
-    public void drawDot2(int x, int y) {
-	drawPixel(x,   y);
-	drawPixel(x-1, y);
-	drawPixel(x,   y-1);
-	drawPixel(x-1, y-1);
-    }
-		
-    /** Draws a dot using the current line width and fill/draw value. */
-    public void drawDot(int xcenter, int ycenter) {
-	double r = lineWidth/2.0;
-	int xmin = (int)(xcenter-r+0.5), ymin=(int)(ycenter-r+0.5);
-	int xmax = xmin+lineWidth      , ymax=ymin+lineWidth;
-	
-	if (xmin<0 || ymin<0 || xmax>=width || ymax>=height) {
-	    // draw edge dot
-	    double r2 = r*r;
-	    r -= 0.5;
-	    double xoffset=xmin+r, yoffset=ymin+r;
-	    double xx, yy;
-	    for (int y=ymin; y<ymax; y++) {
-		for (int x=xmin; x<xmax; x++) {
-		    xx = x-xoffset; yy = y-yoffset;
-		    if (xx*xx+yy*yy<=r2)
-		    drawPixel(x, y);
-		}
-	    }
-	} else {
-	    if (dotMask==null || lineWidth!=dotMask.getWidth()) {
-		OvalRoi oval = new OvalRoi(0, 0, lineWidth, lineWidth);
-		dotMask = oval.getMask();
-	    }
-	    setRoi(xmin, ymin, lineWidth, lineWidth);
-	    fill(dotMask);
-	}
-    }
-    
-    private ImageProcessor dotMask;
-
-    private void setupFrame() {
-	if (frame==null) {
-	    frame = new Frame();
-	    frame.pack();
-	    frame.setBackground(Color.white);
-	}
-	
-	if (font==null)
-		font = new Font("SansSerif", Font.PLAIN, 12);
-	
-	if (fontMetrics==null) {
-	    frame.setFont(font);
-	    fontMetrics = frame.getFontMetrics(font);
-	}
-    }
-
-    /** Draws a string at the current location using the current fill/draw value.
-        Draws multiple lines if the string contains newline characters. */
-    public void drawString(String s) {
-	
-	if (s==null || s.equals("")) 
-	    return;
-	
-	setupFrame();
-	if (ij.IJ.isMacOSX()) 
-	    s += " ";
-	
-	if (s.indexOf("\n") == -1)
-	    drawString2(s);
-	else {
-	    String[] s2 = Tools.split(s, "\n");
-	    for (int i=0; i<s2.length; i++)
-		drawString2(s2[i]);
-	}
-    }
-
-    private void drawString2(String s) {
-	    
-	int   w =  getStringWidth(s);
-	int cxx = cx;
-	    
-	if (justification == CENTER_JUSTIFY)
-	    cxx -= w/2;
-	else if (justification==RIGHT_JUSTIFY)
-	    cxx -= w;
-	    
-	int h =  fontMetrics.getHeight();
-	if (w<=0 || h<=0) return;
-	    
-	Image img;
-	if (ij.IJ.isLinux() && ij.IJ.isJava2())
-	    img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-	    
-	else
-	    img = frame.createImage(w, h);
-	    
-	Graphics    g          = img.getGraphics();
-        FontMetrics metrics    = g.getFontMetrics(font);
-	int         fontHeight = metrics.getHeight();
-	int descent            = metrics.getDescent();
-	    
-	g.setFont(font);
-
-        if (antialiasedText && cxx>=00 && cy-h>=0) {
-		
-	    Java2.setAntialiasedText(g, true);
-	    setRoi(cxx, cy-h, w, h);
-	    ImageProcessor ip = crop();
-	    resetRoi();
-	    g.drawImage(ip.createImage(), 0, 0, null);
-	    g.setColor(drawingColor);
-	    g.drawString(s, 0, h-descent);
-	    g.dispose();
-		
-	    ip = new ColorProcessor(img);
-	    if (this instanceof ByteProcessor) {
-	        ip = ip.convertToByte(false);
-	        if (isInvertedLut())
-	 	    ip.invert();
-	    }
-		    
-	    insert(ip, cxx, cy-h);
-	    cy += h;
-	    return;
-	}
-		
-	if (ij.IJ.isMacOSX() || (ij.IJ.isLinux()&&ij.IJ.isJava2())) {
-	    Java2.setAntialiasedText(g, false);
-	    g.setColor(Color.white);
-	    g.fillRect(0, 0, w, h);
-	}
-	    
-	g.setColor(Color.black);
-	g.drawString(s, 0, h-descent);
-	g.dispose();
-	
-	ImageProcessor ip       = new ColorProcessor(img);
-	ImageProcessor textMask = ip.convertToByte(false);
-	byte[] mpixels          = (byte[])textMask.getPixels();
-	    
-	//new ij.ImagePlus("textmask",textMask).show();
-	textMask.invert();
-	if (cxx<width && cy-h<height) {
-	    setMask(textMask);
-	    setRoi(cxx,cy-h,w,h);
-	    fill(getMask());
-	}
-	    
-	resetRoi();
-	cy += h;
-    }
-
-    /** Draws a string at the specified location using the current fill/draw value. */
-    public void drawString(String s, int x, int y) {
-	moveTo(x, y);
-	drawString(s);
-    }
-
-    /** Sets the justification used by drawString(), where <code>justification</code>
-	is CENTER_JUSTIFY, RIGHT_JUSTIFY or LEFT_JUSTIFY. The default is LEFT_JUSTIFY. */
-    public void setJustification(int justification) {
-	this.justification = justification;
-    }
-
-    /** Sets the font used by drawString(). */
-    public void setFont(Font font) {
-	this.font = font;
-	fontMetrics	= null;
-	boldFont = font.isBold();
-    }
-	
-    /** Specifies whether or not text is drawn using antialiasing. Antialiased
-	test requires Java 2 and an 8 bit or RGB image. Antialiasing does not
-	work with 8-bit images that are not using 0-255 display range. */
-    public void setAntialiasedText(boolean antialiasedText) {
-	if (antialiasedText && ij.IJ.isJava2() &&
-	    (((this instanceof ByteProcessor)&&getMin()==0.0&&getMax()==255.0) || (this instanceof ColorProcessor)))
-	    this.antialiasedText = true;
-	else
-	    this.antialiasedText = false;
-    }
-
-    /** Returns the width in pixels of the specified string. */
-    public int getStringWidth(String s) {
-	
-	setupFrame();
-	int w;
-	
-	if (antialiasedText) {
-	    Graphics g = frame.getGraphics();
-	    if (g==null) {
-		frame = null;
-		setupFrame();
-		g = frame.getGraphics();
-	    }
-	    Java2.setAntialiasedText(g, true);
-	    w = Java2.getStringWidth(s, fontMetrics, g);
-	    g.dispose();
-	    
-	} else
-	    w =  fontMetrics.stringWidth(s);
-	
-	return w;
-    }
-	
-    /** Returns the current FontMetrics. */
-    public FontMetrics getFontMetrics() {
-	setupFrame();
-	return fontMetrics;
-    }
 
     /** Replaces each pixel with the 3x3 neighborhood mean. */
     public void smooth() {
@@ -1337,11 +738,7 @@ public abstract class ImageProcessor extends Object {
         return ip2;
     }
 
-    /** Inserts the image contained in 'ip' at (xloc, yloc). */
-    public void insert(ImageProcessor ip, int xloc, int yloc) {
-	copyBits(ip, xloc, yloc, Blitter.COPY);
-    }
-		
+
     /** Returns a string containing information about this ImageProcessor. */
     public String toString() {
 	return ("ip[width="+width+", height="+height+", min="+getMin()+", max="+getMax()+"]");
@@ -1527,17 +924,10 @@ public abstract class ImageProcessor extends Object {
     /** Stores the specified value at (x,y). */
     public abstract void putPixelValue(int x, int y, double value);
 
-    /** Sets the pixel at (x,y) to the current fill/draw value. */
-    public abstract void drawPixel(int x, int y);
-	
     /** Sets a new pixel array for the image. The length of the array must be equal to width*height.
 	Use setSnapshotPixels(null) to clear the snapshot buffer. */
     public abstract void setPixels(Object pixels);
 	
-    /** Copies the image contained in 'ip' to (xloc, yloc) using one of
-	the transfer modes defined in the Blitter interface. */
-    public abstract void copyBits(ImageProcessor ip, int xloc, int yloc, int mode);
-
     /** Transforms the image or ROI using a lookup table. The
 	length of the table must be 256 for byte images and 
 	65536 for short images. RGB and float images are not
@@ -1644,7 +1034,7 @@ public abstract class ImageProcessor extends Object {
     public abstract void scale(double xScale, double yScale);
 	
     /** Creates a new ImageProcessor containing a scaled copy of this image or ROI.
-	@see ij.process.ImageProcessor#setInterpolate
+	@see ImageProcessor#setInterpolate
       */
 	public abstract ImageProcessor resize(int dstWidth, int dstHeight);
 	
@@ -1691,35 +1081,31 @@ public abstract class ImageProcessor extends Object {
 	source = null;
     }
 
-    /** Returns an 8-bit version of this image as a ByteProcessor. */
-    public ImageProcessor convertToByte(boolean doScaling) {
-	TypeConverter tc = new TypeConverter(this, doScaling);
-	return tc.convertToByte();
-    }
-
-    /** Returns a 16-bit version of this image as a ShortProcessor. */
-    public ImageProcessor convertToShort(boolean doScaling) {
-	TypeConverter tc = new TypeConverter(this, doScaling);
-	return tc.convertToShort();
-    }
-
-    /** Returns a 32-bit float version of this image as a FloatProcessor. 
-	For byte and short images, converts using a calibration function 
-	if a calibration table has been set using setCalibrationTable(). */
-    public ImageProcessor convertToFloat() {
-	TypeConverter tc = new TypeConverter(this, false);
-	return tc.convertToFloat(cTable);
-    }
-	
-    /** Returns an RGB version of this image as a ColorProcessor. */
-    public ImageProcessor convertToRGB() {
-	TypeConverter tc = new TypeConverter(this, true);
-	return tc.convertToRGB();
-    }
-	
-    /** Performs a convolution operation using the specified kernel. 
-	KernelWidth and kernelHeight must be odd. */
-    public abstract void convolve(float[] kernel, int kernelWidth, int kernelHeight);
+//    /** Returns an 8-bit version of this image as a ByteProcessor. */
+//    public ImageProcessor convertToByte(boolean doScaling) {
+//    	TypeConverter tc = new TypeConverter(this, doScaling);
+//	    return tc.convertToByte();
+//    }
+//
+//    /** Returns a 16-bit version of this image as a ShortProcessor. */
+//    public ImageProcessor convertToShort(boolean doScaling) {
+//	TypeConverter tc = new TypeConverter(this, doScaling);
+//	return tc.convertToShort();
+//    }
+//
+//    /** Returns a 32-bit float version of this image as a FloatProcessor.
+//	For byte and short images, converts using a calibration function
+//	if a calibration table has been set using setCalibrationTable(). */
+//    public ImageProcessor convertToFloat() {
+//	TypeConverter tc = new TypeConverter(this, false);
+//	return tc.convertToFloat(cTable);
+//    }
+//
+//    /** Returns an RGB version of this image as a ColorProcessor. */
+//    public ImageProcessor convertToRGB() {
+//	TypeConverter tc = new TypeConverter(this, true);
+//	return tc.convertToRGB();
+//    }
 	
     /** Converts the image to binary using an automatically determined threshold.
 	For byte and short images, converts to binary using an automatically determined
@@ -1779,39 +1165,16 @@ public abstract class ImageProcessor extends Object {
 	    }			
 	    result = (sum1/sum2 + sum3/sum4)/2.0;
 	    movingIndex++;
-	    if (max>255 && (movingIndex%inc)==0)
-		showProgress((double)(movingIndex)/max);
-	    
+
 	} while ((movingIndex+1)<=result && movingIndex<max-1);
 	
-	showProgress(1.0);
+
 	histogram[0]= count0; histogram[maxValue]=countMax;
 	level = (int)Math.round(result);
 	return level;
     }
 	
-    /** Updates the clipping rectangle used by lineTo(), drawLine(), drawDot() and drawPixel().
-	The clipping rectangle is reset by passing a null argument or by calling resetRoi(). */
-    public void setClipRect(Rectangle clipRect) {
-	if (clipRect == null) {
-	    
-	    clipXMin = 0; 
-	    clipXMax = width-1; 
-	    clipYMin = 0; 
-	    clipYMax = height-1; 
-	} else {
-	    clipXMin = clipRect.x; 
-	    clipXMax = clipRect.x + clipRect.width - 1; 
-	    clipYMin = clipRect.y; 
-	    clipYMax = clipRect.y + clipRect.height - 1; 
-	    
-	    if (clipXMin<0      ) clipXMin = 0;
-	    if (clipXMax>=width ) clipXMax = width-1;
-	    if (clipYMin<0      ) clipYMin = 0;
-	    if (clipYMax>=height) clipYMax = height-1;
-	}
-    }
-	
+
     protected String maskSizeError(ImageProcessor mask) {
 	return "Mask size ("+mask.getWidth()+"x"+mask.getHeight()+") != ROI size ("+
 	       roiWidth+"x"+roiHeight+")";
