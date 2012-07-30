@@ -2,6 +2,7 @@ package skyview.process.expfinder;
 
 import nom.tam.fits.Header;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.survey.FitsImage;
 
@@ -17,8 +18,8 @@ public class FitsKeyword implements skyview.process.ExposureFinder {
     double exposure = -1;
     
     public FitsKeyword() {
-	if (Settings.has("ExposureKeyword")) {
-	    expKey = Settings.get("ExposureKeyword");
+	if (Settings.has(Key.ExposureKeyword)) {
+	    expKey = Settings.get(Key.ExposureKeyword);
 	}
     }
     

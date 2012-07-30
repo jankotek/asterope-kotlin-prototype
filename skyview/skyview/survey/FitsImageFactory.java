@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 /** A little class that creates FITS images using a factory method. */
@@ -13,8 +14,8 @@ public class FitsImageFactory implements ImageFactory {
 	
 	if (first) {
 	    first = false;
-	    if (Settings.has("FilePrefix")) {
-		prefix = Settings.get("FilePrefix");
+	    if (Settings.has(Key.FilePrefix)) {
+		prefix = Settings.get(Key.FilePrefix);
 		havePrefix = true;
 	    }
 	}

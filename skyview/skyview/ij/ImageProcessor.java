@@ -974,10 +974,10 @@ public abstract class ImageProcessor extends Object {
 	absolute value transform, otherwise does nothing. */
     public void abs() {}
 
-    /** Pixels less than 'value' are set to 'value'. */
+    /** pixels less than 'value' are set to 'value'. */
     public void min(double value) {process(MINIMUM, value);}
 
-    /** Pixels greater than 'value' are set to 'value'. */
+    /** pixels greater than 'value' are set to 'value'. */
     public void max(double value) {process(MAXIMUM, value);}
 
     /** Returns a copy of this image is the form of an AWT Image. */

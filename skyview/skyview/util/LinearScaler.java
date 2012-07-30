@@ -1,12 +1,12 @@
 package skyview.util;
 
-/** Scale an object linearly.
+/** scale an object linearly.
  */
 public class LinearScaler extends Scaler {
     
     
     
-    /** Scale for the data. */
+    /** scale for the data. */
     private double scale;
     
     /** Minimum value for the data. */
@@ -16,7 +16,7 @@ public class LinearScaler extends Scaler {
     private int    start;
     
     /*
-     *  Scale the array linearly between 0-255.
+     *  scale the array linearly between 0-255.
      */
     public LinearScaler() {
     }
@@ -39,7 +39,7 @@ public class LinearScaler extends Scaler {
 	start = getMinOutput();
     }
     
-    /** Scale a single value
+    /** scale a single value
      *  @param val The value to be scaled.
      *  @return    The scaled value.
      */

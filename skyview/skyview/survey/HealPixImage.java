@@ -7,6 +7,7 @@ import nom.tam.fits.BinaryTable;
 import nom.tam.fits.FitsException;
 import nom.tam.util.BufferedDataInputStream;
 
+import skyview.executive.Key;
 import skyview.geometry.TransformationException;
 import skyview.geometry.WCS;
 import skyview.geometry.Projection;
@@ -60,7 +61,7 @@ public class HealPixImage extends Image {
 	    Fits  f = new Fits(file);
 	    inp     = f.getStream();
 
-            boolean isImage = Settings.has("HealPixArray");
+            boolean isImage = Settings.has(Key.HealPixArray);
             BasicHDU hdu = null;
             if (isImage) {
                 hdu = f.getHDU(0);

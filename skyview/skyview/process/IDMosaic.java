@@ -142,7 +142,7 @@ public class IDMosaic extends Mosaicker  {
 		h.insertHistory("Uncovered pixels:"+nocoverage);
 	    }
 	    if (nonphysical > 0) {
-		h.insertHistory("Pixels off projection:"+nonphysical);
+		h.insertHistory("pixels off projection:"+nonphysical);
 	    }
 	    h.insertHistory("");
 	} catch (nom.tam.fits.FitsException e) {

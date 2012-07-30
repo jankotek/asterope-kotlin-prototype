@@ -1,5 +1,6 @@
 package skyview.process.imagefinder;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.executive.Settings;
 import skyview.process.ImageFinder;
@@ -95,10 +96,10 @@ public class Checker extends ImageFinder {
 	
 	// See if the user has requested that we not include
 	// images where the data value is NaN.
-	checkNaNs = Settings.has("checknans");
+	checkNaNs = Settings.has(Key.checknans);
 	
 	// Do we want to skip the edge checks?
-	cornersOnly = Settings.has("cornersonly");
+	cornersOnly = Settings.has(Key.cornersonly);
 	
 	if (checkNaNs) {
 	    for (int i=0; i < input.length; i += 1) {
@@ -192,7 +193,7 @@ public class Checker extends ImageFinder {
 	
 	rectCount += 1;
 	if (rectCount > 5000 && rectCount % 1000 == 0) {
-	    System.err.println("  FindImage-Pixels found:"+pixelCount+ " of "+img.length + "   Rectangles:"+rectCount+"    "+
+	    System.err.println("  FindImage-pixels found:"+pixelCount+ " of "+img.length + "   Rectangles:"+rectCount+"    "+
 			   100*pixelCount/img.length+"% complete");
 	}
 	

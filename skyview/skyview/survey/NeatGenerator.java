@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.survey.Image;
 
@@ -17,9 +18,9 @@ public class NeatGenerator extends SIAPGenerator {
     /** Find the base URL for the SIAP service and adjust as needed */
     protected String getBaseURL()  {
 	
-	String urlString = Settings.get("SiapURL");
-	if (Settings.has("NEAT_REGION")) {
-	    urlString += "NEAT_REGION="+Settings.get("NEAT_REGION")+"&";
+	String urlString = Settings.get(Key.SiapURL);
+	if (Settings.has(Key.NEAT_REGION)) {
+	    urlString += "NEAT_REGION="+Settings.get(Key.NEAT_REGION)+"&";
 	}
 	return urlString;
     }

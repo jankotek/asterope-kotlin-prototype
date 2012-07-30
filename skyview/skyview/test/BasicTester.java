@@ -1,21 +1,19 @@
 package skyview.test;
 
 import skyview.executive.Imager;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static skyview.test.Util.regress;
-import junit.framework.JUnit4TestAdapter;
 
 import java.io.File;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.DataOutputStream;
-
-import java.awt.image.Raster;
 
 /** This class does basic testing of the features of
  *  the SkyView JAR.  It primarily does end-to-end
@@ -144,55 +142,55 @@ public class BasicTester {
 	      "mell-r", "mell-g", "mell-b"
 	};
 	
-	Settings.put("position", "187.27791499999998,2.052388");
+	Settings.put(Key.position, "187.27791499999998,2.052388");
 	
 	for (int i=0; i<surveys.length; i += 1) {
 	    testSurvey(surveys[i], i+base);
 	}
 	
 	// Try some all sky surveys
-	Settings.put("position", "0.,0.");
-	Settings.put("coordinates", "galactic");
-	Settings.put("Projection", "Car");
-	Settings.put("pixels", "600,300");
-        Settings.put("size", "360,180");
+	Settings.put(Key.position, "0.,0.");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.pixels, "600,300");
+        Settings.put(Key.size, "360,180");
 	
         base += surveys.length;
 	for (int i=0; i<allSky.length; i += 1) {
 	    testSurvey(allSky[i], i+base);
 	}
 	
-        Settings.put("size", "5");
-	Settings.put("pixels", "300");
+        Settings.put(Key.size, "5");
+	Settings.put(Key.pixels, "300");
 	base += allSky.length;
 	
 	for (int i=0; i<gc.length; i += 1) {
 	    testSurvey(gc[i], i+base);
 	}
 	
-	Settings.put("position", "0., 90.");
-	Settings.put("coordinates", "ICRS");
-	Settings.put("pixels", "500,500");
-	Settings.put("projection", "Tan");
+	Settings.put(Key.position, "0., 90.");
+	Settings.put(Key.coordinates, "ICRS");
+	Settings.put(Key.pixels, "500,500");
+	Settings.put(Key.projection, "Tan");
 	
 	base += gc.length;
 	
 	testSurvey("wenss", base);
 	base += 1;
 	
-	Settings.put("position", "0., -90.");
+	Settings.put(Key.position, "0., -90.");
 	testSurvey("sumss", base);
 	base += 1;
 	
-	Settings.put("position", "10.,10.");
+	Settings.put(Key.position, "10.,10.");
 	// No coverage near 3c273
-	Settings.put("size", ".4");
+	Settings.put(Key.size, ".4");
 	testSurvey("galexnear", base);
 	base += 1;
 	testSurvey("galexfar", base);
 	base += 1;
 	
-	Settings.put("size", "40");
+	Settings.put(Key.size, "40");
 	testSurvey("fermi1", base);
 	base += 1;
 	testSurvey("fermi2", base);
@@ -204,8 +202,8 @@ public class BasicTester {
 	testSurvey("fermi5", base);
 	base += 1;
 
-        Settings.put("size","0.1");
-        Settings.put("position", "40.,20.");
+        Settings.put(Key.size,"0.1");
+        Settings.put(Key.position, "40.,20.");
         testSurvey("wisew1", base);
         base += 1;
         testSurvey("wisew2", base);
@@ -215,7 +213,7 @@ public class BasicTester {
         testSurvey("wisew4", base);
         base += 1;
 	
-	Settings.put("size", "5");
+	Settings.put(Key.size, "5");
 	
     }
 
@@ -245,7 +243,7 @@ public class BasicTester {
     Imager runImagerx(int index) throws Exception {
 	
 	Imager img = Imager.getImager();
-	Settings.put("output", "out"+index);
+	Settings.put(Key.output, "out"+index);
 	
 	if (first) {
 	    Settings.addArgs(new String[] {"settings=comparison.settings", "noexit"});
@@ -259,7 +257,7 @@ public class BasicTester {
 	    img.checkUpdateSettings();
 	}
 	
-	String surv = Settings.get("survey");
+	String surv = Settings.get(Key.survey);
 	System.err.println("Processing survey:"+surv);
 	img.processSurvey(surv);
 	
@@ -268,7 +266,7 @@ public class BasicTester {
     
     void testSurvey(String surv, int index) throws Exception {
 	
-	Settings.put("survey", surv);
+	Settings.put(Key.survey, surv);
 
 	if (minTest > 100 || index < minTest || index > maxTest) {
 	    return;
@@ -290,49 +288,49 @@ public class BasicTester {
 	String[] samplers = new String[] {"NN", "LI", "Lanczos", "Lanczos3", "Lanczos4", 
 	                                  "Spline","Spline3","Spline4","Spline5", "Clip"};
    
-	Settings.put("survey",      "user");
-	Settings.put("size",        "1.1");
-	Settings.put("pixels",      "22");
-	Settings.put("userfile",    "inputtest1.fits");
-	Settings.put("position",    "0.,0.");
-	Settings.put("Coordinates", "J2000");
+	Settings.put(Key.survey,      "user");
+	Settings.put(Key.size,        "1.1");
+	Settings.put(Key.pixels,      "22");
+	Settings.put(Key.userfile,    "inputtest1.fits");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.coordinates, "J2000");
 	
-	doTests(samplers, "sampler", base);
+	doTests(samplers, Key.sampler, base);
 	
-	Settings.put("UserFile", "null");
+	Settings.put(Key.userfile, "null");
 	Settings.save();
 	
       try {
 	
 	base += samplers.length;
-	Settings.put("Sampler", "Clip");
-	Settings.put("Survey", "IRIS100");
-	Settings.put("Size",   "30");
-	Settings.put("Pixels", "500");
-	doTests(new String[]{"skyview.process.IDMosaic"}, "mosaicker", base);
+	Settings.put(Key.sampler, "Clip");
+	Settings.put(Key.survey, "IRIS100");
+	Settings.put(Key.size,   "30");
+	Settings.put(Key.pixels, "500");
+	doTests(new String[]{"skyview.process.IDMosaic"}, Key.Mosaicker, base);
 	base += 1;
 	
-	Settings.put("Survey", "User");
-	Settings.put("userfile", "inputtest1.fits,inputtest2.fits,inputtest3.fits");
-	Settings.put("position", "0.,0.");
-	Settings.put("size", "10.1");
-	Settings.put("pixels", "101");
-	Settings.put("Sampler", "Clip");
-	Settings.put("Projection", "Car");
+	Settings.put(Key.survey, "User");
+	Settings.put(Key.userfile, "inputtest1.fits,inputtest2.fits,inputtest3.fits");
+	Settings.put(Key.position, "0.,0.");
+	Settings.put(Key.size, "10.1");
+	Settings.put(Key.pixels, "101");
+	Settings.put(Key.sampler, "Clip");
+	Settings.put(Key.projection, "Car");
 	String[] specialFinders = new String[]{"Bypass", "Overlap"};
-	Settings.put("Mosaicker", "skyview.process.AddingMosaicker");
+	Settings.put(Key.Mosaicker, "skyview.process.AddingMosaicker");
 	
-	doTests(specialFinders, "imagefinder", base);
+	doTests(specialFinders, Key.ImageFinder, base);
 	base+= specialFinders.length;
 	
-	//Settings.put("Survey", "galexfar");
-	//Settings.put("Position", "m81");
-	//Settings.put("MAXRAD", "1391");
-	//Settings.put("ExposureFinder", "FitsKeyword");
-	//Settings.put("ExposureKeyword", "EXPTIME");
-	//Settings.put("Size", "0.3");
-	//Settings.put("Pixels", "600");
-	//Settings.put("Projection", "Tan");
+	//Settings.put(Key.survey, "galexfar");
+	//Settings.put(Key.Position, "m81");
+	//Settings.put(Key.MAXRAD, "1391");
+	//Settings.put(Key.ExposureFinder, "FitsKey.ord);
+	//Settings.put(Key.ExposureKeyword, "EXPTIME");
+	//Settings.put(Key.Size, "0.3");
+	//Settings.put(Key.pixels, "600");
+	//Settings.put(Key.Projection, "Tan");
 	//doTests(specialFinders, "imagefinder", base);
 	//base+= specialFinders.length;
       } finally {
@@ -341,7 +339,7 @@ public class BasicTester {
 	
     }
     
-    double doTests(String[] options, String param, int base) throws Exception {
+    double doTests(String[] options, Key param, int base) throws Exception {
 	
 	double grand = 0;
 	
@@ -402,12 +400,12 @@ public class BasicTester {
 	
 	String[] projections = {"Tan", "Sin", "Car", "Ait", "Csc", "Zea", "Arc", "Stg", "Sfl", "Hpx", "Tea"};
 	
-	Settings.put("Survey", "heao1a");
-	Settings.put("Coordinates", "Galactic");
-	Settings.put("size", "90");
-	Settings.put("pixels", "300");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.coordinates, "Galactic");
+	Settings.put(Key.size, "90");
+	Settings.put(Key.pixels, "300");
 	
-	doTests(projections, "projection", 201);
+	doTests(projections, Key.projection, 201);
 	
 	String[] proj2 = {"Toa"};
 	
@@ -417,28 +415,28 @@ public class BasicTester {
 	
 	// Want to center Toa around the pole.
 	// 
-	Settings.put("Coordinates", "J2000");
-	Settings.put("Position",    "0.,90.");
-	Settings.put("Survey",      "HEAO1A");
-	Settings.put("Pixels",      "200");
-	Settings.put("Size",        "90");
-	Settings.put("Sampler",     "Clip");
-	Settings.put("ClipIntensive","1");
+	Settings.put(Key.coordinates, "J2000");
+	Settings.put(Key.position,    "0.,90.");
+	Settings.put(Key.survey,      "HEAO1A");
+	Settings.put(Key.pixels,      "200");
+	Settings.put(Key.size,        "90");
+	Settings.put(Key.sampler,     "Clip");
+	Settings.put(Key.ClipIntensive,"1");
 	
-	doTests(proj2, "projection", 201+projections.length);
+	doTests(proj2, Key.projection, 201 + projections.length);
 	
 	updateSettings = true;
 	// Now do a tiled TOAST projection
-	Settings.put("Size", "null");
-	Settings.put("Pixels", "null");
-	Settings.put("Survey", "DSS");
-	Settings.put("level", "9");
-	Settings.put("TileX", "255");
-	Settings.put("TileY", "255");
-	Settings.put("Subdiv", "9");
-	String upd = Settings.get("SettingsUpdaters");
-	Settings.put("SettingsUpdaters", "skyview.request.ToastGridder,"+upd);
-	doTests(proj2, "projection", 201+projections.length+proj2.length);
+	Settings.put(Key.size, "null");
+	Settings.put(Key.pixels, "null");
+	Settings.put(Key.survey, "DSS");
+	Settings.put(Key.level, "9");
+	Settings.put(Key.tileX, "255");
+	Settings.put(Key.tileY, "255");
+	Settings.put(Key.Subdiv, "9");
+	String upd = Settings.get(Key.SettingsUpdaters);
+	Settings.put(Key.SettingsUpdaters, "skyview.request.ToastGridder,"+upd);
+	doTests(proj2, Key.projection, 201+projections.length+proj2.length);
       } finally {
 	Settings.restore();
 	updateSettings = updSave;
@@ -449,60 +447,60 @@ public class BasicTester {
 	
 	String[] coordinates = {"J2000", "B1950", "E2000", "H2000", "Galactic", "ICRS"};
 	
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "90");
-	Settings.put("pixels", "300");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "90");
+	Settings.put(Key.pixels, "300");
 	
 	
-	doTests(coordinates, "coordinates", 301);
+	doTests(coordinates, Key.coordinates, 301);
     }
     
     @Test public void testRotation() throws Exception {
 	
 	String[] angles = {"0", "30", "60", "90", "180", "-30", "-90"};
 	
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "90");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels", "300");
-	Settings.put("Sampler", "NN");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "90");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels, "300");
+	Settings.put(Key.sampler, "NN");
 	
-	doTests(angles, "rotation", 401);
-	Settings.put("rotation", "null");
+	doTests(angles, Key.rotation, 401);
+	Settings.put(Key.rotation, "null");
 	
-	Settings.put("survey",     "dss");
-	Settings.put("projection", "Tan");
-	Settings.put("coordinates", "J2000");
-	Settings.put("scale",       "null");
-	Settings.put("size",       "null");
-	Settings.put("position",   "187.27791499999998,2.052388");
+	Settings.put(Key.survey,     "dss");
+	Settings.put(Key.projection, "Tan");
+	Settings.put(Key.coordinates, "J2000");
+	Settings.put(Key.scale,       "null");
+	Settings.put(Key.size,       "null");
+	Settings.put(Key.position,   "187.27791499999998,2.052388");
         
-	double sum0 = doTests(new String[]{"1"},"min", 401+angles.length);
+	double sum0 = doTests(new String[]{"1"},Key.min, 401+angles.length);
 	
-	Settings.put("pixels", "150");
-	double sum1 = doTests(new String[]{"-75,-75", "-75,75", "75,-75", "75,75"},"offset", 402+angles.length);
+	Settings.put(Key.pixels, "150");
+	double sum1 = doTests(new String[]{"-75,-75", "-75,75", "75,-75", "75,75"},Key.offset, 402+angles.length);
 
         System.err.println("Offset test:"+sum0+" "+sum1);
 	assertEquals("Offset test:", sum0, sum1, 0);
 	
 	// RefCoords test
-	Settings.put("offset", "null");
-	Settings.put("pixels", "500,250");
-	Settings.put("size", "380,180");
-	Settings.put("projection", "Ait");
-	Settings.put("Position", "0.,90.");
-	Settings.put("Survey", "408Mhz");
-	doTests(new String[]{"0.,1.", "0.,90.", "0.,-89.", "179.,0."}, "RefCoords", 401+angles.length+5);
+	Settings.put(Key.offset, "null");
+	Settings.put(Key.pixels, "500,250");
+	Settings.put(Key.size, "380,180");
+	Settings.put(Key.projection, "Ait");
+	Settings.put(Key.position, "0.,90.");
+	Settings.put(Key.survey, "408Mhz");
+	doTests(new String[]{"0.,1.", "0.,90.", "0.,-89.", "179.,0."}, Key.RefCoords, 401+angles.length+5);
 	
-	Settings.put("Position", "187.27791499999998,2.052388");
-	Settings.put("RefCoords", "null");
-	Settings.put("Size", "null");
-	Settings.put("Survey", "dss");
+	Settings.put(Key.position, "187.27791499999998,2.052388");
+	Settings.put(Key.RefCoords, "null");
+	Settings.put(Key.size, "null");
+	Settings.put(Key.survey, "dss");
 	
-	Settings.put("pixels", "300");
-	Settings.put("projection", "Car");
+	Settings.put(Key.pixels, "300");
+	Settings.put(Key.projection, "Car");
 	
 	
     }
@@ -511,27 +509,27 @@ public class BasicTester {
 	
 	String[] scales = {"0.25", "0.25,0.25", "0.5,0.25", "0.25,0.5", "0.1"};
 	
-	Settings.put("Survey",      "heao1a");
-	Settings.put("Position",    "0.,0.");
-	Settings.put("projection",  "Car");
-	Settings.put("size",        "90");
-	Settings.put("coordinates", "Galactic");
-	Settings.put("pixels",      "300");
-	Settings.put("Sampler",     "NN");
+	Settings.put(Key.survey,      "heao1a");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.projection,  "Car");
+	Settings.put(Key.size,        "90");
+	Settings.put(Key.coordinates, "Galactic");
+	Settings.put(Key.pixels,      "300");
+	Settings.put(Key.sampler,     "NN");
 	
-	doTests(scales, "scale", 501);
+	doTests(scales, Key.scale, 501);
     }
     
     @Test public void testPixel() throws Exception {
 	String[] pixels = {"300", "300,150", "150,300", "10,10"};
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "90");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels", "300");
-	Settings.put("Sampler", "NN");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "90");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels, "300");
+	Settings.put(Key.sampler, "NN");
 	
-	doTests(pixels, "pixels", 601);
+	doTests(pixels, Key.pixels, 601);
     }
     
     @Test public void testSettings() {
@@ -541,49 +539,49 @@ public class BasicTester {
 	    return;
 	}
 	System.err.println("Testing settings");
-	assertTrue("XXX not set", !Settings.has("xxx"));
-	Settings.add("XXX", "aaa");
-	assertTrue("XXX should not be set", Settings.has("xxx"));
-	assertTrue("XXX should be length 1", Settings.getArray("xxx").length == 1L);
-	Settings.add("XXX", "bbb");
-	assertTrue("XXX should be length 2", Settings.getArray("xxx").length == 2L);
+	assertTrue("XXX not set", !Settings.has(Key.XXX));
+	Settings.add(Key.XXX, "aaa");
+	assertTrue("XXX should not be set", Settings.has(Key.XXX));
+	assertTrue("XXX should be length 1", Settings.getArray(Key.XXX).length == 1L);
+	Settings.add(Key.XXX, "bbb");
+	assertTrue("XXX should be length 2", Settings.getArray(Key.XXX).length == 2L);
 	System.err.println("Adds worked!");
-	Settings.put("xxx", "null");
-	assertTrue("Cleared xxx", !Settings.has("xxx"));
-	assertTrue("Cleared xxx2", Settings.get("xxx") == null);
+	Settings.put(Key.XXX, "null");
+	assertTrue("Cleared xxx", !Settings.has(Key.XXX));
+	assertTrue("Cleared xxx2", Settings.get(Key.XXX) == null);
         org.junit.Assert.
-	assertTrue("Cleared xxx3", Settings.getArray("xxx").length == 0L);
+	assertTrue("Cleared xxx3", Settings.getArray(Key.XXX).length == 0L);
 	System.err.println("Delete worked");
-	Settings.put("xxx", "a,b,c");
-	assertTrue("Reset xxx", Settings.getArray("xxx").length == 3L);
+	Settings.put(Key.XXX, "a,b,c");
+	assertTrue("Reset xxx", Settings.getArray(Key.XXX).length == 3L);
 	System.err.println("Settings OK");
-	assertTrue("Sugg1", Settings.get("xxx").equals("a,b,c"));
-	Settings.suggest("xxx", "d,e,f");
-	assertTrue("Sugg2", Settings.get("xxx").equals("a,b,c"));
-	Settings.suggest("yyy", "d,e,f");
-	assertTrue("Sugg3", Settings.get("yyy").equals("d,e,f"));
-	Settings.suggest("yyy", "a,b,c");
-	assertTrue("Sugg4", Settings.get("yyy").equals("d,e,f"));
-	assertTrue("Sugg5", Settings.has("yyy"));
-	Settings.put("yyy", "null");
-	assertTrue("Sugg6", !Settings.has("yyy"));
-	Settings.suggest("yyy", "abc");
-	assertTrue("Sugg7", !Settings.has("yyy"));
-	Settings.put("yyy", "abc");
-	assertTrue("Sugg8", Settings.has("yyy"));	  
+	assertTrue("Sugg1", Settings.get(Key.XXX).equals("a,b,c"));
+	Settings.suggest(Key.XXX, "d,e,f");
+	assertTrue("Sugg2", Settings.get(Key.XXX).equals("a,b,c"));
+	Settings.suggest(Key.yyy, "d,e,f");
+	assertTrue("Sugg3", Settings.get(Key.yyy).equals("d,e,f"));
+	Settings.suggest(Key.yyy, "a,b,c");
+	assertTrue("Sugg4", Settings.get(Key.yyy).equals("d,e,f"));
+	assertTrue("Sugg5", Settings.has(Key.yyy));
+	Settings.put(Key.yyy, "null");
+	assertTrue("Sugg6", !Settings.has(Key.yyy));
+	Settings.suggest(Key.yyy, "abc");
+	assertTrue("Sugg7", !Settings.has(Key.yyy));
+	Settings.put(Key.yyy, "abc");
+	assertTrue("Sugg8", Settings.has(Key.yyy));	  
 		   
     }
     
     @Test public void testPosit() throws Exception {
 	
 	base = 801;
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "90");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels", "30");
-	Settings.put("Sampler", "NN");
-	Settings.put("position", "180., 0.");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "90");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels, "30");
+	Settings.put(Key.sampler, "NN");
+	Settings.put(Key.position, "180., 0.");
 	
 	if (minTest > 900 || maxTest < 800) {
 	    return;
@@ -594,44 +592,44 @@ public class BasicTester {
 	
 	img.clearImageCache();
 	
-	Settings.put("position", "null");
-	Settings.put("Lat", "0");
-	Settings.put("Lon", "180");
+	Settings.put(Key.position, "null");
+	Settings.put(Key.lat, "0");
+	Settings.put(Key.lon, "180");
 	
 	base += 1;
 	img = runImager(base);
 	double val2 = total((double[]) img.getImageData());
-	assertEquals("Use Lat/Lon or position", val1, val2, 0);
+	assertEquals("Use lat/lon or position", val1, val2, 0);
 	img.clearImageCache();
 	
-	Settings.put("lat", "null");
-	Settings.put("lon", "null");
+	Settings.put(Key.lat, "null");
+	Settings.put(Key.lon, "null");
 	
-	Settings.put("copywcs", "out801.fits");
+	Settings.put(Key.CopyWCS, "out801.fits");
 	base += 1;
 	
 	img = runImager(base);
 	double val3 = total((double[]) img.getImageData());
 	assertEquals("Using copyWCS", val1, val3, 0);
 	System.err.println("LatLon and copyWCS value:"+val1);
-	Settings.put("copywcs", "null");
+	Settings.put(Key.CopyWCS, "null");
     }
     
     @Test public void testQLFormats() throws Exception {
 	
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "360,180");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels", "200,100");
-	Settings.put("Sampler", "NN");
-	Settings.put("position", "180., 0.");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "360,180");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels, "200,100");
+	Settings.put(Key.sampler, "NN");
+	Settings.put(Key.position, "180., 0.");
 	
 	String[] formats={"", "JPEG", "JPG", "GIF", "BMP", "TIFF", "PNG"};
 	
 	boolean oldState = updateSettings;
 	updateSettings = true;
-	doTests(formats, "quicklook", 901);
+	doTests(formats, Key.quicklook, 901);
 	
 	if (maxTest <900 || minTest>=1000) {
 	    return;
@@ -650,8 +648,8 @@ public class BasicTester {
 	assertTrue("Have901Fits", new File("out901.fits").exists());
 	base = 901 + formats.length;
 	
-	Settings.put("quicklook", "");
-	Settings.put("nofits", "");
+	Settings.put(Key.quicklook, "");
+	Settings.put(Key.nofits, "");
 	
 	if (base >= minTest && base <= maxTest) {
 	    runImager(base);
@@ -663,18 +661,18 @@ public class BasicTester {
     
     @Test public void testGrid() throws Exception {
 	
-	Settings.put("scale", "null");
-	Settings.put("Survey", "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size", "360,180");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels", "400,200");
-	Settings.put("Sampler", "NN");
-	Settings.put("position", "0., 0.");
-	Settings.put("nofits", "");
+	Settings.put(Key.scale, "null");
+	Settings.put(Key.survey, "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size, "360,180");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels, "400,200");
+	Settings.put(Key.sampler, "NN");
+	Settings.put(Key.position, "0., 0.");
+	Settings.put(Key.nofits, "");
 	
-	Settings.put("grid", "");
-	Settings.put("quicklook", "JPG");
+	Settings.put(Key.grid, "");
+	Settings.put(Key.quicklook, "JPG");
 	
         base = 1001;
 	
@@ -682,13 +680,13 @@ public class BasicTester {
 	updateSettings = true;
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
-	    System.err.println("Size is:"+Settings.get("pixels"));
+	    System.err.println("Size is:"+Settings.get(Key.pixels));
 	    runImager(base);
 	    jpegCheck("grid", base, 400,200); 
 	}
 	base += 1;
 	
-	Settings.put("gridlabels", "");
+	Settings.put(Key.GridLabels, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -696,7 +694,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("grid", "equatorial");
+	Settings.put(Key.grid, "equatorial");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -704,13 +702,13 @@ public class BasicTester {
 	}
 	base += 1;
 	
-        Settings.put("grid", "");
-	Settings.put("projection", "Tan");
-	Settings.put("position", "45.,90.");
-	Settings.put("pixels", "300");
-	Settings.put("size", "60");
+        Settings.put(Key.grid, "");
+	Settings.put(Key.projection, "Tan");
+	Settings.put(Key.position, "45.,90.");
+	Settings.put(Key.pixels, "300");
+	Settings.put(Key.size, "60");
 	
-	Settings.put("gridlabels", "null");
+	Settings.put(Key.GridLabels, "null");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -718,7 +716,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("gridlabels", "");
+	Settings.put(Key.GridLabels, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -726,7 +724,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("grid", "equatorial");
+	Settings.put(Key.grid, "equatorial");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -734,8 +732,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("grid", "null");
-	Settings.put("gridlabels","null");
+	Settings.put(Key.grid, "null");
+	Settings.put(Key.GridLabels,"null");
 	updateSettings = oldupd;
     }
     
@@ -743,18 +741,18 @@ public class BasicTester {
 	
 	System.err.println("Test contours");
 	
-	Settings.put("scale", "null");
-	Settings.put("nofits", "null");
+	Settings.put(Key.scale, "null");
+	Settings.put(Key.nofits, "null");
 	
-	Settings.put("Survey",     "heao1a");
-	Settings.put("projection", "Car");
-	Settings.put("size",       "360,180");
-	Settings.put("coordinates", "galactic");
-	Settings.put("pixels",     "400,200");
-	Settings.put("Sampler",    "NN");
-	Settings.put("position",   "0., 0.");
-	Settings.put("contour",    "heao1a");
-	Settings.put("quicklook",  "jpg");
+	Settings.put(Key.survey,     "heao1a");
+	Settings.put(Key.projection, "Car");
+	Settings.put(Key.size,       "360,180");
+	Settings.put(Key.coordinates, "galactic");
+	Settings.put(Key.pixels,     "400,200");
+	Settings.put(Key.sampler,    "NN");
+	Settings.put(Key.position,   "0., 0.");
+	Settings.put(Key.contour,    "heao1a");
+	Settings.put(Key.quicklook,  "jpg");
 	
 	boolean oldState = updateSettings;
 	updateSettings = true;
@@ -767,7 +765,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contourSmooth", "7");
+	Settings.put(Key.contourSmooth, "7");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -775,8 +773,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contourSmooth", "null");
-	Settings.put("contour", "heao1a:linear");
+	Settings.put(Key.contourSmooth, "null");
+	Settings.put(Key.contour, "heao1a:linear");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -784,7 +782,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contour", "heao1a:sqrt");
+	Settings.put(Key.contour, "heao1a:sqrt");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -792,7 +790,7 @@ public class BasicTester {
 	}
 	base += 1;
 		
-	Settings.put("contour", "heao1a:log:6");
+	Settings.put(Key.contour, "heao1a:log:6");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -800,7 +798,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contour", "heao1a:log:6:1:1000");
+	Settings.put(Key.contour, "heao1a:log:6:1:1000");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -808,7 +806,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contour", "egrethard");
+	Settings.put(Key.contour, "egrethard");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -816,7 +814,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contour", "egrethard:log:5:1.e-7:0.01");
+	Settings.put(Key.contour, "egrethard:log:5:1.e-7:0.01");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -824,7 +822,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("contourSmooth", "5");
+	Settings.put(Key.contourSmooth, "5");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -832,7 +830,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("noContourPrint", "");
+	Settings.put(Key.noContourPrint, "");
 	if (base >= minTest && base <= maxTest) {
 	    System.err.println("No contour countss should be printed this time");
 	    Imager.getImager().clearImageCache();
@@ -841,9 +839,9 @@ public class BasicTester {
 	base += 1;
 	
 	updateSettings = oldState;
-	Settings.put("contourSmooth", "null");
-	Settings.put("noContourPrint", "null");
-	Settings.put("contour", "null");
+	Settings.put(Key.contourSmooth, "null");
+	Settings.put(Key.noContourPrint, "null");
+	Settings.put(Key.contour, "null");
 	
     }
     
@@ -855,11 +853,11 @@ public class BasicTester {
 	boolean oldState = updateSettings;
 	updateSettings = true;
 	
-	Settings.put("survey",      "user");
-	Settings.put("userfile",    "inputtest1.fits");
-	Settings.put("CopyWCS",     "inputtest1.fits");
+	Settings.put(Key.survey,      "user");
+	Settings.put(Key.userfile,    "inputtest1.fits");
+	Settings.put(Key.CopyWCS,     "inputtest1.fits");
 	
-	Settings.put("Smooth", "5");
+	Settings.put(Key.smooth, "5");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -876,7 +874,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("Smooth", "5,1");
+	Settings.put(Key.smooth, "5,1");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -891,7 +889,7 @@ public class BasicTester {
 	
 	base += 1;
 	
-	Settings.put("Smooth", "1,5");
+	Settings.put(Key.smooth, "1,5");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -907,25 +905,25 @@ public class BasicTester {
 	base += 1;
 	
 	updateSettings = oldState;
-	Settings.put("userfile",    "null");
-	Settings.put("CopyWCS",     "null");
+	Settings.put(Key.userfile,    "null");
+	Settings.put(Key.CopyWCS,     "null");
     }
     
     @Test public void testCatalogs() throws Exception {
 	
 	base = 1301;
-	Settings.put("survey",      "rass-cnt broad");
-	Settings.put("scaling",     "log");
-	Settings.put("size",        "15");
-	Settings.put("pixels",      "500");
-	Settings.put("catalog",     "rosmaster");
-	Settings.put("quicklook",   "jpg");
-	Settings.put("position",    "0.,0.");
-	Settings.put("coordinates", "Galactic");
-	Settings.put("projection",  "Car");
-	Settings.put("nofits",      "null");
-	Settings.put("min",         "null");
-	Settings.put("max",         "null");
+	Settings.put(Key.survey,      "rass-cnt broad");
+	Settings.put(Key.scaling,     "log");
+	Settings.put(Key.size,        "15");
+	Settings.put(Key.pixels,      "500");
+	Settings.put(Key.catalog,     "rosmaster");
+	Settings.put(Key.quicklook,   "jpg");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.coordinates, "Galactic");
+	Settings.put(Key.projection,  "Car");
+	Settings.put(Key.nofits,      "null");
+	Settings.put(Key.min,         "null");
+	Settings.put(Key.max,         "null");
 	
 	boolean oldState = updateSettings;
 	updateSettings = true;
@@ -937,7 +935,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("catalogids", "");
+	Settings.put(Key.CatalogIDs, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImager(base);
@@ -949,29 +947,29 @@ public class BasicTester {
 	skyview.vo.CatalogProcessor.clearRequests();
       
 	int count1=Integer.MAX_VALUE, count2=Integer.MAX_VALUE, count3=Integer.MAX_VALUE;
-	Settings.put("catalogfile", "");
+	Settings.put(Key.catalogFile, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	
-	    assertTrue("catalogcount", Settings.has("_totalCatalogCount"));
+	    assertTrue("catalogcount", Settings.has(Key._totalCatalogCount));
 	    assertTrue("tableexists", new File("out"+base+".tab").exists());
 	
-	    count1 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count1 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base+"_a", count1, os);
 	    Settings.restore();
 	}
 						
 	base += 1;
 	
-	Settings.put("catalogradius", "5");
+	Settings.put(Key.CatalogRadius, "5");
 	skyview.vo.CatalogProcessor.clearRequests();
       
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count2 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count2 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base+"_b", count2, os);
 	
 	    assertTrue("radiusfilter", count2<count1);
@@ -980,14 +978,14 @@ public class BasicTester {
 	
 	base += 1;
 	  
-	Settings.put("catalogfilter", "instrument=hri");
+	Settings.put(Key.CatalogFilter, "instrument=hri");
 	skyview.vo.CatalogProcessor.clearRequests();
       
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base+"_c", count3, os);
 	
 	    assertTrue("fieldfilter", count3<count2);
@@ -995,14 +993,14 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("catalogfilter", "instrument=hri,exposure>20000");
+	Settings.put(Key.CatalogFilter, "instrument=hri,exposure>20000");
 	skyview.vo.CatalogProcessor.clearRequests();
       
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base+"_c", count3, os);
 	
 	    assertTrue("fieldfilter", count3<count2);
@@ -1010,48 +1008,48 @@ public class BasicTester {
 	}
 	base += 1;
 	// Still in Galactic coordinates -- so we use 3C273 in Gal.
-	Settings.put("position", "289.95087909728574,64.35997524900246");
-	Settings.put("survey", "dss");
-	Settings.put("projection", "Tan");
-	Settings.put("size", "0.1");
-	Settings.put("catalogFilter", "null");
-	Settings.put("catalogradius", "null");
-	Settings.put("nofits", "null");
-	Settings.put("pixels", "300");
-	Settings.put("Scale", "null");
+	Settings.put(Key.position, "289.95087909728574,64.35997524900246");
+	Settings.put(Key.survey, "dss");
+	Settings.put(Key.projection, "Tan");
+	Settings.put(Key.size, "0.1");
+	Settings.put(Key.CatalogFilter, "null");
+	Settings.put(Key.CatalogRadius, "null");
+	Settings.put(Key.nofits, "null");
+	Settings.put(Key.pixels, "300");
+	Settings.put(Key.scale, "null");
 	
-	Settings.put("catalog", "ned");
+	Settings.put(Key.catalog, "ned");
 	skyview.vo.CatalogProcessor.clearRequests();
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
-	    System.err.println("test:"+Settings.get("scale"));
+	    System.err.println("test:"+Settings.get(Key.scale));
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base, count3, os);
 	
 	    Settings.restore();
 	}
 	base += 1;
 	
-	Settings.put("catalog", "I/284");
+	Settings.put(Key.catalog, "I/284");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base, count3, os);
 	
 	    Settings.restore();
 	}
 	base += 1;
 	
-	Settings.put("catalog", "http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
+	Settings.put(Key.catalog, "http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base, count3, os);
 	
 	    Settings.restore();
@@ -1059,26 +1057,26 @@ public class BasicTester {
 	base += 1;
 	
 	// This should reuse requests
-	Settings.put("catalog", "ned,I/284,http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
+	Settings.put(Key.catalog, "ned,I/284,http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base, count3, os);
 	
 	    Settings.restore();
 	}
 	base += 1;
 	
-	Settings.put("catalog", "ned,I/284,http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
+	Settings.put(Key.catalog, "ned,I/284,http://heasarc.gsfc.nasa.gov/cgi-bin/vo/cone/coneGet.pl?table=rosmaster&");
 	// Repeat after clearing requests.
 	skyview.vo.CatalogProcessor.clearRequests();
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
 	    
-	    count3 = Integer.parseInt(Settings.get("_totalcatalogcount"));
+	    count3 = Integer.parseInt(Settings.get(Key._totalCatalogCount));
 	    regress("catquery_"+base, count3, os);
 	    jpegCheck("catcomp", base, 300,300); 
 	    Settings.restore();
@@ -1086,8 +1084,8 @@ public class BasicTester {
 	base += 1;
 	
 	
-	Settings.put("catalog", "ned");
-	Settings.put("catalogfields", "");
+	Settings.put(Key.catalog, "ned");
+	Settings.put(Key.CatalogFields, "");
 	skyview.vo.CatalogProcessor.clearRequests();
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
@@ -1097,10 +1095,10 @@ public class BasicTester {
 	base += 1;
 	
 	
-	Settings.put("catalog", "rosmaster");
-	Settings.put("catalogfields", "");
-	Settings.put("catalogfile", "mycat.file");
-	Settings.put("catalogcolumns", "instrument,exposure");
+	Settings.put(Key.catalog, "rosmaster");
+	Settings.put(Key.CatalogFields, "");
+	Settings.put(Key.catalogFile, "mycat.file");
+	Settings.put(Key.CatalogColumns, "instrument,exposure");
 	skyview.vo.CatalogProcessor.clearRequests();
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
@@ -1113,26 +1111,26 @@ public class BasicTester {
 	
 	
 	
-	Settings.put("catalog",       "null");
-	Settings.put("catalogfields", "null");
-	Settings.put("catalogids",    "null");
-	Settings.put("catalogradius", "null");
-	Settings.put("catalogfile",   "null");
-	Settings.put("preprocessor", "null");
-	Settings.put("postprocessor", "null");
+	Settings.put(Key.catalog,       "null");
+	Settings.put(Key.CatalogFields, "null");
+	Settings.put(Key.CatalogIDs,    "null");
+	Settings.put(Key.CatalogRadius, "null");
+	Settings.put(Key.catalogFile,   "null");
+	Settings.put(Key.Preprocessor, "null");
+	Settings.put(Key.Postprocessor, "null");
 	
 	updateSettings = oldState;
     }
     
     @Test public void testLUT() throws Exception { 
 	
-	Settings.put("survey",      "dss");
-	Settings.put("quicklook",   "jpg");
-	Settings.put("position",    "187.27791499999998,2.052388");
-	Settings.put("Coordinates", "J2000");
-	Settings.put("pixels",      "500");
-	Settings.put("nofits",      "");
-	Settings.put("postprocessor", "null");
+	Settings.put(Key.survey,      "dss");
+	Settings.put(Key.quicklook,   "jpg");
+	Settings.put(Key.position,    "187.27791499999998,2.052388");
+	Settings.put(Key.coordinates, "J2000");
+	Settings.put(Key.pixels,      "500");
+	Settings.put(Key.nofits,      "");
+	Settings.put(Key.Postprocessor, "null");
 	
 	boolean oldState = updateSettings;
 	updateSettings = true;
@@ -1148,7 +1146,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("invert", "");
+	Settings.put(Key.invert, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1157,8 +1155,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("invert", "null");
-	Settings.put("lut", "fire");
+	Settings.put(Key.invert, "null");
+	Settings.put(Key.lut, "fire");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1167,7 +1165,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("invert", "");
+	Settings.put(Key.invert, "");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1176,9 +1174,9 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("invert", "null");
-	Settings.put("lut", "null");
-	Settings.put("coltab", "green-pink");
+	Settings.put(Key.invert, "null");
+	Settings.put(Key.lut, "null");
+	Settings.put(Key.coltab, "green-pink");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1187,8 +1185,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("coltab", "null");
-	Settings.put("lut", "colortables/green-pink.bin");
+	Settings.put(Key.coltab, "null");
+	Settings.put(Key.lut, "colortables/green-pink.bin");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1197,9 +1195,9 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("lut", "null");
-	Settings.put("nofits", "null");
-	Settings.put("quicklook", "null");
+	Settings.put(Key.lut, "null");
+	Settings.put(Key.nofits, "null");
+	Settings.put(Key.quicklook, "null");
 	
 	updateSettings = oldState;
 	
@@ -1208,63 +1206,63 @@ public class BasicTester {
     
     @Test public void testRGB() throws Exception {
 	
-	Settings.put("survey",      "iras100,iras25,rass-cnt broad");
-	Settings.put("position",    "0.,0.");
-	Settings.put("coordinates", "G");
-	Settings.put("Pixels",      "600,300");
-	Settings.put("size",        "40,20");
-	Settings.put("rgb",         "");
+	Settings.put(Key.survey,      "iras100,iras25,rass-cnt broad");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.coordinates, "G");
+	Settings.put(Key.pixels,      "600,300");
+	Settings.put(Key.size,        "40,20");
+	Settings.put(Key.rgb,         "");
 	
 	
 	base = 1501;
 	
 	if (base >= minTest && base <= maxTest) {
-	    Settings.put("output", "out"+base);
+	    Settings.put(Key.output, "out"+base);
 	    Imager img = new Imager();
 	    new Imager().run();
 	    jpegRGBCheck("rgb", base, 600, 300);
 	}
 	base += 1;
 	
-	Settings.put("rgbsmooth", "1,1,5");
+	Settings.put(Key.rgbsmooth, "1,1,5");
 	if (base >= minTest && base <= maxTest) {
-	    Settings.put("output", "out"+base);
+	    Settings.put(Key.output, "out"+base);
 	    new Imager().run();
 	    jpegRGBCheck("rgbsm", base, 600, 300);
 	}
 	base += 1;
 	
-	Settings.put("rgbsmooth", "1,1,5");
-	Settings.put("grid", "");
-	Settings.put("gridlabels", "");
+	Settings.put(Key.rgbsmooth, "1,1,5");
+	Settings.put(Key.grid, "");
+	Settings.put(Key.GridLabels, "");
 	if (base >= minTest && base <= maxTest) {
-	    Settings.put("output", "out"+base);
+	    Settings.put(Key.output, "out"+base);
 	    new Imager().run();
 	    jpegRGBCheck("rgbsmgrid", base, 600, 300);
 	}
 	base += 1;
 	
-	Settings.put("rgb",        "null");
-	Settings.put("grid",       "null");
-	Settings.put("gridlabels", "null");
-	Settings.put("rgbsmooth",  "null");
+	Settings.put(Key.rgb,        "null");
+	Settings.put(Key.grid,       "null");
+	Settings.put(Key.GridLabels, "null");
+	Settings.put(Key.rgbsmooth,  "null");
 	
     }
     
     @Test public void testScaling() throws Exception {
 	
-	Settings.put("survey",      "iras100");
-	Settings.put("position",    "0.,0.");
-	Settings.put("coordinates", "G");
-	Settings.put("Pixels",      "500");
-	Settings.put("size",        "10");
-	Settings.put("nofits",      "null");
+	Settings.put(Key.survey,      "iras100");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.coordinates, "G");
+	Settings.put(Key.pixels,      "500");
+	Settings.put(Key.size,        "10");
+	Settings.put(Key.nofits,      "null");
 	
 	base = 1601;
 	boolean oldState = updateSettings;
 	updateSettings = true;
 	
-	Settings.put("scaling", "log");
+	Settings.put(Key.scaling, "log");
 				   
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
@@ -1274,7 +1272,7 @@ public class BasicTester {
 	}
 	base += 1;
 			       
-	Settings.put("scaling", "linear");
+	Settings.put(Key.scaling, "linear");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1283,7 +1281,7 @@ public class BasicTester {
 	}
 	base += 1;
 
-	Settings.put("scaling", "sqrt");
+	Settings.put(Key.scaling, "sqrt");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1292,7 +1290,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("scaling", "histeq");
+	Settings.put(Key.scaling, "histeq");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1301,8 +1299,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("scaling", "log");
-	Settings.put("min", "200");
+	Settings.put(Key.scaling, "log");
+	Settings.put(Key.min, "200");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1312,8 +1310,8 @@ public class BasicTester {
 	base += 1;
 	
 	
-	Settings.put("scaling", "log");
-	Settings.put("max", "5000");
+	Settings.put(Key.scaling, "log");
+	Settings.put(Key.max, "5000");
 	if (base >= minTest && base <= maxTest) {
 	    Imager.getImager().clearImageCache();
 	    runImagerx(base);
@@ -1322,9 +1320,9 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("scaling", "null");
-	Settings.put("min", "null");
-	Settings.put("max", "null");
+	Settings.put(Key.scaling, "null");
+	Settings.put(Key.min, "null");
+	Settings.put(Key.max, "null");
 	
 	updateSettings = oldState;
     }
@@ -1332,22 +1330,22 @@ public class BasicTester {
     
     @Test public void testPlot() throws Exception {
 	
-	Settings.put("survey",      "iras100");
-	Settings.put("position",    "0.,0.");
-	Settings.put("coordinates", "G");
-	Settings.put("Pixels",      "500");
-	Settings.put("size",        "10");
-	Settings.put("nofits",      "null");
+	Settings.put(Key.survey,      "iras100");
+	Settings.put(Key.position,    "0.,0.");
+	Settings.put(Key.coordinates, "G");
+	Settings.put(Key.pixels,      "500");
+	Settings.put(Key.size,        "10");
+	Settings.put(Key.nofits,      "null");
 	
 	boolean oldSettings = updateSettings;
 	updateSettings = true;
 	
 	base = 1701;
 	
-	Settings.put("grid",        "");
-	Settings.put("gridlabels",  "");
-	Settings.put("catalog",     "rosmaster");
-	Settings.put("catalogids",  "");
+	Settings.put(Key.grid,        "");
+	Settings.put(Key.GridLabels,  "");
+	Settings.put(Key.catalog,     "rosmaster");
+	Settings.put(Key.CatalogIDs,  "");
 	
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
@@ -1358,7 +1356,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("plotscale", "2");
+	Settings.put(Key.plotscale, "2");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1368,8 +1366,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("plotscale", "3");
-	Settings.put("plotfontsize", "20");
+	Settings.put(Key.plotscale, "3");
+	Settings.put(Key.plotfontsize, "20");
        
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
@@ -1380,8 +1378,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("plotcolor", "green");
-	Settings.put("lut", "grays");
+	Settings.put(Key.plotcolor, "green");
+	Settings.put(Key.lut, "grays");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1391,7 +1389,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("lut", "fire");
+	Settings.put(Key.lut, "fire");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1401,7 +1399,7 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("draw", "50 50,-50 -50,,50 -50,-50 50");
+	Settings.put(Key.draw, "50 50,-50 -50,,50 -50,-50 50");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1411,8 +1409,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("draw", "null");
-	Settings.put("drawfile", "plot1.drw");
+	Settings.put(Key.draw, "null");
+	Settings.put(Key.DrawFile, "plot1.drw");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1422,8 +1420,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("drawfile", "plot1.drw");
-	Settings.put("drawangle", "45");
+	Settings.put(Key.DrawFile, "plot1.drw");
+	Settings.put(Key.drawAngle, "45");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1433,8 +1431,8 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("drawangle", "null");
-	Settings.put("drawfile", "plot2.drw");
+	Settings.put(Key.drawAngle, "null");
+	Settings.put(Key.DrawFile, "plot2.drw");
 	if (base >= minTest && base <= maxTest) {
 	    skyview.vo.CatalogProcessor.clearRequests();
 	    Imager.getImager().clearImageCache();
@@ -1444,15 +1442,15 @@ public class BasicTester {
 	}
 	base += 1;
 	
-	Settings.put("plotcolor", "null");
-	Settings.put("plotscale", "null");
-	Settings.put("plotfontsize", "null");
-	Settings.put("drawfile", "null");
-	Settings.put("drawangle", "null");
-	Settings.put("draw", "null");
-	Settings.put("grid", "null");
-	Settings.put("gridlabels", "null");
-	Settings.put("catalog", "null");
-	Settings.put("catalogids", "null");
+	Settings.put(Key.plotcolor, "null");
+	Settings.put(Key.plotscale, "null");
+	Settings.put(Key.plotfontsize, "null");
+	Settings.put(Key.DrawFile, "null");
+	Settings.put(Key.drawAngle, "null");
+	Settings.put(Key.draw, "null");
+	Settings.put(Key.grid, "null");
+	Settings.put(Key.GridLabels, "null");
+	Settings.put(Key.catalog, "null");
+	Settings.put(Key.CatalogIDs, "null");
     }
 }

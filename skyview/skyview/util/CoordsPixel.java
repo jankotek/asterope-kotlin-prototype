@@ -38,6 +38,6 @@ public class CoordsPixel {
 	
 	double[] pixel  = w.transform(unit);
 	
-	System.out.println("Pixels: "+pixel[0]+", "+pixel[1]);
+	System.out.println("pixels: "+pixel[0]+", "+pixel[1]);
     }
 }

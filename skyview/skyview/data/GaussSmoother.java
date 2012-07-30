@@ -2,6 +2,7 @@ package skyview.data;
 
 import nom.tam.fits.FitsException;
 import nom.tam.fits.Header;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.survey.Image;
 import org.apache.commons.math3.special.Erf;
@@ -17,7 +18,7 @@ public class GaussSmoother extends WeightedSmoother {
     private double sigma;
 
     void initialize(Image output) {
-        double sigma = Double.parseDouble(Settings.get("sigma", "2"));
+        double sigma = Double.parseDouble(Settings.get(Key.sigma, "2"));
         if (sigma <= 0) {
             sigma = 2;
         }

@@ -6,6 +6,7 @@ package skyview.survey;
  */
 
 import nom.tam.fits.Header;
+import skyview.executive.Key;
 import skyview.geometry.Position;
 import skyview.executive.Settings;
 
@@ -14,7 +15,7 @@ public class UserSurvey implements Survey {
     
     private String[] files;
     public UserSurvey() {
-	files = Settings.getArray("userfile");
+	files = Settings.getArray(Key.userfile);
     }
     
     public String getName() {

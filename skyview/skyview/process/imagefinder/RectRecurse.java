@@ -1,5 +1,6 @@
 package skyview.process.imagefinder;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.survey.Image;
 import skyview.process.ImageFinder;
@@ -143,8 +144,8 @@ public abstract class RectRecurse extends ImageFinder {
 	int np       = output.getWidth()*output.getHeight();
 	imageUsed    = new boolean[input.length];             // set to false on initialization.
 	this.input   = input;
-	
-	if (Settings.has("FindRetry")) {
+
+	if (Settings.has(Key.FindRetry)) {
 	    retry = true;
 	}
 	try {
@@ -156,10 +157,10 @@ public abstract class RectRecurse extends ImageFinder {
 	
 	// See if the user has requested that we not include
 	// images where the data value is NaN.
-	checkNaNs = Settings.has("checknans");
+	checkNaNs = Settings.has(Key.checknans);
 	
 	// Do we want to skip the edge checks?
-	cornersOnly = Settings.has("cornersonly");
+	cornersOnly = Settings.has(Key.cornersonly);
 	
 	if (checkNaNs) {
 	    for (int i=0; i < input.length; i += 1) {
@@ -168,12 +169,12 @@ public abstract class RectRecurse extends ImageFinder {
 	}
 	
 	// Minimum edge distance?
-	if (Settings.has("MinEdge")) {
-	    edgeMin = Double.parseDouble(Settings.get("MinEdge"));
+	if (Settings.has(Key.MinEdge)) {
+	    edgeMin = Double.parseDouble(Settings.get(Key.MinEdge));
 	}
 	
-	if (Settings.has("MaxRad")) {
-	    double radMax   = Double.parseDouble(Settings.get("MaxRad"));
+	if (Settings.has(Key.MaxRad)) {
+	    double radMax   = Double.parseDouble(Settings.get(Key.MaxRad));
 	    // More convenient to compute (r)^2
 	    radMaxSq = radMax*radMax;
 	    radiusCheck = true;
@@ -274,7 +275,7 @@ public abstract class RectRecurse extends ImageFinder {
 	
 	rectCount += 1;
 	if (rectCount > 5000 && rectCount % 1000 == 0) {
-	    System.err.println("  FindImage-Pixels found:"+pixelCount+ " of "+img.length + "   Rectangles:"+rectCount+"    "+
+	    System.err.println("  FindImage-pixels found:"+pixelCount+ " of "+img.length + "   Rectangles:"+rectCount+"    "+
 			   100*pixelCount/img.length+"% complete");
 	}
 	

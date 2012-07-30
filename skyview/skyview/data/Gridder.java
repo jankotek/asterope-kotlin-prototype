@@ -1,5 +1,6 @@
 package skyview.data;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 
 import skyview.executive.Settings;
@@ -80,9 +81,9 @@ public class Gridder  {
     public Gridder(Image image, String system) {
 	this(image, true);
 	
-	String val = Settings.get("grid");
+	String val = Settings.get(Key.grid);
 	
-	if (Settings.has("Projection") && Settings.get("Projection").toLowerCase().equals("car")) {
+	if (Settings.has(Key.projection) && Settings.get(Key.projection).toLowerCase().equals("car")) {
 	    stdForward(image);
 	    // Find the coordinates of the center of the image.
 	    double[] pix  = {image.getWidth()/2.,image.getHeight()/2.};

@@ -1,5 +1,6 @@
 package skyview.geometry.sampler;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.geometry.Transformer;
 import skyview.geometry.Sampler;
@@ -17,7 +18,7 @@ public class Combo extends Sampler {
     protected String  combo;
     
     public Combo() {
-	combo = Settings.get("ComboSamplers");
+	combo = Settings.get(Key.ComboSamplers);
 	String[] samplers = combo.split(",");
 	primary = Sampler.factory(samplers[0]);
 	backup  = Sampler.factory(samplers[1]);

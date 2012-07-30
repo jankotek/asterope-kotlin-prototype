@@ -5,6 +5,7 @@ package skyview.survey;
  *  These are read only images.
  */
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.geometry.WCS;
 import skyview.executive.Settings;
@@ -28,7 +29,7 @@ public class DSSImage extends Image {
     private String directory;
     private String plate;
     
-    private String[] urlPrefixes = Settings.getArray("LocalURL");
+    private String[] urlPrefixes = Settings.getArray(Key.LocalURL);
     private int nTiles   = 28;
     private int tileSize = 500;
     

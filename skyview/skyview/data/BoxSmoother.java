@@ -1,5 +1,6 @@
 package skyview.data;
 
+import skyview.executive.Key;
 import skyview.process.Processor;
 import skyview.executive.Settings;
 import skyview.executive.SettingsUpdater;
@@ -44,7 +45,7 @@ public class BoxSmoother implements Processor {
     public void process(Image[] inputs, Image output,
 			int[] selector, Sampler samp, DepthSampler dsamp) {
 	
-	String[] smoothPar = Settings.getArray("smooth");
+	String[] smoothPar = Settings.getArray(Key.smooth);
 	try {
 	    if (smoothPar.length == 1 && smoothPar[0].length() > 0) {
 	        nx = Integer.parseInt(smoothPar[0]);
@@ -57,7 +58,7 @@ public class BoxSmoother implements Processor {
 	        ny = 3;
 	    }
 	} catch (Exception e) {
-	    System.err.println("Error parsing smooth parameters:"+Settings.get("smooth"));
+	    System.err.println("Error parsing smooth parameters:"+Settings.get(Key.smooth));
 	    return;
 	}
 	

@@ -2,7 +2,7 @@ package skyview.util;
 
 import static org.apache.commons.math3.util.FastMath.*;
 
-/** Scale an object linearly.
+/** scale an object linearly.
  */
 public class LogScaler extends Scaler {
     
@@ -89,7 +89,7 @@ public class LogScaler extends Scaler {
 	}
     }
     
-    /** Scale an value.
+    /** scale an value.
      *  @param val The value to be scaled.
      */
     protected byte scale(double val) {

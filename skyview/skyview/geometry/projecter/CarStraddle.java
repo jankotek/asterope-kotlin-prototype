@@ -5,7 +5,7 @@ import skyview.geometry.sampler.Clip;
 import static org.apache.commons.math3.util.FastMath.*;
 
 /** Handle the Straddling of the Cartesion
- *  projection when a figure extends accross the Lon=180 line.
+ *  projection when a figure extends accross the lon=180 line.
  */
 class CarStraddle extends Straddle {
    

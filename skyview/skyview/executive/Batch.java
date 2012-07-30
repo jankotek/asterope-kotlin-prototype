@@ -31,7 +31,7 @@ public class Batch {
 	
 	Imager img = new Imager();
 	int count = 0;
-	String origOutput = Settings.get("output");
+	String origOutput = Settings.get(Key.output);
 	while (true) {
 	    Settings.save();
 	    String line = in.readLine();
@@ -48,12 +48,12 @@ public class Batch {
 	    }
 	    try {
 		Settings.addArgs(args);
-		String currOutput = Settings.get("output");
+		String currOutput = Settings.get(Key.output);
 		// Make sure each line has a distinct output setting.
 		if (currOutput == null) {
-		    Settings.put("output", "output"+count);
+		    Settings.put(Key.output, "output"+count);
 		} else if (currOutput.equals(origOutput)) {
-		    Settings.put("output", origOutput+count);
+		    Settings.put(Key.output, origOutput+count);
 		}
 	        img.run();
 	    } catch (Exception e) {

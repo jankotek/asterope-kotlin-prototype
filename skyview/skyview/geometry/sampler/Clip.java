@@ -1,5 +1,6 @@
 package skyview.geometry.sampler;
 
+import skyview.executive.Key;
 import skyview.geometry.Sampler;
 import skyview.geometry.Transformer;
 import skyview.geometry.Projecter;
@@ -174,12 +175,12 @@ public class Clip extends Sampler {
     }
     
     public Clip() {
-	if (Settings.has("ClipIntensive")) {
+	if (Settings.has(Key.ClipIntensive)) {
 	    setIntensive(true);
 	}
 	
-	if (Settings.has("ClipDrizzle")) {
-	    double driz = Double.parseDouble(Settings.get("ClipDrizzle"));
+	if (Settings.has(Key.ClipDrizzle)) {
+	    double driz = Double.parseDouble(Settings.get(Key.ClipDrizzle));
 	    if (driz >= 0 && driz <= 1) {
 		setDrizzle(driz);
 	    } else {

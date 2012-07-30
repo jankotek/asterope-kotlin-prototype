@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import nom.tam.fits.FitsException;
 import nom.tam.fits.Header;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.geometry.Converter;
 import skyview.geometry.Projecter;
@@ -29,7 +30,7 @@ public class NormedGaussSmoother extends WeightedSmoother {
 
     void initialize(Image im) {
         try {
-            sigma = Double.parseDouble(Settings.get("sigma", "2"));
+            sigma = Double.parseDouble(Settings.get(Key.sigma, "2"));
             if (sigma <= 0) {
                 sigma = 2;
             }

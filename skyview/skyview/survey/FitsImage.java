@@ -6,6 +6,7 @@ import nom.tam.fits.BasicHDU;
 import nom.tam.fits.FitsException;
 import nom.tam.util.BufferedDataInputStream;
 
+import skyview.executive.Key;
 import skyview.geometry.TransformationException;
 import skyview.survey.Image;
 import skyview.survey.ImageFactory;
@@ -74,8 +75,8 @@ public class FitsImage extends Image {
 	}
 	
 	try {
-	    if (Settings.has("PixelOffset")) {
-		String[] crpOff= Settings.getArray("PixelOffset");
+	    if (Settings.has(Key.PixelOffset)) {
+		String[] crpOff= Settings.getArray(Key.PixelOffset);
 		try {
 		    double d1 = Double.parseDouble(crpOff[0]);
 		    double d2 = d1;
@@ -85,7 +86,7 @@ public class FitsImage extends Image {
 		    h.addValue("CRPIX1", h.getDoubleValue("CRPIX1")+d1, "");
 		    h.addValue("CRPIX2", h.getDoubleValue("CRPIX2")+d2, "");
 		} catch (Exception e) {
-		    System.err.println("Error adding Pixel offset:"+Settings.get("PixelOffset"));
+		    System.err.println("Error adding Pixel offset:"+Settings.get(Key.PixelOffset));
 		    // Just go on after letting the user know.
 		}
 	    }

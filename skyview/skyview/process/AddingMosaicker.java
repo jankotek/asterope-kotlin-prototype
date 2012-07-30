@@ -1,5 +1,6 @@
 package skyview.process;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.geometry.Sampler;
 import skyview.geometry.sampler.Clip;
@@ -61,7 +62,7 @@ public class AddingMosaicker implements Processor {
     
     public AddingMosaicker() {
 	
-	String finder = Settings.get("ExposureFinder");
+	String finder = Settings.get(Key.ExposureFinder);
 	try {
 	    if (finder != null ) {
 		expFinder = (ExposureFinder) skyview.util.Utilities.newInstance(finder, "skyview.process.expfinder");
@@ -131,7 +132,7 @@ public class AddingMosaicker implements Processor {
 	 * we may be adding exposures! [Thanks to
 	 * G. Belanger for pointing this out.]
 	 */
-	if (!Settings.has("nonormalize")) {
+	if (!Settings.has(Key.nonormalize)) {
 	    // Normalize by exposure.
 	    for (int i=0; i<exposure.length; i += 1) {
 	        for (int k=0; k<depth; k += 1) {

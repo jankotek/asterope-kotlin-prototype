@@ -9,7 +9,6 @@ import skyview.survey.Image;
 import skyview.survey.Subset;
 
 import skyview.geometry.Projection;
-import skyview.geometry.Projecter;
 import skyview.geometry.CoordinateSystem;
 import skyview.geometry.Scaler;
 import skyview.geometry.WCS;
@@ -21,20 +20,12 @@ import skyview.geometry.Position;
 import skyview.process.ImageFinder;
 import skyview.process.Processor;
 
-import skyview.ij.IJProcessor;
-
-import skyview.executive.Settings;
-import skyview.executive.SettingsUpdater;
-
 import skyview.request.SourceCoordinates;
-import skyview.util.Utilities;
 
 import nom.tam.fits.Fits;
-import nom.tam.fits.BasicHDU;
 import nom.tam.fits.Header;
 
 import nom.tam.util.ArrayFuncs;
-import nom.tam.util.BufferedFile;
 
 import java.util.regex.Pattern;
 import java.util.HashMap;
@@ -57,15 +48,15 @@ import static org.apache.commons.math3.util.FastMath.*;
  *  The field keys are not case sensitive but the values may be.
  *  <p>  <b> Valid field keys include:
  * <dl>
- * <dt> Lon <dd> The longitude of the center of the output image
+ * <dt> lon <dd> The longitude of the center of the output image
  *               in the coordinate system selected.  Note that the
  *               default coordinate system is J2000, so the longitude is the right ascension.
  *               The value is specified in decimal degrees.
- * <dt> Lat <dd> The latitude of the center of the output image in the coordinate system selected.
- *               J2000 is the default coordinate system, so by default Lat corresponds to declination.
+ * <dt> lat <dd> The latitude of the center of the output image in the coordinate system selected.
+ *               J2000 is the default coordinate system, so by default lat corresponds to declination.
  *               The value is specified in decimal degrees.
- * <dt> Position <dd> The comma separated longitude and latitude.  If Position and Lon/Lat are specified
- *               then the values specified in Lon/Lat override those in position.
+ * <dt> Position <dd> The comma separated longitude and latitude.  If Position and lon/lat are specified
+ *               then the values specified in lon/lat override those in position.
  * <dt> CopyWCS <dd> An existing FITS file may be used to define the
  *               WCS to be used for the output.  If this argument
  *               is specified any other argument that specifies
@@ -108,13 +99,13 @@ import static org.apache.commons.math3.util.FastMath.*;
  *              <li> Clip: A flux conserving exact area resampler where output pixels 
  *                   serve as clipping windows on the input image.
  *              </ul>
- * <dt> Scale: <dd> The size of the output pixels in degrees.  If the pixels are square only
+ * <dt> scale: <dd> The size of the output pixels in degrees.  If the pixels are square only
  *              a single values is given. Non-square pixels can be specified
- *              as Scale=xsize,ysize.
+ *              as scale=xsize,ysize.
  * <dt> Size:   <dd> The size of the entire image in degrees.
- * <dt> Pixels: <dd> The number of output pixels along an edge.
+ * <dt> pixels: <dd> The number of output pixels along an edge.
  *              If the output image is not square this can be
- *              specified as Pixels=xPixels,yPixels
+ *              specified as pixels=xPixels,yPixels
  * <dt> Rotation: <dd> A rotation in the output plane to be applied to the data (in decimal degrees)
  * <dt> Survey: <dd> The survey from which the output image is to be created.  More than
  *              one survey can be specified as survey1,survey2,survey3,...
@@ -269,9 +260,9 @@ public class Imager {
 	    Settings.addArgs(args);
 	    im.run();
 	}
-	if (!Settings.has("imagej")  && !Settings.has("noexit")) {
-	    System.exit(0);
-	}
+//	if (!Settings.has("imagej")  && !Settings.has("noexit")) {
+//	    System.exit(0);
+//	}
     }
     
     public static String getVersion() {
@@ -283,8 +274,8 @@ public class Imager {
      *  elements needed for running the code.
      */
     public Imager() {
-	if (Settings.get("surveyfinder") == null) {
-	    Settings.put("surveyfinder", "XMLSurveyFinder");
+	if (Settings.get(Key.surveyfinder) == null) {
+	    Settings.put(Key.surveyfinder, "XMLSurveyFinder");
 	}
 	lastImager = this;
     }
@@ -292,9 +283,9 @@ public class Imager {
     
     /** Cleanup cache files if needed */
     private void cleanCache() {
-	if (Settings.get("purgecache") != null) {
+	if (Settings.get(Key.purgecache) != null) {
 	    // Delete any cached files
-	    String cacheFiles = Settings.get("_cachedfile");
+	    String cacheFiles = Settings.get(Key._cachedfile);
 	    if (cacheFiles != null) {
 		String[] files = comma.split(cacheFiles);
 		for (String file: files) {
@@ -378,10 +369,10 @@ public class Imager {
 	}
 	SurveyFinder finder;
 	finder = (SurveyFinder) skyview.util.Utilities.newInstance(
-			              Settings.get("surveyfinder"),
+			              Settings.get(Key.surveyfinder),
 				      "skyview.survey");
 	if (finder == null) {
-	    System.err.println("Error creating SurveyFinder: "+Settings.get("surveyfinder"));
+	    System.err.println("Error creating SurveyFinder: "+Settings.get(Key.surveyfinder));
 	    return;
 	}
 	
@@ -405,7 +396,7 @@ public class Imager {
     }
     
     public void checkUpdateSettings()  {
-	String[] updateClasses = Settings.getArray("settingsupdaters");
+	String[] updateClasses = Settings.getArray(Key.SettingsUpdaters);
 	for (int i=0; i<updateClasses.length; i += 1) {
 	    try {
 		SettingsUpdater su = (SettingsUpdater) skyview.util.Utilities.newInstance(updateClasses[i], "skyview.executive");
@@ -417,7 +408,7 @@ public class Imager {
     }
 
     public boolean init() throws Exception {
-	String[] files = Settings.getArray("settings");
+	String[] files = Settings.getArray(Key.settings);
 	for (int i=0; i<files.length; i += 1) {
 	    if (files[i].equals("-")) {
 		Settings.readFile(
@@ -432,22 +423,22 @@ public class Imager {
 	// at the Settings before we begin processing?
 	checkUpdateSettings();
 	
-	if (Settings.get("survey") == null  && Settings.get("contour") == null) {
+	if (Settings.get(Key.survey) == null  && Settings.get(Key.contour) == null) {
 	    System.err.println("No survey specified");
 	    return false;
 	    
-	} else if (!Settings.has("position") && 
-		   (Settings.get("lon") == null || Settings.get("lat") == null)  &&
-		   (!Settings.has("copywcs"))) {
+	} else if (!Settings.has(Key.position) &&
+		   (Settings.get(Key.lon) == null || Settings.get(Key.lat) == null)  &&
+		   (!Settings.has(Key.CopyWCS))) {
 	    System.err.println("No position specified");
 	    return false;
 	}
 	if (finder == null) {
-	    finder = (SurveyFinder) skyview.util.Utilities.newInstance(Settings.get("surveyfinder"), "skyview.survey");
+	    finder = (SurveyFinder) skyview.util.Utilities.newInstance(Settings.get(Key.surveyfinder), "skyview.survey");
 	}
 	
-	if (!Settings.has("output")) {
-	    Settings.put("output","output");
+	if (!Settings.has(Key.output)) {
+	    Settings.put(Key.output,"output");
 	}
 	return true;
     }
@@ -458,8 +449,8 @@ public class Imager {
 	    return;
 	}
 	System.err.println("Imager starting v"+version+".");
-	String[] survs  = Settings.getArray("survey");
-	String output   = Settings.get("output");
+	String[] survs  = Settings.getArray(Key.survey);
+	String output   = Settings.get(Key.output);
 	    
 	int count = 1;
 	for (String surv: survs) {
@@ -468,7 +459,7 @@ public class Imager {
 	    }
 	    try {
 		Settings.save();
-		Settings.put("_surveycount", ""+count);
+		Settings.put(Key._surveyCount, ""+count);
 		
 	        System.err.println("\nProcessing survey:"+surv);
 		processSurvey(surv);
@@ -476,12 +467,12 @@ public class Imager {
 		String scale = null;
 		// If the user has specified an RGB image, then the
 		// scale must be the same of all images.
-		if (count == 1  && Settings.has("rgb")  && Settings.has("scale")) {
-		    scale = Settings.get("scale");
+		if (count == 1  && Settings.has(Key.rgb)  && Settings.has(Key.scale)) {
+		    scale = Settings.get(Key.scale);
 		}
 		Settings.restore();
 		if (scale != null) {
-		    Settings.put("scale", scale);
+		    Settings.put(Key.scale, scale);
 		}
 	    }
 	    count += 1;
@@ -522,7 +513,7 @@ public class Imager {
 	if (parent.length() > 0 ) {
 	    path = parent + "/"+path;
 	}
-	Settings.put("output", path);
+	Settings.put(Key.output, path);
     }
     
     protected Survey loadSurvey(String surveyID) throws Exception {
@@ -548,25 +539,25 @@ public class Imager {
     protected WCS loadWCS() throws Exception {
 	
 	WCS wcs = null;
-	if (Settings.has("UseDSSWCS")) {
+	if (Settings.has(Key.UseDSSWCS)) {
 	    wcs.setPreferDSS(true);
 	}
 	
-	if (Settings.has("CopyWCS")) {
-	    wcs = copyWCS(Settings.get("CopyWCS"));
+	if (Settings.has(Key.CopyWCS)) {
+	    wcs = copyWCS(Settings.get(Key.CopyWCS));
 	    s   = wcs.getScaler();
 	    int[] axes = wcs.getHeaderNaxis();
 	    nx = axes[0];
 	    ny = axes[1];
 		
 	} else {
-	    if (Settings.get("Pixels") != null  && Settings.get("Pixels").length() > 0) {
-	        String[] pix = comma.split(Settings.get("Pixels"));
+	    if (Settings.get(Key.pixels) != null  && Settings.get(Key.pixels).length() > 0) {
+	        String[] pix = comma.split(Settings.get(Key.pixels));
 		try {
 	            nx       = Integer.parseInt(pix[0].trim());
 		} catch (Exception e) {
-		    Settings.put("errormsg", "Invalid pixels setting:"+Settings.get("pixels"));
-		    throw new Exception("Invalid pixels setting:"+Settings.get("Pixels"));
+		    Settings.put(Key.ErrorMsg, "Invalid pixels setting:"+Settings.get(Key.pixels));
+		    throw new Exception("Invalid pixels setting:"+Settings.get(Key.pixels));
 		}
 		    
 		  
@@ -575,8 +566,8 @@ public class Imager {
 		    try {
 	                ny      = Integer.parseInt(pix[1].trim());
 		    } catch (Exception e) {
-		        Settings.put("errormsg", "Invalid pixels setting:"+Settings.get("pixels"));
-		        throw new Exception("Invalid pixels setting:"+Settings.get("Pixels"));
+		        Settings.put(Key.ErrorMsg, "Invalid pixels setting:"+Settings.get(Key.pixels));
+		        throw new Exception("Invalid pixels setting:"+Settings.get(Key.pixels));
 		    }
 	        } else {
 	            ny      = nx;
@@ -588,23 +579,23 @@ public class Imager {
 	    wcs = specifyWCS(nx, ny);
 	}
 	Header h = new Header();
-	wcs.updateHeader(h, getScaler(), 
-			 new double[]{getLon(), getLat()}, 
-			 Settings.get("Projection"), 
-	                 Settings.get("Coordinates")
+	wcs.updateHeader(h, getScaler(),
+			 new double[]{getLon(), getLat()},
+			 Settings.get(Key.projection),
+	                 Settings.get(Key.coordinates)
 			);
 	
 	// Save the key WCS parameters for possible further use.
-	Settings.put("_CRPIX1", h.getDoubleValue("CRPIX1")+"");
-	Settings.put("_CRPIX2", h.getDoubleValue("CRPIX2")+"");
-	Settings.put("_CRVAL1", h.getDoubleValue("CRVAL1")+"");
-	Settings.put("_CRVAL2", h.getDoubleValue("CRVAL2")+"");
-	Settings.put("_CDELT1", h.getDoubleValue("CDELT1")+"");
-	Settings.put("_CDELT2", h.getDoubleValue("CDELT2")+"");
-	Settings.put("_CD1_1", h.getDoubleValue("CD1_1")+"");
-	Settings.put("_CD1_2", h.getDoubleValue("CD1_2")+"");
-	Settings.put("_CD2_1", h.getDoubleValue("CD2_1")+"");
-	Settings.put("_CD2_2", h.getDoubleValue("CD2_2")+"");
+	Settings.put(Key._CRPIX1, h.getDoubleValue("CRPIX1")+"");
+	Settings.put(Key._CRPIX2, h.getDoubleValue("CRPIX2")+"");
+	Settings.put(Key._CRVAL1, h.getDoubleValue("CRVAL1")+"");
+	Settings.put(Key._CRVAL2, h.getDoubleValue("CRVAL2")+"");
+	Settings.put(Key._CDELT1, h.getDoubleValue("CDELT1")+"");
+	Settings.put(Key._CDELT2, h.getDoubleValue("CDELT2")+"");
+	Settings.put(Key._CD1_1, h.getDoubleValue("CD1_1")+"");
+	Settings.put(Key._CD1_2, h.getDoubleValue("CD1_2")+"");
+	Settings.put(Key._CD2_1, h.getDoubleValue("CD2_1")+"");
+	Settings.put(Key._CD2_2, h.getDoubleValue("CD2_2")+"");
 
 	return wcs;
     }
@@ -642,9 +633,9 @@ public class Imager {
 	}
 	Image[]  cand  = surv.getImages(pos, maxSize);
         //--- If no candidates there is no reason to continue
-        if (cand.length == 0  && !Settings.has("nullimages")) {
-	    String msg = "Survey: "+Settings.get("_currentSurvey")+" No candidate images were found in the region.  Position may be outside the coverage area.";
-	    Settings.put("ErrorMsg", msg);
+        if (cand.length == 0  && !Settings.has(Key.NullImages)) {
+	    String msg = "Survey: "+Settings.get(Key._currentSurvey)+" No candidate images were found in the region.  Position may be outside the coverage area.";
+	    Settings.put(Key.ErrorMsg, msg);
 	    System.err.println("  No candidate images.  Processing of this survey is completed.");
 	    // No output image.
 	    output = null;
@@ -655,23 +646,23 @@ public class Imager {
     }
     
     protected void loadSamplers() throws Exception {
-	String sampling = Settings.get("Sampler");
+	String sampling = Settings.get(Key.sampler);
 	
 	// Get the appropriate sampler
 	samp  = Sampler.factory(sampling);
 	
         // Do we need to worry about sampling in the third dimension? 
-        if (Settings.get("Ebins") != null) {
+        if (Settings.get(Key.Ebins) != null) {
 	    dsamp = new DepthSampler(bin0, dBin, nz);
 	}
     }
     
     protected int[] reuseMatch(String surveyID) {
-	if (match != null  && !Settings.has("subset") && Settings.get("GeometryTwin") != null) {
+	if (match != null  && !Settings.has(Key.subset) && Settings.get(Key.GeometryTwin) != null) {
 	    // Note that we're assuming that we process twins sequentially.
 	    String primary = "(^|.*,)"+lastSurvey+"($|,.*)"; 
 	    
-	    if (Pattern.compile(primary, Pattern.CASE_INSENSITIVE).matcher(Settings.get("GeometryTwin")).find()) {
+	    if (Pattern.compile(primary, Pattern.CASE_INSENSITIVE).matcher(Settings.get(Key.GeometryTwin)).find()) {
 		System.err.println("  Reusing geometry match from:"+lastSurvey);
 		return match;
 	    }
@@ -683,15 +674,15 @@ public class Imager {
 	
 	// If the previous survey has the same geometry as this one,
 	// we don't need to recompute the match array.
-	ImageFinder imFin = ImageFinder.factory(Settings.get("imagefinder"));
-	imFin.setStrict(Settings.has("StrictGeometry"));
+	ImageFinder imFin = ImageFinder.factory(Settings.get(Key.ImageFinder));
+	imFin.setStrict(Settings.has(Key.StrictGeometry));
 	match = imFin.findImages(cand, output);
 	lastSurvey = surveyID;
 		
 	if (match == null) {
             System.err.println("  No matches found for requested region");
-	    if (!Settings.has("NullImages")) {
-	        Settings.put("ErrorMsg", "No images in FOV");
+	    if (!Settings.has(Key.NullImages)) {
+	        Settings.put(Key.ErrorMsg, "No images in FOV");
 	        output = null;
 	    } else {
 	        match = new int[output.getWidth()*output.getHeight()];
@@ -702,7 +693,7 @@ public class Imager {
 	return match;
     }
     
-    protected void doProcess(String type) throws Exception {
+    protected void doProcess(Key type) throws Exception {
 	
 	String[] procNames = Settings.getArray(type);
 	for (int i=0; i<procNames.length; i += 1) {
@@ -737,10 +728,10 @@ public class Imager {
 	    
     /** Process a particular survey. */
     public void processSurvey(String surveyID) throws Exception {
-        Settings.put("_currentSurvey", surveyID);
+        Settings.put(Key._currentSurvey, surveyID);
 	output = loadAndProcessSurvey(surveyID);
 	postprocessSurvey();
-	if (match != null && output != null  && !Settings.has("nofits")) {
+	if (match != null && output != null  && !Settings.has(Key.nofits)) {
 	   createFitsFile();
 	}
     }
@@ -784,12 +775,12 @@ public class Imager {
 	//  subset images.
 	Image[] subsets  = new Image[]{prime};
 	
-	if (Settings.has("subset")) {
+	if (Settings.has(Key.subset)) {
 	    int tileX = 1024;
 	    int tileY = 1024;
 	    try {
-		tileX = Integer.parseInt(Settings.get("SubsetX", "1024"));
-		tileY = Integer.parseInt(Settings.get("SubsetX", "1024"));
+		tileX = Integer.parseInt(Settings.get(Key.SubsetX, "1024"));
+		tileY = Integer.parseInt(Settings.get(Key.SubsetX, "1024"));
 	    } catch (Exception e){
 		// Ignore
 	    }
@@ -802,23 +793,23 @@ public class Imager {
 		System.err.println("  Processing subset tile:"+tileCount+" of "+subsets.length);
 	    }
 	    output = img;
-	    if (Settings.get("Mosaicker") == null) {
-		Settings.put("Mosaicker", "skyview.process.Mosaicker");
+	    if (Settings.get(Key.Mosaicker) == null) {
+		Settings.put(Key.Mosaicker, "skyview.process.Mosaicker");
 	    }
-	    Processor mos = (Processor) Class.forName(Settings.get("Mosaicker")).newInstance();
+	    Processor mos = (Processor) Class.forName(Settings.get(Key.Mosaicker)).newInstance();
 	    processes.add(mos);
 	
 	    // Reuse the previous geometry?
 	    match        = reuseMatch(surveyID);
 	
 	    if (match == null &&
-	       (cand != null && cand.length > 0) || Settings.has("NullImages")) {
+	       (cand != null && cand.length > 0) || Settings.has(Key.NullImages)) {
 	        loadMatch(surveyID);
 	    }
 	
 	    if (match != null) {
 	        loadSamplers();
-	        doProcess("Preprocessor");
+	        doProcess(Key.Preprocessor);
 		mos.process(cand, output, match, samp, dsamp);
 	    }
 	}
@@ -838,8 +829,8 @@ public class Imager {
 
 	// Do we have any postprocesing? (Maybe even if the image failed)
 	// Use lastMatch rather than match, since match may have been consumed by the mosaicker.
-	doProcess("Deedger");
-	doProcess("Postprocessor");
+	doProcess(Key.Deedger);
+	doProcess(Key.Postprocessor);
 	cleanCache();
         dsamp = null;
     }
@@ -847,23 +838,23 @@ public class Imager {
     /** Parse a request for sampling in the energy dimension */
     private void parseEbins() {
 	
-	if (!Settings.has("Ebins")) {
+	if (!Settings.has(Key.Ebins)) {
 	    return;
 	}
 	
 	// Should be Ebins=bin0,dBin,nBin
-	String[] tokens = comma.split(Settings.get("Ebins"));
+	String[] tokens = comma.split(Settings.get(Key.Ebins));
 	
 	if (tokens.length != 3) {
 	    throw new Error("Invalid energy bin setting:"+
-		Settings.get("Ebins"));
+		Settings.get(Key.Ebins));
 	}
 	this.bin0 = Double.parseDouble(tokens[0]);
 	this.dBin = Double.parseDouble(tokens[1]);
 	this.nz   = Integer.parseInt(tokens[2]);
 	if (nz < 0 || bin0 < 0  || dBin < 0) {
 	    throw new Error("Invalid energy bin setting:"+
-		Settings.get("Ebins"));
+		Settings.get(Key.Ebins));
 	}
     }
     
@@ -879,7 +870,7 @@ public class Imager {
             return;
         }
 
-        if (Settings.get("float") != null) {
+        if (Settings.get(Key.float_) != null) {
 	    data = nom.tam.util.ArrayFuncs.convertArray(data, float.class);
         }
 	
@@ -900,7 +891,7 @@ public class Imager {
 	
         Header h = new Header();
 	h.addValue("SIMPLE", true, "Written by SkyView "+new java.util.Date());
-	if (Settings.has("float")) {
+	if (Settings.has(Key.float_)) {
 	    h.addValue("BITPIX", -32, "4 byte floating point");
 	} else {
 	    h.addValue("BITPIX", -64, "8 byte floating point");
@@ -916,13 +907,13 @@ public class Imager {
 	    h.addValue("NAXIS3", nz, "Depth of image");
 	}
 	
-	if (Settings.has("copywcs")) {
+	if (Settings.has(Key.CopyWCS)) {
 	    wcs.copyToHeader(h);
 	} else {
             wcs.updateHeader(h, scaler, 
 			 new double[]{getLon(), getLat()}, 
-			 Settings.get("Projection"), 
-	                 Settings.get("Coordinates")
+			 Settings.get(Key.projection),
+	                 Settings.get(Key.coordinates)
 			);
 	}
        
@@ -933,12 +924,12 @@ public class Imager {
 	h.insertHistory("");
 	h.insertHistory(" Settings used in processing:");
 	h.insertHistory("");
-	String[] keys = Settings.getKeys();
+	Key[] keys = Settings.getKeys();
 
 	java.util.Arrays.sort(keys);
-	for(String key: keys) {
+	for(Key key: keys) {
 	    
-	    if (key.charAt(0) == '_' ) {
+	    if (key.name().charAt(0) == '_' ) {
 		continue;  // Skip internal communication settings.
 	    }
 	    
@@ -946,7 +937,7 @@ public class Imager {
 	    if (val == null) {
 		h.insertHistory(key + " is null");
 	    } else if (val.equals("1")) {
-		h.insertHistory(key);
+		h.insertHistory(key.name());
 	    } else {
 		h.insertHistory(key + " = " +val);
 	    }
@@ -965,7 +956,7 @@ public class Imager {
 	}
 	
         writeFits(h, data);
-	if (Settings.has("samp") ) {
+	if (Settings.has(Key.samp) ) {
 	    Samp.notifyFile();
 	}
     }
@@ -980,11 +971,11 @@ public class Imager {
 	java.io.OutputStream base;
        
 	String suffix="";
-	if (Settings.get("Compress") != null) {
+	if (Settings.get(Key.Compress) != null) {
 	    suffix = ".gz";
 	}
 	
-	String out = Settings.get("output");
+	String out = Settings.get(Key.output);
 	
 	// Writing to Standard out?
 	if (out.equals("-") || out.equalsIgnoreCase("stdout")) {
@@ -996,12 +987,12 @@ public class Imager {
 		out = out + ".fits";
 	    }
 	    out = out+suffix;
-	    Settings.put("output_fits", out);
+	    Settings.put(Key.output_fits, out);
 	    System.err.println("  Opening FITS file: "+out);
 	    base = new java.io.FileOutputStream(out);
 	}
 	
-	if (Settings.get("Compress") != null) {
+	if (Settings.get(Key.Compress) != null) {
 	    base = new java.util.zip.GZIPOutputStream(base);
 	}
 	
@@ -1025,54 +1016,54 @@ public class Imager {
 		
     private WCS specifyWCS(int nx, int ny) throws Exception {
 	
-	String csys     = Settings.get("Coordinates");
-	String proj     = Settings.get("Projection");
-	String equin    = Settings.get("Equinox");
+	String csys     = Settings.get(Key.coordinates);
+	String proj     = Settings.get(Key.projection);
+	String equin    = Settings.get(Key.equinox);
 	// The input position may be specified as 'position=ra,dec' or 
 	// 'lon=ra lat=dec'. The values are in the specified coordiante 
         // system (J2000 by default).
 
 	c = CoordinateSystem.factory(csys, equin);
 	if (c != null) {
-	    Settings.put("coordinates", c.getName());
+	    Settings.put(Key.coordinates, c.getName());
 	} else {
-	    System.err.println("Invalid coordinates:"+csys + " "+Settings.get("equinox"));
-	    Settings.put("errormsg", "Invalid coordinates or equinox:"+csys+" "+Settings.get("equinox"));
+	    System.err.println("Invalid coordinates:"+csys + " "+Settings.get(Key.equinox));
+	    Settings.put(Key.ErrorMsg, "Invalid coordinates or equinox:"+csys+" "+Settings.get(Key.equinox));
 	    return null;
 	}
 	
 	csys = c.getName();
 
 	double[] posn = null;
-	if (Settings.get("Position") != null) {
+	if (Settings.get(Key.position) != null) {
 	 
             SourceCoordinates sc=new SourceCoordinates(
-	      Settings.get("position"),  csys,
+	      Settings.get(Key.position),  csys,
 	      Double.parseDouble(equin),
-	      Settings.get("resolver")
+	      Settings.get(Key.resolver)
 	    );
 	
             sc.convertToCoords();
 	    Position ps = sc.getPosition();
 	    if (ps == null) {
-		throw new Exception("Unable to recognize target/position: "+Settings.get("position"));
+		throw new Exception("Unable to recognize target/position: "+Settings.get(Key.position));
 	    }
 	    posn = ps.getCoordinates(csys);
-            Settings.put("ReqXPos", ""+posn[0]);
-            Settings.put("ReqYPos", ""+posn[1]);
+            Settings.put(Key.ReqXPos, ""+posn[0]);
+            Settings.put(Key.ReqYPos, ""+posn[1]);
 	    
-	} else if (Settings.has("Lon") && Settings.has("Lat")) {
-	    SourceCoordinates sc = SourceCoordinates.factory(Settings.get("lon"),
-						     Settings.get("lat"),
-						     Settings.get("coordinates"));
+	} else if (Settings.has(Key.lon) && Settings.has(Key.lat)) {
+	    SourceCoordinates sc = SourceCoordinates.factory(Settings.get(Key.lon),
+						     Settings.get(Key.lat),
+						     Settings.get(Key.coordinates));
 	    if (sc == null) {
-		System.err.println("Invalid coordinates:"+Settings.get("lon")+", "+Settings.get("lat")+" in "+Settings.get("coordinates"));
+		System.err.println("Invalid coordinates:"+Settings.get(Key.lon)+", "+Settings.get(Key.lat)+" in "+Settings.get(Key.coordinates));
 	        return null;
 	    }
-            Settings.put("ReqXPos", Settings.get("lon"));
-            Settings.put("ReqYPos", Settings.get("lat"));
+            Settings.put(Key.ReqXPos, Settings.get(Key.lon));
+            Settings.put(Key.ReqYPos, Settings.get(Key.lat));
 	    posn = sc.getPosition().getCoordinates(csys);
-	    Settings.put("position", Settings.get("lon")+", "+Settings.get("lat"));
+	    Settings.put(Key.position, Settings.get(Key.lon)+", "+Settings.get(Key.lat));
 	} else {
 	    System.err.println("Error: No position specified");
 	    return null;
@@ -1093,7 +1084,7 @@ public class Imager {
 	// by the survey even if the user doesn't specify it
 	// so we'd never see the user specified size.
 	
-	String sz = Settings.get("Size");
+	String sz = Settings.get(Key.size);
 	if (sz != null  && sz.length() > 0 && !sz.toLowerCase().equals("default") ) {
 	    String[] sizes = comma.split(sz);
 	    try {
@@ -1105,12 +1096,12 @@ public class Imager {
 	        xscale = xsize/nx;
 	        yscale = ysize/ny;
 	    } catch (Exception e) {
-		Settings.put("errormsg", "Invalid size setting:"+sz);
+		Settings.put(Key.ErrorMsg, "Invalid size setting:"+sz);
 		throw new Exception("Invalid size setting:"+sz);
 	    }
 						      
-	} else  if (Settings.get("Scale") != null) {
-	    String[] scales = comma.split(Settings.get("Scale"));
+	} else  if (Settings.get(Key.scale) != null) {
+	    String[] scales = comma.split(Settings.get(Key.scale));
 	
 	    xscale   = Double.parseDouble(scales[0]);
 	
@@ -1124,7 +1115,7 @@ public class Imager {
 		xscale = 1/3600.;
 		yscale = xscale;
 	}
-	Settings.put("size", xscale*nx+","+yscale*ny);
+	Settings.put(Key.size, xscale*nx+","+yscale*ny);
 	    
 
 	double[] center = Projection.fixedPoint(proj);
@@ -1133,19 +1124,19 @@ public class Imager {
 	
 	    // Does the user want a non-standard center for
 	    // a fixed projection?
-	    if (Settings.has("RefCoords")) {
-		String[] coords = Settings.getArray("RefCoords");
+	    if (Settings.has(Key.RefCoords)) {
+		String[] coords = Settings.getArray(Key.RefCoords);
 		try {
 		    double lon = toRadians(Double.parseDouble(coords[0]));
 		    double lat = toRadians(Double.parseDouble(coords[1]));
 		    if (lon != center[0] || lat != center[1]) {
 		        p.setReference(lon,lat);
-		        System.err.println("  Using non-standard image center:"+Settings.get("RefCoords"));
+		        System.err.println("  Using non-standard image center:"+Settings.get(Key.RefCoords));
 		    } else {
 			System.err.println("  New reference center matches original");
 		    }
 		} catch (Exception e) {
-		    System.err.println("Error resetting reference coordinates to:"+Settings.get("RefCoords")+
+		    System.err.println("Error resetting reference coordinates to:"+Settings.get(Key.RefCoords)+
 				       "\nProcessing continues  with defaults.");
 		}
 	    }
@@ -1175,7 +1166,7 @@ public class Imager {
         }	
 	
 	
-	String  rot = Settings.get("rotation");
+	String  rot = Settings.get(Key.rotation);
 	
 	if (rot != null  && rot.length() > 0) {
 	    double angle;
@@ -1189,10 +1180,10 @@ public class Imager {
 	    s = rScale.add(s);
 	}
 	
-	if (Settings.has("offset")) {
+	if (Settings.has(Key.offset)) {
 	    double[] deltas = new double[2];
 	    try {
-		String[] offsets = Settings.getArray("offset");
+		String[] offsets = Settings.getArray(Key.offset);
 		if (offsets.length == 2) {
 		    deltas[0] = -Double.parseDouble(offsets[0]);
 		    deltas[1] = -Double.parseDouble(offsets[1]);
@@ -1204,7 +1195,7 @@ public class Imager {
 		s = s.add(translate);
 		
 	    } catch (Exception e) {
-		System.err.println("Error parsing/applying offset:"+Settings.get("Offset"));
+		System.err.println("Error parsing/applying offset:"+Settings.get(Key.offset));
 	    }
 	}
 	return new WCS(c, p, s);

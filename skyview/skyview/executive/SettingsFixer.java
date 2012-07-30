@@ -11,8 +11,8 @@ public class SettingsFixer implements SettingsUpdater {
 	// Handle the smoothing argument and translate to a class
 	//  to a smoothing postprocessor.
 	
-	if (Settings.has("smooth")  && Settings.get("smooth").length() > 0) {
-	    String[] upd = Settings.getArray("postprocessor");
+	if (Settings.has(Key.smooth)  && Settings.get(Key.smooth).length() > 0) {
+	    String[] upd = Settings.getArray(Key.Postprocessor);
 	    String cname = "skyview.data.BoxSmoother";
 	    boolean found = false;
 	    for (int i=0; i<upd.length; i += 1) {
@@ -23,10 +23,10 @@ public class SettingsFixer implements SettingsUpdater {
 	    }
 	    if (!found) {
 	        // Put smooth before other postprocessors.
-	        if (Settings.has("postprocessor")) {
-		    Settings.put("postprocessor", cname+","+Settings.get("postprocessor"));
+	        if (Settings.has(Key.Postprocessor)) {
+		    Settings.put(Key.Postprocessor, cname+","+Settings.get(Key.Postprocessor));
 	        } else {
-	            Settings.put("postprocessor", cname);
+	            Settings.put(Key.Postprocessor, cname);
 	        }
 	    }
 	}
@@ -34,9 +34,9 @@ public class SettingsFixer implements SettingsUpdater {
 	// Handle a catalog request by generating a preprocessor
 	// the will initiate the query and a postprocessor that
 	// will use the results.
-	if (Settings.has("catalog")) {
+	if (Settings.has(Key.catalog)) {
 	    
-	    String[] pres = Settings.getArray("preprocessor");
+	    String[] pres = Settings.getArray(Key.Preprocessor);
 	    String   preclass = "skyview.vo.CatalogProcessor";
 	    
 	    boolean found = false;
@@ -46,12 +46,12 @@ public class SettingsFixer implements SettingsUpdater {
 		}
 	    }
 	    if (!found) {
-	        Settings.add("preprocessor",  preclass);
+	        Settings.add(Key.Preprocessor,  preclass);
 	    }
 	    
 	    String   postclass = "skyview.vo.CatalogPostProcessor";
 	    
-	    String[] posts = Settings.getArray("postprocessor");
+	    String[] posts = Settings.getArray(Key.Postprocessor);
 	    found = false;
 	    for (int i=0; i<posts.length; i += 1) {
 		if (posts.equals(postclass)) {
@@ -59,37 +59,37 @@ public class SettingsFixer implements SettingsUpdater {
 		}
 	    }
 	    if (!found) {
-	        Settings.add("postprocessor",  postclass);
+	        Settings.add(Key.Postprocessor,  postclass);
 	    }
 	}
       
 	// If the user has requested graphic content, then they shouldn't
 	// have to say they want a graphic image.
-	if ( Settings.has("invert") || Settings.has("grid") ||
-	     Settings.has("lut")    || Settings.has("scaling") ||
-	     Settings.has("rgb")    || Settings.has("quicklook") ||
-	     Settings.has("contour") ||
-	     Settings.has("imagej")) {
-	    Settings.add("postprocessor", "skyview.ij.IJProcessor");
-	    if (!Settings.has("quicklook") && !Settings.has("imagej")) {
-		Settings.add("quicklook", "jpg");
+	if ( Settings.has(Key.invert) || Settings.has(Key.grid) ||
+	     Settings.has(Key.lut)    || Settings.has(Key.scaling) ||
+	     Settings.has(Key.rgb)    || Settings.has(Key.quicklook) ||
+	     Settings.has(Key.contour) ||
+	     Settings.has(Key.imagej)) {
+	    Settings.add(Key.Postprocessor, "skyview.ij.IJProcessor");
+	    if (!Settings.has(Key.quicklook) && !Settings.has(Key.imagej)) {
+		Settings.add(Key.quicklook, "jpg");
 	    }
         }
 	
 	// Set JPEGs as the default quicklook format.
-	if (Settings.has("quicklook")) {
-	    String ql = Settings.get("quicklook");
+	if (Settings.has(Key.quicklook)) {
+	    String ql = Settings.get(Key.quicklook);
 	    if (ql == null || ql.length() == 0) {
-		Settings.put("quicklook", "jpeg");
+		Settings.put(Key.quicklook, "jpeg");
 	    }
 	}
 	
 	// If the user has requested the AddingMosaicker, then
 	// they should use the null image finder.
-	if (Settings.has("mosaicker")) {
-	    String mos = Settings.get("mosaicker");
+	if (Settings.has(Key.Mosaicker)) {
+	    String mos = Settings.get(Key.Mosaicker);
 	    if (mos.indexOf ("AddingMosaicker") >= 0) {
-		Settings.put("ImageFinder", "Bypass");
+		Settings.put(Key.ImageFinder, "Bypass");
 	    }
 	}
     }

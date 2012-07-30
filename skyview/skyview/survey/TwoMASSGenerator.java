@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.survey.Image;
 
@@ -27,14 +28,14 @@ public class TwoMASSGenerator implements ImageGenerator {
     /** Get images from a SIAP service */
     public void getImages(double ra, double dec, double size, java.util.ArrayList<String> spells)  {
 	
-	String urlString = Settings.get("SiapURL");
+	String urlString = Settings.get(Key.SiapURL);
 	
 	urlString       += "POS="+ra+","+dec+"&SIZE="+size;
     
 	int timeout      = 15 * 1000;  // Default to 15 seconds.
-	if (Settings.has("SIATimeout") ) {
+	if (Settings.has(Key.SIATimeout) ) {
 	    try {
-		timeout = Integer.parseInt(Settings.get("SIATimeout"))*1000;
+		timeout = Integer.parseInt(Settings.get(Key.SIATimeout))*1000;
 		
 	    } catch (Exception e) {
 	    }
@@ -96,12 +97,12 @@ public class TwoMASSGenerator implements ImageGenerator {
 	private java.util.HashMap<String, Integer> fields = new java.util.HashMap<String, Integer>();
 	private java.util.ArrayList<String> values = new java.util.ArrayList<String>();
 	
-	private String proj           = Settings.get("SIAPProjection");
-	private String csys           = Settings.get("SIAPCoordinates");
-	private String naxis          = Settings.get("SIAPNaxis");
-	private String scaling        = Settings.get("SIAPScaling");
-	private String filterValue    = Settings.get("SIAPFilterValue");
-	private String filterField    = Settings.get("SIAPFilterField");
+	private String proj           = Settings.get(Key.SIAPProjection);
+	private String csys           = Settings.get(Key.SIAPCoordinates);
+	private String naxis          = Settings.get(Key.SIAPNaxis);
+	private String scaling        = Settings.get(Key.SIAPScaling);
+	private String filterValue    = Settings.get(Key.SIAPFilterValue);
+	private String filterField    = Settings.get(Key.SIAPFilterField);
 	
 	java.util.ArrayList<String> spells;
 	

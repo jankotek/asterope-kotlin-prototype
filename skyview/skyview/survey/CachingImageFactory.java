@@ -7,6 +7,7 @@ package skyview.survey;
  *  will have an approximation to the WCS of the real image.
  */
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 import skyview.survey.Image;
@@ -27,11 +28,11 @@ public class CachingImageFactory implements ImageFactory {
     static private java.util.regex.Pattern comma = java.util.regex.Pattern.compile(",");
     public Image factory(String spell) {
 	
-	if (Settings.get("SpellSuffix") != null) {
-	    spell += Settings.get("SpellSuffix");
+	if (Settings.get(Key.SpellSuffix) != null) {
+	    spell += Settings.get(Key.SpellSuffix);
 	}
-	if (Settings.get("SpellPrefix") != null) {
-	    spell = Settings.get("SpellPrefix") + spell;
+	if (Settings.get(Key.SpellPrefix) != null) {
+	    spell = Settings.get(Key.SpellPrefix) + spell;
 	}
 	// The spell given to this parser is:
 	//   url,file,ra,dec,proj,csys,nx,ny,dx,dy
@@ -45,9 +46,9 @@ public class CachingImageFactory implements ImageFactory {
 
 	String[] tokens = comma.split(spell);
 	
-	if (Settings.has("LocalURL")) {
+	if (Settings.has(Key.LocalURL)) {
 	    String url = tokens[0];
-	    String[] fields = Settings.getArray("LocalURL");
+	    String[] fields = Settings.getArray(Key.LocalURL);
 	    if (url.startsWith(fields[0])) {
 		// Replace the beginning of the URL with the local file specification
 		url = fields[1]+url.substring(fields[0].length());
@@ -63,13 +64,13 @@ public class CachingImageFactory implements ImageFactory {
 	    
         String   file        = tokens[1];
 	
-	String   cacheString  = Settings.get("cache", DFT_CACHE);
+	String   cacheString  = Settings.get(Key.cache, DFT_CACHE);
 	String[] caches       = comma.split(cacheString);
 	
-	boolean  appendSurvey = Settings.has("SaveBySurvey");
+	boolean  appendSurvey = Settings.has(Key.SaveBySurvey);
 	String   subdir       =  null;
 	if (appendSurvey) {
-	    String[]   dirs = Settings.getArray("shortname");
+	    String[]   dirs = Settings.getArray(Key.shortname);
 	    if (dirs.length == 0) {
 	        appendSurvey = false;
 	    } else {
@@ -199,7 +200,7 @@ class URLRetrieverFactory implements ImageFactory {
     public Image factory(String spell) {
 	
 	String[] tokens = comma.split(spell);
-	String[] caches = Settings.getArray("Cache");
+	String[] caches = Settings.getArray(Key.cache);
 	if (caches.length == 0) {
 	    caches = new String[]{CachingImageFactory.DFT_CACHE};
 	}
@@ -229,8 +230,8 @@ class URLRetrieverFactory implements ImageFactory {
             skyview.survey.Util.getURL(tokens[0], tfile);
 	    File f = new File(tfile);
 	    f.renameTo(new File(file));
-	    if (Settings.get("purgecache") != null) {
-		Settings.add("_cachedfile", file);
+	    if (Settings.get(Key.purgecache) != null) {
+		Settings.add(Key._cachedfile, file);
 	    }
 	    return new FitsImage(file);
 	} catch (Exception e) {

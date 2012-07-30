@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.survey.Survey;
 import skyview.survey.Image;
 import skyview.survey.ImageFactory;
@@ -101,7 +102,7 @@ public class XMLSurvey implements Survey {
 		
 		// Don't override settings that the user has specified.
 		if (s.length()> 0) {
-		    Settings.suggest(qName, s);
+		    Settings.suggest(Key.valueOfIgnoreCase(qName), s);
 		}
 	    }
 	    
@@ -147,11 +148,11 @@ public class XMLSurvey implements Survey {
 	
 	private void updatePosition() {
 	    try {
-	        double[] coords = pos.getCoordinates(Settings.get("SurveyCoordinateSystem"));
+	        double[] coords = pos.getCoordinates(Settings.get(Key.SurveyCoordinateSystem));
 	        ra     = coords[0];
 	        dec    = coords[1];
 	    } catch (Exception e ) {
-		System.err.println("Error with SurveyCoordinateSystem!"+Settings.get("SurveyCoordinateSystem"));
+		System.err.println("Error with SurveyCoordinateSystem!"+Settings.get(Key.SurveyCoordinateSystem));
 		throw new Error(e);
 	    }
 	}
@@ -187,7 +188,7 @@ public class XMLSurvey implements Survey {
 		    // for mosaicking.
 		    
 		    if (firstImage) {
-			surveySize = Double.parseDouble(Settings.get("ImageSize"));
+			surveySize = Double.parseDouble(Settings.get(Key.ImageSize));
 			firstImage = false;
 		    }
 		    // Could cause problems if filenames have white space in them.
@@ -228,7 +229,7 @@ public class XMLSurvey implements Survey {
 		    // Everything else goes into the Settings.  However
 		    // unlike elements in the <Settings> area, we don't
 		    // defer to what's already there, we replace it.
-		    Settings.put(qName, s);
+		    Settings.put(Key.valueOfIgnoreCase(qName), s);
 		    // Following Images are in the given coordinate system
 		    if (qName.toLowerCase().equals("surveycoordinatesystem")) {
 			updatePosition();
@@ -388,10 +389,10 @@ public class XMLSurvey implements Survey {
 	boolean needImages = true;
 	
 	if (
-	  Settings.has("MaxRequestSize") && 
-	  Settings.has("LargeImage") && 
-	  Double.parseDouble(Settings.get("MaxRequestSize")) < size) {
-	    String[] fields = Settings.getArray("LargeImage");
+	  Settings.has(Key.MaxRequestSize) &&
+	  Settings.has(Key.LargeImage) &&
+	  Double.parseDouble(Settings.get(Key.MaxRequestSize)) < size) {
+	    String[] fields = Settings.getArray(Key.LargeImage);
 	    for (String fld: fields) {
 		images.add(fld);
 	    }
@@ -402,7 +403,7 @@ public class XMLSurvey implements Survey {
 	// the <Images> area.
         doParse(sp, new XMLSurvey.ImageFinderCallBack(pos, size, needImages));
 	
-	String imageFactory = Settings.get("ImageFactory");
+	String imageFactory = Settings.get(Key.ImageFactory);
 	
 	if (images.size() == 0) {
 	    return new Image[0];
@@ -443,7 +444,7 @@ public class XMLSurvey implements Survey {
 	    // This should fill images with the strings for any images we want.
             doParse(sp, new XMLSurvey.SettingsCallBack());
          } catch(Exception e) {
-	    throw new Error("Error updating header when reading file:"+xmlFile+"\n"+e);
+	    throw new Error("Error updating header when reading file:"+xmlFile+"\n",e);
         }
     }
     

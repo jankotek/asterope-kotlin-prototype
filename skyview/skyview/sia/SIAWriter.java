@@ -1,10 +1,9 @@
 package skyview.sia;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.geometry.Sampler;
 import skyview.geometry.DepthSampler;
-import skyview.geometry.Converter;
-import skyview.geometry.TransformationException;
 
 import skyview.executive.Settings;
 
@@ -37,12 +36,12 @@ public class SIAWriter implements skyview.process.Processor {
     public void process(Image[] input, Image output, int[] osource, 
 		        Sampler samp, DepthSampler dSampler)  {
 	
-	String survey   = Settings.get("_currentSurvey");
-	String[] pos    = Settings.getArray("POS");
-	String[] pixels = Settings.getArray("Pixels");
-	String[] size   = Settings.getArray("Size");
+	String survey   = Settings.get(Key._currentSurvey);
+	String[] pos    = Settings.getArray(Key.pos);
+	String[] pixels = Settings.getArray(Key.pixels);
+	String[] size   = Settings.getArray(Key.size);
 	String quicklook= SIA.getSIA().quicklook();
-	String[] scale  = Settings.getArray("scale");
+	String[] scale  = Settings.getArray(Key.scale);
 	
 	if (scale.length > 0) {
 	  try {
@@ -52,14 +51,14 @@ public class SIAWriter implements skyview.process.Processor {
 	    double small = 5;
 	    double xsize  = Double.parseDouble(size[0]);
 	    
-	    if (Settings.has("small")) {
-		small = Double.parseDouble(Settings.get("small"));
+	    if (Settings.has(Key.small)) {
+		small = Double.parseDouble(Settings.get(Key.small));
 		if (small < 0) {
 		    small = 0;
 		}
 	    }
-	    if (Settings.has("big")) {
-		big   = Double.parseDouble(Settings.get("big"));
+	    if (Settings.has(Key.big)) {
+		big   = Double.parseDouble(Settings.get(Key.big));
 	    }
 	    
 	    if (xsize/xscale < small) {
@@ -90,15 +89,15 @@ public class SIAWriter implements skyview.process.Processor {
     }
     
     String getURL(String survey) {
-	String url  = Settings.get("SIABase");
+	String url  = Settings.get(Key.SIABase);
 	
-	url += "position="+encode(Settings.get("position"));
+	url += "position="+encode(Settings.get(Key.position));
 	url += "&survey="+encode(survey);
-	url += "&pixels="+encode(Settings.get("pixels"));
-	url += "&sampler="+encode(Settings.get("sampler"));
-	url += "&size="+encode(Settings.get("size"));
-	url += "&projection="+encode(Settings.get("projection"));
-	url += "&coordinates="+Settings.get("coordinates");
+	url += "&pixels="+encode(Settings.get(Key.pixels));
+	url += "&sampler="+encode(Settings.get(Key.sampler));
+	url += "&size="+encode(Settings.get(Key.size));
+	url += "&projection="+encode(Settings.get(Key.projection));
+	url += "&coordinates="+Settings.get(Key.coordinates);
 	
 	return url;
     }

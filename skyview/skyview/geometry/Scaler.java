@@ -59,7 +59,7 @@ public class Scaler extends Transformer<Vector2D, Vector2D> implements skyview.C
 	return "General Affine Transformation for 2-d points";
     }
     
-    /** Scale a single point where the user supplies the output.
+    /** scale a single point where the user supplies the output.
      * @param x The input point (should be double[2])
      * @param y The output point (should be double[2])
      */

@@ -1,9 +1,8 @@
 package skyview.executive;
 
 
+import java.util.*;
 import java.util.regex.Pattern;
-import java.util.HashMap;
-import java.util.Stack;
 
 /** This class defines a singleton where SkyView preferences/settings
  *  Testchange...
@@ -19,10 +18,10 @@ import java.util.Stack;
 public class Settings {
 
     /** The hashmap storing the settings */
-    private static HashMap<String,String> single = new HashMap<String,String>();
+    private static HashMap<Key,String> single = new HashMap<Key,String>();
     
     /** A stack of saved versions of the settings. */
-    private static Stack<HashMap<String,String>> backup = new Stack<HashMap<String,String>>();
+    private static Stack<HashMap<Key,String>> backup = new Stack<HashMap<Key,String>>();
     
     /** Used to split the hashmap */
     private static Pattern comma = Pattern.compile(",");
@@ -105,7 +104,7 @@ public class Settings {
 			continue;
 		    }
 		}
-		put(parse[0], val);
+		put(Key.valueOfIgnoreCase(parse[0]), val);
 	    }
 	} catch (Exception e) {
 	    System.err.println("Exception caught parsing settings:\n"+e);
@@ -132,10 +131,10 @@ public class Settings {
 	    
 	    if (tokens.length == 2) {
 		String key = tokens[0];
-		put(key, tokens[1]);
+		put(Key.valueOfIgnoreCase(key), tokens[1]);
 		
 	    } else {
-		put(arg, "1");
+		put(Key.valueOfIgnoreCase(arg), "1");
 	    }
 	}
     }
@@ -145,15 +144,15 @@ public class Settings {
     }
     
     /** Get a value corresponding to the key */
-    public static String get(String key) {
+    public static String get(Key key) {
 	if (key == null) {
 	    return null;
 	}
-	return  single.get(key.toLowerCase());
+	return  single.get(key);
     }
     
     /** Get a values corresponding to a key or the default */
-    public static String get(String key, String dft) {
+    public static String get(Key key, String dft) {
 	String gt = get(key);
 	if (gt == null) {
 	    return dft;
@@ -165,7 +164,7 @@ public class Settings {
     /** Get the values corresponding to a key as an array of strings.  Returns
       * null rather than a 0 length array if the value is not set.
       */
-    public static String[] getArray(String key) {
+    public static String[] getArray(Key key) {
 	String gt = get(key);
 	if (gt == null) {
 	    return new String[0];
@@ -179,13 +178,12 @@ public class Settings {
      *  or if the Setting is already set (unless it is set to the
      *  special value "default")
      */
-    public static void suggest(String key, String value) {
-	if (Settings.has(key)  && !"default".equals(Settings.get(key).toLowerCase())) {
+    public static void suggest(Key key, String value) {
+	if (Settings.has(key)  && !"default".equalsIgnoreCase(Settings.get(key))) {
 	    return;
 	}
-	if (Settings.has("_nullvalues")) {
-	    key = key.toLowerCase();
-	    String[] keys = Settings.getArray("_nullvalues");
+	if (Settings.has(Key._nullvalues)) {
+	    String[] keys = Settings.getArray(Key._nullvalues);
 	    for (String nullKey: keys) {
 		if (nullKey.equals(key)) {
 		    return;
@@ -196,14 +194,15 @@ public class Settings {
     }
     
     /** Save a key and value */
-    public static void put(String key, String value) {
-	
-	key = key.toLowerCase();
+    public static void put(Key key, String value) {
+
+    if(key == null) throw new IllegalArgumentException("null key");
+
 	if (value == null) {
 	    value = "1";
 	}
 	if (value.equals("null")) {
-	    Settings.add("_nullvalues", key);
+	    Settings.add(Key._nullvalues, key.name()); //TODO key was put as value here, not sure what it is it for
 	    single.remove(key);
 	    return;
 	}
@@ -221,13 +220,13 @@ public class Settings {
     /** Save the current state of the settings for a later restoration */
     public static void save() {
 	backup.push(single);
-	single = (HashMap<String,String>) single.clone();
+	single = (HashMap<Key,String>) single.clone();
     }
     
     /** Add a setting to a list -- but only if it is
      *  not already in the list.
      */
-    public static void add(String key, String value) {
+    public static void add(Key key, String value) {
 	
 	// If we try to add a null it's OK if it's the only
 	// value, but we can't add it to a list sensibly.
@@ -260,13 +259,13 @@ public class Settings {
     }
     
     /** Check if the given key has been set */
-    public static boolean has(String key) {
-	return single.containsKey(key.toLowerCase());
+    public static boolean has(Key key) {
+	return single.containsKey(key);
     }
     
     /** Return the array of keys in the current settings */
-    public static String[] getKeys() {
-	return single.keySet().toArray(new String[0]);
+    public static Key[] getKeys() {
+	return single.keySet().toArray(new Key[0]);
     }
     
     /** Restore a previously saved state. */
@@ -280,9 +279,9 @@ public class Settings {
     }
     
     /** Give a copy of the current settings and pop the stack */
-    public static HashMap<String, String> pop() {
+    public static HashMap<Key, String> pop() {
 	if (backup.size() > 0) {
-	    HashMap<String,String> curr = single;
+	    HashMap<Key,String> curr = single;
 	    restore();
 	    return curr;
 	} else {
@@ -291,8 +290,24 @@ public class Settings {
 	}
     }
     
-    public static void push(HashMap<String,String> top) {
+    public static void push(HashMap<Key,String> top) {
 	save();
 	single = top;
+    }
+
+
+    /** print current settings, used for debugging*/
+    public static void printSettings(){
+        List keys = new ArrayList();
+        for(Key k:single.keySet()){
+            keys.add(k.name().toLowerCase());
+        }
+
+        Collections.sort(keys);
+        System.out.println("Skyview settings:");
+        for(Object k: keys){
+            Key key = Key.valueOfIgnoreCase((String)k);
+            System.out.println("   "+key+" = "+single.get(key));
+        }
     }
 }

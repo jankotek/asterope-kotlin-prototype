@@ -1,8 +1,10 @@
 package skyview.sia;
 
 import net.ivoa.util.CGI;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.executive.Imager;
+import sun.security.krb5.internal.crypto.KeyUsage;
 
 import java.util.HashMap;
 
@@ -53,12 +55,12 @@ public class SIA {
     
     private String getSurvey() {
 	
-	String want = Settings.get("survey");
+	String want = Settings.get(Key.survey);
 	if (want == null) {
-	    return Settings.get("DefaultSIASurveys");
+	    return Settings.get(Key.DefaultSIASurveys);
 	} else {
-	    if (Settings.has(want)) {
-		return Settings.get(want);
+	    if (Settings.has(Key.valueOfIgnoreCase(want))) {
+		return Settings.get(Key.valueOfIgnoreCase(want));
 	    } else {
 		return want;
 	    }
@@ -94,16 +96,16 @@ public class SIA {
     }
     
     private void getGeometry() {
-	String[] pos = Settings.getArray("pos");
+	String[] pos = Settings.getArray(Key.pos);
 	if (pos.length != 2) {
-	    error("POS not specified or incorrectly formatted:"+Settings.get("pos"));
+	    error("POS not specified or incorrectly formatted:"+Settings.get(Key.pos));
 	}
 	try {
 	    double ra   = Double.parseDouble(pos[0].trim());
 	    double dec  = Double.parseDouble(pos[1].trim());
-	    String[] sz = Settings.getArray("size");
+	    String[] sz = Settings.getArray(Key.size);
 	    if (sz.length < 1 || sz.length > 2) {
-		error("Invalid string in size:"+Settings.get("size"));
+		error("Invalid string in size:"+Settings.get(Key.size));
 	    }
 	    double sizex = Double.parseDouble(sz[0]);
 	    if (sz.length == 2) {
@@ -112,14 +114,14 @@ public class SIA {
 		sizey = sizex;
 	    }
 	} catch (Exception e) {
-	    error("Error parsing POS or SIZE:"+Settings.get("pos")+ " :: "+Settings.get("size"));
+	    error("Error parsing POS or SIZE:"+Settings.get(Key.pos)+ " :: "+Settings.get(Key.size));
 	}
 	
 	proj    = getProjection();
-	Settings.put("projection", proj);
+	Settings.put(Key.projection, proj);
 	csys    = getFrame();
 	equinox = getEquinox();
-	Settings.put("equinox", ""+equinox);
+	Settings.put(Key.equinox, ""+equinox);
 	
         int[] axes = getNaxes();
 	naxisx = axes[0];
@@ -130,8 +132,8 @@ public class SIA {
     
     int[] getNaxes() {
 	
-	if (Settings.has("NAXIS")) {
-	    String[] ax = Settings.getArray("NAXIS");
+	if (Settings.has(Key.NAXIS)) {
+	    String[] ax = Settings.getArray(Key.NAXIS);
 	    try {
 		int nx = Integer.parseInt(ax[0].trim());
 		int ny;
@@ -150,8 +152,8 @@ public class SIA {
 		
     
     String getProjection() {
-	if (Settings.has("proj")) {
-	    String set  = Settings.get("proj");
+	if (Settings.has(Key.proj)) {
+	    String set  = Settings.get(Key.proj);
 	    if (set.length() >= 3) {
 	        String xset = set.substring(0,1).toUpperCase() +
 		             set.substring(1,3).toLowerCase();
@@ -169,8 +171,8 @@ public class SIA {
     }
     
     String getFrame() {
-	if (Settings.has("cframe")) {
-	    String frame = Settings.get("cframe").toUpperCase().trim();
+	if (Settings.has(Key.cframe)) {
+	    String frame = Settings.get(Key.cframe).toUpperCase().trim();
 	    if (frame.equals("ICRS")) {
 		return "ICRS";
 	    } else if (frame.equals("FK4")) {
@@ -183,14 +185,14 @@ public class SIA {
 		return "E";
 	    }
 	} else {
-	    Settings.put("cframe", "FK5");
+	    Settings.put(Key.cframe, "FK5");
 	}
 	return "J";
     }
     
     String getInterpolation() {
-	if (Settings.has("Interpolation")) {
-	    String interp = Settings.get("Interpolation").toUpperCase();
+	if (Settings.has(Key.Interpolation)) {
+	    String interp = Settings.get(Key.Interpolation).toUpperCase();
 	    if (interp.equals("LI")) {
 		return "LI";
 	    } else if (interp.equals("NN")) {
@@ -207,9 +209,9 @@ public class SIA {
     }
 	    
     double getEquinox() {
-	if (Settings.has("equinox")) {
+	if (Settings.has(Key.equinox)) {
 	    try {
-		return Double.parseDouble(Settings.get("equinox"));
+		return Double.parseDouble(Settings.get(Key.equinox));
 	    } catch(Exception e) {
 		// Just ignore
 	    }
@@ -253,8 +255,8 @@ public class SIA {
 	        Matcher m = p.matcher(line);
 	        if (m.find()) {
 		    String gr = m.group(1);
-		    if (Settings.has(gr)) {
-		        line = m.replaceFirst("value=\""+Settings.get(gr)+"\" ");
+		    if (Settings.has(Key.valueOfIgnoreCase(gr))) {
+		        line = m.replaceFirst("value=\""+Settings.get(Key.valueOfIgnoreCase(gr))+"\" ");
 		    } else {
 		        line = m.replaceFirst("");
 		    }
@@ -300,14 +302,14 @@ public class SIA {
 	    for (String key: keys) {
 	        String[] values = params.values(key);
 	        for (String val: values) {
-		    Settings.put(key, val);
+		    Settings.put(Key.valueOfIgnoreCase(key), val);
 	        }
 	    }
 
 	    log ("Got args");
-	    String[] formats = Settings.getArray("format");
+	    String[] formats = Settings.getArray(Key.format);
 	    if (formats.length == 0) {
-		Settings.put("format", "Image/FITS,Image/JPEG");
+		Settings.put(Key.format, "Image/FITS,Image/JPEG");
 	    }
 	    
 	    for (int i=0; i<formats.length; i += 1) {
@@ -339,12 +341,12 @@ public class SIA {
 	
 	// Add the parameters than specify the output image
 	args.add("survey="+survey);
-	args.add("position="+Settings.get("pos"));
+	args.add("position="+Settings.get(Key.pos));
 	if (sizex != 0) {
-	    args.add("size="+Settings.get("size"));
+	    args.add("size="+Settings.get(Key.size));
 	}
 	args.add("pixels="  +  naxisx+","+naxisy);
-	Settings.put("pixels", naxisx+","+naxisy);
+	Settings.put(Key.pixels, naxisx+","+naxisy);
 	
 	if (sizex==0 && naxisx == 0) {
 	    error("Invalid defaults: cannot set both size and naxis to 0");
@@ -354,7 +356,7 @@ public class SIA {
 	args.add("coordinates="+csys);
 	args.add("equinox="+equinox);
 	args.add("sampler="+interp);
-	Settings.put("sampler", interp);
+	Settings.put(Key.sampler, interp);
 	
 	log("Set settings");
 	

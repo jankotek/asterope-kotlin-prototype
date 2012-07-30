@@ -2,6 +2,7 @@ package skyview.process.expfinder;
 
 import nom.tam.fits.Header;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.survey.FitsImage;
 import skyview.executive.Settings;
@@ -26,11 +27,11 @@ public class ExposureFile implements skyview.process.ExposureFinder {
     
     
     public ExposureFile() {
-	if (Settings.has("ExposureFileMatch")) {
-	    expMatchStr = Settings.get("ExposureFileMatch");
+	if (Settings.has(Key.ExposureFileMatch)) {
+	    expMatchStr = Settings.get(Key.ExposureFileMatch);
 	}
-	if (Settings.has("ExposureFileGen")) {
-	    expOutStr = Settings.get("ExposureFileGen");
+	if (Settings.has(Key.ExposureFileGen)) {
+	    expOutStr = Settings.get(Key.ExposureFileGen);
 	}
     }
     

@@ -1,6 +1,7 @@
 package skyview.request;
 
 import net.ivoa.util.CGI;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.executive.Imager;
 import java.util.Calendar;
@@ -69,7 +70,9 @@ public class CGIInitiator {
 
             //--- Read and validate parameters 
 	    for (String key: keys) {
+
 	        String[] values = params.values(key);
+
 		boolean first = true;
 
 	        for (String val: values) {
@@ -89,11 +92,11 @@ public class CGIInitiator {
                     }
 
 		    if (first) {
-			Settings.put(key, val);
-			first = false;
-                        delim=",";
+			    Settings.put(Key.valueOfIgnoreCase(key), val);
+			    first = false;
+                 delim=",";
 		    } else {
-		        Settings.add(key, val);
+		        Settings.add(Key.valueOfIgnoreCase(key), val);
 		    }
 	        }
 	    }
@@ -109,8 +112,8 @@ public class CGIInitiator {
 	
 	    String id = "";
 	
-	    if (Settings.has("outputRoot")) {
-	        id += Settings.get("outputRoot");
+	    if (Settings.has(Key.outputRoot)) {
+	        id += Settings.get(Key.outputRoot);
 		if (!id.endsWith("/")) {
 		    id += "/";
 		}
@@ -120,8 +123,8 @@ public class CGIInitiator {
             boolean html     = true;
 	    String  retVal   = null;
 	    // Did the user ask for something other than an HTML output?
-	    if (Settings.has("return")) {
-		retVal = Settings.get("return").toLowerCase();
+	    if (Settings.has(Key.return_)) {
+		retVal = Settings.get(Key.return_).toLowerCase();
 		if (!retVal.equals("simple")) {
 		    html = false;
 		}
@@ -129,35 +132,35 @@ public class CGIInitiator {
 	        if (retVal.equals("gif") || retVal.equals("jpeg") ||
 		    retVal.equals("png") || retVal.equals("jpg")  ||
 		    retVal.equals("tiff") || retVal.equals("bmp")) {
-		    Settings.put("quicklook", retVal);
+		    Settings.put(Key.quicklook, retVal);
 	        }
 				
 		if (retVal.equals("filename")) {
-		    Settings.put("quicklook", "gif");
+		    Settings.put(Key.quicklook, "gif");
 		}
 		if (retVal.equals("compfits")) {
-		    Settings.put("compressed", "1");
+		    Settings.put(Key.compressed, "1");
 		}
 		// Use 4 byte reals.
-		Settings.suggest("float", "");
+		Settings.suggest(Key.float_, "");
 	    }
 	
 	    //HTMLWriter writer = null;
 	    if (html) {
 	        // Add the HTML writer postprocessor.
 	        String htmlWriter;
-	        if (Settings.has("rgb")) {
-	            htmlWriter = Settings.get("RGBWriter");
+	        if (Settings.has(Key.rgb)) {
+	            htmlWriter = Settings.get(Key.RGBWriter);
 	        } else {
-	            htmlWriter = Settings.get("HTMLWriter");
+	            htmlWriter = Settings.get(Key.HTMLWriter);
 	        }
 	        if (htmlWriter == null) {
 	            htmlWriter = "skyview.request.HTMLWriter";
 	        }
-		Settings.add("PostProcessor", "skyview.ij.IJProcessor");
-	        Settings.add("PostProcessor", htmlWriter);
-                if (!Settings.has("Quicklook")) {
-	            Settings.put("Quicklook", "JPG");
+		Settings.add(Key.Postprocessor, "skyview.ij.IJProcessor");
+	        Settings.add(Key.Postprocessor, htmlWriter);
+                if (!Settings.has(Key.quicklook)) {
+	            Settings.put(Key.quicklook, "JPG");
 	        } 
 		
 	        writer = (HTMLWriter) Class.forName(htmlWriter).newInstance();
@@ -167,12 +170,12 @@ public class CGIInitiator {
 		wroteHeader  = true;
 	    }
 	
-	    if (Settings.has("catlog") || Settings.has("catalog")) {
-	        Settings.put("catalogFile", id+".cat");
+	    if (Settings.has(Key.CATLOG) || Settings.has(Key.catalog)) {
+	        Settings.put(Key.catalogFile, id+".cat");
 	    }
 	
-	    Settings.put("output", id);
-	    Settings.put("NOEXIT", "");
+	    Settings.put(Key.output, id);
+	    Settings.put(Key.NOEXIT, "");
 	
 	    Imager.main(new String[]{"Dummy"});
 	    
@@ -239,7 +242,7 @@ public class CGIInitiator {
 	} else if (type.equals("compfits") || type.equals("fits") || 
                    type.equals("batch")) {
 	    id += ".fits";
-	    if (Settings.has("compressed")) {
+	    if (Settings.has(Key.compressed)) {
 		id += ".gz";
 	    }
 	    copyToOutput(id, "fits");
@@ -261,7 +264,7 @@ public class CGIInitiator {
 	
 	java.io.File f = new java.io.File(file);
 	if (!f.exists()) {
-	    file = Settings.get("NullImageDir")+"/nodata."+type;
+	    file = Settings.get(Key.NullImageDir)+"/nodata."+type;
 	}
 	System.out.println("Content-disposition: "+dispo+"; filename="+last);
 	

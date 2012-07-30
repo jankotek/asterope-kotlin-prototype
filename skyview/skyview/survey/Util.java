@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 public class Util {
@@ -32,9 +34,9 @@ public class Util {
     */
    public static void getURL(String url, String file) throws Exception {
        int timeout      = 1200000;  // Default to 15 seconds.
-	if (Settings.has("SIAImageTimeout") ) {
+	if (Settings.has(Key.SIAImageTimeout) ) {
 	    try {
-		timeout = Integer.parseInt(Settings.get("SIAImageTimeout"));
+		timeout = Integer.parseInt(Settings.get(Key.SIAImageTimeout));
 		
 	    } catch (Exception e) {
 	    }

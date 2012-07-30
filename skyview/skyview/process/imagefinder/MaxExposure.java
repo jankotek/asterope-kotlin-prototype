@@ -1,5 +1,6 @@
 package skyview.process.imagefinder;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.survey.FitsImage;
 import nom.tam.fits.Header;
@@ -26,7 +27,7 @@ public class MaxExposure extends RectRecurse {
 	
 	exposures = new double[input.length];
 	java.util.Arrays.fill(exposures, -1);
-	expKey = Settings.get("ExposureKeyword");
+	expKey = Settings.get(Key.ExposureKeyword);
 	return super.findImages(input, output);
     }
 	

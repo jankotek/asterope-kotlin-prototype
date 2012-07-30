@@ -33,7 +33,7 @@ public final class Car extends Projecter {
     
     /** Return a description of the component */
     public String getDescription() {
-	return "Transform from the celestial sphere to the plane described by Lon/Lat directly";
+	return "Transform from the celestial sphere to the plane described by lon/lat directly";
     }
     
     /** Get the inverse transformation */
@@ -118,7 +118,7 @@ public final class Car extends Projecter {
 	
         /** Return a description of the component */
         public String getDescription() {
-	    return "Transform from the Lat/Lon to the corresponding unit vector.";
+	    return "Transform from the lat/lon to the corresponding unit vector.";
 	}
 	
 	/** Get the inverse */

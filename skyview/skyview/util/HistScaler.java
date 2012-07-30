@@ -1,6 +1,6 @@
 package skyview.util;
 
-/** Scale an object linearly.
+/** scale an object linearly.
  */
 public class HistScaler extends Scaler {
     

@@ -2,7 +2,7 @@ package skyview.util;
 
 import nom.tam.util.ArrayFuncs;
 
-/** Scale an object.
+/** scale an object.
  */
 public abstract class Scaler {
     
@@ -59,7 +59,7 @@ public abstract class Scaler {
 	this.maxVal = maxVal;
     }
     
-    /** Scale an array assumed to be a double array of arbitrary
+    /** scale an array assumed to be a double array of arbitrary
       * dimensionality.
       */
     public Object scaleArray(Object array) {
@@ -118,7 +118,7 @@ public abstract class Scaler {
     /** Get ready for scaling in this particular instance. */
     protected abstract void prepareScaling(double[] array);
     
-    /** Scale a single number. */
+    /** scale a single number. */
     protected abstract byte scale(double val);
 }
 		      

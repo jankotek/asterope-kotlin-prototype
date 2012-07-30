@@ -1,5 +1,6 @@
 package skyview.vo;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 import java.io.BufferedInputStream;
@@ -65,8 +66,8 @@ public class ConeQuerier implements Runnable {
 	urlString    = URL;
 	this.tableID = id;
 	this.size    = -1;
-	if (Settings.has("CatalogColumns")) {
-	    addColNames = Settings.getArray("CatalogColumns");
+	if (Settings.has(Key.CatalogColumns)) {
+	    addColNames = Settings.getArray(Key.CatalogColumns);
 	    addCols     = new int[addColNames.length];
 	    java.util.Arrays.fill(addCols,-1);
 	    extraCols   = new ArrayList<String[]>();
@@ -388,12 +389,12 @@ public class ConeQuerier implements Runnable {
 	String xid = id.toLowerCase();
 	String baseURL;
 
-        if (Settings.has("Url."+xid)) {
-            baseURL = Settings.get("Url."+xid);
+        if (Settings.has(Key.valueOfIgnoreCase("Url."+xid))) {
+            baseURL = Settings.get(Key.valueOfIgnoreCase("Url."+xid));
 	} else if (xid.indexOf("/") > 0) {
-	    baseURL = Settings.get("Url.VizierBase")+id+"&";
+	    baseURL = Settings.get(Key.Url_VizierBase)+id+"&";
 	} else {
-	    baseURL = Settings.get("Url.HeasarcBase")+xid+"&";
+	    baseURL = Settings.get(Key.Url_HeasarcBase)+xid+"&";
 	}
 	return new ConeQuerier(baseURL, id, ra, dec, size);
     }

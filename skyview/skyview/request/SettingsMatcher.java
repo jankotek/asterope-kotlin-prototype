@@ -1,5 +1,6 @@
 package skyview.request;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -42,7 +43,7 @@ public class SettingsMatcher {
 	    return key;
 	}
 	
-        String val = Settings.get(key.substring(1));
+        String val = Settings.get(Key.valueOfIgnoreCase(key.substring(1)));
 	if (val != null) {
 	    return val;
 	} else {

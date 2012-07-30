@@ -9,31 +9,31 @@ public class BatchCompatibility implements skyview.executive.SettingsUpdater {
      */
     public void updateSettings() {
 	
-	if (Settings.has("file") ) {
-	    Settings.put("output", Settings.get("file"));
+	if (Settings.has(Key.file) ) {
+	    Settings.put(Key.output, Settings.get(Key.file));
         }
 	
-	if (Settings.has("vcoord") ) {
-	    Settings.put("position", Settings.get("vcoord"));
+	if (Settings.has(Key.vcoord) ) {
+	    Settings.put(Key.position, Settings.get(Key.vcoord));
 	    // This is the mandatory keyword that anyone using
 	    // the old interface would use.  We'll set the
 	    // code to use 4-byte reals, but someone can
 	    // say float=null to disable this.  This way
 	    // people using the old interface get 4-byte reals
 	    // as before.
-	    Settings.suggest("float", "true");
+	    Settings.suggest(Key.float_, "true");
 	}
 	
-	if (Settings.has("pixelx") && Settings.has("pixely") ) {
-	    Settings.put("pixels", Settings.get("pixelx")+","+
-            Settings.get("pixely"));
+	if (Settings.has(Key.pixelx) && Settings.has(Key.pixely) ) {
+	    Settings.put(Key.pixels, Settings.get(Key.pixelx)+","+
+            Settings.get(Key.pixely));
 	    
 	    // Note the in the old version a scalar sfactr was the
 	    // longer dimension and all pixels were square.
 	    // We reset sfactr as a tuple if nx != ny
-	    if (Settings.has("sfactr")  && 
-		   Settings.get("pixelx") != Settings.get("pixely")) { 
-		String[] flds = Settings.getArray("sfactr");
+	    if (Settings.has(Key.SFACTR)  &&
+		   Settings.get(Key.pixelx) != Settings.get(Key.pixely)) {
+		String[] flds = Settings.getArray(Key.SFACTR);
 		
 		if (flds.length == 1) {
 		    try {
@@ -41,18 +41,18 @@ public class BatchCompatibility implements skyview.executive.SettingsUpdater {
 			// don't need to worry about.
 			double size = -1;
 			try {
-			    size = Double.parseDouble(Settings.get("SFACTR"));
+			    size = Double.parseDouble(Settings.get(Key.SFACTR));
 			} catch (Exception e) {
 			    // Ignore it
 			}
 			if (size > 0) {
 			    // Recover as double so we don't need to worry about truncation.
-			    double nx   = Double.parseDouble(Settings.get("pixelx"));
-			    double ny   = Double.parseDouble(Settings.get("pixely"));
+			    double nx   = Double.parseDouble(Settings.get(Key.pixelx));
+			    double ny   = Double.parseDouble(Settings.get(Key.pixely));
 			    if (nx > ny) {
-			        Settings.put("SFACTR", size + "," +ny/nx*size);
+			        Settings.put(Key.SFACTR, size + "," +ny/nx*size);
 			    } else {
-			        Settings.put("SFACTR", nx/ny*size+","+size);
+			        Settings.put(Key.SFACTR, nx/ny*size+","+size);
 			    }
 			}
 		    } catch (Exception e) {
@@ -63,8 +63,8 @@ public class BatchCompatibility implements skyview.executive.SettingsUpdater {
 	    }
 	}
 	
-	if ( Settings.has("iscaln") ) {
-	    String scal = Settings.get("iscaln").toLowerCase();
+	if ( Settings.has(Key.iscaln) ) {
+	    String scal = Settings.get(Key.iscaln).toLowerCase();
 	    if (scal.startsWith("lo")) {
 		scal = "log";
 	    } else if (scal.startsWith("li")) {
@@ -74,105 +74,105 @@ public class BatchCompatibility implements skyview.executive.SettingsUpdater {
 	    } else {
 		scal = "log";
 	    }
-	    Settings.put("scaling", scal);
+	    Settings.put(Key.scaling, scal);
 	}
 	
-	if (Settings.has("imgree") && Settings.has("imredd") &&
-	    Settings.has("imblue")) {
-	    String surv = Settings.get("imredd") + "," + 
-	                  Settings.get("imgree") + "," +
-	                  Settings.get("imblue");
-	    Settings.put("survey", surv);
-	    Settings.put("RGB", "true");
+	if (Settings.has(Key.imgree) && Settings.has(Key.imredd) &&
+	    Settings.has(Key.imblue)) {
+	    String surv = Settings.get(Key.imredd) + "," +
+	                  Settings.get(Key.imgree) + "," +
+	                  Settings.get(Key.imblue);
+	    Settings.put(Key.survey, surv);
+	    Settings.put(Key.rgb, "true");
 	}
 	
-	if (Settings.has("sfactr") ) {
-	    Settings.put("size", Settings.get("sfactr"));
+	if (Settings.has(Key.SFACTR) ) {
+	    Settings.put(Key.size, Settings.get(Key.SFACTR));
 
 	}
 	
-	if (Settings.has("maproj")) {
-	    String proj = Settings.get("maproj").toLowerCase();
+	if (Settings.has(Key.maproj)) {
+	    String proj = Settings.get(Key.maproj).toLowerCase();
 	    if (proj.startsWith("gnom")) {
-		Settings.put("projection", "Tan");
+		Settings.put(Key.projection, "Tan");
 	    } else if (proj.startsWith("rect")) {
-		Settings.put("projection", "Car");
+		Settings.put(Key.projection, "Car");
 	    } else if (proj.startsWith("hamm")) {
-		Settings.put("projection", "Ait");
+		Settings.put(Key.projection, "Ait");
 	    } else if (proj.startsWith("orth")) {
-		Settings.put("projection", "Sin");
+		Settings.put(Key.projection, "Sin");
 	    } else if (proj.startsWith("zeni")) {
-		Settings.put("projection", "Zea");
+		Settings.put(Key.projection, "Zea");
 	    } else {
-		Settings.put("projection", Settings.get("maproj"));
+		Settings.put(Key.projection, Settings.get(Key.maproj));
 	    }
 	}
 	
-	if (Settings.has("resamp")) {
-	    String samp = Settings.get("resamp").toLowerCase();
+	if (Settings.has(Key.resamp)) {
+	    String samp = Settings.get(Key.resamp).toLowerCase();
 	    if (samp.startsWith("interp")) {
-		Settings.put("sampler", "LI");
+		Settings.put(Key.sampler, "LI");
 	    } else if (samp.startsWith("near")) {
-		Settings.put("sampler", "NN");
+		Settings.put(Key.sampler, "NN");
 	    } else if (samp.startsWith("tri")) {
-		Settings.put("sampler", "Clip");
+		Settings.put(Key.sampler, "Clip");
 	    } else {
-		Settings.put("sampler", Settings.get("resamp"));
+		Settings.put(Key.sampler, Settings.get(Key.resamp));
 	    }
 	}
 	
-	if (Settings.has("griddd")) {
-	    if (!Settings.get("griddd").toLowerCase().equals("no")) {
-	        if (!Settings.has("grid")) {
-		    Settings.put("grid", "1");
-		    Settings.put("gridlabels", "1");
+	if (Settings.has(Key.griddd)) {
+	    if (!Settings.get(Key.griddd).toLowerCase().equals("no")) {
+	        if (!Settings.has(Key.grid)) {
+		    Settings.put(Key.grid, "1");
+		    Settings.put(Key.GridLabels, "1");
 	        }
 	    }
 	}
 	
-	if (Settings.has("CATLOG")) {
-	    String[] catalogs = Settings.getArray("CATLOG");
+	if (Settings.has(Key.CATLOG)) {
+	    String[] catalogs = Settings.getArray(Key.CATLOG);
 	    String newCat   = "";
 	    String sep      = "";
 	    for (int i=0; i<catalogs.length; i += 1) {
 		newCat += sep + getCatalog(catalogs[i]); 
 		sep     = ",";
 	    }
-	    Settings.put("catalog", newCat);
+	    Settings.put(Key.catalog, newCat);
 	}
 				       
 		
 	
-	if (Settings.has("equinx") ) {
-	    Settings.put("equinox", Settings.get("equinx"));
+	if (Settings.has(Key.equinx) ) {
+	    Settings.put(Key.equinox, Settings.get(Key.equinx));
 	}
 	
-	if (Settings.has("scoord") ) {
-            String csys = Settings.get("scoord").toLowerCase();
+	if (Settings.has(Key.scoord) ) {
+            String csys = Settings.get(Key.scoord).toLowerCase();
 	    if (csys.startsWith("equa")) {
-	       Settings.put("coordinates", "J");
+	       Settings.put(Key.coordinates, "J");
 	    } else {
-	       Settings.put("coordinates", 
-		 Settings.get("scoord").substring(0,1));
+	       Settings.put(Key.coordinates,
+		 Settings.get(Key.scoord).substring(0,1));
 	    }
 
 	}
 	
-	if (Settings.has("return") && !Settings.has("quicklook")) {
-	    if (! Settings.get("return").toUpperCase().equals("FITS")) {
-	        Settings.put("quicklook", Settings.get("return"));
-		Settings.put("nofits", "");
+	if (Settings.has(Key.return_) && !Settings.has(Key.quicklook)) {
+	    if (! Settings.get(Key.return_).toUpperCase().equals("FITS")) {
+	        Settings.put(Key.quicklook, Settings.get(Key.return_));
+		Settings.put(Key.nofits, "");
 	    }
 	}
 	
 	// This assume the LUT files are available in the JAR
 	// (or that the user has put the colortables directly directly
 	// beneath the execution directory.
-	if (Settings.has("coltab")) {
-	    String lutFile = Settings.get("coltab").trim();
+	if (Settings.has(Key.coltab)) {
+	    String lutFile = Settings.get(Key.coltab).trim();
 	    lutFile = lutFile.replace(" ", "-");
 	    lutFile = "colortables/"+lutFile+".bin";
-	    Settings.put("lut", lutFile);
+	    Settings.put(Key.lut, lutFile);
 	}
     }
     

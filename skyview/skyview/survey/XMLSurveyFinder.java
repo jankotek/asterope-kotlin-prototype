@@ -20,6 +20,7 @@ package skyview.survey;
  *   
  */
 
+import skyview.executive.Key;
 import skyview.survey.XMLSurvey;
 import skyview.executive.Settings;
 
@@ -67,7 +68,7 @@ public class XMLSurveyFinder implements SurveyFinder {
     /** Get the surveys in the document root area */
     protected void getSurveysFromRoot() {
 	
-	String[] roots = Settings.getArray("xmlroot");
+	String[] roots = Settings.getArray(Key.xmlroot);
 	
         for (String root: roots) {
 	    File     f      = new File(root);
@@ -82,7 +83,7 @@ public class XMLSurveyFinder implements SurveyFinder {
     /** Get user specified surveys */
     protected void getSurveysFromUser() {
 	
-	String userSurveys= Settings.get("surveyxml");
+	String userSurveys= Settings.get(Key.surveyxml);
 	if (userSurveys != null) {
 	    
 	    Pattern comma    = Pattern.compile(",");
@@ -100,7 +101,7 @@ public class XMLSurveyFinder implements SurveyFinder {
 	
 	try {
 	    
-	    String manifest = Settings.get("surveymanifest");
+	    String manifest = Settings.get(Key.surveymanifest);
 	    if (manifest == null) {
 		manifest = defaultSurveyManifest;
 	    }

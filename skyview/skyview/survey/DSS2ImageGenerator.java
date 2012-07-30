@@ -1,6 +1,7 @@
 package skyview.survey;
 
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import static org.apache.commons.math3.util.FastMath.*;
 
@@ -9,10 +10,10 @@ public class DSS2ImageGenerator implements ImageGenerator {
     
     public void getImages(double ra, double dec, double size, java.util.ArrayList<String> list) {
 	
-	size       += Double.parseDouble(Settings.get("imagesize"));
+	size       += Double.parseDouble(Settings.get(Key.ImageSize));
 	
 	// This string is used to distinguish the various DSS2 surveys.
-	String dssPrefix = Settings.get("DSS2Prefix");
+	String dssPrefix = Settings.get(Key.DSS2Prefix);
 	if (dssPrefix == null) {
 	    dssPrefix = "";
 	}

@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.survey.Image;
 
@@ -22,7 +23,7 @@ public class SIAPGenerator implements ImageGenerator {
 
     /** Find the base URL for this SIAP service */
     protected String getBaseURL() {
-	return Settings.get("SiapURL");
+	return Settings.get(Key.SiapURL);
     }
     String filterField;
     String filterValue;
@@ -32,11 +33,11 @@ public class SIAPGenerator implements ImageGenerator {
     public void getImages(double ra, double dec, double size, java.util.ArrayList<String> spells)  {
 	
 	String urlString = getBaseURL();
-	filterField      = Settings.get("SIAPFilterField");
-	filterValue      = Settings.get("SIAPFilterValue");
+	filterField      = Settings.get(Key.SIAPFilterField);
+	filterValue      = Settings.get(Key.SIAPFilterValue);
 	filtering        = filterField != null && filterValue != null;
 	int timeout      = 15 * 1000;  // Default to 15 seconds.
-	if (Settings.has("SIATimeout") ) {
+	if (Settings.has(Key.SIATimeout) ) {
 	    try {
 		timeout = Integer.parseInt("SIATimeout")*1000;
 	    } catch (Exception e) {}
@@ -95,11 +96,11 @@ public class SIAPGenerator implements ImageGenerator {
 	private java.util.HashMap<String, Integer> fields = new java.util.HashMap<String, Integer>();
 	private java.util.ArrayList<String> values = new java.util.ArrayList<String>();
 	
-	private String proj    = Settings.get("SIAPProjection");
-	private String csys    = Settings.get("SIAPCoordinates");
-	private String naxis   = Settings.get("SIAPNaxis");
-	private String scaling = Settings.get("SIAPScaling");
-	private String maxImageString = Settings.get("SIAPMaxImages");
+	private String proj    = Settings.get(Key.SIAPProjection);
+	private String csys    = Settings.get(Key.SIAPCoordinates);
+	private String naxis   = Settings.get(Key.SIAPNaxis);
+	private String scaling = Settings.get(Key.SIAPScaling);
+	private String maxImageString = Settings.get(Key.SIAPMaxImages);
 	private int maxImages;
 	private int imageCount = 0;
 	
@@ -238,7 +239,7 @@ public class SIAPGenerator implements ImageGenerator {
                         csys = "Galactic";
                     }
                 }
-                // Probably should worry about Equinox field, but doesn't seem
+                // Probably should worry about equinox field, but doesn't seem
                 // to be used.
 		
 		String crval   = mashVal(getFieldValue("VOX:WCS_CoordRefValue"), invert, 2);

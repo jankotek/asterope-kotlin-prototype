@@ -1,5 +1,6 @@
 package skyview.process.imagefinder;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.Component;
 import skyview.geometry.Sampler;
@@ -54,8 +55,8 @@ public class Prefetcher implements skyview.process.Processor {
 	}
 	if (redo) {
 	    System.err.println("  Recalculating pixel source images.");
-	    ImageFinder imFin = ImageFinder.factory(Settings.get("imagefinder"));
-	    imFin.setStrict(Settings.has("StrictGeometry"));
+	    ImageFinder imFin = ImageFinder.factory(Settings.get(Key.ImageFinder));
+	    imFin.setStrict(Settings.has(Key.StrictGeometry));
 	    int[] newMatch = imFin.findImages(inputs, output);
 	    
 	    System.arraycopy(newMatch, 0, source, 0, source.length);

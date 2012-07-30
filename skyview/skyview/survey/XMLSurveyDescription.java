@@ -1,5 +1,6 @@
 package skyview.survey;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 import java.io.StringWriter;
@@ -71,7 +72,7 @@ public class XMLSurveyDescription {
     }
     
     public static void printDescription(String filename) throws Exception {
-	String xslt = Settings.get("DescriptionXSLT");
+	String xslt = Settings.get(Key.DescriptionXSLT);
 	if (xslt == null) {
 	    error("No description transformation file in settings");
 	}
@@ -114,8 +115,8 @@ public class XMLSurveyDescription {
 	}
 	// Print out any header file we have.
 	boolean wroteHeader = false;
-	if (Settings.has("SurveysHeader")) {
-	    String header = skyview.request.HTMLWriter.slurp(Settings.get("SurveysHeader"));
+	if (Settings.has(Key.SurveysHeader)) {
+	    String header = skyview.request.HTMLWriter.slurp(Settings.get(Key.SurveysHeader));
 	    if (header.length() > 10) { 
 		System.out.print(header);
 		wroteHeader = true;
@@ -133,8 +134,8 @@ public class XMLSurveyDescription {
 	    fileHash = processRegime(regime, fileHash);
 	}
 	processRemaining(fileHash);
-	if (Settings.has("SurveysTrailer")) {
-	    String trailer = skyview.request.HTMLWriter.slurp(Settings.get("SurveysTrailer"));
+	if (Settings.has(Key.SurveysTrailer)) {
+	    String trailer = skyview.request.HTMLWriter.slurp(Settings.get(Key.SurveysTrailer));
 	    System.out.print(trailer);
 	} else {
 	    printAllTrailer();

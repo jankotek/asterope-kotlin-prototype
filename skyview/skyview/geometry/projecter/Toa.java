@@ -1,5 +1,6 @@
 package skyview.geometry.projecter;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.geometry.Transformer;
 import skyview.geometry.Deprojecter;
@@ -145,9 +146,9 @@ public class Toa extends skyview.geometry.Projecter {
     private boolean diagonal;
     
     public Toa() {
-	if (Settings.has("ToastGrid")) {
+	if (Settings.has(Key.ToastGrid)) {
 	    
-	    String[] params = Settings.getArray("ToastGrid");
+	    String[] params = Settings.getArray(Key.ToastGrid);
 	    gridLevel = Integer.parseInt(params[0]);
 	    gridX     = Integer.parseInt(params[1]);
 	    gridY     = Integer.parseInt(params[2]);

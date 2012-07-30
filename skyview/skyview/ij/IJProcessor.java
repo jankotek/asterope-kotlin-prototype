@@ -1,6 +1,7 @@
 package skyview.ij;
 
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.executive.Settings;
 
@@ -125,7 +126,7 @@ public class IJProcessor implements skyview.process.Processor {
 	}
 	scale = scale.toLowerCase();
 	if ( (scale.equals("log") || scale.equals("sqrt")) &&
-	     !Settings.has("min")) {
+	     !Settings.has(Key.min)) {
 	    double zmin = 1.e20;
 	    double zmax = -1.e20;
 	    double[] data = output.getDataArray();
@@ -167,17 +168,17 @@ public class IJProcessor implements skyview.process.Processor {
         ip = new ByteProcessor(ip.createImage());
 	    new ContrastEnhancer().equalize(ip);
 	} else {
-	    if (Settings.has("min") && Settings.has("max")) {
+	    if (Settings.has(Key.min) && Settings.has(Key.max)) {
 		standardScale(scale);
 	    }
 	}
     }
     
-    private String getIndexedString(String field) {
-	if (Settings.get("_surveycount") == null ) {
+    private String getIndexedString(Key field) {
+	if (Settings.get(Key._surveyCount) == null ) {
 	    return Settings.get(field);
 	} else {
-	    int index = Integer.parseInt(Settings.get("_surveycount"));
+	    int index = Integer.parseInt(Settings.get(Key._surveyCount));
 	    String[] flds = Settings.getArray(field);
 	    if (flds == null || flds.length == 0) {
 		return null;
@@ -192,8 +193,8 @@ public class IJProcessor implements skyview.process.Processor {
      *  the actual pixel values.
      */
     private void standardScale(String scale) {
-	float mn = Float.parseFloat(getIndexedString("min"));
-	float mx = Float.parseFloat(getIndexedString("max"));
+	float mn = Float.parseFloat(getIndexedString(Key.min));
+	float mx = Float.parseFloat(getIndexedString(Key.max));
 	if (mx <= mn) {
 	    System.err.println("Scaling has Max < Min");
 	}
@@ -221,7 +222,7 @@ public class IJProcessor implements skyview.process.Processor {
 	if (catalog == null) {
 	    return;
 	}
-	boolean labels       = Settings.has("CatalogIDs");
+	boolean labels       = Settings.has(Key.CatalogIDs);
 	CatalogProcessor cp  = CatalogProcessor.getLastProcessor();
 	double[][] pixels    = cp.getPixels();
 	
@@ -245,7 +246,7 @@ public class IJProcessor implements skyview.process.Processor {
 	if (contourStr == null) {
 	    return;
 	}
-	String[] contours = Settings.getArray("contour");
+	String[] contours = Settings.getArray(Key.contour);
 	for (int i=0; i<contours.length; i += 1) {
 	    if (contours[i] == null || contours[i].length() == 0) {
 		continue;
@@ -258,7 +259,7 @@ public class IJProcessor implements skyview.process.Processor {
 	    String contourScale = "Log";
 	    double[] range = null;
 	    // Could we get data?
-	    if (survey.toLowerCase().equals(Settings.get("_currentSurvey").toLowerCase())) {
+	    if (survey.toLowerCase().equals(Settings.get(Key._currentSurvey).toLowerCase())) {
 		cntr.putImage(output);
 	    } else if (!cntr.getData(survey)) {
 		continue;
@@ -327,7 +328,7 @@ public class IJProcessor implements skyview.process.Processor {
 		    }
 	        }
 		
-	        if (Settings.has("GridLabels")) {
+	        if (Settings.has(Key.GridLabels)) {
 	            String[] labels    = grid.getLabels();
 		
 		    for (int i=0; i<labels.length; i += 1) {
@@ -377,9 +378,9 @@ public class IJProcessor implements skyview.process.Processor {
     private boolean processRGB(String rgbStr, String outStem, int index) {
 	if (rgbStr != null) {
 	    
-	    if (Settings.has("rgboffset")) {
+	    if (Settings.has(Key.rgboffset)) {
 		try {
-		    String[] offset = Settings.getArray("rgboffset");
+		    String[] offset = Settings.getArray(Key.rgboffset);
 		    if (offset.length > index) {
 			float off = Float.parseFloat(offset[index]);
 		        float[] pix = (float[])ip.getPixels();
@@ -389,13 +390,13 @@ public class IJProcessor implements skyview.process.Processor {
 			ip.setPixels(pix);
 		    }
 		} catch (Exception e) {
-		    System.err.println("  Unable to parse rgboffset:"+Settings.get("rgboffset"));
+		    System.err.println("  Unable to parse rgboffset:"+Settings.get(Key.rgboffset));
 		}
 	    }
 	    
-	    if (Settings.has("rgbscale")) {
+	    if (Settings.has(Key.rgbscale)) {
 		try {
-		    String[] scales = Settings.getArray("rgbscale");
+		    String[] scales = Settings.getArray(Key.rgbscale);
 		    if (scales.length > index) {
 			float scale = Float.parseFloat(scales[index]);
 			float[] pix = (float[])ip.getPixels();
@@ -405,13 +406,13 @@ public class IJProcessor implements skyview.process.Processor {
 			ip.setPixels(pix);
 		    }
 		} catch (Exception e) {
-		    System.err.println("  Unable to parse rgbscale:"+Settings.get("rgbscale"));
+		    System.err.println("  Unable to parse rgbscale:"+Settings.get(Key.rgbscale));
 		}
 	    }
 	    
 	    if (index < 3) {
 		
-	        String[] surveys = Settings.getArray("survey");
+	        String[] surveys = Settings.getArray(Key.survey);
 	        rgb[index]      = toBufferedImage(ip.createImage());
 		
 	        if (index == 2 || index == surveys.length-1) {
@@ -435,7 +436,7 @@ public class IJProcessor implements skyview.process.Processor {
 //		    ImageStack is   = rsm.mergeStacks(output.getWidth(), output.getHeight(), 1,
 //						    rgb[0], rgb[1], rgb[2], true);
 //		    ImagePlus imp   = new ImagePlus("rgb", is);
-		    if (Settings.has("quicklook") ) {
+		    if (Settings.has(Key.quicklook) ) {
 		        String filename = outStem.substring(0,outStem.length()-1)+"rgb.jpg";
                 try {
                     ImageIO.write(img, "jpg",new File(filename));
@@ -466,7 +467,7 @@ public class IJProcessor implements skyview.process.Processor {
 	    }
 	    ip.setColor(col.getRGB());
 	} else {
-	    System.err.println("  Unknown plot color specified:"+Settings.get("plotcolor"));
+	    System.err.println("  Unknown plot color specified:"+Settings.get(Key.plotcolor));
 	}
     }
     
@@ -501,20 +502,20 @@ public class IJProcessor implements skyview.process.Processor {
 	this.output  = output;
 	
 	setUserFont = false;
-	if (Settings.has("plotfontsize")) {
+	if (Settings.has(Key.plotfontsize)) {
 	    try {
 		if (userFont == null) {
-		    userFont = new Font("SansSerif", Font.PLAIN, Integer.parseInt(Settings.get("plotfontsize")));
+		    userFont = new Font("SansSerif", Font.PLAIN, Integer.parseInt(Settings.get(Key.plotfontsize)));
 	            setUserFont = true;
 		}
 	    } catch (Exception e) {
-		System.err.println("  Warning: Unable to set font to size "+Settings.get("plotfontsize"));
+		System.err.println("  Warning: Unable to set font to size "+Settings.get(Key.plotfontsize));
 	    }
 	}
 	
-	String out = Settings.get("output");
+	String out = Settings.get(Key.output);
 	
-	String indexStr = Settings.get("_surveycount");
+	String indexStr = Settings.get(Key._surveyCount);
 	// Note that the survey index is 1 based (so that we start with file1 rather than file0)
 	int index = 0;
 	if (indexStr == null) {
@@ -523,8 +524,8 @@ public class IJProcessor implements skyview.process.Processor {
 	    index = Integer.parseInt(indexStr) - 1;
 	}
 	
-	if (Settings.has("rgbsmooth")) {
-	    String[] smoothings = Settings.getArray("rgbsmooth");
+	if (Settings.has(Key.rgbsmooth)) {
+	    String[] smoothings = Settings.getArray(Key.rgbsmooth);
 	    if (smoothings.length >= index) {
 		img = imgSmooth(img, smoothings[index]);
 	    }
@@ -540,18 +541,18 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// First process things that actually change the pixel values.
 	// Here we need to treat the data as real.
-	processMin(getIndexedString("min"));
-	processMax(getIndexedString("max"));
+	processMin(getIndexedString(Key.min));
+	processMax(getIndexedString(Key.max));
 	
 	// Allow different scalings for different surveys
-	if (Settings.has("scaling")) {
+	if (Settings.has(Key.scaling)) {
 	    
 	    int scount = 1;
 	    try {
-		scount = Integer.parseInt(Settings.get("_surveycount"));
+		scount = Integer.parseInt(Settings.get(Key._surveyCount));
 	    } catch (Exception e) {}
 	    
-	    String[] sarr = Settings.getArray("scaling");
+	    String[] sarr = Settings.getArray(Key.scaling);
 	    if (sarr.length > 0) {
 	        processScale(sarr[(scount-1) % sarr.length]);
 	    } else {
@@ -567,16 +568,16 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// Now we're done with the pixels -- we play
 	// with the color tables.
-	processLUT(Settings.get("lut"));
+	processLUT(Settings.get(Key.lut));
 	
         // This one's easy enought to do here!
-	if (Settings.has("invert")) {
+	if (Settings.has(Key.invert)) {
 	    ip.invertLut();
 	}
 	
 	
-	if (Settings.has("plotcolor")) {
-	    setColor(Settings.get("plotcolor"));
+	if (Settings.has(Key.plotcolor)) {
+	    setColor(Settings.get(Key.plotcolor));
 	}
 	
 	// Set the font if the user specified it.
@@ -584,19 +585,19 @@ public class IJProcessor implements skyview.process.Processor {
 //    TODO set font
 //	    ip.setFont(userFont);
 	}
-	processContour(Settings.get("contour"));
-	processCatalog(Settings.get("catalog"));
-	processGrid(Settings.get("grid"));
+	processContour(Settings.get(Key.contour));
+	processCatalog(Settings.get(Key.catalog));
+	processGrid(Settings.get(Key.grid));
 	
 	
 	// Draw lines if needed.
-	if (Settings.has("Annotations") || Settings.has("Draw")  || Settings.has("DrawFile")) {
+	if (Settings.has(Key.Annotations) || Settings.has(Key.draw)  || Settings.has(Key.DrawFile)) {
 	    Drawer ld = new Drawer(this, nx, ny, output.getWCS());
 	    
 	    // Annotations are system specified and typically associated
 	    // with surveys.
-	    if (Settings.has("Annotations")) {
-	        for (String file: Settings.getArray("Annotations")) {
+	    if (Settings.has(Key.Annotations)) {
+	        for (String file: Settings.getArray(Key.Annotations)) {
 		    ld.reset();
 		    ld.drawFile(file);
 	        }	    
@@ -605,8 +606,8 @@ public class IJProcessor implements skyview.process.Processor {
 	    // Draw files are used specified.  User commands are drawn
 	    // before the Draw file (if any).  This allows the
 	    // user to do things like rotate the image.
-	    if (Settings.has("DrawFile")) {
-	        for (String file: Settings.getArray("DrawFile")) {
+	    if (Settings.has(Key.DrawFile)) {
+	        for (String file: Settings.getArray(Key.DrawFile)) {
 		    ld.reset();
 		    ld.drawCommands();
 		    ld.drawFile(file);
@@ -623,17 +624,17 @@ public class IJProcessor implements skyview.process.Processor {
 	
 	// This should be done after we add anything to the image
 	// It writes the output so we're done if we do this processing.
-	if (processRGB(Settings.get("rgb"), out, index)) {
+	if (processRGB(Settings.get(Key.rgb), out, index)) {
 	    return;
 	}
 	
 	// Time to write out the file.
-	if (Settings.has("quicklook")) {
+	if (Settings.has(Key.quicklook)) {
 	    writeFile(out, index);
 	}
 	
 	// Display the image.
-	if (Settings.has("imagej")) {
+	if (Settings.has(Key.imagej)) {
         throw new UnsupportedOperationException("imagej not supported");
 //	    String sname = Settings.getArray("survey")[index];
 //	    imp = new ImagePlus(sname, ip);
@@ -658,16 +659,16 @@ public class IJProcessor implements skyview.process.Processor {
     
     private void writeFile(String outStem, int index) {
 	
-	String    sname = Settings.getArray("survey")[index];
+	String    sname = Settings.getArray(Key.survey)[index];
 
     BufferedImage imp1 = toBufferedImage(ip.createImage());
 
 	
-	String format = Settings.get("quicklook");
+	String format = Settings.get(Key.quicklook);
 	if (format == null  || format.length() == 0) {
 	    // If the user specifies RGB but not a quicklook format
 	    // the they get only the RGB image.
-	    if (Settings.has("rgb")) {
+	    if (Settings.has(Key.rgb)) {
 		return;
 	    }
 	    format = "jpeg";
@@ -759,11 +760,11 @@ public class IJProcessor implements skyview.process.Processor {
     void drawSymbol(double x, double y, int symbol) {
 	
 	double scale = 1;
-	if (Settings.has("plotscale")) {
+	if (Settings.has(Key.plotscale)) {
 	    try {
-		scale = Double.parseDouble(Settings.get("plotscale"));
+		scale = Double.parseDouble(Settings.get(Key.plotscale));
 	    } catch (Exception e) {
-		System.err.println("  Warning: Unable to change plot scale to "+Settings.get("plotscale"));
+		System.err.println("  Warning: Unable to change plot scale to "+Settings.get(Key.plotscale));
 	    }
 	}
 	
@@ -854,7 +855,7 @@ public class IJProcessor implements skyview.process.Processor {
         image = new ImageIcon(image).getImage();
 
         // Determine if the image has transparent pixels; for this method's
-        // implementation, see Determining If an Image Has Transparent Pixels
+        // implementation, see Determining If an Image Has Transparent pixels
         boolean hasAlpha = false;
 
         // Create a buffered image with a format that's compatible with the screen

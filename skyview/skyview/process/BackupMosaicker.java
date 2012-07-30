@@ -1,6 +1,7 @@
 package skyview.process;
 
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 import skyview.survey.Image;
@@ -62,7 +63,7 @@ public class BackupMosaicker extends Mosaicker {
 	m.process(input, output, source, samp, dSampler);
 	
 	
-	String[] backups = Settings.getArray("BackupSurvey");
+	String[] backups = Settings.getArray(Key.BackupSurvey);
 	for (int i=0; i<backups.length; i += 1) {
 	    for (int j=0; j<data.length; j += 1) {
 		double datum = data[j];
@@ -83,7 +84,7 @@ public class BackupMosaicker extends Mosaicker {
 	    // A quick recapitulation of what is done in Imager.
 	    // Get the survey finder
 	    SurveyFinder finder = (SurveyFinder) 
-	      skyview.util.Utilities.newInstance(Settings.get("surveyfinder"),
+	      skyview.util.Utilities.newInstance(Settings.get(Key.surveyfinder),
 						 "skyview.survey");
 	
 	    // Get the survey
@@ -109,7 +110,7 @@ public class BackupMosaicker extends Mosaicker {
 	    Image[]  cand  = surv.getImages(pos, maxSize);
 	    
 	    // Get an image finder
-	    ImageFinder imFin = ImageFinder.factory(Settings.get("imagefinder"));
+	    ImageFinder imFin = ImageFinder.factory(Settings.get(Key.ImageFinder));
 	    
 	    // Find the images to be used.
 	    int[] match = imFin.findImages(cand, output);

@@ -1,8 +1,8 @@
 package skyview.request;
 
+import skyview.executive.Key;
 import skyview.geometry.Sampler;
 import skyview.geometry.DepthSampler;
-import skyview.geometry.Scaler;
 
 import skyview.process.Processor;
 import skyview.survey.Image;
@@ -22,14 +22,14 @@ public class HTMLWriter implements Processor {
 			Sampler samp, DepthSampler dpSamp) {
 	if (output == null) {
 	    System.out.println("<h2> Error processing survey: "+
-		Settings.get("name")+"</h2><p>"+
-	        "Error: "+Settings.get("ErrorMsg")+"<p><p>");
+		Settings.get(Key.name_)+"</h2><p>"+
+	        "Error: "+Settings.get(Key.ErrorMsg)+"<p><p>");
 	} else {
 	    updateSettings(output, samp);
 	    setSettings();
-	    printoutTemplate("SurveyTemplate");
-	    if (Settings.has("onlinetext")) {
-		String text = Settings.get("onlinetext");
+	    printoutTemplate(Key.SurveyTemplate);
+	    if (Settings.has(Key.onlinetext)) {
+		String text = Settings.get(Key.onlinetext);
 		if (text.length() > 0) {
 	            text = SettingsMatcher.replaceSettings(text);
 		}
@@ -47,15 +47,15 @@ public class HTMLWriter implements Processor {
     protected void setSettings() {
 	int index = 0;
 	try {
-	    index = Integer.parseInt(Settings.get("_surveycount"));
+	    index = Integer.parseInt(Settings.get(Key._surveyCount));
         } catch (Exception e) {}
 	
 	System.out.println("<script language='javascript'>");
 	System.out.println("x = new Object()");
 	System.out.println("surveySettings["+index+"] = x");
-	String[] keys = Settings.getKeys();
+	Key[] keys = Settings.getKeys();
 	java.util.Arrays.sort(keys);
-	for(String key: keys) {
+	for(Key key: keys) {
 	    String val = Settings.get(key);
 	    if (val != null) {
 	        val = val.replaceAll("'", "");
@@ -78,14 +78,14 @@ public class HTMLWriter implements Processor {
     public void writeHeader() {
 	
 	System.out.println("Content-type: text/html\n");
-	printoutTemplate("HeaderTemplate");
+	printoutTemplate(Key.HeaderTemplate);
     }
     
     public void writeFooter() {
-	printoutTemplate("FooterTemplate");
+	printoutTemplate(Key.FooterTemplate);
     }
     
-    protected void printoutTemplate(String fileSetting) {
+    protected void printoutTemplate(Key  fileSetting) {
 	String file = Settings.get(fileSetting);
 	if (file != null) {
 	    String content = slurp(file);
@@ -134,71 +134,71 @@ public class HTMLWriter implements Processor {
 	    }
 	}
 	
-	Settings.put("_ImageMin",    ""+min);
-	Settings.put("_ImageMax",    ""+max);
-	Settings.put("_ImageXPixel", ""+output.getWidth());
-	Settings.put("_ImageYPixel", ""+output.getHeight());
+	Settings.put(Key._imageMin,    ""+min);
+	Settings.put(Key._imageMax,    ""+max);
+	Settings.put(Key._ImageXPixel, ""+output.getWidth());
+	Settings.put(Key._ImageYPixel, ""+output.getHeight());
 	
 
-	String[] sizes = Settings.getArray("size");
-	Settings.put("_ImageXSize", sizes[0]);
-	Settings.put("_ImageYSize", sizes[1]);
+	String[] sizes = Settings.getArray(Key.size);
+	Settings.put(Key._ImageXSize, sizes[0]);
+	Settings.put(Key._ImageYSize, sizes[1]);
 
-	if (Settings.get("position") == null) {
-	    Settings.put("position",Settings.get("lon")+","+
-			            Settings.get("lat"));
+	if (Settings.get(Key.position) == null) {
+	    Settings.put(Key.position,Settings.get(Key.lon)+","+
+			            Settings.get(Key.lat));
         } else {
-           if (Settings.has("ReqXPos") && Settings.has("ReqYPos")) {
+           if (Settings.has(Key.ReqXPos) && Settings.has(Key.ReqYPos)) {
 
              //--- Add requested center coordiates in decimal format to 
 	     //--- settings only if user did not enter decimal format.
-             Pattern pattern = Pattern.compile(Settings.get("ReqXPos") +
-		"\\s*,?\\s*" +Settings.get("ReqYPos"));
-	     Matcher matcher = pattern.matcher(Settings.get("position")) ;
+             Pattern pattern = Pattern.compile(Settings.get(Key.ReqXPos) +
+		"\\s*,?\\s*" +Settings.get(Key.ReqYPos));
+	     Matcher matcher = pattern.matcher(Settings.get(Key.position)) ;
              boolean found = false;           
              while (matcher.find()) {               
                 found = true;
             }
             if(!found){
-              Settings.put("requested_coords", Settings.get("ReqXPos") + ", " +
-                                            Settings.get("ReqYPos"));
+              Settings.put(Key.requested_coords, Settings.get(Key.ReqXPos) + ", " +
+                                            Settings.get(Key.ReqYPos));
             }
 
            }
         }
 
-	if (Settings.get("scaling") == null) {
-	    Settings.put("scaling", "Log");
+	if (Settings.get(Key.scaling) == null) {
+	    Settings.put(Key.scaling, "Log");
 	}
 	
-	String format = Settings.get("quicklook").toLowerCase();
+	String format = Settings.get(Key.quicklook).toLowerCase();
 	if (format.equals("jpeg")) {
 	    format="jpg";
 	}
 
-	String imagepath =  Settings.get("output") +"." +format;
-	String fitspath  =  Settings.get("output");
-	String catpath  =  Settings.get("catalogFile");
+	String imagepath =  Settings.get(Key.output) +"." +format;
+	String fitspath  =  Settings.get(Key.output);
+	String catpath  =  Settings.get(Key.catalogFile);
 
         //--- Remove new lines and single quotes from meta data for 
 	//--- easier javascript handling in HTML template files
-        if (Settings.has("_meta_copyright")) {
-           String copyright = Settings.get("_meta_copyright");
+        if (Settings.has(Key._meta_copyright)) {
+           String copyright = Settings.get(Key._meta_copyright);
            copyright = copyright.replace("\n"," ");
            copyright = copyright.replace("\'","\"");
-           Settings.put("_meta_copyright",copyright);
+           Settings.put(Key._meta_copyright,copyright);
         }
-        if (Settings.has("_meta_provenance")) {
-           String provenance = Settings.get("_meta_provenance");
+        if (Settings.has(Key._meta_provenance)) {
+           String provenance = Settings.get(Key._meta_provenance);
            provenance = provenance.replace("\n"," ");
            provenance = provenance.replace("\'","\"");
-           Settings.put("_meta_provenance",provenance);
+           Settings.put(Key._meta_provenance,provenance);
         }
 
         //--- Make path adjustment for web chrooted area if necessary
-        if (Settings.has("webrootpath")) {
+        if (Settings.has(Key.webrootpath)) {
            String fullpath = fitspath;
-           String webpath = Settings.get("webrootpath");
+           String webpath = Settings.get(Key.webrootpath);
            if (fullpath.startsWith(webpath)) {
 	      fitspath = 
 		fullpath.substring(webpath.length(),fullpath.length());
@@ -220,13 +220,13 @@ public class HTMLWriter implements Processor {
               }
            }
         } 
-	Settings.put("_output_ql",        imagepath);
-	Settings.put("_output",           fitspath);
-	Settings.put("_catalogFile",      catpath);
+	Settings.put(Key._output_ql,        imagepath);
+	Settings.put(Key._output,           fitspath);
+	Settings.put(Key._catalogFile,      catpath);
 
         //--- colortable image
-        if (Settings.has("lutcbarpath") && Settings.has("lut")) {
-           File fil = new File(Settings.get("lut"));
+        if (Settings.has(Key.lutcbarpath) && Settings.has(Key.lut)) {
+           File fil = new File(Settings.get(Key.lut));
 	   // Get the end of the file name
 	   String path = fil.getName();
 	    
@@ -239,24 +239,24 @@ public class HTMLWriter implements Processor {
               path = path.substring(0,off);
               path = path.replace("-","");
               path = path.replace(" ","");
-              if (Settings.has("invert")) {
-                 if (Settings.get("invert").equals("on")) {
+              if (Settings.has(Key.invert)) {
+                 if (Settings.get(Key.invert).equals("on")) {
                     path=path+"_inv";
                  }
               }
-	      Settings.put("_ctnumb", Settings.get("lutcbarpath")+"/" +
+	      Settings.put(Key._ctnumb, Settings.get(Key.lutcbarpath)+"/" +
 		   path.toLowerCase());
            }
         }
 
-	Settings.put("_CoordinateSystem", 
+	Settings.put(Key._CoordinateSystem,
 		output.getWCS().getCoordinateSystem().getName());
-	Settings.put("_Projection",       
+	Settings.put(Key._Projection,
 		output.getWCS().getProjection().getProjecter().getName());
 	if (samp != null) {
-            Settings.put("_Sampler", samp.getName());
+            Settings.put(Key._Sampler, samp.getName());
         } else {
-            Settings.put("_Sampler", "null");
+            Settings.put(Key._Sampler, "null");
         }
     }
 }

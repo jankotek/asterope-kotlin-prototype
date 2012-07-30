@@ -1,6 +1,7 @@
 package skyview.data;
 
 import skyview.executive.Imager;
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.executive.Settings;
 
@@ -77,21 +78,21 @@ public class Contourer {
 	// on top of which we are going an overlay should
 	// be specified.
 	
-	String scale = Settings.get("scale");
-	HashMap<String,String> oldSettings = Settings.pop();
-	boolean hadScale = Settings.has("scale");
+	String scale = Settings.get(Key.scale);
+	HashMap<Key,String> oldSettings = Settings.pop();
+	boolean hadScale = Settings.has(Key.scale);
 	if (!hadScale) {
-	    Settings.put("scale", scale);
+	    Settings.put(Key.scale, scale);
 	}
 	Imager imager  = new Imager();
 	
 	try {
 	    System.err.println("  Contour requesting image from survey "+
 		survey);
-	    Settings.put("preprocessor", "null");
+	    Settings.put(Key.Preprocessor, "null");
 	    img = imager.loadAndProcessSurvey(survey);
-	    String[] posts   = Settings.getArray("postprocessor");
-	    String[] fposts = Settings.getArray("finalpostprocessor");
+	    String[] posts   = Settings.getArray(Key.Postprocessor);
+	    String[] fposts = Settings.getArray(Key.finalpostprocessor);
            
 	    
 	    // When getting an image for contouring there
@@ -188,10 +189,10 @@ public class Contourer {
      */
     public int[] contour() {
 	
-	if (Settings.has("contourSmooth")) {
+	if (Settings.has(Key.contourSmooth)) {
 	    int boxWidth=3;
 	    int boxHeight=3;
-	    String[] cs = Settings.getArray("contourSmooth");
+	    String[] cs = Settings.getArray(Key.contourSmooth);
 	    if (cs.length > 0 || cs[0].length() > 0) {
 		try {
 		    boxWidth  = Integer.parseInt(cs[0]);
@@ -200,7 +201,7 @@ public class Contourer {
 			boxHeight = Integer.parseInt(cs[1]);
 		    }
 		} catch (Exception e) {
-		    System.err.println("  Error parsing contour smoothing:"+Settings.get("contourSmooth"));
+		    System.err.println("  Error parsing contour smoothing:"+Settings.get(Key.contourSmooth));
 		}
 	    }
 	    
@@ -280,7 +281,7 @@ public class Contourer {
 	    }
 	}
 	
-	if (!Settings.has("NoContourPrint")) {
+	if (!Settings.has(Key.noContourPrint)) {
 	    double basis = this.min;
 	    double val0  = basis;
 	    double val1  = -1;

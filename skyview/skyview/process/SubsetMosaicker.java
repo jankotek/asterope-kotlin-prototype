@@ -1,5 +1,6 @@
 package skyview.process;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.survey.Subset;
 import skyview.geometry.Sampler;
@@ -48,8 +49,8 @@ public class SubsetMosaicker implements Processor {
 	
 	
 	try {
-	    tileX = Integer.parseInt(Settings.get("SubsetX", "1024"));
-	    tileY = Integer.parseInt(Settings.get("SubsetY", "1024"));
+	    tileX = Integer.parseInt(Settings.get(Key.SubsetX, "1024"));
+	    tileY = Integer.parseInt(Settings.get(Key.SubsetY, "1024"));
 	} catch (Exception e) {
 	    System.err.println("Ignored invalid Subset[XY] values");	    
 	}

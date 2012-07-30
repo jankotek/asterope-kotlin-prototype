@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import net.ivoa.util.CGI;
+import skyview.executive.Key;
 import skyview.executive.Settings;
 
 /** This class writes an HTML description of a survey based upon
@@ -60,11 +61,11 @@ public class XMLGallery {
     }
     
     public static void printGallery(String filename) throws Exception {
-        if (Settings.get("GalleryXSLT") == null) {
-	    Settings.put("GalleryXSLT", "cgifiles/imagegallerythumbs.xsl");
+        if (Settings.get(Key.GalleryXSLT) == null) {
+	    Settings.put(Key.GalleryXSLT, "cgifiles/imagegallerythumbs.xsl");
 	}
 
-	String xslt = Settings.get("GalleryXSLT");
+	String xslt = Settings.get(Key.GalleryXSLT);
 	if (xslt == null) {
 	    error("No description transformation file in settings");
 	} 

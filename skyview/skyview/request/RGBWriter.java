@@ -1,5 +1,6 @@
 package skyview.request;
 
+import skyview.executive.Key;
 import skyview.geometry.Sampler;
 import skyview.geometry.DepthSampler;
 import skyview.geometry.Scaler;
@@ -21,40 +22,40 @@ public class RGBWriter extends HTMLWriter {
     }
     public void process(Image[] inputs, Image output, int[] sources,
 			Sampler samp, DepthSampler dpSamp) {
-	System.err.println("Calling process:"+Settings.get("output"));
+	System.err.println("Calling process:"+Settings.get(Key.output));
 	
 	if (output == null) {
 	    System.out.println("<h2> Error processing survey:"+
-		Settings.get("name")+"</h2><p>"+
-		"Error: "+Settings.get("ErrorMsg")+"<p><p>");
+		Settings.get(Key.name_)+"</h2><p>"+
+		"Error: "+Settings.get(Key.ErrorMsg)+"<p><p>");
 	} else {
 	    updateSettings(output, samp);
 	    setSettings();
 	    int index = 0;
-	    String cnt = Settings.get("_surveyCount");
+	    String cnt = Settings.get(Key._surveyCount);
 	    
 	    if (cnt != null) {
 		index = Integer.parseInt(cnt)-1;
 	    }
 	    
-	    saved.put("_name"+index,     Settings.get("name"));
-	    saved.put("_survey"+index,   Settings.getArray("survey")[index]);
-	    saved.put("_imageMin"+index, Settings.get("_imageMin"));
-	    saved.put("_imageMax"+index, Settings.get("_imageMax"));
-	    saved.put("_output"+index,   Settings.get("output"));
+	    saved.put("_name"+index,     Settings.get(Key.name_));
+	    saved.put("_survey"+index,   Settings.getArray(Key.survey)[index]);
+	    saved.put("_imageMin"+index, Settings.get(Key._imageMin));
+	    saved.put("_imageMax"+index, Settings.get(Key._imageMax));
+	    saved.put("_output"+index,   Settings.get(Key.output));
 	    
-	    if (index == Settings.getArray("survey").length-1) {
+	    if (index == Settings.getArray(Key.survey).length-1) {
 		
-		String out = Settings.get("_output");
+		String out = Settings.get(Key._output);
 	        out = out.substring(0,out.length()-1)+"rgb.jpg";
-		Settings.put("_output_rgb", out);
+		Settings.put(Key._output_rgb, out);
 		
 		for (String key: saved.keySet()) {
 		    System.err.println("Restoring: "+key);
-		    Settings.put(key, saved.get(key));
+		    Settings.put(Key.valueOfIgnoreCase(key), saved.get(key));
 		}
 		
-	        printoutTemplate("RGBTemplate");
+	        printoutTemplate(Key.RGBTemplate);
 	    }
 	}
     }

@@ -1,5 +1,6 @@
 package skyview.ij;
 
+import skyview.executive.Key;
 import skyview.executive.Settings;
 import skyview.geometry.CoordinateSystem;
 import skyview.geometry.Projection;
@@ -47,11 +48,11 @@ public class Drawer {
 	y0       = ny/2.;
 	this.wcs = wcs;
 	angScale = wcs.getScale();
-	if (Settings.has("drawAngle")) {
+	if (Settings.has(Key.drawAngle)) {
 	    try {
-	        initialAngle = Double.parseDouble(Settings.get("drawAngle"));
+	        initialAngle = Double.parseDouble(Settings.get(Key.drawAngle));
 	    } catch (Exception e) {
-		System.err.println("  Unable to parse plot angle:"+Settings.get("plotAngle"));
+		System.err.println("  Unable to parse plot angle:"+Settings.get(Key.plotAngle));
 	    }
 	}
 	reset();
@@ -159,7 +160,7 @@ public class Drawer {
     }
     
     void drawCommands() {
-	String[] cmds = Settings.getArray("draw");
+	String[] cmds = Settings.getArray(Key.draw);
 	draw(cmds);
     }
     
@@ -289,7 +290,7 @@ public class Drawer {
 	    }
 	    cnv = new Converter();
 	    
-	    // Scale positions to radians.
+	    // scale positions to radians.
 	    cnv.add(new Scaler(0,0, -sign*angScale, 0, 0, angScale));
 	    
 	    // Invert the projection.  Since we need to
@@ -358,7 +359,7 @@ public class Drawer {
 	proc.setColor(input);
     }
     
-    /** Scale can be specified as pixels or in degrees, minutes or seconds.
+    /** scale can be specified as pixels or in degrees, minutes or seconds.
      *  When specified in angular measurements the WCS scale of the output
      *  image is used.
      */

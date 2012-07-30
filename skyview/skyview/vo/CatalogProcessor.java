@@ -3,6 +3,7 @@ package skyview.vo;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import skyview.executive.Key;
 import skyview.survey.Image;
 import skyview.geometry.Sampler;
 import skyview.geometry.DepthSampler;
@@ -60,21 +61,21 @@ public class CatalogProcessor implements skyview.process.Processor {
     public void process(Image[] inputs, Image output, int[] source, 
 				 Sampler samp, DepthSampler dsamp) {
 	
-	if (Settings.has("CatalogFile")) {
-	    String file  = Settings.get("CatalogFile");
+	if (Settings.has(Key.catalogFile)) {
+	    String file  = Settings.get(Key.catalogFile);
 
 	    if (file == null || file.length() == 0 || file.equals("1")) {
-	        file = Settings.get("output") + ".tab";
+	        file = Settings.get(Key.output) + ".tab";
 	    } else {
-                if (Settings.has("_surveycount"))  {
+                if (Settings.has(Key._surveyCount))  {
                  //--- Add surveycount to file name for association
-                 if (Settings.has("dummy") && file.indexOf(".cat") >=0) {
+                 if (Settings.has(Key.dummy) && file.indexOf(".cat") >=0) {
                     file= file.replace(".cat","_" + 
-			Settings.get("_surveycount") + ".cat") ;
+			Settings.get(Key._surveyCount) + ".cat") ;
                  } else {
-                     file = file + "." + Settings.get("_surveycount");
+                     file = file + "." + Settings.get(Key._surveyCount);
                  } 
-	         Settings.put("CatalogFile",file);
+	         Settings.put(Key.CatalogFileKey,file);
                }
              }
 
@@ -102,7 +103,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	    }
 	}
 	this.outputImage = output;
-	this.catalogs    = Settings.getArray("catalog");
+	this.catalogs    = Settings.getArray(Key.catalog);
 	int nx = output.getWidth();
 	int ny = output.getHeight();
 	
@@ -110,14 +111,14 @@ public class CatalogProcessor implements skyview.process.Processor {
 	double imageSize = -1;
 	
 	// Did the user specify it?
-	if (Settings.has("CatalogRadius")) {
+	if (Settings.has(Key.CatalogRadius)) {
 	    try {
-		imageSize = Double.parseDouble(Settings.get("catalogradius"));
+		imageSize = Double.parseDouble(Settings.get(Key.CatalogRadius));
 		cosRad    = cos(toRadians(imageSize));
 		hasRad    = true;
 	    } catch (Exception e) {
 		System.err.println("  Invalid CatalogRadius setting:"+
-		   Settings.get("CatalogRadius") + " ignored");
+		   Settings.get(Key.CatalogRadius) + " ignored");
 	    }
 	}
 	
@@ -150,7 +151,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	}
 	pixelsValid = false;
 	
-	String[]   qualArr   = Settings.getArray("CatalogFilter");
+	String[]   qualArr   = Settings.getArray(Key.CatalogFilter);
 	String[][] qualFlds  = new String[qualArr.length][];
 	
 	int      nQual       = 0;
@@ -177,7 +178,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	        cq = ConeQuerier.factory(cat, toDegrees(centerCoords[0]), toDegrees(centerCoords[1]), imageSize);
 	    }
 	    
-	    if (Settings.has("CatalogFields")) {
+	    if (Settings.has(Key.CatalogFields)) {
 	        cq.setOutput(ps);
 	    }
 	    if (nQual > 0) {
@@ -295,8 +296,8 @@ public class CatalogProcessor implements skyview.process.Processor {
 	}
 	maxCatLen += 1;
 	
-	if (Settings.has("_surveycount")) {
-	    String[] surveys = Settings.getArray("survey");
+	if (Settings.has(Key._surveyCount)) {
+	    String[] surveys = Settings.getArray(Key.survey);
 	    if (geometryMessage) {
 	        System.err.println("   Catalog output file uses image geometry for survey="+surveys[0]+".");
 	        geometryMessage = false;
@@ -312,8 +313,8 @@ public class CatalogProcessor implements skyview.process.Processor {
 
 	if (ps != null  && doPrint) {
 	    ps.printf(" %3s | %-"+maxCatLen+"s| %-20s| %9s| %9s|",
-		      "N ", "Cat", "ID/Name", "RA/Lon ", "Dec/Lat ");
-	    String[] xtras = Settings.getArray("CatalogColumns");
+		      "N ", "Cat", "ID/Name", "RA/lon ", "Dec/lat ");
+	    String[] xtras = Settings.getArray(Key.CatalogColumns);
 	    if (xtras != null) {
 		for (int i=0; i<xtras.length; i += 1) {
 		     ps.printf("%19s|", xtras[i]);
@@ -387,7 +388,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	    cq.setEntriesUsed(catCount);
 	}
 	pixelsValid = true;
-	Settings.put("_totalCatalogCount", ""+count);
+	Settings.put(Key._totalCatalogCount, ""+count);
     }
       
     public void postProcess(Image[] inputs, Image output, int[] source, 
@@ -395,7 +396,7 @@ public class CatalogProcessor implements skyview.process.Processor {
 	//if (  Settings.has("CatalogFile") 
 	    //(!Settings.has("_surveycount") || Settings.get("_surveycount").equals("1"))
 	   //) {
-	if (  Settings.has("CatalogFile") ) {
+	if (  Settings.has(Key.catalogFile) ) {
 	    pixels(true);
 	}
     }

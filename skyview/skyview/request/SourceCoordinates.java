@@ -4,6 +4,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.StringTokenizer;
 import java.util.HashMap;
+
+import skyview.executive.Key;
 import skyview.geometry.Position;
 
 import java.net.URLEncoder;
@@ -45,7 +47,7 @@ public class SourceCoordinates implements Runnable {
     boolean  processed = false;
     
     /** URL for HEASARC service */
-    static final String urlBase = Settings.get("UrlCoordinates");
+    static final String urlBase = Settings.get(Key.UrlCoordinates);
 
     /** Save requests */
     static HashMap<String, Position> savedQueries = new HashMap<String, Position>();
