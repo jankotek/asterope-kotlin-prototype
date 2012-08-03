@@ -203,13 +203,13 @@ public class FloatProcessor extends ImageProcessor {
 	public void reset(ImageProcessor mask) {
 		if (mask==null || snapshotPixels==null)
 			return;	
-		if (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight)
+		if (mask.getWidth()!=width||mask.getHeight()!=height)
 			throw new IllegalArgumentException(maskSizeError(mask));
 		byte[] mpixels = (byte[])mask.getPixels();
-		for (int y=roiY, my=0; y<(roiY+roiHeight); y++, my++) {
-			int i = y * width + roiX;
-			int mi = my * roiWidth;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0, my=0; y<(0+height); y++, my++) {
+			int i = y * width + 0;
+			int mi = my * width;
+			for (int x=0; x<(0+width); x++) {
 				if (mpixels[mi++]==0)
 					pixels[i] = snapshotPixels[i];
 				i++;
@@ -336,11 +336,11 @@ public class FloatProcessor extends ImageProcessor {
 
 	private void process(int op, double value) {
 		float c, v1, v2;
-		boolean resetMinMax = roiWidth==width && roiHeight==height && !(op==FILL);
+		boolean resetMinMax = width==width && height==height && !(op==FILL);
 		c = (float)value;
-		for (int y=roiY; y<(roiY+roiHeight); y++) {
-			int i = y * width + roiX;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0; y<(0+height); y++) {
+			int i = y * width + 0;
+			for (int x=0; x<(0+width); x++) {
 				v1 = pixels[i];
 				switch(op) {
 					case INVERT:
@@ -430,15 +430,15 @@ public class FloatProcessor extends ImageProcessor {
 	public void fill(ImageProcessor mask) {
 		if (mask==null)
 			{fill(); return;}
-		int roiWidth=this.roiWidth, roiHeight=this.roiHeight;
-		int roiX=this.roiX, roiY=this.roiY;
-		if (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight)
+		int width=this.width, height=this.height;
+		int roiX=0, roiY=0;
+		if (mask.getWidth()!=width||mask.getHeight()!=height)
 			return;
 		byte[] mpixels = (byte[])mask.getPixels();
-		for (int y=roiY, my=0; y<(roiY+roiHeight); y++, my++) {
+		for (int y=roiY, my=0; y<(roiY+height); y++, my++) {
 			int i = y * width + roiX;
-			int mi = my * roiWidth;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+			int mi = my * width;
+			for (int x=roiX; x<(roiX+width); x++) {
 				if (mpixels[mi++]!=0)
 					pixels[i] = fillColor;
 				i++;
@@ -457,7 +457,7 @@ public class FloatProcessor extends ImageProcessor {
 		for (int i=0; i<kernel.length; i++)
 			scale += kernel[i];
 		if (scale==0) scale = 1f;
-		int inc = roiHeight/25;
+		int inc = height/25;
 		if (inc<1) inc = 1;
 		
 		float[] pixels2 = (float[])getPixelsCopy();
@@ -495,7 +495,7 @@ public class FloatProcessor extends ImageProcessor {
 	/** Filters using a 3x3 neighborhood. */
 	public void filter(int type) {
 		float p1, p2, p3, p4, p5, p6, p7, p8, p9;
-		int inc = roiHeight/25;
+		int inc = height/25;
 		if (inc<1) inc = 1;
 		
 		float[] pixels2 = (float[])getPixelsCopy();
@@ -543,9 +543,9 @@ public class FloatProcessor extends ImageProcessor {
 	*/
 	public void rotate(double angle) {
 		float[] pixels2 = (float[])getPixelsCopy();
-		double centerX = roiX + (roiWidth-1)/2.0;
-		double centerY = roiY + (roiHeight-1)/2.0;
-		int xMax = roiX + this.roiWidth - 1;
+		double centerX = 0 + (width-1)/2.0;
+		double centerY = 0 + (height-1)/2.0;
+		int xMax = 0 + this.width - 1;
 		
 		double angleRadians = -angle/(180.0/Math.PI);
 		double ca = Math.cos(angleRadians);
@@ -558,11 +558,11 @@ public class FloatProcessor extends ImageProcessor {
 		double xlimit = width-1.0, xlimit2 = width-1.001;
 		double ylimit = height-1.0, ylimit2 = height-1.001;
 		
-		for (int y=roiY; y<(roiY + roiHeight); y++) {
-			index = y*width + roiX;
+		for (int y=0; y<(0 + height); y++) {
+			index = y*width + 0;
 			tmp3 = tmp1 - y*sa + centerX;
 			tmp4 = tmp2 + y*ca + centerY;
-			for (int x=roiX; x<=xMax; x++) {
+			for (int x=0; x<=xMax; x++) {
 				xs = x*ca + tmp3;
 				ys = x*sa + tmp4;
 				if ((xs>=-0.01) && (xs<dwidth) && (ys>=-0.01) && (ys<dheight)) {
@@ -588,10 +588,10 @@ public class FloatProcessor extends ImageProcessor {
 	public void flipVertical() {
 		int index1,index2;
 		float tmp;
-		for (int y=0; y<roiHeight/2; y++) {
-			index1 = (roiY+y)*width+roiX;
-			index2 = (roiY+roiHeight-1-y)*width+roiX;
-			for (int i=0; i<roiWidth; i++) {
+		for (int y=0; y<height/2; y++) {
+			index1 = (0+y)*width+0;
+			index2 = (0+height-1-y)*width+0;
+			for (int i=0; i<width; i++) {
 				tmp = pixels[index1];
 				pixels[index1++] = pixels[index2];
 				pixels[index2++] = tmp;
@@ -601,9 +601,9 @@ public class FloatProcessor extends ImageProcessor {
 	
     public void noise(double range) {
 		Random rnd=new Random();
-		for (int y=roiY; y<(roiY+roiHeight); y++) {
-			int i = y * width + roiX;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0; y<(0+height); y++) {
+			int i = y * width + 0;
+			for (int x=0; x<(0+width); x++) {
 				float RandomBrightness = (float)(rnd.nextGaussian()*range);
 				pixels[i] = pixels[i] + RandomBrightness;
 				i++;
@@ -613,12 +613,12 @@ public class FloatProcessor extends ImageProcessor {
     }
 
 	public ImageProcessor crop() {
-		ImageProcessor ip2 = createProcessor(roiWidth, roiHeight);
+		ImageProcessor ip2 = createProcessor(width, height);
 		float[] pixels2 = (float[])ip2.getPixels();
-		for (int ys=roiY; ys<roiY+roiHeight; ys++) {
-			int offset1 = (ys-roiY)*roiWidth;
-			int offset2 = ys*width+roiX;
-			for (int xs=0; xs<roiWidth; xs++)
+		for (int ys=0; ys<0+height; ys++) {
+			int offset1 = (ys-0)*width;
+			int offset2 = ys*width+0;
+			for (int xs=0; xs<width; xs++)
 				pixels2[offset1++] = pixels[offset2++];
 		}
         return ip2;
@@ -636,25 +636,25 @@ public class FloatProcessor extends ImageProcessor {
 		@see ImageProcessor#setInterpolate
 	*/
 	public void scale(double xScale, double yScale) {
-		double xCenter = roiX + roiWidth/2.0;
-		double yCenter = roiY + roiHeight/2.0;
+		double xCenter = 0 + width/2.0;
+		double yCenter = 0 + height/2.0;
 		int xmin, xmax, ymin, ymax;
 		
 		if ((xScale>1.0) && (yScale>1.0)) {
 			//expand roi
-			xmin = (int)(xCenter-(xCenter-roiX)*xScale);
+			xmin = (int)(xCenter-(xCenter-0)*xScale);
 			if (xmin<0) xmin = 0;
-			xmax = xmin + (int)(roiWidth*xScale) - 1;
+			xmax = xmin + (int)(width*xScale) - 1;
 			if (xmax>=width) xmax = width - 1;
-			ymin = (int)(yCenter-(yCenter-roiY)*yScale);
+			ymin = (int)(yCenter-(yCenter-0)*yScale);
 			if (ymin<0) ymin = 0;
-			ymax = ymin + (int)(roiHeight*yScale) - 1;
+			ymax = ymin + (int)(height*yScale) - 1;
 			if (ymax>=height) ymax = height - 1;
 		} else {
-			xmin = roiX;
-			xmax = roiX + roiWidth - 1;
-			ymin = roiY;
-			ymax = roiY + roiHeight - 1;
+			xmin = 0;
+			xmax = 0 + width - 1;
+			ymin = 0;
+			ymax = 0 + height - 1;
 		}
 		float[] pixels2 = (float[])getPixelsCopy();
 		boolean checkCoordinates = (xScale < 1.0) || (yScale < 1.0);
@@ -704,12 +704,12 @@ public class FloatProcessor extends ImageProcessor {
 
 	/** Creates a new FloatProcessor containing a scaled copy of this image or selection. */
 	public ImageProcessor resize(int dstWidth, int dstHeight) {
-		double srcCenterX = roiX + roiWidth/2.0;
-		double srcCenterY = roiY + roiHeight/2.0;
+		double srcCenterX = 0 + width/2.0;
+		double srcCenterY = 0 + height/2.0;
 		double dstCenterX = dstWidth/2.0;
 		double dstCenterY = dstHeight/2.0;
-		double xScale = (double)dstWidth/roiWidth;
-		double yScale = (double)dstHeight/roiHeight;
+		double xScale = (double)dstWidth/width;
+		double yScale = (double)dstHeight/height;
 		if (interpolate) {
 			dstCenterX += xScale/2.0;
 			dstCenterY += yScale/2.0;

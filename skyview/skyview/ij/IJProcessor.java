@@ -341,14 +341,14 @@ public class IJProcessor implements skyview.process.Processor {
 		        }
 		        double len = 0;
 		        for (int j=1; j<line.length; j += 1) {
-			    len += abs(line[j][0]-line[j-1][0]) +
-			           abs(line[j][1]-line[j-1][1]);
+			    len += abs(line[j][0] - line[j - 1][0]) +
+			           abs(line[j][1] - line[j - 1][1]);
 		        }
 		        if (len < 30) {
 			    continue;
 		        }
 		        int p = (int)(0.3*lines[i].length);
-		        double angle = atan2(-line[p][1]+line[p-1][1], line[p][0]-line[p-1][0]);
+		        double angle = atan2(-line[p][1] + line[p - 1][1], line[p][0] - line[p - 1][0]);
 			// Make sure the letters aren't upside down.
 			if (angle > PI/2) {
 			    angle -= PI;
@@ -444,7 +444,7 @@ public class IJProcessor implements skyview.process.Processor {
                     throw new IOError(e);
                 }
                 //   new FileSaver(imp).saveAsJpeg(filename);
-		        System.err.println("  Writing 3-color image: "+filename);
+		        System.err.println("  Writing 3-color image: " + filename);
 		    }
 	        }
 	    }
@@ -523,7 +523,7 @@ public class IJProcessor implements skyview.process.Processor {
 	} else {
 	    index = Integer.parseInt(indexStr) - 1;
 	}
-	
+
 	if (Settings.has(Key.rgbsmooth)) {
 	    String[] smoothings = Settings.getArray(Key.rgbsmooth);
 	    if (smoothings.length >= index) {
@@ -532,13 +532,13 @@ public class IJProcessor implements skyview.process.Processor {
 	}
 		
         ip = new FloatProcessor(output.getWidth(), output.getHeight(), img);
-	
+
 	// Astronomers have Y start at the bottom, but ImageJ uses the typical image
 	// convention and starts from the top.
 	
 	ip.flipVertical();
-	
-	
+
+
 	// First process things that actually change the pixel values.
 	// Here we need to treat the data as real.
 	processMin(getIndexedString(Key.min));
@@ -565,7 +565,7 @@ public class IJProcessor implements skyview.process.Processor {
 
     ip = new ByteProcessor(ip.createImage());
 	ip.setValue(255);
-	
+
 	// Now we're done with the pixels -- we play
 	// with the color tables.
 	processLUT(Settings.get(Key.lut));
@@ -702,6 +702,17 @@ public class IJProcessor implements skyview.process.Processor {
     }catch(IOException e){
         throw new IOError(e);
     }
+    }
+
+    private void displayeImage(){
+        BufferedImage imp1 = toBufferedImage(ip.createImage());
+        JFrame frame = new JFrame();
+        frame.getContentPane().setLayout(new FlowLayout());
+        frame.getContentPane().add(new JLabel(new ImageIcon(imp1)));
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(imp1.getWidth(),imp1.getHeight()));
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public void updateHeader(nom.tam.fits.Header header) {

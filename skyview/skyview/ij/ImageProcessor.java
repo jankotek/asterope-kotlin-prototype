@@ -40,7 +40,6 @@ public abstract class ImageProcessor extends Object {
 
     protected int         width, snapshotWidth;
     protected int         height, snapshotHeight;
-    protected int         roiX, roiY, roiWidth, roiHeight;
     protected int         xMin, xMax, yMin, yMax;
     boolean               snapshotCopyMode;
     
@@ -693,13 +692,13 @@ public abstract class ImageProcessor extends Object {
 
     /** Flips the image or ROI horizontally. */
     public void flipHorizontal() {
-	int[] col1 = new int[roiHeight];
-	int[] col2 = new int[roiHeight];
-	for (int x=0; x<roiWidth/2; x++) {
-	    getColumn(roiX+x, roiY, col1, roiHeight);
-	    getColumn(roiX+roiWidth-x-1, roiY, col2, roiHeight);
-	    putColumn(roiX+x, roiY, col2, roiHeight);
-	    putColumn(roiX+roiWidth-x-1, roiY, col1, roiHeight);
+	int[] col1 = new int[height];
+	int[] col2 = new int[height];
+	for (int x=0; x<width/2; x++) {
+	    getColumn(x, 0, col1, height);
+	    getColumn(width-x-1, 0, col2, height);
+	    putColumn(x, 0, col2, height);
+	    putColumn(width-x-1, 0, col1, height);
 	}
     }
 
@@ -1041,7 +1040,7 @@ public abstract class ImageProcessor extends Object {
     /** Creates a new ImageProcessor containing a scaled copy 
 	of this image or ROI, with the aspect ratio maintained. */
     public ImageProcessor resize(int dstWidth) {
-	return resize(dstWidth, (int)(dstWidth*((double)roiHeight/roiWidth)));
+	return resize(dstWidth, (int)(dstWidth*((double)height/width)));
     }
 
     /** Rotates the image or selection 'angle' degrees clockwise.
@@ -1177,7 +1176,7 @@ public abstract class ImageProcessor extends Object {
 
     protected String maskSizeError(ImageProcessor mask) {
 	return "Mask size ("+mask.getWidth()+"x"+mask.getHeight()+") != ROI size ("+
-	       roiWidth+"x"+roiHeight+")";
+	       width+"x"+height+")";
     }
 	
     protected SampleModel getIndexSampleModel() {

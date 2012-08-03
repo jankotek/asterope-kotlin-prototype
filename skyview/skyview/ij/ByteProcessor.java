@@ -92,12 +92,12 @@ public class ByteProcessor extends ImageProcessor {
 	}
 
 	public ImageProcessor crop() {
-		ImageProcessor ip2 = createProcessor(roiWidth, roiHeight);
+		ImageProcessor ip2 = createProcessor(width, height);
 		byte[] pixels2 = (byte[])ip2.getPixels();
-		for (int ys=roiY; ys<roiY+roiHeight; ys++) {
-			int offset1 = (ys-roiY)*roiWidth;
-			int offset2 = ys*width+roiX;
-			for (int xs=0; xs<roiWidth; xs++)
+		for (int ys=0; ys<height; ys++) {
+			int offset1 = (ys)*width;
+			int offset2 = ys*width;
+			for (int xs=0; xs<width; xs++)
 				pixels2[offset1++] = pixels[offset2++];
 		}
         return ip2;
@@ -131,13 +131,13 @@ public class ByteProcessor extends ImageProcessor {
 	public void reset(ImageProcessor mask) {
 		if (mask==null || snapshotPixels==null)
 			return;	
-		if (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight)
+		if (mask.getWidth()!=width||mask.getHeight()!=height)
 			throw new IllegalArgumentException(maskSizeError(mask));
 		byte[] mpixels = (byte[])mask.getPixels();
-		for (int y=roiY, my=0; y<(roiY+roiHeight); y++, my++) {
-			int i = y * width + roiX;
-			int mi = my * roiWidth;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0, my=0; y<(height); y++, my++) {
+			int i = y * width ;
+			int mi = my * width;
+			for (int x=0; x<(width); x++) {
 				if (mpixels[mi++]==0)
 					pixels[i] = snapshotPixels[i];
 				i++;
@@ -156,15 +156,15 @@ public class ByteProcessor extends ImageProcessor {
 	public void fill(ImageProcessor mask) {
 		if (mask==null)
 			{fill(); return;}
-		int roiWidth=this.roiWidth, roiHeight=this.roiHeight;
-		int roiX=this.roiX, roiY=this.roiY;
-		if (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight)
+		int width=this.width, height=this.height;
+		int roiX=0, roiY=0;
+		if (mask.getWidth()!=width||mask.getHeight()!=height)
 			return;
 		byte[] mpixels = (byte[])mask.getPixels();
-		for (int y=roiY, my=0; y<(roiY+roiHeight); y++, my++) {
+		for (int y=roiY, my=0; y<(roiY+height); y++, my++) {
 			int i = y * width + roiX;
-			int mi = my * roiWidth;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+			int mi = my * width;
+			for (int x=roiX; x<(roiX+width); x++) {
 				if (mpixels[mi++]!=0)
 					pixels[i] = (byte)fgColor;
 				i++;
@@ -178,7 +178,7 @@ public class ByteProcessor extends ImageProcessor {
 		else
 			return 0;
 	}
-	
+
 	public final int get(int x, int y) {
 		return pixels[y*width+x]&0xff;
 	}
@@ -306,7 +306,7 @@ public class ByteProcessor extends ImageProcessor {
 			pixels[j++] = (byte)data[i];
 	}
 	*/
-	
+
 	/** Returns the smallest displayed pixel value. */
 	public double getMin() {
 		return min;
@@ -323,14 +323,14 @@ public class ByteProcessor extends ImageProcessor {
 			return;
 		this.min = (int)min;
 		this.max = (int)max;
-		
+
 		if (rLUT1==null) {
 			if (cm==null)
 				makeDefaultColorModel();
 			baseCM = cm;
 			IndexColorModel m = (IndexColorModel)cm;
 			rLUT1 = new byte[256]; gLUT1 = new byte[256]; bLUT1 = new byte[256];
-			m.getReds(rLUT1); m.getGreens(gLUT1); m.getBlues(bLUT1); 
+			m.getReds(rLUT1); m.getGreens(gLUT1); m.getBlues(bLUT1);
 			rLUT2 = new byte[256]; gLUT2 = new byte[256]; bLUT2 = new byte[256];
 		}
 		int index;
@@ -371,9 +371,9 @@ public class ByteProcessor extends ImageProcessor {
 
 	public void applyTable(int[] lut) {
 		int lineStart, lineEnd;
-		for (int y=roiY; y<(roiY+roiHeight); y++) {
-			lineStart = y * width + roiX;
-			lineEnd = lineStart + roiWidth;
+		for (int y=0; y<(height); y++) {
+			lineStart = y * width ;
+			lineEnd = lineStart + width;
 			for (int i=lineEnd; --i>=lineStart;)
 				pixels[i] = (byte)lut[pixels[i]&0xff];
 		}
@@ -392,9 +392,9 @@ public class ByteProcessor extends ImageProcessor {
 		for (int i=0; i<kernel.length; i++)
 			scale += kernel[i];
 		if (scale==0) scale = 1;
-		int inc = roiHeight/25;
+		int inc = height/25;
 		if (inc<1) inc = 1;
-		
+
 		byte[] pixels2 = (byte[])getPixelsCopy();
 		int offset, sum;
         int rowOffset = width;
@@ -443,9 +443,9 @@ public class ByteProcessor extends ImageProcessor {
 	*/
 	public void filter(int type) {
 		int p1, p2, p3, p4, p5, p6, p7, p8, p9;
-		int inc = roiHeight/25;
+		int inc = height/25;
 		if (inc<1) inc = 1;
-		
+
 		byte[] pixels2 = (byte[])getPixelsCopy();
 		int offset, sum1, sum2=0, sum=0;
         int[] values = new int[10];
@@ -519,7 +519,7 @@ public class ByteProcessor extends ImageProcessor {
 							if (p6==binaryBackground) count++;
 							if (p7==binaryBackground) count++;
 							if (p8==binaryBackground) count++;
-							if (p9==binaryBackground) count++;							
+							if (p9==binaryBackground) count++;
 							if (count>=binaryCount)
 								sum = binaryBackground;
 							else
@@ -538,7 +538,7 @@ public class ByteProcessor extends ImageProcessor {
 							if (p6==binaryForeground) count++;
 							if (p7==binaryForeground) count++;
 							if (p8==binaryForeground) count++;
-							if (p9==binaryForeground) count++;							
+							if (p9==binaryForeground) count++;
 							if (count>=binaryCount)
 								sum = binaryForeground;
 							else
@@ -546,14 +546,14 @@ public class ByteProcessor extends ImageProcessor {
 						}
 						break;
 				}
-				
+
 				pixels[offset++] = (byte)sum;
 			}
 		}
-        if (xMin==1) filterEdge(type, pixels2, roiHeight, roiX, roiY, 0, 1);
-        if (yMin==1) filterEdge(type, pixels2, roiWidth, roiX, roiY, 1, 0);
-        if (xMax==width-2) filterEdge(type, pixels2, roiHeight, width-1, roiY, 0, 1);
-        if (yMax==height-2) filterEdge(type, pixels2, roiWidth, roiX, height-1, 1, 0);
+        if (xMin==1) filterEdge(type, pixels2, height, 0, 0, 0, 1);
+        if (yMin==1) filterEdge(type, pixels2, width, 0, 0, 1, 0);
+        if (xMax==width-2) filterEdge(type, pixels2, height, width-1, 0, 0, 1);
+        if (yMax==height-2) filterEdge(type, pixels2, width, 0, height-1, 1, 0);
 
 	}
 
@@ -617,7 +617,7 @@ public class ByteProcessor extends ImageProcessor {
 						if (p6==binaryBackground) count++;
 						if (p7==binaryBackground) count++;
 						if (p8==binaryBackground) count++;
-						if (p9==binaryBackground) count++;							
+						if (p9==binaryBackground) count++;
 						if (count>=binaryCount)
 							sum = binaryBackground;
 						else
@@ -636,7 +636,7 @@ public class ByteProcessor extends ImageProcessor {
 						if (p6==binaryForeground) count++;
 						if (p7==binaryForeground) count++;
 						if (p8==binaryForeground) count++;
-						if (p9==binaryForeground) count++;							
+						if (p9==binaryForeground) count++;
 						if (count>=binaryCount)
 							sum = binaryForeground;
 						else
@@ -670,7 +670,7 @@ public class ByteProcessor extends ImageProcessor {
 		else
 			filter(MAX);
 	}
-	
+
 	public void dilate() {
 		if (isInvertedLut())
 			filter(MAX);
@@ -718,9 +718,9 @@ public class ByteProcessor extends ImageProcessor {
 		Random rnd=new Random();
 		int v, ran;
 		boolean inRange;
-		for (int y=roiY; y<(roiY+roiHeight); y++) {
-			int i = y * width + roiX;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0; y<(0+height); y++) {
+			int i = y * width + 0;
+			for (int x=0; x<(0+width); x++) {
 				inRange = false;
 				do {
 					ran = (int)Math.round(rnd.nextGaussian()*range);
@@ -738,26 +738,26 @@ public class ByteProcessor extends ImageProcessor {
 		@see ImageProcessor#setInterpolate
 	*/
 	public void scale(double xScale, double yScale) {
-		double xCenter = roiX + roiWidth/2.0;
-		double yCenter = roiY + roiHeight/2.0;
+		double xCenter = 0 + width/2.0;
+		double yCenter = 0 + height/2.0;
 		int xmin, xmax, ymin, ymax;
 		if (!bgColorSet && isInvertedLut()) bgColor = 0;
-		
+
 		if ((xScale>1.0) && (yScale>1.0)) {
 			//expand roi
-			xmin = (int)(xCenter-(xCenter-roiX)*xScale);
+			xmin = (int)(xCenter-(xCenter-0)*xScale);
 			if (xmin<0) xmin = 0;
-			xmax = xmin + (int)(roiWidth*xScale) - 1;
+			xmax = xmin + (int)(width*xScale) - 1;
 			if (xmax>=width) xmax = width - 1;
-			ymin = (int)(yCenter-(yCenter-roiY)*yScale);
+			ymin = (int)(yCenter-(yCenter-0)*yScale);
 			if (ymin<0) ymin = 0;
-			ymax = ymin + (int)(roiHeight*yScale) - 1;
+			ymax = ymin + (int)(height*yScale) - 1;
 			if (ymax>=height) ymax = height - 1;
 		} else {
-			xmin = roiX;
-			xmax = roiX + roiWidth - 1;
-			ymin = roiY;
-			ymax = roiY + roiHeight - 1;
+			xmin = 0;
+			xmax = 0 + width - 1;
+			ymin = 0;
+			ymax = 0 + height - 1;
 		}
 		byte[] pixels2 = (byte[])getPixelsCopy();
 		boolean checkCoordinates = (xScale < 1.0) || (yScale < 1.0);
@@ -768,7 +768,7 @@ public class ByteProcessor extends ImageProcessor {
 		for (int y=ymin; y<=ymax; y++) {
 			ys = (y-yCenter)/yScale + yCenter;
 			ysi = (int)ys;
-			if (ys<0.0) ys = 0.0;			
+			if (ys<0.0) ys = 0.0;
 			if (ys>=ylimit) ys = ylimit2;
 			index1 = y*width + xmin;
 			index2 = width*(int)ys;
@@ -810,14 +810,14 @@ public class ByteProcessor extends ImageProcessor {
 	/** Creates a new ByteProcessor containing a scaled copy of this image or selection.
 	*/
 	public ImageProcessor resize(int dstWidth, int dstHeight) {
-		if (roiWidth==dstWidth && roiHeight==dstHeight)
+		if (width==dstWidth && height==dstHeight)
 			return crop();
-		double srcCenterX = roiX + roiWidth/2.0;
-		double srcCenterY = roiY + roiHeight/2.0;
+		double srcCenterX = 0 + width/2.0;
+		double srcCenterY = 0 + height/2.0;
 		double dstCenterX = dstWidth/2.0;
 		double dstCenterY = dstHeight/2.0;
-		double xScale = (double)dstWidth/roiWidth;
-		double yScale = (double)dstHeight/roiHeight;
+		double xScale = (double)dstWidth/width;
+		double yScale = (double)dstHeight/height;
 		if (interpolate) {
 			dstCenterX += xScale/2.0;
 			dstCenterY += yScale/2.0;
@@ -856,11 +856,11 @@ public class ByteProcessor extends ImageProcessor {
         if (angle%360==0)
         	return;
 		byte[] pixels2 = (byte[])getPixelsCopy();
-		double centerX = roiX + (roiWidth-1)/2.0;
-		double centerY = roiY + (roiHeight-1)/2.0;
-		int xMax = roiX + this.roiWidth - 1;
+		double centerX = 0 + (width-1)/2.0;
+		double centerY = 0 + (height-1)/2.0;
+		int xMax = 0 + this.width - 1;
 		if (!bgColorSet && isInvertedLut()) bgColor = 0;
-		
+
 		double angleRadians = -angle/(180.0/Math.PI);
 		double ca = Math.cos(angleRadians);
 		double sa = Math.sin(angleRadians);
@@ -871,19 +871,19 @@ public class ByteProcessor extends ImageProcessor {
 		double dwidth=width, dheight=height;
 		double xlimit = width-1.0, xlimit2 = width-1.001;
 		double ylimit = height-1.0, ylimit2 = height-1.001;
-		
-		for (int y=roiY; y<(roiY + roiHeight); y++) {
-			index = y*width + roiX;
+
+		for (int y=0; y<(0 + height); y++) {
+			index = y*width + 0;
 			tmp3 = tmp1 - y*sa + centerX;
 			tmp4 = tmp2 + y*ca + centerY;
-			for (int x=roiX; x<=xMax; x++) {
+			for (int x=0; x<=xMax; x++) {
 				xs = x*ca + tmp3;
 				ys = x*sa + tmp4;
 				if ((xs>=-0.01) && (xs<dwidth) && (ys>=-0.01) && (ys<dheight)) {
 					if (interpolate) {
 						if (xs<0.0) xs = 0.0;
 						if (xs>=xlimit) xs = xlimit2;
-						if (ys<0.0) ys = 0.0;			
+						if (ys<0.0) ys = 0.0;
 						if (ys>=ylimit) ys = ylimit2;
 						pixels[index++] = (byte)((int)(getInterpolatedPixel(xs, ys, pixels2)+0.5)&255);
 				  	} else {
@@ -903,24 +903,24 @@ public class ByteProcessor extends ImageProcessor {
 	public void flipVertical() {
 		int index1,index2;
 		byte tmp;
-		for (int y=0; y<roiHeight/2; y++) {
-			index1 = (roiY+y)*width+roiX;
-			index2 = (roiY+roiHeight-1-y)*width+roiX;
-			for (int i=0; i<roiWidth; i++) {
+		for (int y=0; y<height/2; y++) {
+			index1 = (0+y)*width+0;
+			index2 = (0+height-1-y)*width+0;
+			for (int i=0; i<width; i++) {
 				tmp = pixels[index1];
 				pixels[index1++] = pixels[index2];
 				pixels[index2++] = tmp;
 			}
 		}
 	}
-	
+
 	public int[] getHistogram() {
 		if (mask!=null)
 			return getHistogram(mask);
 		int[] histogram = new int[256];
-		for (int y=roiY; y<(roiY+roiHeight); y++) {
-			int i = y * width + roiX;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0; y<(0+height); y++) {
+			int i = y * width + 0;
+			for (int x=0; x<(0+width); x++) {
 				int v = pixels[i++] & 0xff;
 				histogram[v]++;
 			}
@@ -929,15 +929,15 @@ public class ByteProcessor extends ImageProcessor {
 	}
 
 	public int[] getHistogram(ImageProcessor mask) {
-		if (mask.getWidth()!=roiWidth||mask.getHeight()!=roiHeight)
+		if (mask.getWidth()!=width||mask.getHeight()!=height)
 			throw new IllegalArgumentException(maskSizeError(mask));
 		int v;
 		int[] histogram = new int[256];
 		byte[] mpixels = (byte[])mask.getPixels();
-		for (int y=roiY, my=0; y<(roiY+roiHeight); y++, my++) {
-			int i = y * width + roiX;
-			int mi = my * roiWidth;
-			for (int x=roiX; x<(roiX+roiWidth); x++) {
+		for (int y=0, my=0; y<(0+height); y++, my++) {
+			int i = y * width + 0;
+			int mi = my * width;
+			for (int x=0; x<(0+width); x++) {
 				if (mpixels[mi++]!=0) {
 					v = pixels[i] & 0xff;
 					histogram[v]++;
